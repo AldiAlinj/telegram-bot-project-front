@@ -5,7 +5,6 @@ import telegram from '../../assets/telegram.svg'
 import youtube from '../../assets/youtube.svg'
 import discord from '../../assets/discord.svg'
 import twitter from '../../assets/twitter.svg'
-import rightArrow from '../../assets/rightArrow.svg'
 import TaskItem from '../../components/TaskItem/TaskItem'
 import { NavLink } from 'react-router-dom'
 
