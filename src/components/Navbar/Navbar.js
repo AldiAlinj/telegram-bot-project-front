@@ -40,20 +40,6 @@ const Navbar = () => {
           </>
         )}
       </NavLink>
-
-      <NavLink 
-        to="/friends" 
-        className={({ isActive }) => 
-          `navbar-item p-2 d-flex flex-column align-items-center justify-content-center ${isActive ? 'active' : ''}`
-        }
-      >
-        {({ isActive }) => (
-          <>
-            <img src={isActive ? friendsIconActive : friendsIcon} width={24} height={24} alt="Friends Icon" />
-            <span className={`navbar-span ${isActive && "span-active"}`}>Friends</span>
-          </>
-        )}
-      </NavLink>
       <NavLink 
         to="/airdrop" 
         className={({ isActive }) => 
@@ -64,6 +50,19 @@ const Navbar = () => {
           <>
             <img src={isActive ? giftIconActive : giftIcon} width={24} height={24} alt="Tasks Icon" />
             <span className={`navbar-span ${isActive && "span-active"}`}>Airdrop</span>
+          </>
+        )}
+      </NavLink>
+      <NavLink 
+        to="/friends" 
+        className={({ isActive }) => 
+          `navbar-item p-2 d-flex flex-column align-items-center justify-content-center ${isActive ? 'active' : ''}`
+        }
+      >
+        {({ isActive }) => (
+          <>
+            <img src={isActive ? friendsIconActive : friendsIcon} width={24} height={24} alt="Friends Icon" />
+            <span className={`navbar-span ${isActive && "span-active"}`}>Friends</span>
           </>
         )}
       </NavLink>

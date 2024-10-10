@@ -17,3 +17,10 @@
   body{
     font-family: 'Gilroy-Bold', sans-serif !important;
   }
+
+
+  @media screen and (max-height: 795px) {
+    .main-wrapper{
+      margin-bottom: 96px;
+    }
+  }

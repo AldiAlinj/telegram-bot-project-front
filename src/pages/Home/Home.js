@@ -36,7 +36,7 @@ const Home = () => {
 
 
   return (
-    <div className="container-fluid home-wrapper pt-4">
+    <div className="container-fluid home-wrapper pt-4 pb-3">
         <div className="score-wrapper d-flex flex-column align-items-center justify-content-end px-3 pb-2 pt-5 w-100 position-relative mt-5">
             <img src={crazeToken} className='home-token' alt="" />
             <h6 className="player-score mb-0">53,534,234</h6>
