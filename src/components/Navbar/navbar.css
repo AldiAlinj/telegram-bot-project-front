@@ -1,0 +1,31 @@
+.navbar{
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+    z-index: 10;
+}
+
+.navbar-item{
+    text-decoration: none;
+    border-radius: 10px;
+}
+.navbar-item.active{
+background: #06826B !important;
+}
+
+
+
+
+.navbar-span{
+    color: #06826B;
+    text-align: center;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 200% */
+    letter-spacing: 0.4px;
+}
+
+.span-active{
+    color: #fff !important;
+}

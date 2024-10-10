@@ -1,0 +1,28 @@
+.home-task-item{
+    border-radius: 10px;
+    border: 0.5px solid #7D8732;
+    background: #FCFDE7;
+}
+
+.home-task-name{
+    color: #7D8732;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+.home-task-reward{
+    color: #7D8732;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.home-tasks-title{
+    color: #7D8732;
+font-size: 18px;
+font-style: normal;
+font-weight: 800;
+line-height: normal;
+}
