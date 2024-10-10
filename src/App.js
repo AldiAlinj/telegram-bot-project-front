@@ -20,7 +20,7 @@ const App = () => {
             setUsername('No Username');
           }
         } catch (error) {
-          console.error('Error parsing initData:', error);
+          alert('Error parsing initData:', error);
           setUsername('Error fetching username');
         }
       } else {
