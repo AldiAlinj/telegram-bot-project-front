@@ -1,19 +1,42 @@
-// src/App.js
-import React from 'react';
-import './App.css';
-import Tasks from './components/Tasks';
-import Points from './components/Points';
-import Leaderboard from './components/Leaderboard';
+import React, { useEffect, useState } from 'react';
 
-function App() {
+const App = () => {
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    // Check if Telegram.WebApp.initData is defined
+    if (window.Telegram && window.Telegram.WebApp) {
+      const initData = window.Telegram.WebApp.initData;
+
+      // Check if initData is not empty
+      if (initData) {
+        try {
+          const webAppData = JSON.parse(decodeURIComponent(initData));
+
+          // Set username if it exists
+          if (webAppData && webAppData.user) {
+            setUsername(webAppData.user.username || 'No Username');
+          } else {
+            setUsername('No Username');
+          }
+        } catch (error) {
+          console.error('Error parsing initData:', error);
+          setUsername('Error fetching username');
+        }
+      } else {
+        setUsername('No Init Data');
+      }
+    } else {
+      setUsername('Telegram Web App not initialized');
+    }
+  }, []);
+
   return (
-    <div className="App">
-      <h1>Telegram Bot Dashboard</h1>
-      <Tasks />
-      <Points />
-      <Leaderboard />
+    <div>
+      <h1>Welcome to the Telegram Web App</h1>
+      <p>Your Telegram username: {username}</p>
     </div>
   );
-}
+};
 
 export default App;
