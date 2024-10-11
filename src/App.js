@@ -15,6 +15,17 @@ const App = () => {
   const [airdrop, setAirdrop] = useState(false);
 
 
+  useEffect(() => {
+    if (!isTelegramBrowser()) {
+      window.location.href = "https://www.google.com/"; // Redirect to an error page or show a message
+    }
+  }, []);
+
+  const isTelegramBrowser = () => {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    return /Telegram/i.test(userAgent);
+  };
+
 
 
   useEffect(() => {
