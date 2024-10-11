@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './leaderboard.css'
 
 const Leaderboard = () => {
@@ -7,6 +7,13 @@ const Leaderboard = () => {
     id: index + 1,
     name: `Item ${index + 1}`,
   }));
+
+
+  
+  useEffect(() => {
+    window.scrollTo(0,0)
+  }, [])
+
   return (
     <div className="container-fluid leaderboard-wrapper pt-4 pb-3">
       <div className="d-flex flex-column gap-2">

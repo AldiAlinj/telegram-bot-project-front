@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./friends.css";
 import craze from "../../assets/craze.png";
 
@@ -34,6 +34,12 @@ const Friends = () => {
     },
   ];
 
+
+  useEffect(() => {
+    window.scrollTo(0,0)
+  }, [])
+  
+
   return (
     <div className="container-fluid friends-wrapper d-flex flex-column justify-content-between pt-4 pb-5">
       <div className="d-flex craze-friends-wrapper w-100 justify-content-center mt-5">
@@ -45,7 +51,7 @@ const Friends = () => {
       <button className="invite-friends-button py-3">Invite Friends</button>
       {dummyFriends.length > 0 &&
       <>
-      <h6 className="friends-list-title mb-0">
+      <h6 className="friends-list-title mb-0 my-3">
         {dummyFriends.length} Friends
       </h6>
         <div className="d-flex flex-column friends-list-wrapper">

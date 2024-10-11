@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './home.css'
 import crazeToken from '../../assets/crazeToken.png'
 import telegram from '../../assets/telegram.svg'
@@ -34,6 +34,10 @@ const Home = () => {
 
     ]
 
+    
+  useEffect(() => {
+    window.scrollTo(0,0)
+  }, [])
 
   return (
     <div className="container-fluid home-wrapper pt-4 pb-3">
