@@ -20,7 +20,7 @@ const App = () => {
     //   window.location.href = "https://www.google.com/"; // Redirect to an error page or show a message
     // }
 
-    alert(navigator.userAgent)
+    alert(navigator.vendor)
   }, []);
 
   // const isTelegramBrowser = () => {
