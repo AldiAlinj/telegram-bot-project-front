@@ -16,15 +16,17 @@ const App = () => {
 
 
   useEffect(() => {
-    if (!isTelegramBrowser()) {
-      window.location.href = "https://www.google.com/"; // Redirect to an error page or show a message
-    }
+    // if (!isTelegramBrowser()) {
+    //   window.location.href = "https://www.google.com/"; // Redirect to an error page or show a message
+    // }
+
+    alert(navigator.userAgent)
   }, []);
 
-  const isTelegramBrowser = () => {
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-    return /Telegram/i.test(userAgent);
-  };
+  // const isTelegramBrowser = () => {
+  //   const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  //   return /Telegram/i.test(userAgent);
+  // };
 
 
 
