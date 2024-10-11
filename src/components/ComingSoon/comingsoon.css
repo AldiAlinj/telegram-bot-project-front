@@ -1,0 +1,42 @@
+.coming-soon-wrapper {
+  width: 100%;
+  height: 25vh;
+  position: fixed;
+  background: #fff;
+  border-radius: 25px 25px 0 0;
+  bottom: -100%;
+  transition: all .35s ease-in-out;
+}
+
+
+.coming-soon-active{
+    bottom: 96px;
+    box-shadow: 0 0 0 10000px rgba(0, 0, 0, 0.5);
+}
+
+.coming-soon-title{
+    color: #7D8732;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 123.725%; /* 39.592px */
+    letter-spacing: 0.4px;
+    text-align: center;
+}
+
+.coming-soon-button{
+    background: #7D8732;
+    border-radius: 100px;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
+    letter-spacing: 0.4px;
+    text-transform: capitalize;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}

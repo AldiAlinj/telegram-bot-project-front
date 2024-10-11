@@ -8,16 +8,21 @@ import Navbar from "./components/Navbar/Navbar";
 import "./app.css";
 import Airdrop from "./pages/Airdrop/Airdrop";
 import GetStarted from "./components/GetStarted/GetStarted";
+import ComingSoon from "./components/ComingSoon/ComingSoon";
 
 const App = () => {
   const [showWelcome, setShowWelcome] = useState(false);
+  const [airdrop, setAirdrop] = useState(false);
+
+
+
 
   useEffect(() => {
-    const hasVisited = sessionStorage.getItem('hasVisited');
+    const hasVisited = sessionStorage.getItem("hasVisited");
     if (!hasVisited) {
       // Show the welcome screen if it's the user's first visit in this session
       setShowWelcome(true);
-      sessionStorage.setItem('hasVisited', 'true'); // Set the flag in sessionStorage
+      sessionStorage.setItem("hasVisited", "true"); // Set the flag in sessionStorage
     }
   }, []);
 
@@ -26,11 +31,8 @@ const App = () => {
   };
 
   return (
-    <div className="container-fluid px-0 main-wrapper">
-        <GetStarted
-          showWelcome={showWelcome}
-          onClose={handleClose}
-        />
+    <div className={`container-fluid px-0 main-wrapper ${airdrop && "hide-scroll"}`}>
+      <GetStarted showWelcome={showWelcome} onClose={handleClose} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
@@ -38,7 +40,8 @@ const App = () => {
         <Route path="/tasks" element={<Tasks />} />
         <Route path="/airdrop" element={<Airdrop />} />
       </Routes>
-      <Navbar />
+      <ComingSoon show={airdrop} onClose={() => setAirdrop(false)} />
+      <Navbar showAirdrop={() => setAirdrop(true)} />
     </div>
   );
 };

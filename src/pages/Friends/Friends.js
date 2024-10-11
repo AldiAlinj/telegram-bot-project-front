@@ -1,9 +1,70 @@
-import React from 'react'
+import React from "react";
+import "./friends.css";
+import craze from "../../assets/craze.png";
 
 const Friends = () => {
-  return (
-    <div>Friends</div>
-  )
-}
+  const dummyFriends = [
+    {
+      name: "Lorena579",
+      reward: "1,200"
+    },
+    {
+      name: "AldiPogradec69",
+      reward: "220"
+    },
+    {
+      name: "Tekooo",
+      reward: "650"
+    },
+    {
+      name: "Bekuu28",
+      reward: "265"
+    },
+    {
+      name: "Bekuu28",
+      reward: "265"
+    },
+    {
+      name: "Bekuu28",
+      reward: "265"
+    },
+    {
+      name: "Bekuu28",
+      reward: "265"
+    },
+  ];
 
-export default Friends
+  return (
+    <div className="container-fluid friends-wrapper d-flex flex-column justify-content-between pt-4 pb-5">
+      <div className="d-flex craze-friends-wrapper w-100 justify-content-center mt-5">
+        <img src={craze} alt="" className="craze-friends" />
+      </div>
+      <h1 className="invite-friends-title mb-0">
+        Invite friends and get more MUMU
+      </h1>
+      <button className="invite-friends-button py-3">Invite Friends</button>
+      {dummyFriends.length > 0 &&
+      <>
+      <h6 className="friends-list-title mb-0">
+        {dummyFriends.length} Friends
+      </h6>
+        <div className="d-flex flex-column friends-list-wrapper">
+          {dummyFriends.map((friend, index) => (
+            <div className="friend-item p-1 d-flex align-items-center justify-content-between" key={index}>
+                <div className="d-flex align-items-center gap-2">
+              <div className="friend-initial-wrapper">
+                <span className="friend-initial">{friend.name.slice(0, 1)}</span>
+              </div>
+                  <span className="friend-name">{friend.name}</span>
+                </div>
+                <span className="friend-reward">+{friend.reward} MUMU</span>
+            </div>
+          ))}
+        </div>
+      </>
+      }
+    </div>
+  );
+};
+
+export default Friends;

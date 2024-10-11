@@ -24,3 +24,8 @@
       margin-bottom: 96px;
     }
   }
+
+  .hidescroll {
+    overflow: hidden !important;
+    pointer-events: none !important;
+  }
