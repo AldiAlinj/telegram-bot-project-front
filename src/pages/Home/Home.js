@@ -5,7 +5,7 @@ import wodToken from '../../assets/wodToken.svg'
 // import youtube from '../../assets/youtube.svg'
 // import discord from '../../assets/discord.svg'
 // import twitter from '../../assets/twitter.svg'
-// import TaskItem from '../../components/TaskItem/TaskItem'
+import TaskItem from '../../components/TaskItem/TaskItem'
 import { NavLink } from 'react-router-dom'
 import playBanner from '../../assets/playBanner.png'
 import getFormattedNumber from '../../hooks/getFormattedNumber'
@@ -74,9 +74,9 @@ const Home = ({username, tasks, userData}) => {
         <div className="d-flex flex-column gap-2 mt-3">
             <h6 className="home-tasks-title mb-0">Earn</h6>
             <div className="home-tasks-container d-flex flex-column gap-2 position-relative mb-4">
-               {/* {tasks.map((task, index) => (
+               {tasks.map((task, index) => (
                 <TaskItem item={task} key={index} />
-               ))}             */}
+               ))}            
 
                 <NavLink to={"/earn"}>
                 <button className='show-more-button py-1 px-2'>Show more</button>
