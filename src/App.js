@@ -43,6 +43,7 @@ const App = () => {
       const user = window.Telegram.WebApp.initDataUnsafe.user;
 
       if (user) {
+        alert(window.Telegram.WebApp.initData)
         postToken(window.Telegram.WebApp.initData)
       setIsTelegram(true)
         if (user.username) {
