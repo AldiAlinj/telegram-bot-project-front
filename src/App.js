@@ -42,7 +42,7 @@ const App = () => {
 
   useEffect(() => {
 
-    alert(window.location.href)
+    alert(window.location.pathname)
 
     if (window.Telegram?.WebApp) {
       window.Telegram.WebApp.expand();
