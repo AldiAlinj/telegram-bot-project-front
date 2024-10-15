@@ -65,9 +65,9 @@ const Friends = ({referralCode}) => {
       <h1 className="invite-friends-title mb-0">
         Invite friends and get more WOD
       </h1>
-      <button className="invite-friends-button py-3">
-        <a href={`https://t.me/share/url?url=${appLink}/${referralCode}`}>Invite Friends</a>
-        Invite Friends</button>
+      <button className="invite-friends-button py-3" style={{textDecoration: "none"}}>
+        <a href={`https://t.me/share/url?url=${appLink}/${referralCode}`} style={{textDecoration: "none"}}>Invite Friends</a>
+     </button>
       </div>
       {dummyFriends.length > 0 &&
       <>
