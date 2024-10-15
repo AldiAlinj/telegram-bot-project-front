@@ -26,3 +26,9 @@ font-style: normal;
 font-weight: 800;
 line-height: normal;
 }
+
+
+.completed-task{
+    border: 1px solid #7037CA;
+    background: rgba(112, 55, 202, 0.1);
+}

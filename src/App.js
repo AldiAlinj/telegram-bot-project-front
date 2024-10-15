@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Leaderboard from "./pages/Leaderboard/Leaderboard";
 import Friends from "./pages/Friends/Friends";
-import Tasks from "./pages/Tasks/Tasks";
+import Earn from "./pages/Earn/Earn";
 import Navbar from "./components/Navbar/Navbar";
 import "./app.css";
 import Airdrop from "./pages/Airdrop/Airdrop";
@@ -13,14 +13,23 @@ import ComingSoon from "./components/ComingSoon/ComingSoon";
 const App = () => {
   const [showWelcome, setShowWelcome] = useState(false);
   const [airdrop, setAirdrop] = useState(false);
-
+  const [isTelegram, setIsTelegram] = useState(null)
   const [username, setUsername] = useState("");
 
   useEffect(() => {
+
+    if (window.Telegram?.WebApp) {
+      window.Telegram.WebApp.expand();
+      window.Telegram.WebApp.setHeaderColor('bg_color', '#FF5733'); 
+    }else{
+    }
+
     if (window.Telegram?.WebApp?.initDataUnsafe) {
       const user = window.Telegram.WebApp.initDataUnsafe.user;
 
       if (user) {
+      setIsTelegram(true)
+
         if (user.username) {
           setUsername(user.username);
         } else if (user.first_name) {
@@ -30,6 +39,8 @@ const App = () => {
         }
       } else {
         setUsername("User");
+      setIsTelegram(false)
+
       }
     }
   }, []);
@@ -47,6 +58,25 @@ const App = () => {
     setShowWelcome(false); // Hide the welcome screen when the user dismisses it
   };
 
+
+  if(!isTelegram){
+    return (
+      <div
+      className={`d-flex  justify-content-center align-items-center`}
+      style={{height: "100vh", width: "100vw"}}
+    >
+        <div className="d-flex flex-column align-items-center justify-content-center gap-2">
+        <h1 className="use-telegram-title mb-0">
+          Page available on
+        </h1>
+        <a href="https://t.me/AldiTestBot_bot/AldiTestBot" className="use-telegram-title">
+        Telegram
+        </a>
+        </div>
+    </div>
+    )
+  }
+
   return (
     <div
       className={`container-fluid px-0 main-wrapper ${
@@ -61,7 +91,7 @@ const App = () => {
           element={<Leaderboard username={username} />}
         />
         <Route path="/friends" element={<Friends />} />
-        <Route path="/tasks" element={<Tasks />} />
+        <Route path="/earn" element={<Earn />} />
         <Route path="/airdrop" element={<Airdrop />} />
       </Routes>
       <ComingSoon show={airdrop} onClose={() => setAirdrop(false)} />

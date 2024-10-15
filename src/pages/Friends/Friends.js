@@ -21,12 +21,24 @@ const Friends = () => {
       reward: "265"
     },
     {
-      name: "Bekuu28",
-      reward: "265"
+      name: "Tekooo",
+      reward: "650"
     },
     {
       name: "Bekuu28",
       reward: "265"
+    },
+    {
+      name: "AldiPogradec69",
+      reward: "220"
+    },
+    {
+      name: "Bekuu28",
+      reward: "265"
+    },
+    {
+      name: "Lorena579",
+      reward: "1,200"
     },
     {
       name: "Bekuu28",
@@ -42,13 +54,15 @@ const Friends = () => {
 
   return (
     <div className="container-fluid friends-wrapper d-flex flex-column justify-content-between pt-4 pb-5">
-      <div className="d-flex wod-friends-wrapper w-100 justify-content-center mt-5">
+      <div className="d-flex flex-column align-items-center gap-3">
+      <div className="d-flex wod-friends-wrapper w-100 justify-content-center ">
         <img src={wodToken} alt="" className="wod-friends" />
       </div>
       <h1 className="invite-friends-title mb-0">
         Invite friends and get more WOD
       </h1>
       <button className="invite-friends-button py-3">Invite Friends</button>
+      </div>
       {dummyFriends.length > 0 &&
       <>
       <h6 className="friends-list-title mb-0 my-3">

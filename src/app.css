@@ -29,3 +29,12 @@
     overflow: hidden !important;
     pointer-events: none !important;
   }
+  
+  .use-telegram-title{
+    font-size: 34px;
+    color: #46557B !important;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 123.725%; /* 39.592px */
+    letter-spacing: 0.4px;
+  }

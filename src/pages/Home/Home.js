@@ -16,21 +16,25 @@ const Home = ({username}) => {
             image: twitter,
             title: "Follow [Project Name]",
             reward : "6,000",
+            completed: false
         },
         {
             image: telegram,
             title: "Join [Project Name]",
             reward : "6,000",
+            completed: false
         },
         {
             image: discord,
             title: "Join [Project Name]",
             reward : "6,000",
+            completed: false
         },
         {
             image: youtube,
             title: "Subscribe [Project Name]",
             reward : "6,000",
+            completed: false
         },
 
     ]
@@ -73,7 +77,7 @@ const Home = ({username}) => {
                 <TaskItem item={task} key={index} />
                ))}            
 
-                <NavLink to={"/tasks"}>
+                <NavLink to={"/earn"}>
                 <button className='show-more-button py-1 px-2'>Show more</button>
                 </NavLink>
             </div>

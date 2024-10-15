@@ -1,5 +1,6 @@
 .friends-wrapper {
-    min-height: 90vh;
+    height: calc(-96px + 100vh);
+    overflow-y: scroll;
     background-size: 100% 100%;
     background: #FCFCFE;
 
@@ -11,7 +12,7 @@
   }
 
   .wod-friends{
-    width: 70%;
+    width: 50%;
   }
 
   .invite-friends-title{
@@ -56,6 +57,10 @@
 border-bottom: 0.5px solid #46557B;
 }
 
+.friend-item:last-child{
+    border-bottom: none;
+}
+
 .friend-initial-wrapper{
 min-width: 28px;
 min-height: 28px;
@@ -94,7 +99,7 @@ align-items: center;
 }
 
 .friends-list-wrapper{
-    max-height: 20vh;
+    height: 40%;
     overflow-y: scroll;
     border-radius: 10px;
 border: 1px solid #F2F0F8;

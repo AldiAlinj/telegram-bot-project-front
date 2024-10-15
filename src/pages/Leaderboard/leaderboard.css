@@ -1,5 +1,6 @@
 .leaderboard-wrapper {
-  min-height: 100vh;
+  height: calc(-96px + 100vh);
+  overflow-y: scroll;
   background-size: 100% 100%;
   background: #FCFCFE;
 
@@ -80,7 +81,11 @@
 }
 
 .leaderboard-item {
-  border-bottom: 0.5px solid #4e8046;
+  border-bottom: 0.5px solid #46557b;
+}
+
+.leaderboard-item:last-child{
+  border-bottom: none;
 }
 
 .players-leaderboard {
@@ -88,6 +93,17 @@
   border: 1px solid #f2f0f8;
   background: #fff;
   box-shadow: 0px 4px 4px 0px rgba(125, 135, 50, 0.1);
-  max-height: 65vh;
+  max-height: 75%;
   overflow-y: scroll;
+}
+
+@media screen and (max-height: 730px) {
+  .players-leaderboard{
+    max-height: 70%;
+  }
+}
+@media screen and (max-height: 650px) {
+  .players-leaderboard{
+    max-height: 65%;
+  }
 }

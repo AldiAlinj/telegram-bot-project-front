@@ -42,6 +42,7 @@ const Leaderboard = ({username}) => {
           <h6 className="mb-0 wod-total-holders">51,632,343 Holders</h6>
           <span className="top-100">(Top 100)</span>
         </div>
+      </div>
         <div className="players-leaderboard d-flex flex-column">
           {dummyArray.map((item, index) => (
             <div
@@ -69,7 +70,6 @@ const Leaderboard = ({username}) => {
             </div>
           ))}
         </div>
-      </div>
     </div>
   );
 };
