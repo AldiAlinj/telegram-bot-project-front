@@ -9,12 +9,27 @@ import "./app.css";
 import Airdrop from "./pages/Airdrop/Airdrop";
 import GetStarted from "./components/GetStarted/GetStarted";
 import ComingSoon from "./components/ComingSoon/ComingSoon";
+import axios from "axios";
 
 const App = () => {
   const [showWelcome, setShowWelcome] = useState(false);
   const [airdrop, setAirdrop] = useState(false);
   const [isTelegram, setIsTelegram] = useState(null)
   const [username, setUsername] = useState("");
+
+
+
+  const postToken = async(token) => {
+    await axios.post(`https://api.worldofdypians.com/api/tg_auth`, {
+      urlData: token
+    }).then((res) => {
+      console.log(res);
+      
+    }).catch((err) => {
+      console.log(err)
+      
+    })
+  }
 
   useEffect(() => {
 
@@ -28,8 +43,8 @@ const App = () => {
       const user = window.Telegram.WebApp.initDataUnsafe.user;
 
       if (user) {
+        postToken(window.Telegram.WebApp.initData)
       setIsTelegram(true)
-
         if (user.username) {
           setUsername(user.username);
         } else if (user.first_name) {
@@ -40,7 +55,7 @@ const App = () => {
       } else {
         setUsername("User");
       setIsTelegram(false)
-
+        
       }
     }
   }, []);
