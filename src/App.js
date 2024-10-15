@@ -25,7 +25,7 @@ const App = () => {
         data: token
       });
       // console.log(res);
-      alert(res)
+      alert(res.data)
     } catch (err) {
       console.log(err);
     }
