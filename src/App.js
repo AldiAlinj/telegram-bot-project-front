@@ -128,7 +128,7 @@ const App = () => {
           path="/leaderboard"
           element={<Leaderboard username={username} />}
         />
-        <Route path="/friends" element={<Friends refferredUsers={userData.refferredUsers} referralCode={userData.referralCode} />} />
+        <Route path="/friends" element={<Friends referredUsers={userData.referredUsers} referralCode={userData.referralCode} />} />
         <Route path="/earn" element={<Earn />} />
         <Route path="/airdrop" element={<Airdrop />} />
       </Routes>
