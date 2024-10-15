@@ -24,7 +24,8 @@ const App = () => {
       const res = await axios.post(`https://api.worldofdypians.com/api/tg_auth`, {
         data: token
       });
-      console.log(res);
+      // console.log(res);
+      alert(res)
     } catch (err) {
       console.log(err);
     }
