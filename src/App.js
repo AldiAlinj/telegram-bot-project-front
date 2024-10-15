@@ -22,10 +22,22 @@ const App = () => {
 
 
   const postToken = async (token) => {
+
+    let body = {
+      data: token,
+    }
+
+    const initData = window.Telegram?.WebApp?.initDataUnsafe;
+    // Check if there's a `start_param` in the initData (this could be the referral code)
+    if (initData?.start_param) {
+      body = {
+        data: token,
+        referralCode: initData?.start_param
+      }
+    }
+
     try {
-      const res = await axios.post(`https://api.worldofdypians.com/api/tg_auth`, {
-        data: token
-      });
+      const res = await axios.post(`https://api.worldofdypians.com/api/tg_auth`, body);
       // console.log(res);
       setUserData(res.data.userData)
       setTasks(res.data.userData.availableTasks)
