@@ -27,7 +27,7 @@ const App = () => {
         data: token
       });
       // console.log(res);
-      setUserData(res.data)
+      setUserData(res.data.data)
       setTasks(res.data.availableTasks)
       alert(res.data)
   
