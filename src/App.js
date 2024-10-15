@@ -29,7 +29,7 @@ const App = () => {
       // console.log(res);
       setUserData(res.data.data)
       setTasks(res.data.availableTasks)
-      alert(JSON.stringify(res.data))
+      alert(res.data.referralCode)
   
     } catch (err) {
       console.log(err);
