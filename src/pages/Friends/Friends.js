@@ -2,49 +2,8 @@ import React, { useEffect } from "react";
 import "./friends.css";
 import wodToken from "../../assets/wodToken.svg";
 
-const Friends = ({referralCode}) => {
-  const dummyFriends = [
-    {
-      name: "Lorena579",
-      reward: "1,200"
-    },
-    {
-      name: "AldiPogradec69",
-      reward: "220"
-    },
-    {
-      name: "Tekooo",
-      reward: "650"
-    },
-    {
-      name: "Bekuu28",
-      reward: "265"
-    },
-    {
-      name: "Tekooo",
-      reward: "650"
-    },
-    {
-      name: "Bekuu28",
-      reward: "265"
-    },
-    {
-      name: "AldiPogradec69",
-      reward: "220"
-    },
-    {
-      name: "Bekuu28",
-      reward: "265"
-    },
-    {
-      name: "Lorena579",
-      reward: "1,200"
-    },
-    {
-      name: "Bekuu28",
-      reward: "265"
-    },
-  ];
+const Friends = ({referredUsers, referralCode}) => {
+ 
 
 
   const appLink = "https://t.me/AldiTestBot_bot/AldiTestBot"
@@ -69,21 +28,21 @@ const Friends = ({referralCode}) => {
         <a href={`https://t.me/share/url?url=${appLink}?startapp=${referralCode}`} style={{textDecoration: "none"}}>Invite Friends</a>
      </button>
       </div>
-      {dummyFriends.length > 0 &&
+      {referredUsers.length > 0 &&
       <>
       <h6 className="friends-list-title mb-0 my-3">
-        {dummyFriends.length} Friends
+        {referredUsers.length} Friends
       </h6>
         <div className="d-flex flex-column friends-list-wrapper">
-          {dummyFriends.map((friend, index) => (
+          {referredUsers.map((friend, index) => (
             <div className="friend-item p-1 d-flex align-items-center justify-content-between" key={index}>
                 <div className="d-flex align-items-center gap-2">
               <div className="friend-initial-wrapper">
-                <span className="friend-initial">{friend.name.slice(0, 1)}</span>
+                <span className="friend-initial">{friend.telegramUsername.slice(0, 1)}</span>
               </div>
-                  <span className="friend-name">{friend.name}</span>
+                  <span className="friend-name">{friend.telegramUsername}</span>
                 </div>
-                <span className="friend-reward">+{friend.reward} WOD</span>
+                <span className="friend-reward">+{friend.earnedPoints} WOD</span>
             </div>
           ))}
         </div>
