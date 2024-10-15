@@ -28,9 +28,7 @@ const App = () => {
       });
       // console.log(res);
       setUserData(res.data)
-      setTasks(res.data.availableTasks)
-      alert(res.data.availableTasks)
-      alert(res.data.totalScore)
+      alert(res.data)
     } catch (err) {
       console.log(err);
     }
