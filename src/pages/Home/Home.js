@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react'
 import './home.css'
-import crazeToken from '../../assets/crazeToken.png'
+import wodToken from '../../assets/wodToken.svg'
 import telegram from '../../assets/telegram.svg'
 import youtube from '../../assets/youtube.svg'
 import discord from '../../assets/discord.svg'
 import twitter from '../../assets/twitter.svg'
 import TaskItem from '../../components/TaskItem/TaskItem'
 import { NavLink } from 'react-router-dom'
+import playBanner from '../../assets/playBanner.png'
 
-const Home = () => {
+const Home = ({username}) => {
 
     const tasks = [
         {
@@ -41,10 +42,11 @@ const Home = () => {
 
   return (
     <div className="container-fluid home-wrapper pt-4 pb-3">
+        <span className="hello-user">Hello, {username}!</span>
         <div className="score-wrapper d-flex flex-column align-items-center justify-content-end px-3 pb-2 pt-5 w-100 position-relative mt-5">
-            <img src={crazeToken} className='home-token' alt="" />
+            <img src={wodToken} className='home-token' alt="" />
             <h6 className="player-score mb-0">53,534,234</h6>
-            <span className="player-mumu">MUMU</span>
+            <span className="player-wod">WOD</span>
         </div>
         <div className="home-info-grid mt-3">
             <div className="home-info-grid-item d-flex flex-column  py-3  justify-content-center align-items-center gap-1">
@@ -60,12 +62,13 @@ const Home = () => {
                 <span className="home-grid-info">Invites</span>
             </div>
         </div>
-        <div className="mt-5 d-flex justify-content-center align-items-center w-100">
+        <div className="d-flex flex-column mt-3 mb-5 play-banner-wrapper">
+            <img src={playBanner} alt="" style={{borderRadius: "10px"}} />
             <button className="play-button py-2 px-4">Play</button>
         </div>
         <div className="d-flex flex-column gap-2 mt-3">
-            <h6 className="home-tasks-title mb-0">Tasks</h6>
-            <div className="home-tasks-container px-3 pt-3 pb-4 d-flex flex-column gap-2 position-relative">
+            <h6 className="home-tasks-title mb-0">Earn</h6>
+            <div className="home-tasks-container d-flex flex-column gap-2 position-relative mb-4">
                {tasks.map((task, index) => (
                 <TaskItem item={task} key={index} />
                ))}            

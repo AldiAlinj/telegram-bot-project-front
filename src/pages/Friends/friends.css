@@ -1,20 +1,21 @@
 .friends-wrapper {
-    background-image: url("../../assets/mainBg.png");
     min-height: 90vh;
     background-size: 100% 100%;
-  }
-
-
-  .craze-friends-wrapper{
+    background: #FCFCFE;
 
   }
 
-  .craze-friends{
+
+  .wod-friends-wrapper{
+
+  }
+
+  .wod-friends{
     width: 70%;
   }
 
   .invite-friends-title{
-    color: #7D8732;
+    color: #46557B;
     font-size: 34px;
     font-style: normal;
     font-weight: 400;
@@ -28,7 +29,7 @@
     background: #fff;
     border-radius: 100px;
     width: 100%;
-    color: #7D8732;
+    color: #46557B;
     text-align: center;
     font-size: 18px;
     font-style: normal;
@@ -36,7 +37,7 @@
     line-height: 24px; /* 150% */
     letter-spacing: 0.4px;
     text-transform: capitalize;
-    border-bottom: 5px solid #7D8732;
+    border-bottom: 5px solid #46557B;
     border-top: none;
     border-left: none;
     border-right: none;
@@ -44,7 +45,7 @@
 
 
 .friends-list-title{
-    color: #7D8732;
+    color: #46557B;
     font-size: 18px;
     font-style: normal;
     font-weight: 800;
@@ -52,13 +53,13 @@
 }
 
 .friend-item{
-border-bottom: 0.5px solid #7D8732;
+border-bottom: 0.5px solid #46557B;
 }
 
 .friend-initial-wrapper{
 min-width: 28px;
 min-height: 28px;
-background: #7D8732;
+background: #46557B;
 border-radius: 50%;
 display: flex;
 justify-content: center;
@@ -76,7 +77,7 @@ align-items: center;
 }
 
 .friend-name{
-    color: #7D8732;
+    color: #46557B;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -84,7 +85,7 @@ align-items: center;
 }
 
 .friend-reward{
-    color: #7D8732;
+    color: #46557B;
     text-align: right;
     font-size: 12px;
     font-style: normal;
@@ -95,4 +96,8 @@ align-items: center;
 .friends-list-wrapper{
     max-height: 20vh;
     overflow-y: scroll;
+    border-radius: 10px;
+border: 1px solid #F2F0F8;
+background: #FFF;
+padding: 10px;
 }

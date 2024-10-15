@@ -14,21 +14,25 @@ const App = () => {
   const [showWelcome, setShowWelcome] = useState(false);
   const [airdrop, setAirdrop] = useState(false);
 
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
-    // if (!isTelegramBrowser()) {
-    //   window.location.href = "https://www.google.com/"; // Redirect to an error page or show a message
-    // }
+    if (window.Telegram?.WebApp?.initDataUnsafe) {
+      const user = window.Telegram.WebApp.initDataUnsafe.user;
 
-    alert(navigator.vendor)
+      if (user) {
+        if (user.username) {
+          setUsername(user.username);
+        } else if (user.first_name) {
+          setUsername(user.first_name);
+        } else {
+          setUsername("User");
+        }
+      } else {
+        setUsername("User");
+      }
+    }
   }, []);
-
-  // const isTelegramBrowser = () => {
-  //   const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-  //   return /Telegram/i.test(userAgent);
-  // };
-
-
 
   useEffect(() => {
     const hasVisited = sessionStorage.getItem("hasVisited");
@@ -44,11 +48,18 @@ const App = () => {
   };
 
   return (
-    <div className={`container-fluid px-0 main-wrapper ${airdrop && "hide-scroll"}`}>
+    <div
+      className={`container-fluid px-0 main-wrapper ${
+        airdrop && "hide-scroll"
+      }`}
+    >
       <GetStarted showWelcome={showWelcome} onClose={handleClose} />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/" element={<Home username={username} />} />
+        <Route
+          path="/leaderboard"
+          element={<Leaderboard username={username} />}
+        />
         <Route path="/friends" element={<Friends />} />
         <Route path="/tasks" element={<Tasks />} />
         <Route path="/airdrop" element={<Airdrop />} />

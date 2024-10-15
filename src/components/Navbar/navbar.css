@@ -9,15 +9,13 @@
     text-decoration: none;
     border-radius: 10px;
 }
-.navbar-item.active{
-background: #06826B !important;
-}
+
 
 
 
 
 .navbar-span{
-    color: #06826B;
+    color: #DFDCED;
     text-align: center;
     font-size: 12px;
     font-style: normal;
@@ -27,5 +25,5 @@ background: #06826B !important;
 }
 
 .span-active{
-    color: #fff !important;
+    color: #7037CA !important;
 }

@@ -9,7 +9,7 @@ const TaskItem = ({item}) => {
         <img src={item.image} height={36} width={36} alt="" />
         <div className="d-flex flex-column">
             <span className="home-task-name">{item.title}</span>
-            <span className="home-task-reward">Earn {item.reward} MUMU</span>
+            <span className="home-task-reward">Earn {item.reward} WOD</span>
         </div>
     </div>
     <img src={rightArrow} alt="" />

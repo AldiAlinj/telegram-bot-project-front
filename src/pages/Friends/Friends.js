@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./friends.css";
-import craze from "../../assets/craze.png";
+import wodToken from "../../assets/wodToken.svg";
 
 const Friends = () => {
   const dummyFriends = [
@@ -42,11 +42,11 @@ const Friends = () => {
 
   return (
     <div className="container-fluid friends-wrapper d-flex flex-column justify-content-between pt-4 pb-5">
-      <div className="d-flex craze-friends-wrapper w-100 justify-content-center mt-5">
-        <img src={craze} alt="" className="craze-friends" />
+      <div className="d-flex wod-friends-wrapper w-100 justify-content-center mt-5">
+        <img src={wodToken} alt="" className="wod-friends" />
       </div>
       <h1 className="invite-friends-title mb-0">
-        Invite friends and get more MUMU
+        Invite friends and get more WOD
       </h1>
       <button className="invite-friends-button py-3">Invite Friends</button>
       {dummyFriends.length > 0 &&
@@ -63,7 +63,7 @@ const Friends = () => {
               </div>
                   <span className="friend-name">{friend.name}</span>
                 </div>
-                <span className="friend-reward">+{friend.reward} MUMU</span>
+                <span className="friend-reward">+{friend.reward} WOD</span>
             </div>
           ))}
         </div>
