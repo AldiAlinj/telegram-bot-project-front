@@ -47,7 +47,7 @@ const Friends = ({referralCode}) => {
   ];
 
 
-  const appLink = "https://t.me/AldiTestBot_bot/AldiTestBot"
+  const appLink = "https://t.me/AldiTestBot_bot"
 
 
 
@@ -66,7 +66,7 @@ const Friends = ({referralCode}) => {
         Invite friends and get more WOD
       </h1>
       <button className="invite-friends-button py-3" style={{textDecoration: "none"}}>
-        <a href={`https://t.me/share/url?url=${appLink}/${referralCode}`} style={{textDecoration: "none"}}>Invite Friends</a>
+        <a href={`https://t.me/share/url?url=${appLink}?startapp=${referralCode}`} style={{textDecoration: "none"}}>Invite Friends</a>
      </button>
       </div>
       {dummyFriends.length > 0 &&
