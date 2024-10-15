@@ -74,9 +74,9 @@ const Home = ({username, tasks, userData}) => {
         <div className="d-flex flex-column gap-2 mt-3">
             <h6 className="home-tasks-title mb-0">Earn</h6>
             <div className="home-tasks-container d-flex flex-column gap-2 position-relative mb-4">
-               {tasks.map((task, index) => (
+               {/* {tasks.map((task, index) => (
                 <TaskItem item={task} key={index} />
-               ))}            
+               ))}             */}
 
                 <NavLink to={"/earn"}>
                 <button className='show-more-button py-1 px-2'>Show more</button>
