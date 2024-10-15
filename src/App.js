@@ -16,6 +16,7 @@ const App = () => {
   const [airdrop, setAirdrop] = useState(false);
   const [isTelegram, setIsTelegram] = useState(null)
   const [username, setUsername] = useState("");
+  const [userData, setUserData] = useState({})
 
 
 
@@ -25,18 +26,29 @@ const App = () => {
         data: token
       });
       // console.log(res);
-      alert(res.data.JWT, res.data.userData)
+      setUserData(res.data)
     } catch (err) {
       console.log(err);
     }
   };
+
+  const appLink = "https://t.me/AldiTestBot_bot/AldiTestBot"
+
+
+  const handleShareReferral = () => {
+
+    // const referralMessage = `Check out this awesome app!`;
+    if(window?.Telegram?.WebApp){
+      window.Telegram.WebApp.openTelegramLink(`${appLink}?start=${userData?.referralCode}`)
+    }
+  }
+
 
   useEffect(() => {
 
     if (window.Telegram?.WebApp) {
       window.Telegram.WebApp.expand();
       window.Telegram.WebApp.setHeaderColor('bg_color', '#FF5733'); 
-    }else{
     }
 
     if (window.Telegram?.WebApp?.initDataUnsafe) {
@@ -100,12 +112,12 @@ const App = () => {
     >
       <GetStarted showWelcome={showWelcome} onClose={handleClose} />
       <Routes>
-        <Route path="/" element={<Home username={username} />} />
+        <Route path="/" element={<Home username={username} userData={userData} />} />
         <Route
           path="/leaderboard"
           element={<Leaderboard username={username} />}
         />
-        <Route path="/friends" element={<Friends />} />
+        <Route path="/friends" element={<Friends handleShareReferral={handleShareReferral} />} />
         <Route path="/earn" element={<Earn />} />
         <Route path="/airdrop" element={<Airdrop />} />
       </Routes>

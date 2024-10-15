@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./friends.css";
 import wodToken from "../../assets/wodToken.svg";
 
-const Friends = () => {
+const Friends = ({handleShareReferral}) => {
   const dummyFriends = [
     {
       name: "Lorena579",
@@ -61,7 +61,7 @@ const Friends = () => {
       <h1 className="invite-friends-title mb-0">
         Invite friends and get more WOD
       </h1>
-      <button className="invite-friends-button py-3">Invite Friends</button>
+      <button className="invite-friends-button py-3" onClick={handleShareReferral}>Invite Friends</button>
       </div>
       {dummyFriends.length > 0 &&
       <>
