@@ -63,11 +63,6 @@ const App = () => {
     if (window.Telegram?.WebApp?.initDataUnsafe) {
       const user = window.Telegram.WebApp.initDataUnsafe.user;
 
-      if(window.Telegram?.WebApp?.initDataUnsafe?.start_param){
-        alert(window.Telegram?.WebApp?.initDataUnsafe?.start_param)
-      }else{
-        alert("No referral")
-      }
 
 
       if (user) {
