@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./friends.css";
 import wodToken from "../../assets/wodToken.svg";
 
-const Friends = ({handleShareReferral}) => {
+const Friends = ({referralCode}) => {
   const dummyFriends = [
     {
       name: "Lorena579",
@@ -47,6 +47,10 @@ const Friends = ({handleShareReferral}) => {
   ];
 
 
+  const appLink = "https://t.me/AldiTestBot_bot/AldiTestBot"
+
+
+
   useEffect(() => {
     window.scrollTo(0,0)
   }, [])
@@ -61,7 +65,9 @@ const Friends = ({handleShareReferral}) => {
       <h1 className="invite-friends-title mb-0">
         Invite friends and get more WOD
       </h1>
-      <button className="invite-friends-button py-3" onClick={handleShareReferral}>Invite Friends</button>
+      <button className="invite-friends-button py-3">
+        <a href={`https://t.me/share/url?url=${appLink}/${referralCode}`}>Invite Friends</a>
+        Invite Friends</button>
       </div>
       {dummyFriends.length > 0 &&
       <>

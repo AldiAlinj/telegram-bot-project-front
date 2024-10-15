@@ -29,21 +29,16 @@ const App = () => {
       // console.log(res);
       setUserData(res.data)
       setTasks(res.data.availableTasks)
+      alert(res.data.availableTasks)
+      alert(res.data.totalScore)
     } catch (err) {
       console.log(err);
     }
   };
 
-  const appLink = "https://t.me/AldiTestBot_bot/AldiTestBot"
 
 
-  const handleShareReferral = () => {
-
-    // const referralMessage = `Check out this awesome app!`;
-    if(window?.Telegram?.WebApp){
-      window.Telegram.WebApp.openTelegramLink(`${appLink}?start=${userData?.referralCode}`)
-    }
-  }
+ 
 
 
   useEffect(() => {
@@ -119,7 +114,7 @@ const App = () => {
           path="/leaderboard"
           element={<Leaderboard username={username} />}
         />
-        <Route path="/friends" element={<Friends handleShareReferral={handleShareReferral} />} />
+        <Route path="/friends" element={<Friends referralCode={userData.referralCode} />} />
         <Route path="/earn" element={<Earn />} />
         <Route path="/airdrop" element={<Airdrop />} />
       </Routes>
