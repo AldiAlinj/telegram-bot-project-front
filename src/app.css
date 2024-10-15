@@ -19,11 +19,7 @@
   }
 
 
-  @media screen and (max-height: 795px) {
-    .main-wrapper{
-      margin-bottom: 96px;
-    }
-  }
+ 
 
   .hidescroll {
     overflow: hidden !important;

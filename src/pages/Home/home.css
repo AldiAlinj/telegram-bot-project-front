@@ -5,6 +5,11 @@
     overflow-y: scroll;
 }
 
+.home-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+
 .score-wrapper{
 border-radius: 10px;
 background-size: 100% 100%;
