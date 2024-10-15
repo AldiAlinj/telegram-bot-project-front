@@ -29,7 +29,7 @@ const App = () => {
       // console.log(res);
       setUserData(res.data.data)
       setTasks(res.data.availableTasks)
-      alert(res.data)
+      alert(JSON.stringify(res.data))
   
     } catch (err) {
       console.log(err);
