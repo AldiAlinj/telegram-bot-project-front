@@ -19,17 +19,16 @@ const App = () => {
 
 
 
-  const postToken = async(token) => {
-    await axios.post(`https://api.worldofdypians.com/api/tg_auth`, {
-      urlData: token
-    }).then((res) => {
+  const postToken = async (token) => {
+    try {
+      const res = await axios.post(`https://api.worldofdypians.com/api/tg_auth`, {
+        urlData: token
+      });
       console.log(res);
-      
-    }).catch((err) => {
-      console.log(err)
-      
-    })
-  }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
 
@@ -43,7 +42,6 @@ const App = () => {
       const user = window.Telegram.WebApp.initDataUnsafe.user;
 
       if (user) {
-        alert(window.Telegram.WebApp.initData)
         postToken(window.Telegram.WebApp.initData)
       setIsTelegram(true)
         if (user.username) {
