@@ -22,7 +22,7 @@ const App = () => {
   const postToken = async (token) => {
     try {
       const res = await axios.post(`https://api.worldofdypians.com/api/tg_auth`, {
-        urlData: token
+        data: token
       });
       console.log(res);
     } catch (err) {
