@@ -42,7 +42,6 @@ const App = () => {
 
   useEffect(() => {
 
-    alert(window.location.pathname)
 
     if (window.Telegram?.WebApp) {
       window.Telegram.WebApp.expand();
@@ -51,6 +50,13 @@ const App = () => {
 
     if (window.Telegram?.WebApp?.initDataUnsafe) {
       const user = window.Telegram.WebApp.initDataUnsafe.user;
+
+      if(window.Telegram?.WebApp?.initDataUnsafe?.start_param){
+        alert(window.Telegram?.WebApp?.initDataUnsafe?.start_param)
+      }else{
+        alert("No referral")
+      }
+
 
       if (user) {
         postToken(window.Telegram.WebApp.initData)
