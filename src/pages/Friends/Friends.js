@@ -47,7 +47,7 @@ const Friends = ({referralCode}) => {
   ];
 
 
-  const appLink = "https://t.me/AldiTestBot_bot"
+  const appLink = "https://t.me/AldiTestBot_bot/AldiTestBot"
 
 
 
