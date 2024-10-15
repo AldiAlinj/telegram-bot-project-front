@@ -16,7 +16,8 @@ const App = () => {
   const [airdrop, setAirdrop] = useState(false);
   const [isTelegram, setIsTelegram] = useState(null)
   const [username, setUsername] = useState("");
-  const [userData, setUserData] = useState({})
+  const [userData, setUserData] = useState({});
+  const [tasks, setTasks] = useState([])
 
 
 
@@ -27,6 +28,7 @@ const App = () => {
       });
       // console.log(res);
       setUserData(res.data)
+      setTasks(res.data.availableTasks)
     } catch (err) {
       console.log(err);
     }
@@ -112,7 +114,7 @@ const App = () => {
     >
       <GetStarted showWelcome={showWelcome} onClose={handleClose} />
       <Routes>
-        <Route path="/" element={<Home username={username} userData={userData} />} />
+        <Route path="/" element={<Home username={username} tasks={tasks} userData={userData} />} />
         <Route
           path="/leaderboard"
           element={<Leaderboard username={username} />}

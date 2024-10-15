@@ -10,7 +10,7 @@ import { NavLink } from 'react-router-dom'
 import playBanner from '../../assets/playBanner.png'
 import getFormattedNumber from '../../hooks/getFormattedNumber'
 
-const Home = ({username, userData}) => {
+const Home = ({username, tasks, userData}) => {
 
     // const tasks = [
     //     {
@@ -74,7 +74,7 @@ const Home = ({username, userData}) => {
         <div className="d-flex flex-column gap-2 mt-3">
             <h6 className="home-tasks-title mb-0">Earn</h6>
             <div className="home-tasks-container d-flex flex-column gap-2 position-relative mb-4">
-               {userData.availableTasks.map((task, index) => (
+               {tasks.map((task, index) => (
                 <TaskItem item={task} key={index} />
                ))}            
 
