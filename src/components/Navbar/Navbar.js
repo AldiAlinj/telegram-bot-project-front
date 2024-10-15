@@ -11,7 +11,7 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = ({showAirdrop}) => {
   return (
-    <div className="navbar p-3 w-100">
+    <div className="navbar px-3 py-0 w-100">
       <NavLink
         to="/"
         className={({ isActive }) =>

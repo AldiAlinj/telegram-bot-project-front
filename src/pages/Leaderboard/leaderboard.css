@@ -1,5 +1,5 @@
 .leaderboard-wrapper {
-  height: calc(-96px + 100vh);
+  height: calc(-64px + 100vh);
   overflow-y: scroll;
   background-size: 100% 100%;
   background: #FCFCFE;

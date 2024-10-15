@@ -1,5 +1,5 @@
 .friends-wrapper {
-    height: calc(-96px + 100vh);
+    height: calc(-64px + 100vh);
     overflow-y: scroll;
     background-size: 100% 100%;
     background: #FCFCFE;
@@ -7,9 +7,6 @@
   }
 
 
-  .wod-friends-wrapper{
-
-  }
 
   .wod-friends{
     width: 50%;
@@ -105,4 +102,10 @@ align-items: center;
 border: 1px solid #F2F0F8;
 background: #FFF;
 padding: 10px;
+}
+
+@media screen and (max-height: 700px) {
+    .wod-friends{
+        width: 25%;
+      }
 }

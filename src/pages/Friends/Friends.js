@@ -53,7 +53,7 @@ const Friends = () => {
   
 
   return (
-    <div className="container-fluid friends-wrapper d-flex flex-column justify-content-between pt-4 pb-5">
+    <div className="container-fluid friends-wrapper d-flex flex-column justify-content-between pt-4 pb-3">
       <div className="d-flex flex-column align-items-center gap-3">
       <div className="d-flex wod-friends-wrapper w-100 justify-content-center ">
         <img src={wodToken} alt="" className="wod-friends" />

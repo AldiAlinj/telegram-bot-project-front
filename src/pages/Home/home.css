@@ -1,6 +1,6 @@
 .home-wrapper{
     background: #FCFCFE;
-    height: calc(-96px + 100vh);
+    height: calc(-64px + 100vh);
     background-size: 100% 100%;
     overflow-y: scroll;
 }
