@@ -54,7 +54,7 @@ const App = () => {
 
   const fetchLeaderboard = async(token) => {
     try {
-      const res = await axios.post(`https://api.worldofdypians.com/api/tg_auth`, {
+      const res = await axios.post(`https://api.worldofdypians.com/api/leaderboard`, {
         token: token
       });
       alert(token)
