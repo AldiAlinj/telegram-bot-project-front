@@ -75,7 +75,7 @@ const App = () => {
   };
 
   const claimDailySession = async (token) => {
-    setLoadingClaim(true)
+    setLoadingClaim(true);
     try {
       const res = await axios.post(
         `https://api.worldofdypians.com/api/claim-streak`,
@@ -85,7 +85,6 @@ const App = () => {
       );
       setLoadingClaim(false);
       console.log(res.data);
-      
     } catch (err) {
       console.log(err);
     }
@@ -117,16 +116,18 @@ const App = () => {
     }
   }, []);
 
-
-
   const canClaimToday = (lastStreakDate) => {
-    const now = new Date();
-    const lastDate = new Date(lastStreakDate);
+    if (lastStreakDate === null) {
+      return true;
+    } else {
+      const now = new Date();
+      const lastDate = new Date(lastStreakDate);
 
-    lastDate.setUTCHours(0, 0, 0, 0);
-    now.setUTCHours(0, 0, 0, 0);
+      lastDate.setUTCHours(0, 0, 0, 0);
+      now.setUTCHours(0, 0, 0, 0);
 
-    return now > lastDate;
+      return now > lastDate;
+    }
   };
 
   useEffect(() => {
@@ -202,14 +203,14 @@ const App = () => {
         <Route path="/earn" element={<Earn />} />
         <Route path="/airdrop" element={<Airdrop />} />
       </Routes>
-   {dailySession &&
-      <DailySession
-      canClaimToday={() => canClaimToday(dailySessionData?.lastStreakDate)}
-      streakDay={dailySessionData?.streakDay}
-      claimDailySession={() => claimDailySession(jwt)}
-      loadingClaim={loadingClaim}
-    />
-   }
+      {dailySession && (
+        <DailySession
+          canClaimToday={() => canClaimToday(dailySessionData?.lastStreakDate)}
+          streakDay={dailySessionData?.streakDay}
+          claimDailySession={() => claimDailySession(jwt)}
+          loadingClaim={loadingClaim}
+        />
+      )}
       <ComingSoon show={airdrop} onClose={() => setAirdrop(false)} />
       <Navbar showAirdrop={() => setAirdrop(true)} />
     </div>
