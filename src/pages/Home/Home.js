@@ -69,6 +69,7 @@ const Home = ({
     if (now >= countdownEndTime) {
       setCanClaim(true);
     }
+    alert(now)
     alert(countdownEndTime)
   }, [countdownEndTime]);
 
