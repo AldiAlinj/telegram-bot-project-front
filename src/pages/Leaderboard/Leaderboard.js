@@ -27,7 +27,7 @@ const Leaderboard = ({ username, leaderboard, userPosition }) => {
                 {username}
               </h6>
               <span className="player-wod-amount" style={{ color: "#46557B" }}>
-                {getFormattedNumber(userPosition?.points, 2)} WOD
+                {getFormattedNumber(userPosition?.points, 0)} WOD
               </span>
             </div>
           </div>
