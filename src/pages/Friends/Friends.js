@@ -25,10 +25,10 @@ const Friends = ({referredUsers, referralCode}) => {
         Invite friends and get more WOD
       </h1>
       <button className="invite-friends-button py-3" style={{textDecoration: "none"}}>
-        <a href={`https://t.me/share/url?url=${appLink}?startapp=${referralCode}`} style={{textDecoration: "none"}}>Invite Friends</a>
+        <a href={`https://t.me/share/url?url=${appLink}?startapp=${referralCode}`} style={{textDecoration: "none", color: "#46557B"}}>Invite Friends</a>
      </button>
       </div>
-      {referredUsers.length > 0 &&
+      {/* {referredUsers.length > 0 &&
       <>
       <h6 className="friends-list-title mb-0 my-3">
         {referredUsers.length} Friends
@@ -47,7 +47,7 @@ const Friends = ({referredUsers, referralCode}) => {
           ))}
         </div>
       </>
-      }
+      } */}
     </div>
   );
 };

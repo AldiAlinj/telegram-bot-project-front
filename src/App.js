@@ -17,7 +17,10 @@ const App = () => {
   const [isTelegram, setIsTelegram] = useState(null)
   const [username, setUsername] = useState("");
   const [userData, setUserData] = useState({});
-  const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useState([]);
+  const [leaderboard, setLeaderboard] = useState([]);
+  const [userPosition, setUserPosition] = useState({});
+  const [jwt, setJwt] = useState(null)
 
 
 
@@ -41,7 +44,7 @@ const App = () => {
       // console.log(res);
       setUserData(res.data.userData)
       setTasks(res.data.userData.availableTasks)
-  
+      setJwt(res.data.JWT)
     } catch (err) {
       console.log(err);
     }
@@ -49,6 +52,19 @@ const App = () => {
 
 
 
+  const fetchLeaderboard = async(token) => {
+    try {
+      const res = await axios.post(`https://api.worldofdypians.com/api/tg_auth`, {
+        token: token
+      });
+      // console.log(res);
+      setLeaderboard(res.data.topUsers)
+      setUserPosition(res.data.userPosition)
+  
+    } catch (err) {
+      console.log(err);
+    }
+  }
  
 
 
@@ -97,6 +113,12 @@ const App = () => {
   };
 
 
+  useEffect(() => {
+    fetchLeaderboard(jwt)
+  }, [jwt])
+  
+
+
   if(!isTelegram){
     return (
       <div
@@ -126,7 +148,7 @@ const App = () => {
         <Route path="/" element={<Home username={username} tasks={tasks} userData={userData} />} />
         <Route
           path="/leaderboard"
-          element={<Leaderboard username={username} />}
+          element={<Leaderboard username={username} leaderboard={leaderboard} userPosition={userPosition} />}
         />
         <Route path="/friends" element={<Friends referredUsers={userData.referredUsers} referralCode={userData.referralCode} />} />
         <Route path="/earn" element={<Earn />} />

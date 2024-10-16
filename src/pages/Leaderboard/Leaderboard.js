@@ -3,13 +3,9 @@ import "./leaderboard.css";
 import goldMedal from "../../assets/goldMedal.svg";
 import silverMedal from "../../assets/silverMedal.svg";
 import bronzeMedal from "../../assets/bronzeMedal.svg";
+import getFormattedNumber from "../../hooks/getFormattedNumber";
 
-const Leaderboard = ({username}) => {
-  const dummyArray = Array.from({ length: 50 }, (_, index) => ({
-    id: index + 1,
-    name: `Item ${index + 1}`,
-  }));
-
+const Leaderboard = ({ username, leaderboard, userPosition }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -24,52 +20,65 @@ const Leaderboard = ({username}) => {
               className="name-holder d-flex align-items-center justify-content-center"
               style={{ background: "#7037CA" }}
             >
-              <span className="name-initial">{username.slice(0,1)}</span>
+              <span className="name-initial">{username.slice(0, 1)}</span>
             </div>
             <div className="d-flex flex-column">
               <h6 className="player-name mb-0" style={{ color: "#46557B" }}>
                 {username}
               </h6>
               <span className="player-wod-amount" style={{ color: "#46557B" }}>
-                126,000 WOD
+                {getFormattedNumber(userPosition?.points, 2)} WOD
               </span>
             </div>
           </div>
-          {/* <span className="player-rank" style={{color:"#46557B"}}>#250,762</span> */}
-          <img src={goldMedal} alt="gold" />
+          {userPosition?.position === 1 ? (
+            <img src={goldMedal} alt="gold" />
+          ) : userPosition?.position === 2 ? (
+            <img src={silverMedal} alt="silver" />
+          ) : userPosition?.position === 3 ? (
+            <img src={bronzeMedal} alt="bronze" />
+          ) : (
+            <span className="player-rank" style={{ color: "#46557B" }}>
+              {userPosition?.position}
+            </span>
+          )}
         </div>
         <div className="d-flex mt-3 align-items-bottom justify-content-between">
           <h6 className="mb-0 wod-total-holders">51,632,343 Holders</h6>
           <span className="top-100">(Top 100)</span>
         </div>
       </div>
-        <div className="players-leaderboard d-flex flex-column">
-          {dummyArray.map((item, index) => (
-            <div
-              key={index}
-              className="leaderboard-item d-flex align-items-center justify-content-between p-3"
-            >
-              <div className="d-flex align-items-center gap-2">
-                <div className="name-holder d-flex align-items-center justify-content-center">
-                  <span className="name-initial">L</span>
-                </div>
-                <div className="d-flex flex-column">
-                  <h6 className="player-name mb-0">Lorena579</h6>
-                  <span className="player-wod-amount">126,000 WOD</span>
-                </div>
+      <div className="players-leaderboard d-flex flex-column">
+        {leaderboard.map((item, index) => (
+          <div
+            key={index}
+            className="leaderboard-item d-flex align-items-center justify-content-between p-3"
+          >
+            <div className="d-flex align-items-center gap-2">
+              <div className="name-holder d-flex align-items-center justify-content-center">
+                <span className="name-initial">
+                  {item.username.slice(0, 1)}
+                </span>
               </div>
-              {index + 1 === 1 ? (
-                <img src={goldMedal} alt="" />
-              ) : index + 1 === 2 ? (
-                <img src={silverMedal} alt="" />
-              ) : index + 1 === 3 ? (
-                <img src={bronzeMedal} alt="" />
-              ) : (
-                <span className="player-rank">#{index + 1}</span>
-              )}
+              <div className="d-flex flex-column">
+                <h6 className="player-name mb-0">{item.username}</h6>
+                <span className="player-wod-amount">
+                  {getFormattedNumber(item.totalPoints, 0)} WOD
+                </span>
+              </div>
             </div>
-          ))}
-        </div>
+            {item.rank === 1 ? (
+              <img src={goldMedal} alt="" />
+            ) : item.rank === 2 ? (
+              <img src={silverMedal} alt="" />
+            ) : item.rank === 3 ? (
+              <img src={bronzeMedal} alt="" />
+            ) : (
+              <span className="player-rank">#{item.rank}</span>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
