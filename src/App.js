@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { json, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Leaderboard from "./pages/Leaderboard/Leaderboard";
 import Friends from "./pages/Friends/Friends";
@@ -55,6 +55,7 @@ const App = () => {
         streakPoints: res.data.userData.streakPoints,
       });
       const referredUsers = res.data.userData.referredUsers
+      alert(JSON.stringify(referredUsers))
       const sumRewards = referredUsers.reduce((acc, item) => acc + item.reward, 0);
       setReferralPoints(sumRewards)
       setJwt(res.data.JWT);
