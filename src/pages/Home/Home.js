@@ -10,35 +10,9 @@ import { NavLink } from 'react-router-dom'
 import playBanner from '../../assets/playBanner.png'
 import getFormattedNumber from '../../hooks/getFormattedNumber'
 
-const Home = ({username, tasks, userData}) => {
+const Home = ({username, tasks, userData, jwt}) => {
 
-    // const tasks = [
-    //     {
-    //         image: twitter,
-    //         title: "Follow [Project Name]",
-    //         reward : "6,000",
-    //         completed: false
-    //     },
-    //     {
-    //         image: telegram,
-    //         title: "Join [Project Name]",
-    //         reward : "6,000",
-    //         completed: false
-    //     },
-    //     {
-    //         image: discord,
-    //         title: "Join [Project Name]",
-    //         reward : "6,000",
-    //         completed: false
-    //     },
-    //     {
-    //         image: youtube,
-    //         title: "Subscribe [Project Name]",
-    //         reward : "6,000",
-    //         completed: false
-    //     },
-
-    // ]
+   
 
     
   useEffect(() => {
@@ -55,11 +29,11 @@ const Home = ({username, tasks, userData}) => {
         </div>
         <div className="home-info-grid mt-3">
             <div className="home-info-grid-item d-flex flex-column  py-3  justify-content-center align-items-center gap-1">
-                <h6 className="home-grid-value mb-0">12,500,000</h6>
+                <h6 className="home-grid-value mb-0">{getFormattedNumber(userData.streakPoints + userData.chestsPoints, 0)}</h6>
                 <span className="home-grid-info">Rewards</span>
             </div>
             <div className="home-info-grid-item d-flex flex-column  py-3  justify-content-center align-items-center gap-1">
-                <h6 className="home-grid-value mb-0">500,000</h6>
+                <h6 className="home-grid-value mb-0">{getFormattedNumber(userData.tasksPoints, 0)}</h6>
                 <span className="home-grid-info">Tasks</span>
             </div>
             <div className="home-info-grid-item d-flex flex-column  py-3  justify-content-center align-items-center gap-1">
@@ -75,7 +49,7 @@ const Home = ({username, tasks, userData}) => {
             <h6 className="home-tasks-title mb-0">Earn</h6>
             <div className="home-tasks-container d-flex flex-column gap-2 position-relative mb-4">
                {tasks.map((task, index) => (
-                <TaskItem item={task} key={index} />
+                <TaskItem item={task} key={index} jwt={jwt} />
                ))}            
 
                 <NavLink to={"/earn"}>

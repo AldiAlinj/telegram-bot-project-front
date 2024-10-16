@@ -1,6 +1,6 @@
 .daily-session-outer-wrapper{
     width: 100%;
-    height: calc(-64px + 100vh);
+    height: 100vh;
     position: fixed;
     top: -100%;
     z-index: 20;
@@ -10,7 +10,7 @@
 }
 
 .daily-session-active{
-    transform: translateY(108%);
+    transform: translateY(100%);
 }
 
 

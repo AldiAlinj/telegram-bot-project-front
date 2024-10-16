@@ -217,7 +217,7 @@ const App = () => {
         <Route
           path="/"
           element={
-            <Home username={username} tasks={tasks} userData={userData} />
+            <Home username={username} tasks={tasks} userData={userData} jwt={jwt} />
           }
         />
         <Route
@@ -239,7 +239,7 @@ const App = () => {
             />
           }
         />
-        <Route path="/earn" element={<Earn />} />
+        <Route path="/earn" element={<Earn  tasks={tasks} jwt={jwt} />} />
         <Route path="/airdrop" element={<Airdrop />} />
       </Routes>
         <DailySession
