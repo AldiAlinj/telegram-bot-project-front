@@ -23,6 +23,7 @@ const Home = ({
   referralPoints,
   openHourlyChest,
   loadingChest,
+  chestTimeStamp
 }) => {
   const dummyTasks = [
     {
@@ -57,8 +58,9 @@ const Home = ({
 
   const [canClaim, setCanClaim] = useState(false);
 
+  const lastClaimTime = Date.parse(chestTimeStamp); // or new Date(lastClaimTimestamp).getTime()
   const oneHourInMs = 3600000;
-  const countdownEndTime = userData.lastChestOpened + oneHourInMs;
+  const countdownEndTime = lastClaimTime + oneHourInMs;
 
   useEffect(() => {
     const now = Date.now();
@@ -112,7 +114,13 @@ const Home = ({
       </div>
       <div className="d-flex flex-column mt-3 mb-5 play-banner-wrapper">
         <img src={playBanner} alt="" style={{ borderRadius: "10px" }} />
-        <button className={`play-button ${canClaim === false && "play-button-disabled"} py-2 px-4`} onClick={openHourlyChest} disabled={!canClaim || loadingChest}>
+        <button
+          className={`play-button ${
+            canClaim === false && "play-button-disabled"
+          } py-2 px-4`}
+          onClick={openHourlyChest}
+          disabled={!canClaim || loadingChest}
+        >
           {loadingChest ? (
             <div
               class="spinner-border spinner-border-sm text-info"

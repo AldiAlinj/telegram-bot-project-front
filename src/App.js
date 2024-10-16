@@ -28,6 +28,7 @@ const App = () => {
   const [canClaim, setCanClaim] = useState(false);
   const [referralPoints, setReferralPoints] = useState(0);
   const [loadingChest, setLoadingChest] = useState(false);
+  const [chestTimeStamp, setChestTimeStamp] = useState(null);
   // const [chestReward, setChestReward] = useState(0);
 
   const postToken = async (token) => {
@@ -56,6 +57,7 @@ const App = () => {
         lastStreakDate: res.data.userData.lastStreakDate,
         streakPoints: res.data.userData.streakPoints,
       });
+      setChestTimeStamp(res.data.userData.lastChestOpened)
       const referredUsers = res.data.userData.referredUsers
       const sumRewards = referredUsers.reduce((acc, item) => acc + item.earnedPoints, 0);
       setReferralPoints(sumRewards)
@@ -251,6 +253,7 @@ const App = () => {
               handleCompleteTask={handleCompleteTask}
               openHourlyChest={openHourlyChest}
               loadingChest={loadingChest}
+              chestTimeStamp={chestTimeStamp}
             />
           }
         />
