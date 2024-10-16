@@ -2,10 +2,15 @@
     width: 100%;
     height: calc(-64px + 100vh);
     position: fixed;
-    top: 0;
+    top: -100%;
     z-index: 20;
     background-image: url('../../assets/blueBg.png');
     background-size: 100% 100%;
+    transition: all ease-in-out .35s;
+}
+
+.daily-session-active{
+    transform: translateY(108%);
 }
 
 

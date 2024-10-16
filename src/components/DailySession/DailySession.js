@@ -1,24 +1,24 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./dailysession.css";
 import coin from "../../assets/dailySession/coin.png";
 import calendar from "../../assets/dailySession/calendar.png";
 import fire from "../../assets/dailySession/fire.png";
+import closeDaily from '../../assets/dailySession/closeDaily.svg'
 
 const DailySession = ({
   canClaimToday,
   streakDay,
   claimDailySession,
   loadingClaim,
+  onClose,
+  show
 }) => {
 
-useEffect(() => {
- alert(canClaimToday)
-}, [canClaimToday])
-
-
-
   return (
-    <div className="daily-session-outer-wrapper p-3 d-flex flex-column align-items-center gap-2">
+    <div className={`daily-session-outer-wrapper ${show && "daily-session-active"} p-3 d-flex flex-column align-items-center gap-2`}>
+      <div className="d-flex align-items-center justify-content-end w-100">
+        <img src={closeDaily} onClick={onClose} alt="" />
+      </div>
       <div className="daily-session-inner-wrapper d-flex flex-column gap-4 align-items-center justify-content-end">
         <img src={fire} alt="" style={{ width: "200px" }} />
         <div className="d-flex flex-column gap-2 align-items-center">

@@ -22,9 +22,10 @@ const App = () => {
   const [leaderboard, setLeaderboard] = useState([]);
   const [userPosition, setUserPosition] = useState({});
   const [jwt, setJwt] = useState(null);
-  const [dailySession, setDailySession] = useState(true);
+  const [dailySession, setDailySession] = useState(false);
   const [dailySessionData, setDailySessionData] = useState({});
   const [loadingClaim, setLoadingClaim] = useState(false);
+  const [canClaim, setCanClaim] = useState(false);
 
   const postToken = async (token) => {
     let body = {
@@ -32,7 +33,6 @@ const App = () => {
     };
 
     const initData = window.Telegram?.WebApp?.initDataUnsafe;
-    // Check if there's a `start_param` in the initData (this could be the referral code)
     if (initData?.start_param) {
       body = {
         data: token,
@@ -58,6 +58,10 @@ const App = () => {
       console.log(err);
     }
   };
+
+
+
+
 
   const fetchLeaderboard = async (token) => {
     try {
@@ -140,8 +144,9 @@ const App = () => {
   }, []);
 
   const canClaimToday = (lastStreakDate) => {
+    setLoadingClaim(true)
     if (lastStreakDate === null) {
-      return true;
+      setCanClaim(true);
     } else {
       const now = new Date();
       const lastDate = new Date(lastStreakDate);
@@ -149,9 +154,20 @@ const App = () => {
       lastDate.setUTCHours(0, 0, 0, 0);
       now.setUTCHours(0, 0, 0, 0);
 
-      return now > lastDate;
+      if(now > lastDate){
+        setCanClaim(true)
+      }else{
+        setCanClaim(false)
+      }
     }
+    setLoadingClaim(false)
   };
+
+
+  useEffect(() => {
+    canClaimToday(dailySessionData.lastStreakDate)
+   }, [dailySessionData])
+   
 
   useEffect(() => {
     const hasVisited = sessionStorage.getItem("hasVisited");
@@ -160,11 +176,11 @@ const App = () => {
       setShowWelcome(true);
       sessionStorage.setItem("hasVisited", "true"); // Set the flag in sessionStorage
     }
-    setDailySession(true);
   }, []);
 
   const handleClose = () => {
     setShowWelcome(false); // Hide the welcome screen when the user dismisses it
+    setDailySession(true);
   };
 
   useEffect(() => {
@@ -226,14 +242,14 @@ const App = () => {
         <Route path="/earn" element={<Earn />} />
         <Route path="/airdrop" element={<Airdrop />} />
       </Routes>
-      {dailySession && (
         <DailySession
-          canClaimToday={() => canClaimToday(dailySessionData?.lastStreakDate)}
+        show={dailySession}
+        onClose={() => setDailySession(false)}
+          canClaimToday={canClaim}
           streakDay={dailySessionData?.streakDay}
           claimDailySession={() => claimDailySession(jwt)}
           loadingClaim={loadingClaim}
         />
-      )}
       <ComingSoon show={airdrop} onClose={() => setAirdrop(false)} />
       <Navbar showAirdrop={() => setAirdrop(true)} />
     </div>
