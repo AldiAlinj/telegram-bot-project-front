@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./dailysession.css";
 import coin from "../../assets/dailySession/coin.png";
 import calendar from "../../assets/dailySession/calendar.png";
@@ -10,6 +10,13 @@ const DailySession = ({
   claimDailySession,
   loadingClaim,
 }) => {
+
+useEffect(() => {
+ alert(canClaimToday)
+}, [canClaimToday])
+
+
+
   return (
     <div className="daily-session-outer-wrapper p-3 d-flex flex-column align-items-center gap-2">
       <div className="daily-session-inner-wrapper d-flex flex-column gap-4 align-items-center justify-content-end">
