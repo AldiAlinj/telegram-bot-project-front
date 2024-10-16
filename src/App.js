@@ -55,8 +55,7 @@ const App = () => {
         streakPoints: res.data.userData.streakPoints,
       });
       const referredUsers = res.data.userData.referredUsers
-      alert(JSON.stringify(referredUsers))
-      const sumRewards = referredUsers.reduce((acc, item) => acc + item.reward, 0);
+      const sumRewards = referredUsers.reduce((acc, item) => acc + item.earnedPoints, 0);
       setReferralPoints(sumRewards)
       setJwt(res.data.JWT);
     } catch (err) {
