@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./earn.css";
 import TaskItem from "../../components/TaskItem/TaskItem";
-// import CompletedTaskItem from "../../components/TaskItem/CompletedTaskItem";
+import CompletedTaskItem from "../../components/TaskItem/CompletedTaskItem";
 
 const Earn = ({ tasks, jwt, completedTasks, handleCompleteTask }) => {
   return (
@@ -13,9 +13,9 @@ const Earn = ({ tasks, jwt, completedTasks, handleCompleteTask }) => {
           {tasks.map((task, index) => (
             <TaskItem item={task} key={index} jwt={jwt} handleCompleteTask={handleCompleteTask} />
           ))}
-          {/* {completedTasks.map((task, index) => (
+          {completedTasks.map((task, index) => (
             <CompletedTaskItem item={task} key={index} />
-          ))} */}
+          ))}
 
           <NavLink to={"/earn"}></NavLink>
         </div>
