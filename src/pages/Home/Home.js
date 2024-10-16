@@ -71,7 +71,7 @@ const Home = ({
     }
     alert(chestTimeStamp)
    
-  }, [countdownEndTime]);
+  }, [countdownEndTime ,chestTimeStamp]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
