@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Leaderboard from "./pages/Leaderboard/Leaderboard";
@@ -26,6 +26,7 @@ const App = () => {
   const [dailySessionData, setDailySessionData] = useState({});
   const [loadingClaim, setLoadingClaim] = useState(false);
   const [canClaim, setCanClaim] = useState(false);
+  const [referralPoints, setReferralPoints] = useState(0)
 
   const postToken = async (token) => {
     let body = {
@@ -53,11 +54,43 @@ const App = () => {
         lastStreakDate: res.data.userData.lastStreakDate,
         streakPoints: res.data.userData.streakPoints,
       });
+      const referredUsers = res.data.userData.referredUsers
+      const sumRewards = referredUsers.reduce((acc, item) => acc + item.reward, 0);
+      setReferralPoints(sumRewards)
       setJwt(res.data.JWT);
     } catch (err) {
       console.log(err);
     }
   };
+
+
+ 
+
+  const fetchAllData = useCallback(() => {
+    if (window.Telegram?.WebApp) {
+      window.Telegram.WebApp.expand();
+      window.Telegram.WebApp.setHeaderColor("bg_color", "#FF5733");
+    }
+
+    if (window.Telegram?.WebApp?.initDataUnsafe) {
+      const user = window.Telegram.WebApp.initDataUnsafe.user;
+
+      if (user) {
+        postToken(window.Telegram.WebApp.initData);
+        setIsTelegram(true);
+        if (user.username) {
+          setUsername(user.username);
+        } else if (user.first_name) {
+          setUsername(user.first_name);
+        } else {
+          setUsername("User");
+        }
+      } else {
+        setUsername("User");
+        setIsTelegram(false);
+      }
+    }
+  }, []);
 
   const fetchLeaderboard = async (token) => {
     try {
@@ -84,29 +117,7 @@ const App = () => {
         }
       );
       setLoadingClaim(false);
-      if (window.Telegram?.WebApp) {
-        window.Telegram.WebApp.expand();
-        window.Telegram.WebApp.setHeaderColor("bg_color", "#FF5733");
-      }
-
-      if (window.Telegram?.WebApp?.initDataUnsafe) {
-        const user = window.Telegram.WebApp.initDataUnsafe.user;
-
-        if (user) {
-          postToken(window.Telegram.WebApp.initData);
-          setIsTelegram(true);
-          if (user.username) {
-            setUsername(user.username);
-          } else if (user.first_name) {
-            setUsername(user.first_name);
-          } else {
-            setUsername("User");
-          }
-        } else {
-          setUsername("User");
-          setIsTelegram(false);
-        }
-      }
+      fetchAllData()
       console.log(res.data);
     } catch (err) {
       console.log(err);
@@ -114,30 +125,9 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (window.Telegram?.WebApp) {
-      window.Telegram.WebApp.expand();
-      window.Telegram.WebApp.setHeaderColor("bg_color", "#FF5733");
-    }
-
-    if (window.Telegram?.WebApp?.initDataUnsafe) {
-      const user = window.Telegram.WebApp.initDataUnsafe.user;
-
-      if (user) {
-        postToken(window.Telegram.WebApp.initData);
-        setIsTelegram(true);
-        if (user.username) {
-          setUsername(user.username);
-        } else if (user.first_name) {
-          setUsername(user.first_name);
-        } else {
-          setUsername("User");
-        }
-      } else {
-        setUsername("User");
-        setIsTelegram(false);
-      }
-    }
-  }, []);
+   
+  fetchAllData()
+  }, [fetchAllData]);
 
   const canClaimToday = (lastStreakDate) => {
     setLoadingClaim(true);
@@ -194,29 +184,7 @@ const App = () => {
         body
       );
       console.log(res.data);
-      if (window.Telegram?.WebApp) {
-        window.Telegram.WebApp.expand();
-        window.Telegram.WebApp.setHeaderColor("bg_color", "#FF5733");
-      }
-  
-      if (window.Telegram?.WebApp?.initDataUnsafe) {
-        const user = window.Telegram.WebApp.initDataUnsafe.user;
-  
-        if (user) {
-          postToken(window.Telegram.WebApp.initData);
-          setIsTelegram(true);
-          if (user.username) {
-            setUsername(user.username);
-          } else if (user.first_name) {
-            setUsername(user.first_name);
-          } else {
-            setUsername("User");
-          }
-        } else {
-          setUsername("User");
-          setIsTelegram(false);
-        }
-      }
+      fetchAllData();
     } catch (err) {
       console.log(err);
     }
@@ -255,6 +223,7 @@ const App = () => {
           element={
             <Home
               username={username}
+              referralPoints={referralPoints}
               tasks={tasks?.slice(0, 4)}
               userData={userData}
               jwt={jwt}

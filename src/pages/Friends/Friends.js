@@ -28,7 +28,7 @@ const Friends = ({referredUsers, referralCode}) => {
         <a href={`https://t.me/share/url?url=${appLink}?startapp=${referralCode}`} style={{textDecoration: "none", color: "#46557B"}}>Invite Friends</a>
      </button>
       </div>
-      {/* {referredUsers.length > 0 &&
+      {referredUsers.length > 0 &&
       <>
       <h6 className="friends-list-title mb-0 my-3">
         {referredUsers.length} Friends
@@ -47,7 +47,7 @@ const Friends = ({referredUsers, referralCode}) => {
           ))}
         </div>
       </>
-      } */}
+      }
     </div>
   );
 };

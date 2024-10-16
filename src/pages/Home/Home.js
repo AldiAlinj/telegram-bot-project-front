@@ -10,7 +10,7 @@ import { NavLink } from 'react-router-dom'
 import playBanner from '../../assets/playBanner.png'
 import getFormattedNumber from '../../hooks/getFormattedNumber'
 
-const Home = ({username, tasks, userData, jwt, handleCompleteTask}) => {
+const Home = ({username, tasks, userData, handleCompleteTask, referralPoints}) => {
 
    
 
@@ -37,7 +37,7 @@ const Home = ({username, tasks, userData, jwt, handleCompleteTask}) => {
                 <span className="home-grid-info">Tasks</span>
             </div>
             <div className="home-info-grid-item d-flex flex-column  py-3  justify-content-center align-items-center gap-1">
-                <h6 className="home-grid-value mb-0">6,000,000</h6>
+                <h6 className="home-grid-value mb-0">{getFormattedNumber(referralPoints, 0)}</h6>
                 <span className="home-grid-info">Invites</span>
             </div>
         </div>
