@@ -1,21 +1,12 @@
 import React from "react";
-import "./taskitem.css";
-import rightArrow from "../../assets/rightArrow.svg";
 import check from "../../assets/check.svg";
 
-const TaskItem = ({ item, handleCompleteTask }) => {
 
 
+const CompletedTaskItem = ({ item }) => {
   return (
-    <a
-      href={item.link}
-      target="_blank"
-      rel="noreferrer"
-      onClick={() => handleCompleteTask(item._id)}
-      style={{ textDecoration: "none" }}
-      className={`home-task-item ${
-        item.completed && "completed-task"
-      } p-2 d-flex w-100 align-items-center justify-content-between`}
+    <div
+      className={`home-task-item completed-task p-2 d-flex w-100 align-items-center justify-content-between`}
     >
       <div className="d-flex align-items-center gap-2">
         <img
@@ -39,13 +30,9 @@ const TaskItem = ({ item, handleCompleteTask }) => {
           </span>
         </div>
       </div>
-      {item.completed ? (
-        <img src={check} alt="" />
-      ) : (
-        <img src={rightArrow} alt="" />
-      )}
-    </a>
+      <img src={check} alt="" />
+    </div>
   );
 };
 
-export default TaskItem;
+export default CompletedTaskItem;

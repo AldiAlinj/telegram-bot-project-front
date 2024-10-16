@@ -59,10 +59,6 @@ const App = () => {
     }
   };
 
-
-
-
-
   const fetchLeaderboard = async (token) => {
     try {
       const res = await axios.post(
@@ -92,10 +88,10 @@ const App = () => {
         window.Telegram.WebApp.expand();
         window.Telegram.WebApp.setHeaderColor("bg_color", "#FF5733");
       }
-  
+
       if (window.Telegram?.WebApp?.initDataUnsafe) {
         const user = window.Telegram.WebApp.initDataUnsafe.user;
-  
+
         if (user) {
           postToken(window.Telegram.WebApp.initData);
           setIsTelegram(true);
@@ -144,7 +140,7 @@ const App = () => {
   }, []);
 
   const canClaimToday = (lastStreakDate) => {
-    setLoadingClaim(true)
+    setLoadingClaim(true);
     if (lastStreakDate === null) {
       setCanClaim(true);
     } else {
@@ -154,20 +150,18 @@ const App = () => {
       lastDate.setUTCHours(0, 0, 0, 0);
       now.setUTCHours(0, 0, 0, 0);
 
-      if(now > lastDate){
-        setCanClaim(true)
-      }else{
-        setCanClaim(false)
+      if (now > lastDate) {
+        setCanClaim(true);
+      } else {
+        setCanClaim(false);
       }
     }
-    setLoadingClaim(false)
+    setLoadingClaim(false);
   };
 
-
   useEffect(() => {
-    canClaimToday(dailySessionData.lastStreakDate)
-   }, [dailySessionData])
-   
+    canClaimToday(dailySessionData.lastStreakDate);
+  }, [dailySessionData]);
 
   useEffect(() => {
     const hasVisited = sessionStorage.getItem("hasVisited");
@@ -186,6 +180,25 @@ const App = () => {
   useEffect(() => {
     fetchLeaderboard(jwt);
   }, [jwt]);
+
+
+  const handleCompleteTask = async (taskId) => {
+    let body = {
+      token: jwt,
+      taskId: taskId,
+    };
+
+    try {
+      const res = await axios.post(
+        `https://api.worldofdypians.com/api/complete-task`,
+        body
+      );
+      console.log(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
 
   if (!isTelegram) {
     return (
@@ -217,7 +230,13 @@ const App = () => {
         <Route
           path="/"
           element={
-            <Home username={username} tasks={tasks} userData={userData} jwt={jwt} />
+            <Home
+              username={username}
+              tasks={tasks?.slice(0, 4)}
+              userData={userData}
+              jwt={jwt}
+              handleCompleteTask={handleCompleteTask}
+            />
           }
         />
         <Route
@@ -239,17 +258,27 @@ const App = () => {
             />
           }
         />
-        <Route path="/earn" element={<Earn  tasks={tasks} jwt={jwt} />} />
+        <Route
+          path="/earn"
+          element={
+            <Earn
+              tasks={tasks}
+              jwt={jwt}
+              completedTasks={userData.completedTasks}
+              handleCompleteTask={handleCompleteTask}
+            />
+          }
+        />
         <Route path="/airdrop" element={<Airdrop />} />
       </Routes>
-        <DailySession
+      <DailySession
         show={dailySession}
         onClose={() => setDailySession(false)}
-          canClaimToday={canClaim}
-          streakDay={dailySessionData?.streakDay}
-          claimDailySession={() => claimDailySession(jwt)}
-          loadingClaim={loadingClaim}
-        />
+        canClaimToday={canClaim}
+        streakDay={dailySessionData?.streakDay}
+        claimDailySession={() => claimDailySession(jwt)}
+        loadingClaim={loadingClaim}
+      />
       <ComingSoon show={airdrop} onClose={() => setAirdrop(false)} />
       <Navbar showAirdrop={() => setAirdrop(true)} />
     </div>

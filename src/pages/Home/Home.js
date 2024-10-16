@@ -10,7 +10,7 @@ import { NavLink } from 'react-router-dom'
 import playBanner from '../../assets/playBanner.png'
 import getFormattedNumber from '../../hooks/getFormattedNumber'
 
-const Home = ({username, tasks, userData, jwt}) => {
+const Home = ({username, tasks, userData, jwt, handleCompleteTask}) => {
 
    
 
@@ -49,7 +49,7 @@ const Home = ({username, tasks, userData, jwt}) => {
             <h6 className="home-tasks-title mb-0">Earn</h6>
             <div className="home-tasks-container d-flex flex-column gap-2 position-relative mb-4">
                {tasks.map((task, index) => (
-                <TaskItem item={task} key={index} jwt={jwt} />
+                <TaskItem item={task} key={index} handleCompleteTask={handleCompleteTask} />
                ))}            
 
                 <NavLink to={"/earn"}>
