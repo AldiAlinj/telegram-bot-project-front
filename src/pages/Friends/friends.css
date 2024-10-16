@@ -5,6 +5,12 @@
     background: #FCFCFE;
   }
 
+  .invite-friends-banner{
+    height: 100%;
+    background-image: url('../../assets/blueBg.png');
+    background-size: 100% 100%;
+  }
+
 
   .friends-wrapper::-webkit-scrollbar {
     display: none;
@@ -37,7 +43,7 @@
     line-height: 24px; /* 150% */
     letter-spacing: 0.4px;
     text-transform: capitalize;
-    border-bottom: 5px solid #46557B;
+    border-bottom: 5px solid #8CB1FF;
     border-top: none;
     border-left: none;
     border-right: none;

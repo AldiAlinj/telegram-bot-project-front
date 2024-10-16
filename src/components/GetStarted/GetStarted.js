@@ -1,5 +1,6 @@
 import React from "react";
 import "./getstarted.css";
+import getStartedWod from '../../assets/getStartedWod.png'
 
 const GetStarted = ({ showWelcome, onClose }) => {
   return (
@@ -8,6 +9,9 @@ const GetStarted = ({ showWelcome, onClose }) => {
         !showWelcome && "hide-start"
       } p-4 d-flex flex-column justify-content-end`}
     >
+      <div className="d-flex w-100 justify-content-center">
+        <img src={getStartedWod} className="w-50 position-relative" style={{bottom: '50%'}} alt="" />
+      </div>
       <div className="d-flex flex-column gap-3">
         <h1 className="get-started-title mb-0">
           Welcome to <br /> World of Dypians!

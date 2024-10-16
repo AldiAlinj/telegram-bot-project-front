@@ -1,120 +1,162 @@
-.home-wrapper{
-    background: #FCFCFE;
-    height: calc(-64px + 100vh);
-    background-size: 100% 100%;
-    overflow-y: scroll;
+.home-wrapper {
+  background: #fcfcfe;
+  height: calc(-64px + 100vh);
+  background-size: 100% 100%;
+  overflow-y: scroll;
 }
 
 .home-wrapper::-webkit-scrollbar {
-    display: none;
-  }
-
-
-.score-wrapper{
-border-radius: 10px;
-background-size: 100% 100%;
-border: 1px solid #F2F0F8;
-background: #FFF;
+  display: none;
 }
 
-.home-token{
-position: absolute;
-top: -25%;
+.score-wrapper {
+  border-radius: 10px;
+  background-size: 100% 100%;
+  border: 1px solid #f2f0f8;
+  background: #fff;
 }
 
-.player-score{
-    color: #46557B;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 800;
-    line-height: normal;
+.home-token {
+  position: absolute;
+  top: -25%;
 }
 
-.player-wod{
-    color: #46557B;
+.player-score {
+  color: #46557b;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.player-wod {
+  color: #46557b;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.my-progress-wrapper {
+  border-radius: 10px;
+  box-shadow: 0px 12.522px 10.017px 0px rgba(97, 84, 170, 0.06);
+  background-image: url("../../assets/blueBg.png");
+  background-size: cover;
+}
+
+.my-progress-title {
+  color: #fff;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 21px */
+}
+
+.home-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.home-info-grid-item {
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.home-grid-value {
+    color: #FFF;
+    text-align: center;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
 }
 
-.home-info-grid{
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 10px;
-}
-
-.home-info-grid-item{
-    border: 1px solid #F2F0F8;
-border-radius: 10px;
-
-    background: #FFF;
-}
-
-.home-grid-value{
-    color: #46557B;
-    text-align: center;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-}
-
-.home-grid-info{
-    color: #46557B;
+.home-grid-info {
+    color: #FFF;
     text-align: center;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
-    line-height: 12px; /* 240% */
 }
 
-
-
-
-
-
-.show-more-button{
-    border-radius: 10px;
-border: 1px solid #46557B;
-background: #FFF;
-color: #46557B;
-text-align: center;
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: 120%; /* 14.4px */
-letter-spacing: 0.24px;
-text-transform: capitalize;
-position: absolute;
-right: 0;
-left: 0;
-margin: auto;
-width: fit-content;
+.show-more-button {
+  border-radius: 10px;
+  border: 1px solid #46557b;
+  background: #fff;
+  color: #46557b;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 14.4px */
+  letter-spacing: 0.24px;
+  text-transform: capitalize;
+  position: absolute;
+  right: 0;
+  left: 0;
+  margin: auto;
+  width: fit-content;
 }
 
-.play-banner-wrapper{
-    border-radius: 10px;
-    position: relative;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+.play-banner-wrapper {
+  border-radius: 10px;
+  position: relative;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
-.play-button{
-    border-radius: 20px;
-    background: linear-gradient(180deg, #5690FF 0%, #8C56FF 102.5%);
-color: #FFF;
-text-align: center;
-font-size: 18px;
-font-style: normal;
-font-weight: 700;
-line-height: 120%; /* 16.8px */
-letter-spacing: 0.28px;
-text-transform: capitalize;
-border: none;
-position: absolute;
-bottom: -20px;
-left: 0;
-right: 0;
-margin: auto;
-width: fit-content;
+.play-button {
+  border-radius: 20px;
+  background: linear-gradient(180deg, #5690ff 0%, #8c56ff 102.5%);
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%; /* 16.8px */
+  letter-spacing: 0.28px;
+  text-transform: capitalize;
+  border: none;
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: fit-content;
+}
+
+.time-left{
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%; /* 16.8px */
+  letter-spacing: 0.28px;
+  text-transform: capitalize;
+}
+
+.play-button-disabled{
+  background: gray;
+}
+
+.total-coins-wrapper {
+  border-radius: 200px;
+  background: #5690ff;
+}
+
+.user-total-coins {
+  color: #fff;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.home-coin-wrapper {
+  background: #fff;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
 }

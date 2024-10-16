@@ -5,7 +5,7 @@
 }
 
 .home-task-name{
-    color: #46557B;
+    color: #4F5F90;
     font-size: 14px;
     font-style: normal;
     font-weight: 800;
@@ -31,4 +31,18 @@ line-height: normal;
 .completed-task{
     border: 1px solid #7037CA;
     background: rgba(112, 55, 202, 0.1);
+}
+
+.task-reward-wrapper{
+border: 0.5px solid #E19836;
+border-radius: 5px;
+width: 80px;
+}
+
+.task-reward-amount{
+    color: #E19836;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }

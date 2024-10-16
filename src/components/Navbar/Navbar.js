@@ -6,6 +6,8 @@ import friendsIcon from "../../assets/friendsIcon.svg";
 import friendsIconActive from "../../assets/friendsIconActive.svg";
 import houseIcon from "../../assets/houseIcon.svg";
 import houseIconActive from "../../assets/houseIconActive.svg";
+import taskIcon from "../../assets/taskIcon.svg";
+import taskIconActive from "../../assets/taskIconActive.svg";
 import giftIcon from "../../assets/giftIcon.svg";
 import { NavLink } from "react-router-dom";
 
@@ -30,6 +32,28 @@ const Navbar = ({showAirdrop}) => {
             />
             <span className={`navbar-span ${isActive && "span-active"}`}>
               Home
+            </span>
+          </>
+        )}
+      </NavLink>
+      <NavLink
+        to="/earn"
+        className={({ isActive }) =>
+          `navbar-item p-2 d-flex flex-column align-items-center justify-content-center ${
+            isActive ? "active" : ""
+          }`
+        }
+      >
+        {({ isActive }) => (
+          <>
+            <img
+              src={isActive ? taskIconActive : taskIcon}
+              width={24}
+              height={24}
+              alt="Task Icon"
+            />
+            <span className={`navbar-span ${isActive && "span-active"}`}>
+              Earn
             </span>
           </>
         )}

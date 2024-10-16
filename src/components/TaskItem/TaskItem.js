@@ -2,6 +2,7 @@ import React from "react";
 import "./taskitem.css";
 import rightArrow from "../../assets/rightArrow.svg";
 import getFormattedNumber from "../../hooks/getFormattedNumber";
+import coin from '../../assets/dailySession/coin.png'
 
 const TaskItem = ({ item, handleCompleteTask }) => {
 
@@ -29,13 +30,15 @@ const TaskItem = ({ item, handleCompleteTask }) => {
           >
             {item.title}
           </span>
-          <span
-            className="home-task-reward"
-            style={{ textDecoration: "none", color: "#B9B3D8" }}
-          >
-            Reward: {getFormattedNumber(item.reward, 0)} points
-          </span>
+         
         </div>
+      </div>
+      <div className="d-flex align-items-center gap-2">
+        <div className="task-reward-wrapper d-flex align-items-center gap-1">
+            <img src={coin} width={20} height={20} alt="" />
+            <span className="task-reward-amount">+{getFormattedNumber(item.reward, 0)}</span>
+        </div>
+      
       </div>
         <img src={rightArrow} alt="" />
     </a>

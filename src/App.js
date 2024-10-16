@@ -26,7 +26,9 @@ const App = () => {
   const [dailySessionData, setDailySessionData] = useState({});
   const [loadingClaim, setLoadingClaim] = useState(false);
   const [canClaim, setCanClaim] = useState(false);
-  const [referralPoints, setReferralPoints] = useState(0)
+  const [referralPoints, setReferralPoints] = useState(0);
+  const [loadingChest, setLoadingChest] = useState(false);
+  // const [chestReward, setChestReward] = useState(0);
 
   const postToken = async (token) => {
     let body = {
@@ -107,6 +109,25 @@ const App = () => {
     }
   };
 
+
+  const openHourlyChest = async () => {
+    setLoadingChest(true);
+    try {
+      const res = await axios.post(
+        `https://api.worldofdypians.com/api/open-chest`,
+        {
+          token: jwt,
+        }
+      );
+    setLoadingChest(false);
+      // setChestReward(res.data.pointsAwarded);
+      alert(res.data.pointsAwarded);
+
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const claimDailySession = async (token) => {
     setLoadingClaim(true);
     try {
@@ -117,7 +138,7 @@ const App = () => {
         }
       );
       setLoadingClaim(false);
-      fetchAllData()
+      fetchAllData();
       console.log(res.data);
     } catch (err) {
       console.log(err);
@@ -228,6 +249,8 @@ const App = () => {
               userData={userData}
               jwt={jwt}
               handleCompleteTask={handleCompleteTask}
+              openHourlyChest={openHourlyChest}
+              loadingChest={loadingChest}
             />
           }
         />
