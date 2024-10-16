@@ -69,8 +69,8 @@ const Home = ({
     if (now >= countdownEndTime) {
       setCanClaim(true);
     }
-    alert(now, "now")
-    alert(countdownEndTime, "end")
+    alert(chestTimeStamp)
+   
   }, [countdownEndTime]);
 
   useEffect(() => {
