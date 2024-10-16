@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { json, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Leaderboard from "./pages/Leaderboard/Leaderboard";
 import Friends from "./pages/Friends/Friends";
