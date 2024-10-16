@@ -63,6 +63,7 @@ const App = () => {
       setUserPosition(res.data.userPosition)
   
     } catch (err) {
+      alert(err)
       console.log(err);
     }
   }
