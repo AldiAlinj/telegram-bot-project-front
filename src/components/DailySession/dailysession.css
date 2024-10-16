@@ -1,0 +1,132 @@
+.daily-session-outer-wrapper{
+    width: 100%;
+    height: calc(-64px + 100vh);
+    position: fixed;
+    top: 0;
+    z-index: 20;
+    background-image: url('../../assets/blueBg.png');
+    background-size: 100% 100%;
+}
+
+
+.daily-session-inner-wrapper{
+    height: 80%;
+    border-radius: 10px;
+background: rgba(255, 255, 255, 0.80);
+box-shadow: 0px 4px 4px 0px rgba(185, 179, 216, 0.10);
+}
+
+
+.daily-streak-amount{
+    color: #F67117;
+    text-align: center;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 123.725%; /* 49.49px */
+    letter-spacing: 0.4px;
+}
+
+.daily-streak-span{
+    color: #4F5F90;
+    text-align: center;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 123.725%; /* 24.745px */
+    letter-spacing: 0.4px;
+}
+
+.daily-streak-desc{
+    color: #4F5F90;
+    text-align: center;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 123.725%; /* 14.847px */
+    letter-spacing: 0.4px;
+}
+
+.daily-streak-item{
+    border-radius: 15px;
+    border: 1px solid #F2F0F8;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(185, 179, 216, 0.10);
+}
+
+.daily-streak-day{
+    color: #4F5F90;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.daily-session-reward-wrapper{
+border: 0.5px solid #E19836;
+border-radius: 5px;
+}
+
+.daily-session-reward-amount{
+    color: #4F5F90;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.daily-session-button{
+    background: #fff;
+    border-radius: 100px;
+    width: 100%;
+    color: #5690FF;
+    text-align: center;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
+    letter-spacing: 0.4px;
+    text-transform: capitalize;
+    border-bottom: 5px solid #8CB1FF;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.completed-session{
+    background-image: url('../../assets/dailySession/completedSessionBg.png');
+    background-size: cover;
+}
+
+.completed-day{
+    color: #FFF;
+}
+
+.completed-reward{
+    background: #79A9FF;
+    border: 0.5px solid #fff;
+}
+
+.completed-reward .daily-session-reward-amount{
+    color: #fff ;
+}
+
+.active-session{
+    border: 1px solid #E19836;
+}
+.active-day{
+color: #E19836;
+}
+.active-reward{
+background: #E19836;
+}
+
+.active-reward .daily-session-reward-amount{
+    color: #fff ;
+}
+
+.cant-claim{
+    background: gray;
+    color: black;
+}
