@@ -1,6 +1,7 @@
 import React from "react";
 import "./taskitem.css";
 import rightArrow from "../../assets/rightArrow.svg";
+import getFormattedNumber from "../../hooks/getFormattedNumber";
 
 const TaskItem = ({ item, handleCompleteTask }) => {
 
@@ -32,7 +33,7 @@ const TaskItem = ({ item, handleCompleteTask }) => {
             className="home-task-reward"
             style={{ textDecoration: "none", color: "#B9B3D8" }}
           >
-            {item.subtitle}
+            Reward: {getFormattedNumber(item.reward, 0)} points
           </span>
         </div>
       </div>

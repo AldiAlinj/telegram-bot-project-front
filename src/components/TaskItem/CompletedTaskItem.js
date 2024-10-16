@@ -1,7 +1,6 @@
 import React from "react";
 import check from "../../assets/check.svg";
-
-
+import getFormattedNumber from "../../hooks/getFormattedNumber";
 
 const CompletedTaskItem = ({ item }) => {
   return (
@@ -26,7 +25,7 @@ const CompletedTaskItem = ({ item }) => {
             className="home-task-reward"
             style={{ textDecoration: "none", color: "#B9B3D8" }}
           >
-            {item.subtitle}
+            Reward: {getFormattedNumber(item.reward, 0)} points
           </span>
         </div>
       </div>
