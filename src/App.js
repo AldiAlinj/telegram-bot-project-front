@@ -194,6 +194,29 @@ const App = () => {
         body
       );
       console.log(res.data);
+      if (window.Telegram?.WebApp) {
+        window.Telegram.WebApp.expand();
+        window.Telegram.WebApp.setHeaderColor("bg_color", "#FF5733");
+      }
+  
+      if (window.Telegram?.WebApp?.initDataUnsafe) {
+        const user = window.Telegram.WebApp.initDataUnsafe.user;
+  
+        if (user) {
+          postToken(window.Telegram.WebApp.initData);
+          setIsTelegram(true);
+          if (user.username) {
+            setUsername(user.username);
+          } else if (user.first_name) {
+            setUsername(user.first_name);
+          } else {
+            setUsername("User");
+          }
+        } else {
+          setUsername("User");
+          setIsTelegram(false);
+        }
+      }
     } catch (err) {
       console.log(err);
     }
