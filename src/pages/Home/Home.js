@@ -62,11 +62,14 @@ const Home = ({
   const oneHourInMs = 3600000;
   const countdownEndTime = lastClaimTime + oneHourInMs;
 
+
+
   useEffect(() => {
     const now = Date.now();
     if (now >= countdownEndTime) {
       setCanClaim(true);
     }
+    alert(countdownEndTime)
   }, [countdownEndTime]);
 
   useEffect(() => {
