@@ -57,7 +57,8 @@ const App = () => {
       const res = await axios.post(`https://api.worldofdypians.com/api/tg_auth`, {
         token: token
       });
-      // console.log(res);
+      alert(token)
+      alert(JSON.stringify(res.data))
       setLeaderboard(res.data.topUsers)
       setUserPosition(res.data.userPosition)
   
