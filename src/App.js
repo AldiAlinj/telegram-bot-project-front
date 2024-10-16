@@ -14,78 +14,69 @@ import axios from "axios";
 const App = () => {
   const [showWelcome, setShowWelcome] = useState(false);
   const [airdrop, setAirdrop] = useState(false);
-  const [isTelegram, setIsTelegram] = useState(null)
+  const [isTelegram, setIsTelegram] = useState(null);
   const [username, setUsername] = useState("");
   const [userData, setUserData] = useState({});
   const [tasks, setTasks] = useState([]);
   const [leaderboard, setLeaderboard] = useState([]);
   const [userPosition, setUserPosition] = useState({});
-  const [jwt, setJwt] = useState(null)
-
-
+  const [jwt, setJwt] = useState(null);
 
   const postToken = async (token) => {
-
     let body = {
       data: token,
-    }
+    };
 
     const initData = window.Telegram?.WebApp?.initDataUnsafe;
     // Check if there's a `start_param` in the initData (this could be the referral code)
     if (initData?.start_param) {
       body = {
         data: token,
-        referralCode: initData?.start_param
-      }
+        referralCode: initData?.start_param,
+      };
     }
 
     try {
-      const res = await axios.post(`https://api.worldofdypians.com/api/tg_auth`, body);
+      const res = await axios.post(
+        `https://api.worldofdypians.com/api/tg_auth`,
+        body
+      );
       // console.log(res);
-      setUserData(res.data.userData)
-      setTasks(res.data.userData.availableTasks)
-      setJwt(res.data.JWT)
+      setUserData(res.data.userData);
+      setTasks(res.data.userData.availableTasks);
+      setJwt(res.data.JWT);
     } catch (err) {
       console.log(err);
     }
   };
 
-
-
-  const fetchLeaderboard = async(token) => {
+  const fetchLeaderboard = async (token) => {
     try {
-      const res = await axios.post(`https://api.worldofdypians.com/api/leaderboard`, {
-        token: token
-      });
-      alert(token)
-      alert(JSON.stringify(res.data))
-      setLeaderboard(res.data.topUsers)
-      setUserPosition(res.data.userPosition)
-  
+      const res = await axios.post(
+        `https://api.worldofdypians.com/api/leaderboard`,
+        {
+          token: token,
+        }
+      );
+      setLeaderboard(res.data.topUsers);
+      setUserPosition(res.data.userPosition);
     } catch (err) {
-      alert(err)
       console.log(err);
     }
-  }
- 
-
+  };
 
   useEffect(() => {
-
-
     if (window.Telegram?.WebApp) {
       window.Telegram.WebApp.expand();
-      window.Telegram.WebApp.setHeaderColor('bg_color', '#FF5733'); 
+      window.Telegram.WebApp.setHeaderColor("bg_color", "#FF5733");
     }
 
     if (window.Telegram?.WebApp?.initDataUnsafe) {
       const user = window.Telegram.WebApp.initDataUnsafe.user;
 
-
-
       if (user) {
-        postToken(window.Telegram.WebApp.initData)
-      setIsTelegram(true)
+        postToken(window.Telegram.WebApp.initData);
+        setIsTelegram(true);
         if (user.username) {
           setUsername(user.username);
         } else if (user.first_name) {
@@ -95,8 +86,7 @@ const App = () => {
         }
       } else {
         setUsername("User");
-      setIsTelegram(false)
-        
+        setIsTelegram(false);
       }
     }
   }, []);
@@ -114,29 +104,27 @@ const App = () => {
     setShowWelcome(false); // Hide the welcome screen when the user dismisses it
   };
 
-
   useEffect(() => {
-    fetchLeaderboard(jwt)
-  }, [jwt])
-  
+    fetchLeaderboard(jwt);
+  }, [jwt]);
 
-
-  if(!isTelegram){
+  if (!isTelegram) {
     return (
       <div
-      className={`d-flex  justify-content-center align-items-center`}
-      style={{height: "100vh", width: "100vw"}}
-    >
+        className={`d-flex  justify-content-center align-items-center`}
+        style={{ height: "100vh", width: "100vw" }}
+      >
         <div className="d-flex flex-column align-items-center justify-content-center gap-2">
-        <h1 className="use-telegram-title mb-0">
-          Page available on
-        </h1>
-        <a href="https://t.me/AldiTestBot_bot/AldiTestBot" className="use-telegram-title">
-        Telegram
-        </a>
+          <h1 className="use-telegram-title mb-0">Page available on</h1>
+          <a
+            href="https://t.me/AldiTestBot_bot/AldiTestBot"
+            className="use-telegram-title"
+          >
+            Telegram
+          </a>
         </div>
-    </div>
-    )
+      </div>
+    );
   }
 
   return (
@@ -147,12 +135,31 @@ const App = () => {
     >
       <GetStarted showWelcome={showWelcome} onClose={handleClose} />
       <Routes>
-        <Route path="/" element={<Home username={username} tasks={tasks} userData={userData} />} />
+        <Route
+          path="/"
+          element={
+            <Home username={username} tasks={tasks} userData={userData} />
+          }
+        />
         <Route
           path="/leaderboard"
-          element={<Leaderboard username={username} leaderboard={leaderboard} userPosition={userPosition} />}
+          element={
+            <Leaderboard
+              username={username}
+              leaderboard={leaderboard}
+              userPosition={userPosition}
+            />
+          }
         />
-        <Route path="/friends" element={<Friends referredUsers={userData.referredUsers} referralCode={userData.referralCode} />} />
+        <Route
+          path="/friends"
+          element={
+            <Friends
+              referredUsers={userData.referredUsers}
+              referralCode={userData.referralCode}
+            />
+          }
+        />
         <Route path="/earn" element={<Earn />} />
         <Route path="/airdrop" element={<Airdrop />} />
       </Routes>
