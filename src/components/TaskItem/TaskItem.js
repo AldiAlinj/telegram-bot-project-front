@@ -9,6 +9,8 @@ const TaskItem = ({ item, handleCompleteTask }) => {
   return (
     <a
       href={item.link}
+      target="_blank"
+      rel="noreferrer"
       onClick={() => handleCompleteTask(item._id)}
       style={{ textDecoration: "none" }}
       className={`home-task-item ${
