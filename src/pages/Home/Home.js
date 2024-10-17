@@ -84,9 +84,9 @@ const Home = ({
         <img src={playBanner} alt="" style={{ borderRadius: "10px" }} />
        {!disableAll &&
         <button
-        className={`play-button  py-2 px-4`}
+        className={`play-button ${!canClaim || loadingChest ? "play-button-disabled" : ""}  py-2 px-4`}
         onClick={openHourlyChest}
-        // disabled={!canClaim || loadingChest}
+        disabled={!canClaim || loadingChest}
       >
         {loadingChest ? (
           <div
@@ -100,7 +100,7 @@ const Home = ({
         ) : (
           <Countdown
             renderer={renderer}
-            date={chestTimeStamp}
+            date={chestTimeStamp + 3600000}
             onComplete={() => {setCanClaim(true)}}
           />
         )}

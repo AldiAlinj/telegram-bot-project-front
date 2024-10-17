@@ -58,8 +58,7 @@ const App = () => {
         lastStreakDate: res.data.userData.lastStreakDate,
         streakPoints: res.data.userData.streakPoints,
       });
-      setChestTimeStamp(res.data.userData.nextOpenChest);
-      alert(res.data.userData.nextOpenChest)
+      setChestTimeStamp(res.data.userData.lastChestOpened);
       setLoadingChest(false)
       const referredUsers = res.data.userData.referredUsers
       const sumRewards = referredUsers.reduce((acc, item) => acc + item.earnedPoints, 0);
