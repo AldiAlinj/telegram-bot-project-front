@@ -30,10 +30,11 @@ const Home = ({
 
   const [canClaim, setCanClaim] = useState(false)
 
+  setCanClaim(false)
   useEffect(() => {
     alert(chestTimeStamp)
     window.scrollTo(0, 0);
-  }, []);
+  }, [chestTimeStamp]);
 
   return (
     <div className="container-fluid home-wrapper pt-4 pb-3">
@@ -94,7 +95,7 @@ const Home = ({
             <Countdown
               renderer={renderer}
               date={chestTimeStamp}
-              onComplete={() => setCanClaim(true)}
+              onComplete={() => alert("Hello")}
             />
           )}
         </button>
