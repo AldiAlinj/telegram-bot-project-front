@@ -65,16 +65,6 @@ const Home = ({
 
 
   useEffect(() => {
-    const now = Date.now();
-
-    if (now >= countdownEndTime) {
-      setCanClaim(true);
-    }
-    // alert(chestTimeStamp)
-   
-  }, [countdownEndTime ,chestTimeStamp]);
-
-  useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
@@ -139,7 +129,7 @@ const Home = ({
             <Countdown
               renderer={renderer}
               date={countdownEndTime}
-              onComplete={() => alert(countdownEndTime)}
+              onComplete={() => setCanClaim(true)}
             />
           )}
         </button>
