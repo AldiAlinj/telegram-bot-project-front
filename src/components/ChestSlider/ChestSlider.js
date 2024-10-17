@@ -16,7 +16,6 @@ import chest3open from '../../assets/chestImages/chest3open.png';
 import chest4 from "../../assets/chestImages/chest4.png";
 import chest4open from '../../assets/chestImages/chest4open.png';
 import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
-import arrow from '../../assets/arrow.svg'
 
 const ChestSlider = ({ onClaim, canClaimHourly }) => {
   const [chestIndex, setChestIndex] = useState(null);
@@ -101,15 +100,7 @@ const ChestSlider = ({ onClaim, canClaimHourly }) => {
           />
         </SwiperSlide>
       </Swiper>
-      <div className="d-flex align-items-center  justify-content-between w-100">
-        <div className="arrow-holder-prev" style={{ zIndex: 50 }}>
-         <img src={arrow} style={{rotate: "180deg"}} alt="" />
-        </div>
-        <div className="arrow-holder-next" style={{ zIndex: 50 }}>
-         <img src={arrow}  alt="" />
-          
-        </div>
-      </div>
+    
     </div>
   );
 };
