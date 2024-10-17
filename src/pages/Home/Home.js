@@ -40,11 +40,12 @@ const Home = ({
 
  
   useEffect(() => {
+    setDisableAll(true);
     if (chestTimeStamp !== null) {
 
       setDisableAll(false);
     }
-  }, [chestTimeStamp]);
+  }, [chestTimeStamp, openHourlyChest]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
