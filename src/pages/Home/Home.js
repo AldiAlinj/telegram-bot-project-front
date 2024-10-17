@@ -126,7 +126,7 @@ const Home = ({
           ) : ( */}
             <Countdown
               renderer={renderer}
-              date={countdownEndTime}
+              date={1729154669125}
               // onComplete={() => setCanClaim(true)}
             />
           {/* )} */}
