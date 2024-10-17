@@ -29,12 +29,9 @@ const Home = ({
   const [canClaim, setCanClaim] = useState(false);
   const [timeStamp, setTimeStamp] = useState(null);
 
-  const refreshButton = () => {
-    setCanClaim(false);
-    setTimeStamp(Date.now() + 3600000);
-  };
-
+ 
   useEffect(() => {
+    setDisableAll(true);
     if (chestTimeStamp !== null) {
       setTimeStamp(chestTimeStamp);
       setDisableAll(false);
