@@ -32,6 +32,7 @@ const App = () => {
   // const [chestReward, setChestReward] = useState(0);
 
   const postToken = async (token) => {
+    setLoadingChest(true)
     let body = {
       data: token,
     };
@@ -58,7 +59,7 @@ const App = () => {
         streakPoints: res.data.userData.streakPoints,
       });
       setChestTimeStamp(res.data.userData.nextOpenChest);
-    
+      setLoadingChest(false)
       const referredUsers = res.data.userData.referredUsers
       const sumRewards = referredUsers.reduce((acc, item) => acc + item.earnedPoints, 0);
       setReferralPoints(sumRewards)
