@@ -27,13 +27,11 @@ const Home = ({
 }) => {
   const [disableAll, setDisableAll] = useState(true);
   const [canClaim, setCanClaim] = useState(false);
-  const [timeStamp, setTimeStamp] = useState(null);
 
  
   useEffect(() => {
     setDisableAll(true);
     if (chestTimeStamp !== null) {
-      setTimeStamp(chestTimeStamp);
       setDisableAll(false);
     }
   }, [chestTimeStamp]);
@@ -90,7 +88,6 @@ const Home = ({
             }  py-2 px-4`}
             onClick={() => {
               openHourlyChest();
-              refreshButton();
             }}
             disabled={!canClaim || loadingChest}
           >
@@ -106,7 +103,7 @@ const Home = ({
             ) : (
               <Countdown
                 renderer={renderer}
-                date={Date.parse(timeStamp) + 3600000}
+                date={Date.parse(chestTimeStamp) + 3600000}
                 onComplete={() => {
                   setCanClaim(true);
                 }}
