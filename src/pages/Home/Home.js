@@ -28,14 +28,23 @@ const Home = ({
   const [disableAll, setDisableAll] = useState(true);
   const [canClaim, setCanClaim] = useState(false);
 
+
+  const onClaim = () => {
+    openHourlyChest()
+    setDisableAll(true);
+    if(chestTimeStamp !== null){
+      setDisableAll(false)
+    }
+  }
+
+
  
   useEffect(() => {
-    setDisableAll(true);
     if (chestTimeStamp !== null) {
 
       setDisableAll(false);
     }
-  }, [chestTimeStamp, openHourlyChest]);
+  }, [chestTimeStamp]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -87,9 +96,7 @@ const Home = ({
             className={`play-button ${
               !canClaim || loadingChest ? "play-button-disabled" : ""
             }  py-2 px-4`}
-            onClick={() => {
-              openHourlyChest();
-            }}
+            onClick={onClaim}
             disabled={!canClaim || loadingChest}
           >
             {loadingChest ? (

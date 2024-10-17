@@ -125,12 +125,8 @@ const App = () => {
         }
       );
       setLoadingChest(false);
-      fetchAllData();
       alert(res.data.pointsAwarded);
-      const now = new Date();
-      const oneHourLater = new Date(now.getTime() + 3600000);
-      const oneHourLaterInMs = oneHourLater.getTime();
-      setChestTimeStamp(oneHourLaterInMs);
+      setChestTimeStamp(Date.parse(res.data.nextChestAvailableAt));
     } catch (err) {
       console.log(err);
     }
