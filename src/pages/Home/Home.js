@@ -25,25 +25,21 @@ const Home = ({
   loadingChest,
   chestTimeStamp,
   canClaimHourly,
-setCanClaimHourly
+  setCanClaimHourly,
 }) => {
   const [disableAll, setDisableAll] = useState(true);
-
 
   const onClaim = () => {
     openHourlyChest();
     setDisableAll(true);
-    if(chestTimeStamp !== null){
+    if (chestTimeStamp !== null) {
       setDisableAll(false);
     }
-  }
+  };
 
-
- 
   useEffect(() => {
     setDisableAll(true);
     if (chestTimeStamp !== null) {
-
       setDisableAll(false);
     }
   }, [chestTimeStamp, openHourlyChest]);
@@ -69,7 +65,7 @@ setCanClaimHourly
         <h6 className="my-progress-title mb-0">My Progress</h6>
         <div className="home-info-grid">
           <div className="home-info-grid-item d-flex flex-column align-items-center gap-1 py-2">
-            <span className="home-grid-value">
+            <span className="home-grid-value ps-1">
               {getFormattedNumber(
                 userData.streakPoints + userData.chestsPoints,
                 0

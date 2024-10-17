@@ -34,6 +34,7 @@ const TaskItem = ({ item, handleCompleteTask }) => {
         </div>
       </div>
       <div className="d-flex align-items-center gap-2">
+      <div className="d-flex align-items-center gap-2">
         <div className="task-reward-wrapper d-flex align-items-center gap-1">
             <img src={coin} width={20} height={20} alt="" />
             <span className="task-reward-amount">+{getFormattedNumber(item.reward, 0)}</span>
@@ -41,6 +42,7 @@ const TaskItem = ({ item, handleCompleteTask }) => {
       
       </div>
         <img src={rightArrow} alt="" />
+      </div>
     </a>
   );
 };
