@@ -30,10 +30,11 @@ const Home = ({
 
 
   const onClaim = () => {
-    openHourlyChest()
+    openHourlyChest();
     setDisableAll(true);
     if(chestTimeStamp !== null){
-      setDisableAll(false)
+      setDisableAll(false);
+      alert(chestTimeStamp)
     }
   }
 
