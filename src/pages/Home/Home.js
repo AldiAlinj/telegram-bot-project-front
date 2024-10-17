@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./home.css";
 import coin from "../../assets/dailySession/coin.png";
 import TaskItem from "../../components/TaskItem/TaskItem";
@@ -25,44 +25,10 @@ const Home = ({
   loadingChest,
   chestTimeStamp
 }) => {
-  const dummyTasks = [
-    {
-      title: "Follow World of Dypians",
-      link: "#",
-      _id: 1,
-      type: "twitter",
-      reward: 700,
-    },
-    {
-      title: "Follow World of Dypians",
-      link: "#",
-      _id: 1,
-      type: "discord",
-      reward: 5000,
-    },
-    {
-      title: "Follow World of Dypians",
-      link: "#",
-      _id: 1,
-      type: "youtube",
-      reward: 700,
-    },
-    {
-      title: "Follow World of Dypians",
-      link: "#",
-      _id: 1,
-      type: "telegram",
-      reward: 12000,
-    },
-  ];
-
-  // const [canClaim, setCanClaim] = useState(false);
-
-  // const lastClaimTime = Date.parse(chestTimeStamp); // or new Date(lastClaimTimestamp).getTime()
-  // const oneHourInMs = 3600000;
-  // const countdownEndTime = lastClaimTime + oneHourInMs;
 
 
+
+  const [canClaim, setCanClaim] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -114,7 +80,7 @@ const Home = ({
           onClick={openHourlyChest}
           // disabled={!canClaim || loadingChest}
         >
-          {/* {loadingChest ? (
+          {loadingChest ? (
             <div
               class="spinner-border spinner-border-sm text-info"
               role="status"
@@ -123,19 +89,19 @@ const Home = ({
             </div>
           ) : canClaim ? (
             "Claim"
-          ) : ( */}
+          ) : (
             <Countdown
               renderer={renderer}
-              date={1729154669125}
-              // onComplete={() => setCanClaim(true)}
+              date={chestTimeStamp}
+              onComplete={() => setCanClaim(true)}
             />
-          {/* )} */}
+          )}
         </button>
       </div>
       <div className="d-flex flex-column gap-2 mt-3">
         <h6 className="home-tasks-title mb-0">Earn</h6>
         <div className="home-tasks-container d-flex flex-column gap-2 position-relative mb-4">
-          {dummyTasks.map((task, index) => (
+          {tasks.map((task, index) => (
             <TaskItem
               item={task}
               key={index}

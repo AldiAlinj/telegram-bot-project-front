@@ -57,7 +57,7 @@ const App = () => {
         lastStreakDate: res.data.userData.lastStreakDate,
         streakPoints: res.data.userData.streakPoints,
       });
-      setChestTimeStamp(res.data.userData.lastChestOpened);
+      setChestTimeStamp(res.data.userData.nextOpenChest);
     
       const referredUsers = res.data.userData.referredUsers
       const sumRewards = referredUsers.reduce((acc, item) => acc + item.earnedPoints, 0);
@@ -67,9 +67,6 @@ const App = () => {
       console.log(err);
     }
   };
-
-
- 
 
   const fetchAllData = useCallback(() => {
     if (window.Telegram?.WebApp) {
