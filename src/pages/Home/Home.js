@@ -28,7 +28,18 @@ const Home = ({
 
 
   const [disableAll, setDisableAll] = useState(true);
-  const [canClaim, setCanClaim] = useState(false)
+  const [canClaim, setCanClaim] = useState(false);
+
+const refreshButton = () => {
+  setTimeout(() => {
+    setDisableAll(true)
+    if(chestTimeStamp !== null){
+      setDisableAll(false)
+    }
+    
+  }, 1000);
+}
+
 
   useEffect(() => {
     if(chestTimeStamp !== null){
@@ -85,7 +96,7 @@ const Home = ({
        {!disableAll &&
         <button
         className={`play-button ${!canClaim || loadingChest ? "play-button-disabled" : ""}  py-2 px-4`}
-        onClick={openHourlyChest}
+        onClick={() => {openHourlyChest(); refreshButton()}}
         disabled={!canClaim || loadingChest}
       >
         {loadingChest ? (
