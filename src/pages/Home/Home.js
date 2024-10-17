@@ -3,9 +3,9 @@ import "./home.css";
 import coin from "../../assets/dailySession/coin.png";
 import TaskItem from "../../components/TaskItem/TaskItem";
 import { NavLink } from "react-router-dom";
-import playBanner from "../../assets/playBanner.png";
 import getFormattedNumber from "../../hooks/getFormattedNumber";
 import Countdown from "react-countdown";
+import ChestSlider from "../../components/ChestSlider/ChestSlider";
 
 const renderer = ({ hours, minutes }) => {
   return (
@@ -88,13 +88,12 @@ const Home = ({
         </div>
       </div>
       <div className="d-flex flex-column mt-3 mb-5 play-banner-wrapper">
-        <img src={playBanner} alt="" style={{ borderRadius: "10px" }} />
+        <ChestSlider onClaim={onClaim} canClaimHourly={canClaimHourly} />
         {!disableAll && (
           <button
             className={`play-button ${
               !canClaimHourly || loadingChest ? "play-button-disabled" : ""
             }  py-2 px-4`}
-            onClick={onClaim}
             disabled={!canClaimHourly || loadingChest}
           >
             {loadingChest ? (
@@ -105,7 +104,7 @@ const Home = ({
                 <span class="visually-hidden">Loading...</span>
               </div>
             ) : canClaimHourly ? (
-              "Claim"
+              "Ready to Claim"
             ) : (
               <Countdown
                 renderer={renderer}
