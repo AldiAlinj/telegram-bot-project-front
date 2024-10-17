@@ -32,6 +32,7 @@ const Home = ({
   useEffect(() => {
     setDisableAll(true);
     if (chestTimeStamp !== null) {
+
       setDisableAll(false);
     }
   }, [chestTimeStamp, openHourlyChest]);
@@ -103,7 +104,7 @@ const Home = ({
             ) : (
               <Countdown
                 renderer={renderer}
-                date={Date.parse(chestTimeStamp) + 3600000}
+                date={chestTimeStamp}
                 onComplete={() => {
                   setCanClaim(true);
                 }}

@@ -32,7 +32,7 @@ const App = () => {
   // const [chestReward, setChestReward] = useState(0);
 
   const postToken = async (token) => {
-    setLoadingChest(true)
+    setLoadingChest(true);
     let body = {
       data: token,
     };
@@ -58,11 +58,16 @@ const App = () => {
         lastStreakDate: res.data.userData.lastStreakDate,
         streakPoints: res.data.userData.streakPoints,
       });
-      setChestTimeStamp(res.data.userData.lastChestOpened);
-      setLoadingChest(false)
-      const referredUsers = res.data.userData.referredUsers
-      const sumRewards = referredUsers.reduce((acc, item) => acc + item.earnedPoints, 0);
-      setReferralPoints(sumRewards)
+      setChestTimeStamp(
+        Date.parse(res.data.userData.lastChestOpened) + 3600000
+      );
+      setLoadingChest(false);
+      const referredUsers = res.data.userData.referredUsers;
+      const sumRewards = referredUsers.reduce(
+        (acc, item) => acc + item.earnedPoints,
+        0
+      );
+      setReferralPoints(sumRewards);
       setJwt(res.data.JWT);
     } catch (err) {
       console.log(err);
@@ -110,7 +115,6 @@ const App = () => {
     }
   };
 
-
   const openHourlyChest = async () => {
     setLoadingChest(true);
     try {
@@ -120,11 +124,13 @@ const App = () => {
           token: jwt,
         }
       );
-    setLoadingChest(false);
-    fetchAllData();
-      // setChestReward(res.data.pointsAwarded);
+      setLoadingChest(false);
+      fetchAllData();
       alert(res.data.pointsAwarded);
-
+      const now = new Date();
+      const oneHourLater = new Date(now.getTime() + 3600000);
+      const oneHourLaterInMs = oneHourLater.getTime();
+      setChestTimeStamp(oneHourLaterInMs);
     } catch (err) {
       console.log(err);
     }
@@ -148,8 +154,7 @@ const App = () => {
   };
 
   useEffect(() => {
-   
-  fetchAllData()
+    fetchAllData();
   }, [fetchAllData]);
 
   const canClaimToday = (lastStreakDate) => {
@@ -194,7 +199,6 @@ const App = () => {
     fetchLeaderboard(jwt);
   }, [jwt]);
 
-
   const handleCompleteTask = async (taskId) => {
     let body = {
       token: jwt,
@@ -212,7 +216,6 @@ const App = () => {
       console.log(err);
     }
   };
-
 
   if (!isTelegram) {
     return (
