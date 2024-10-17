@@ -31,6 +31,7 @@ const Home = ({
   const [canClaim, setCanClaim] = useState(false)
 
   useEffect(() => {
+    alert(chestTimeStamp)
     window.scrollTo(0, 0);
   }, []);
 
