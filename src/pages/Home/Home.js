@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./home.css";
 import coin from "../../assets/dailySession/coin.png";
 import TaskItem from "../../components/TaskItem/TaskItem";
@@ -23,7 +23,7 @@ const Home = ({
   referralPoints,
   openHourlyChest,
   loadingChest,
-  chestTimeStamp
+  chestTimeStamp,
 }) => {
   const dummyTasks = [
     {
@@ -57,12 +57,18 @@ const Home = ({
   ];
 
   const [canClaim, setCanClaim] = useState(false);
+  const [countdownTime, setCountdownTime] = useState(null);
 
-  const lastClaimTime = Date.parse(chestTimeStamp); // or new Date(lastClaimTimestamp).getTime()
-  const oneHourInMs = 3600000;
-  const countdownEndTime = lastClaimTime + oneHourInMs;
+  const addHour = useCallback(() => {
+    const lastClaimTime = Date.parse(chestTimeStamp);
+    const oneHourInMs = 3600000;
+    const countdownEndTime = lastClaimTime + oneHourInMs;
+    setCountdownTime(countdownEndTime);
+  }, [chestTimeStamp]);
 
-
+  useEffect(() => {
+    addHour();
+  }, [addHour]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -128,7 +134,7 @@ const Home = ({
           ) : (
             <Countdown
               renderer={renderer}
-              date={countdownEndTime}
+              date={countdownTime}
               onComplete={() => setCanClaim(true)}
             />
           )}
