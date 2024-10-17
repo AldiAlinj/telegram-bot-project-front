@@ -53,7 +53,7 @@ const Home = ({
       <div className="d-flex align-items-center justify-content-between w-100">
         <span className="hello-user">Hello, {username}!</span>
         <div className="total-coins-wrapper d-flex align-items-center gap-2 p-1">
-          <span className="user-total-coins">
+          <span className="user-total-coins ps-1">
             {getFormattedNumber(userData.totalPoints, 0)}
           </span>
           <div className="home-coin-wrapper d-flex align-items-center justify-content-center">
@@ -65,7 +65,7 @@ const Home = ({
         <h6 className="my-progress-title mb-0">My Progress</h6>
         <div className="home-info-grid">
           <div className="home-info-grid-item d-flex flex-column align-items-center gap-1 py-2">
-            <span className="home-grid-value ps-1">
+            <span className="home-grid-value ">
               {getFormattedNumber(
                 userData.streakPoints + userData.chestsPoints,
                 0
