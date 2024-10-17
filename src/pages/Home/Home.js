@@ -58,9 +58,9 @@ const Home = ({
 
   // const [canClaim, setCanClaim] = useState(false);
 
-  const lastClaimTime = Date.parse(chestTimeStamp); // or new Date(lastClaimTimestamp).getTime()
-  const oneHourInMs = 3600000;
-  const countdownEndTime = lastClaimTime + oneHourInMs;
+  // const lastClaimTime = Date.parse(chestTimeStamp); // or new Date(lastClaimTimestamp).getTime()
+  // const oneHourInMs = 3600000;
+  // const countdownEndTime = lastClaimTime + oneHourInMs;
 
 
 
