@@ -3,7 +3,8 @@ import "./dailysession.css";
 import coin from "../../assets/dailySession/coin.png";
 import calendar from "../../assets/dailySession/calendar.png";
 import fire from "../../assets/dailySession/fire.png";
-import closeDaily from '../../assets/dailySession/closeDaily.svg'
+import closeDaily from "../../assets/dailySession/closeDaily.svg";
+import getFormattedNumber from "../../hooks/getFormattedNumber";
 
 const DailySession = ({
   canClaimToday,
@@ -11,17 +12,50 @@ const DailySession = ({
   claimDailySession,
   loadingClaim,
   onClose,
-  show
+  show,
 }) => {
+  const days = [
+    {
+      title: "Day 1",
+      reward: 10000,
+    },
+    {
+      title: "Day 2",
+      reward: 25000,
+    },
+    {
+      title: "Day 3",
+      reward: 45000,
+    },
+    {
+      title: "Day 4",
+      reward: 70000,
+    },
+    {
+      title: "Day 5",
+      reward: 100000,
+    },
+    {
+      title: "Day 6",
+      reward: 200000,
+    },
+  ];
 
   return (
-    <div className={`daily-session-outer-wrapper ${show && "daily-session-active"} p-3 d-flex flex-column align-items-center gap-2`}>
+    <div
+      className={`daily-session-outer-wrapper ${
+        show && "daily-session-active"
+      } p-3 d-flex flex-column align-items-center gap-2`}
+    >
       <div className="d-flex align-items-center justify-content-end w-100">
         <img src={closeDaily} onClick={onClose} alt="" />
       </div>
       <div className="daily-session-inner-wrapper d-flex flex-column gap-4 align-items-center justify-content-end">
-        <img src={fire} alt="" style={{ width: "200px" }} />
-        <div className="d-flex flex-column gap-2 align-items-center">
+          <div className="daily-session-fire-wrapper w-100 d-flex justify-content-center align-items-center">
+          <img src={fire} alt="" className="w-50" />
+          </div>
+       <div className="daily-session-lower-wrapper d-flex flex-column gap-2">
+       <div className="d-flex flex-column gap-2 align-items-center">
           <h6 className="mb-0 daily-streak-amount">2</h6>
           <span className="daily-streak-span">Daily Streak</span>
           <p className="daily-streak-desc mb-0">
@@ -29,223 +63,53 @@ const DailySession = ({
           </p>
         </div>
         <div className="row mx-0 w-100">
-          <div className="col-4 px-1">
-            <div
-              className={`daily-streak-item ${
-                streakDay === 0
-                  ? "active-session"
-                  : streakDay > 0
-                  ? "completed-session"
-                  : ""
-              } w-100 px-1 py-2 d-flex flex-column align-items-center gap-1 mb-2`}
-            >
-              <span
-                className={`daily-streak-day ${
-                  streakDay === 0
-                    ? "active-day"
-                    : streakDay > 0
-                    ? "completed-day"
-                    : ""
-                }`}
-              >
-                Day 1
-              </span>
+          {days.map((day, index) => (
+            <div className="col-4 px-1" key={index}>
               <div
-                className={`daily-session-reward-wrapper  ${
-                  streakDay === 0
-                    ? "active-reward"
-                    : streakDay > 0
-                    ? "completed-reward"
+                className={`daily-streak-item ${
+                  streakDay === index
+                    ? "active-session"
+                    : streakDay > index
+                    ? "completed-session"
                     : ""
-                } px-2 py-1 d-flex align-items-center gap-1`}
+                } w-100 px-1 py-2 d-flex flex-column align-items-center gap-1 mb-2`}
               >
-                <img src={coin} width={15} height={15} alt="" />
-                <span className="daily-session-reward-amount">+25,000</span>
+                <span
+                  className={`daily-streak-day ${
+                    streakDay === index
+                      ? "active-day"
+                      : streakDay > index
+                      ? "completed-day"
+                      : ""
+                  }`}
+                >
+                  {day.title}
+                </span>
+                <div
+                  className={`daily-session-reward-wrapper  ${
+                    streakDay === index
+                      ? "active-reward"
+                      : streakDay > index
+                      ? "completed-reward"
+                      : ""
+                  } px-2 py-1 d-flex align-items-center gap-1`}
+                >
+                  <img src={coin} width={15} height={15} alt="" />
+                  <span className="daily-session-reward-amount">
+                    +{getFormattedNumber(day.reward, 0)}
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="col-4 px-1">
-            <div
-              className={`daily-streak-item ${
-                streakDay === 1
-                  ? "active-session"
-                  : streakDay > 1
-                  ? "completed-session"
-                  : ""
-              } w-100 px-1 py-2 d-flex flex-column align-items-center gap-1 mb-2`}
-            >
-              <span
-                className={`daily-streak-day ${
-                  streakDay === 1
-                    ? "active-day"
-                    : streakDay > 1
-                    ? "completed-day"
-                    : ""
-                }`}
-              >
-                Day 2
-              </span>
-              <div
-                className={`daily-session-reward-wrapper ${
-                  streakDay === 1
-                    ? "active-reward"
-                    : streakDay > 1
-                    ? "completed-reward"
-                    : ""
-                } px-2 py-1 d-flex align-items-center gap-1`}
-              >
-                <img src={coin} width={15} height={15} alt="" />
-                <span className="daily-session-reward-amount">+25,000</span>
-              </div>
-            </div>
-          </div>
-          <div className="col-4 px-1">
-            <div
-              className={`daily-streak-item ${
-                streakDay === 2
-                  ? "active-session"
-                  : streakDay > 2
-                  ? "completed-session"
-                  : ""
-              } w-100 px-1 py-2 d-flex flex-column align-items-center gap-1 mb-2`}
-            >
-              <span
-                className={`daily-streak-day ${
-                  streakDay === 2
-                    ? "active-day"
-                    : streakDay > 2
-                    ? "completed-day"
-                    : ""
-                }`}
-              >
-                Day 3
-              </span>
-              <div
-                className={`daily-session-reward-wrapper ${
-                  streakDay === 2
-                    ? "active-reward"
-                    : streakDay > 2
-                    ? "completed-reward"
-                    : ""
-                } px-2 py-1 d-flex align-items-center gap-1`}
-              >
-                <img src={coin} width={15} height={15} alt="" />
-                <span className="daily-session-reward-amount">+25,000</span>
-              </div>
-            </div>
-          </div>
-          <div className="col-4 px-1">
-            <div
-              className={`daily-streak-item ${
-                streakDay === 3
-                  ? "active-session"
-                  : streakDay > 3
-                  ? "completed-session"
-                  : ""
-              } w-100 px-1 py-2 d-flex flex-column align-items-center gap-1 mb-2`}
-            >
-              <span
-                className={`daily-streak-day ${
-                  streakDay === 3
-                    ? "active-day"
-                    : streakDay > 3
-                    ? "completed-day"
-                    : ""
-                }`}
-              >
-                Day 4
-              </span>
-              <div
-                className={`daily-session-reward-wrapper ${
-                  streakDay === 3
-                    ? "active-reward"
-                    : streakDay > 3
-                    ? "completed-reward"
-                    : ""
-                } px-2 py-1 d-flex align-items-center gap-1`}
-              >
-                <img src={coin} width={15} height={15} alt="" />
-                <span className="daily-session-reward-amount">+25,000</span>
-              </div>
-            </div>
-          </div>
-          <div className="col-4 px-1">
-            <div
-              className={`daily-streak-item ${
-                streakDay === 4
-                  ? "active-session"
-                  : streakDay > 4
-                  ? "completed-session"
-                  : ""
-              } w-100 px-1 py-2 d-flex flex-column align-items-center gap-1 mb-2`}
-            >
-              <span
-                className={`daily-streak-day ${
-                  streakDay === 4
-                    ? "active-day"
-                    : streakDay > 4
-                    ? "completed-day"
-                    : ""
-                }`}
-              >
-                Day 5
-              </span>
-              <div
-                className={`daily-session-reward-wrapper ${
-                  streakDay === 4
-                    ? "active-reward"
-                    : streakDay > 4
-                    ? "completed-reward"
-                    : ""
-                } px-2 py-1 d-flex align-items-center gap-1`}
-              >
-                <img src={coin} width={15} height={15} alt="" />
-                <span className="daily-session-reward-amount">+25,000</span>
-              </div>
-            </div>
-          </div>
-          <div className="col-4 px-1">
-            <div
-              className={`daily-streak-item ${
-                streakDay === 5
-                  ? "active-session"
-                  : streakDay > 5
-                  ? "completed-session"
-                  : ""
-              } w-100 px-1 py-2 d-flex flex-column align-items-center gap-1 mb-2`}
-            >
-              <span
-                className={`daily-streak-day ${
-                  streakDay === 5
-                    ? "active-day"
-                    : streakDay > 5
-                    ? "completed-day"
-                    : ""
-                }`}
-              >
-                Day 6
-              </span>
-              <div
-                className={`daily-session-reward-wrapper ${
-                  streakDay === 5
-                    ? "active-reward"
-                    : streakDay > 5
-                    ? "completed-reward"
-                    : ""
-                } px-2 py-1 d-flex align-items-center gap-1`}
-              >
-                <img src={coin} width={15} height={15} alt="" />
-                <span className="daily-session-reward-amount">+25,000</span>
-              </div>
-            </div>
-          </div>
+          ))}
+
           <div className="col-12 px-1">
             <div
               className={`daily-streak-item w-100 ${
                 streakDay === 6
                   ? "active-session"
                   : streakDay > 6
-                  ? "completed-session"
+                  ? "completed-session-7"
                   : ""
               } px-1 py-2 d-flex align-items-center justify-content-between gap-1 mb-2`}
             >
@@ -271,13 +135,14 @@ const DailySession = ({
                   } px-2 py-1 d-flex align-items-center gap-1`}
                 >
                   <img src={coin} width={15} height={15} alt="" />
-                  <span className="daily-session-reward-amount">+25,000</span>
+                  <span className="daily-session-reward-amount">+250,000</span>
                 </div>
               </div>
               <img src={calendar} className="w-25" alt="" />
             </div>
           </div>
         </div>
+       </div>
       </div>
       <button
         className={`daily-session-button py-3 ${

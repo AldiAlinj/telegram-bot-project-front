@@ -10,6 +10,10 @@
     background-image: url('../../assets/blueBg.png');
     background-size: 100% 100%;
   }
+  .invite-friends-banner-small{
+    height: 70%;
+    border-radius: 0px 0px 20px 20px;
+  }
 
 
   .friends-wrapper::-webkit-scrollbar {
@@ -21,13 +25,13 @@
   }
 
   .invite-friends-title{
-    color: #46557B;
+    color: #FFF;
+    text-align: center;
     font-size: 34px;
     font-style: normal;
     font-weight: 400;
-    line-height: 123.725%; /* 39.592px */
+    line-height: 123.725%; /* 24.745px */
     letter-spacing: 0.4px;
-    text-align: center;
 }
 
 
@@ -87,20 +91,20 @@ align-items: center;
 }
 
 .friend-name{
-    color: #46557B;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  color: #4F5F90;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .friend-reward{
-    color: #46557B;
-    text-align: right;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+  color: #5690FF;
+  text-align: right;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .friends-list-wrapper{

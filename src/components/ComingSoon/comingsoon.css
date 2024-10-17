@@ -15,13 +15,13 @@
 }
 
 .coming-soon-title{
-    color: #46557B;
+    color: #5690FF;
+    text-align: center;
     font-size: 24px;
     font-style: normal;
-    font-weight: 400;
-    line-height: 123.725%; /* 39.592px */
+    font-weight: 800;
+    line-height: 24px; /* 150% */
     letter-spacing: 0.4px;
-    text-align: center;
 }
 
 .coming-soon-button{

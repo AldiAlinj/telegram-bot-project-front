@@ -7,10 +7,10 @@ const GetStarted = ({ showWelcome, onClose }) => {
     <div
       className={`get-started-wrapper ${
         !showWelcome && "hide-start"
-      } p-4 d-flex flex-column justify-content-end`}
+      } p-4 d-flex flex-column justify-content-between`}
     >
-      <div className="d-flex w-100 justify-content-center">
-        <img src={getStartedWod} className="w-50 position-relative" style={{bottom: '50%'}} alt="" />
+      <div className="d-flex w-100 justify-content-center get-started-logo-wrapper">
+        <img src={getStartedWod} className="w-50 position-relative"  alt="" />
       </div>
       <div className="d-flex flex-column gap-3">
         <h1 className="get-started-title mb-0">

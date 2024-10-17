@@ -8,35 +8,14 @@ const Friends = ({referredUsers, referralCode}) => {
   const appLink = "https://t.me/AldiTestBot_bot/AldiTestBot"
 
 
-  const dummyFriends = [
-    {
-      telegramUsername: "AldiAlinj",
-      earnedPoints: 500,
-    },
-    {
-      telegramUsername: "Tekkol",
-      earnedPoints: 1000,
-    },
-    {
-      telegramUsername: "Lorena579",
-      earnedPoints: 10000,
-    },
-    {
-      telegramUsername: "MiciiG",
-      earnedPoints: 500,
-    }
-  ]
-
-
-
   useEffect(() => {
     window.scrollTo(0,0)
   }, [])
   
 
   return (
-    <div className="container-fluid friends-wrapper d-flex flex-column justify-content-between pt-4 pb-3">
-      <div className={`d-flex flex-column align-items-center gap-3 invite-friends-banner ${dummyFriends.length > 0 && "invite-friends-banner-small"}`}>
+    <div className="container-fluid friends-wrapper d-flex flex-column justify-content-between p-0">
+      <div className={`d-flex flex-column align-items-center justify-content-end gap-3 invite-friends-banner ${referredUsers.length > 0 && "invite-friends-banner-small"} p-3`}>
       <div className="d-flex wod-friends-wrapper w-100 justify-content-center ">
       </div>
       <h1 className="invite-friends-title mb-0">
@@ -46,13 +25,13 @@ const Friends = ({referredUsers, referralCode}) => {
         <a href={`https://t.me/share/url?url=${appLink}?startapp=${referralCode}`} style={{textDecoration: "none", color: "#5690FF"}}>Invite Friends</a>
      </button>
       </div>
-      {dummyFriends.length > 0 &&
+      {referredUsers.length > 0 &&
       <>
-      <h6 className="friends-list-title mb-0 my-3">
-        {dummyFriends.length} Friends
+      <h6 className="friends-list-title mb-0 my-3 mx-3">
+        {referredUsers.length} Friends
       </h6>
-        <div className="d-flex flex-column friends-list-wrapper">
-          {dummyFriends.map((friend, index) => (
+        <div className="d-flex flex-column friends-list-wrapper mx-3 mb-3">
+          {referredUsers.map((friend, index) => (
             <div className="friend-item p-1 d-flex align-items-center justify-content-between" key={index}>
                 <div className="d-flex align-items-center gap-2">
               <div className="friend-initial-wrapper">
@@ -60,7 +39,7 @@ const Friends = ({referredUsers, referralCode}) => {
               </div>
                   <span className="friend-name">{friend.telegramUsername}</span>
                 </div>
-                <span className="friend-reward">+{friend.earnedPoints} WOD</span>
+                <span className="friend-reward">+{friend.earnedPoints} Points</span>
             </div>
           ))}
         </div>

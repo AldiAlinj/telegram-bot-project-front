@@ -10,6 +10,10 @@ const Leaderboard = ({ username, leaderboard, userPosition }) => {
     window.scrollTo(0, 0);
   }, []);
 
+
+  
+
+
   return (
     <div className="container-fluid leaderboard-wrapper pt-4 pb-3">
       <div className="d-flex flex-column gap-2">
@@ -18,16 +22,17 @@ const Leaderboard = ({ username, leaderboard, userPosition }) => {
           <div className="d-flex align-items-center gap-2">
             <div
               className="name-holder d-flex align-items-center justify-content-center"
-              style={{ background: "#7037CA" }}
+              
             >
               <span className="name-initial">{username.slice(0, 1)}</span>
+              {/* <span className="name-initial">{username.slice(0, 1)}</span> */}
             </div>
             <div className="d-flex flex-column">
-              <h6 className="player-name mb-0" style={{ color: "#46557B" }}>
+              <h6 className="user-name mb-0" >
                 {username}
               </h6>
-              <span className="player-wod-amount" style={{ color: "#46557B" }}>
-                {getFormattedNumber(userPosition?.points, 0)} WOD
+              <span className="user-score-amount">
+                {getFormattedNumber(userPosition?.points, 0)} Points
               </span>
             </div>
           </div>
@@ -38,8 +43,8 @@ const Leaderboard = ({ username, leaderboard, userPosition }) => {
           ) : userPosition?.position === 3 ? (
             <img src={bronzeMedal} alt="bronze" />
           ) : (
-            <span className="player-rank" style={{ color: "#46557B" }}>
-              {userPosition?.position}
+            <span className="user-rank">
+              #{userPosition?.position}
             </span>
           )}
         </div>
@@ -52,7 +57,7 @@ const Leaderboard = ({ username, leaderboard, userPosition }) => {
         {leaderboard.map((item, index) => (
           <div
             key={index}
-            className="leaderboard-item d-flex align-items-center justify-content-between p-3"
+            className="leaderboard-item d-flex align-items-center justify-content-between px-3 py-2"
           >
             <div className="d-flex align-items-center gap-2">
               <div className="name-holder d-flex align-items-center justify-content-center">
@@ -62,20 +67,23 @@ const Leaderboard = ({ username, leaderboard, userPosition }) => {
               </div>
               <div className="d-flex flex-column">
                 <h6 className="player-name mb-0">{item.username}</h6>
-                <span className="player-wod-amount">
-                  {getFormattedNumber(item.totalPoints, 0)} WOD
-                </span>
+               
               </div>
             </div>
-            {item.rank === 1 ? (
+          <div className="d-flex align-items-center gap-2">
+          <span className="player-score-amount">
+                  {getFormattedNumber(item.totalPoints, 0)} Points
+                </span>
+          {index + 1 === 1 ? (
               <img src={goldMedal} alt="" />
-            ) : item.rank === 2 ? (
+            ) : index + 1 === 2 ? (
               <img src={silverMedal} alt="" />
-            ) : item.rank === 3 ? (
+            ) : index + 1 === 3 ? (
               <img src={bronzeMedal} alt="" />
             ) : (
-              <span className="player-rank">#{item.rank}</span>
+              <span className="player-rank">#{index + 1}</span>
             )}
+          </div>
           </div>
         ))}
       </div>

@@ -29,8 +29,8 @@ line-height: normal;
 
 
 .completed-task{
-    border: 1px solid #7037CA;
-    background: rgba(112, 55, 202, 0.1);
+    border: 1px solid #3370E3;
+    background: rgba(51, 112, 227, 0.1);
 }
 
 .task-reward-wrapper{

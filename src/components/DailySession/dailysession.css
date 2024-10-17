@@ -15,10 +15,16 @@
 
 
 .daily-session-inner-wrapper{
-    height: 80%;
+    height: 100%;
     border-radius: 10px;
 background: rgba(255, 255, 255, 0.80);
 box-shadow: 0px 4px 4px 0px rgba(185, 179, 216, 0.10);
+}
+@media screen and (max-height: 660px) {
+    .daily-session-inner-wrapper{
+        height: 85%;
+  ;
+    } 
 }
 
 
@@ -103,6 +109,18 @@ border-radius: 5px;
     background-image: url('../../assets/dailySession/completedSessionBg.png');
     background-size: cover;
 }
+.completed-session-7{
+    background-image: url('../../assets/dailySession/completedSeven.png');
+    background-size: cover;
+}
+
+
+.daily-session-fire-wrapper{
+    height: 20%;
+}
+.daliy-session-lower-wrapper{
+    height: 70%;
+}
 
 .completed-day{
     color: #FFF;
@@ -132,6 +150,6 @@ background: #E19836;
 }
 
 .cant-claim{
-    background: gray;
-    color: black;
+    background: #DFDCED;
+    color: #4F5F90;
 }

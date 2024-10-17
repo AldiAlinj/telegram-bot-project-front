@@ -10,6 +10,14 @@ transition: all .35s ease-in-out;
 }
 
 
+.get-started-logo-wrapper{
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+
 .hide-start{
     transform: translateY(-100%);
 }
@@ -44,7 +52,7 @@ width: 80%;
     background: #fff;
     border-radius: 100px;
     width: 100%;
-    color: #000;
+    color: #5690FF;
     text-align: center;
     font-size: 18px;
     font-style: normal;
@@ -52,7 +60,7 @@ width: 80%;
     line-height: 24px; /* 150% */
     letter-spacing: 0.4px;
     text-transform: capitalize;
-    border-bottom: 5px solid #D8D5EA;
+    border-bottom: 5px solid #8CB1FF;
     border-top: none;
     border-left: none;
     border-right: none;
