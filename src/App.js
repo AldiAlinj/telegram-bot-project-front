@@ -129,6 +129,7 @@ const App = () => {
       setLoadingChest(false);
       alert(res.data.pointsAwarded);
       setChestTimeStamp(Date.parse(res.data.nextChestAvailableAt));
+      setCanClaimHourly(false);
     } catch (err) {
       console.log(err);
     }
