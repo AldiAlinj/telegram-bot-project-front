@@ -100,7 +100,7 @@ const Home = ({
         ) : (
           <Countdown
             renderer={renderer}
-            date={chestTimeStamp + 3600000}
+            date={Date.parse(chestTimeStamp) + 3600000}
             onComplete={() => {setCanClaim(true)}}
           />
         )}
