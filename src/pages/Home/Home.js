@@ -116,6 +116,7 @@ const Home = ({
             )}
           </button>
         )}
+        
       </div>
       <div className="d-flex flex-column gap-2 mt-3">
         <h6 className="home-tasks-title mb-0">Earn</h6>
