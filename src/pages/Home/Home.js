@@ -139,7 +139,7 @@ const Home = ({
             <Countdown
               renderer={renderer}
               date={countdownEndTime}
-              onComplete={() => alert("done")}
+              onComplete={() => alert(countdownEndTime)}
             />
           )}
         </button>
