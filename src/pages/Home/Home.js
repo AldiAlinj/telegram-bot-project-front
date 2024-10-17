@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./home.css";
 import coin from "../../assets/dailySession/coin.png";
 import TaskItem from "../../components/TaskItem/TaskItem";
@@ -23,7 +23,7 @@ const Home = ({
   referralPoints,
   openHourlyChest,
   loadingChest,
-  chestTimeStamp,
+  chestTimeStamp
 }) => {
   const dummyTasks = [
     {
@@ -56,19 +56,13 @@ const Home = ({
     },
   ];
 
-  const [canClaim, setCanClaim] = useState(false);
-  const [countdownTime, setCountdownTime] = useState(null);
+  // const [canClaim, setCanClaim] = useState(false);
 
-  const addHour = useCallback(() => {
-    const lastClaimTime = Date.parse(chestTimeStamp);
-    const oneHourInMs = 3600000;
-    const countdownEndTime = lastClaimTime + oneHourInMs;
-    setCountdownTime(countdownEndTime);
-  }, [chestTimeStamp]);
+  const lastClaimTime = Date.parse(chestTimeStamp); // or new Date(lastClaimTimestamp).getTime()
+  const oneHourInMs = 3600000;
+  const countdownEndTime = lastClaimTime + oneHourInMs;
 
-  useEffect(() => {
-    addHour();
-  }, [addHour]);
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -116,13 +110,11 @@ const Home = ({
       <div className="d-flex flex-column mt-3 mb-5 play-banner-wrapper">
         <img src={playBanner} alt="" style={{ borderRadius: "10px" }} />
         <button
-          className={`play-button ${
-            canClaim === false && "play-button-disabled"
-          } py-2 px-4`}
+          className={`play-button  py-2 px-4`}
           onClick={openHourlyChest}
-          disabled={!canClaim || loadingChest}
+          // disabled={!canClaim || loadingChest}
         >
-          {loadingChest ? (
+          {/* {loadingChest ? (
             <div
               class="spinner-border spinner-border-sm text-info"
               role="status"
@@ -131,13 +123,13 @@ const Home = ({
             </div>
           ) : canClaim ? (
             "Claim"
-          ) : (
+          ) : ( */}
             <Countdown
               renderer={renderer}
-              date={countdownTime}
-              onComplete={() => setCanClaim(true)}
+              date={countdownEndTime}
+              // onComplete={() => setCanClaim(true)}
             />
-          )}
+          {/* )} */}
         </button>
       </div>
       <div className="d-flex flex-column gap-2 mt-3">
