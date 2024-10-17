@@ -27,14 +27,9 @@ const Home = ({
 }) => {
 
 
-  const [disableAll, setDisableAll] = useState(true);
   const [canClaim, setCanClaim] = useState(false)
 
-  useEffect(() => {
-    if(chestTimeStamp !== null){
-      setDisableAll(false)
-    }
-  }, [chestTimeStamp])
+
   
 
   useEffect(() => {
@@ -82,7 +77,7 @@ const Home = ({
       </div>
       <div className="d-flex flex-column mt-3 mb-5 play-banner-wrapper">
         <img src={playBanner} alt="" style={{ borderRadius: "10px" }} />
-       {!disableAll &&
+       {/* {!disableAll && */}
         <button
         className={`play-button  py-2 px-4`}
         onClick={openHourlyChest}
@@ -105,7 +100,7 @@ const Home = ({
           />
         )}
       </button>
-       }
+       {/* } */}
       </div>
       <div className="d-flex flex-column gap-2 mt-3">
         <h6 className="home-tasks-title mb-0">Earn</h6>
