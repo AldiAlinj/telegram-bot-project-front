@@ -23,30 +23,23 @@ const Home = ({
   referralPoints,
   openHourlyChest,
   loadingChest,
-  chestTimeStamp
+  chestTimeStamp,
 }) => {
-
-
   const [disableAll, setDisableAll] = useState(true);
   const [canClaim, setCanClaim] = useState(false);
+  const [timeStamp, setTimeStamp] = useState(null);
 
-const refreshButton = () => {
-  setTimeout(() => {
-    setDisableAll(true)
-    if(chestTimeStamp !== null){
-      setDisableAll(false)
-    }
-    
-  }, 1000);
-}
-
+  const refreshButton = () => {
+    setCanClaim(false);
+    setTimeStamp(Date.now() + 3600000);
+  };
 
   useEffect(() => {
-    if(chestTimeStamp !== null){
-      setDisableAll(false)
+    if (chestTimeStamp !== null) {
+      setTimeStamp(chestTimeStamp);
+      setDisableAll(false);
     }
-  }, [chestTimeStamp])
-  
+  }, [chestTimeStamp]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -93,30 +86,37 @@ const refreshButton = () => {
       </div>
       <div className="d-flex flex-column mt-3 mb-5 play-banner-wrapper">
         <img src={playBanner} alt="" style={{ borderRadius: "10px" }} />
-       {!disableAll &&
-        <button
-        className={`play-button ${!canClaim || loadingChest ? "play-button-disabled" : ""}  py-2 px-4`}
-        onClick={() => {openHourlyChest(); refreshButton()}}
-        disabled={!canClaim || loadingChest}
-      >
-        {loadingChest ? (
-          <div
-            class="spinner-border spinner-border-sm text-info"
-            role="status"
+        {!disableAll && (
+          <button
+            className={`play-button ${
+              !canClaim || loadingChest ? "play-button-disabled" : ""
+            }  py-2 px-4`}
+            onClick={() => {
+              openHourlyChest();
+              refreshButton();
+            }}
+            disabled={!canClaim || loadingChest}
           >
-            <span class="visually-hidden">Loading...</span>
-          </div>
-        ) : canClaim ? (
-          "Claim"
-        ) : (
-          <Countdown
-            renderer={renderer}
-            date={Date.parse(chestTimeStamp) + 3600000}
-            onComplete={() => {setCanClaim(true)}}
-          />
+            {loadingChest ? (
+              <div
+                class="spinner-border spinner-border-sm text-info"
+                role="status"
+              >
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            ) : canClaim ? (
+              "Claim"
+            ) : (
+              <Countdown
+                renderer={renderer}
+                date={Date.parse(timeStamp) + 3600000}
+                onComplete={() => {
+                  setCanClaim(true);
+                }}
+              />
+            )}
+          </button>
         )}
-      </button>
-       }
       </div>
       <div className="d-flex flex-column gap-2 mt-3">
         <h6 className="home-tasks-title mb-0">Earn</h6>
