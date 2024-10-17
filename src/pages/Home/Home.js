@@ -24,9 +24,10 @@ const Home = ({
   openHourlyChest,
   loadingChest,
   chestTimeStamp,
+  canClaimHourly,
+setCanClaimHourly
 }) => {
   const [disableAll, setDisableAll] = useState(true);
-  const [canClaim, setCanClaim] = useState(false);
 
 
   const onClaim = () => {
@@ -34,7 +35,6 @@ const Home = ({
     setDisableAll(true);
     if(chestTimeStamp !== null){
       setDisableAll(false);
-      alert(chestTimeStamp)
     }
   }
 
@@ -96,10 +96,10 @@ const Home = ({
         {!disableAll && (
           <button
             className={`play-button ${
-              !canClaim || loadingChest ? "play-button-disabled" : ""
+              !canClaimHourly || loadingChest ? "play-button-disabled" : ""
             }  py-2 px-4`}
             onClick={onClaim}
-            disabled={!canClaim || loadingChest}
+            disabled={!canClaimHourly || loadingChest}
           >
             {loadingChest ? (
               <div
@@ -108,14 +108,14 @@ const Home = ({
               >
                 <span class="visually-hidden">Loading...</span>
               </div>
-            ) : canClaim ? (
+            ) : canClaimHourly ? (
               "Claim"
             ) : (
               <Countdown
                 renderer={renderer}
                 date={chestTimeStamp}
                 onComplete={() => {
-                  setCanClaim(true);
+                  setCanClaimHourly(true);
                 }}
               />
             )}

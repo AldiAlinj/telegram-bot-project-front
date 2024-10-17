@@ -29,6 +29,8 @@ const App = () => {
   const [referralPoints, setReferralPoints] = useState(0);
   const [loadingChest, setLoadingChest] = useState(false);
   const [chestTimeStamp, setChestTimeStamp] = useState(null);
+  const [canClaimHourly, setCanClaimHourly] = useState(false);
+  
   // const [chestReward, setChestReward] = useState(0);
 
   const postToken = async (token) => {
@@ -253,6 +255,8 @@ const App = () => {
               openHourlyChest={openHourlyChest}
               loadingChest={loadingChest}
               chestTimeStamp={chestTimeStamp}
+              canClaimHourly={canClaimHourly}
+              setCanClaimHourly={setCanClaimHourly}
             />
           }
         />
