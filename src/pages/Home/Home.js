@@ -1,19 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./home.css";
 import coin from "../../assets/dailySession/coin.png";
 import TaskItem from "../../components/TaskItem/TaskItem";
 import { NavLink } from "react-router-dom";
 import getFormattedNumber from "../../hooks/getFormattedNumber";
-import Countdown from "react-countdown";
-import ChestSlider from "../../components/ChestSlider/ChestSlider";
 
-const renderer = ({ hours, minutes }) => {
-  return (
-    <span className="time-left">
-      {hours}:{minutes}
-    </span>
-  );
-};
+import playBanner from "../../assets/playBanner.png";
 
 const Home = ({
   username,
@@ -21,29 +13,7 @@ const Home = ({
   userData,
   handleCompleteTask,
   referralPoints,
-  openHourlyChest,
-  loadingChest,
-  chestTimeStamp,
-  canClaimHourly,
-  setCanClaimHourly,
 }) => {
-  const [disableAll, setDisableAll] = useState(true);
-
-  const onClaim = () => {
-    openHourlyChest();
-    setDisableAll(true);
-    if (chestTimeStamp !== null) {
-      setDisableAll(false);
-    }
-  };
-
-  useEffect(() => {
-    setDisableAll(true);
-    if (chestTimeStamp !== null) {
-      setDisableAll(false);
-    }
-  }, [chestTimeStamp, openHourlyChest]);
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -88,35 +58,11 @@ const Home = ({
         </div>
       </div>
       <div className="d-flex flex-column mt-3 mb-5 play-banner-wrapper">
-        <ChestSlider onClaim={onClaim} canClaimHourly={canClaimHourly} />
-        {!disableAll && (
-          <button
-            className={`play-button ${
-              !canClaimHourly || loadingChest ? "play-button-disabled" : ""
-            }  py-2 px-4`}
-            disabled={!canClaimHourly || loadingChest}
-          >
-            {loadingChest ? (
-              <div
-                class="spinner-border spinner-border-sm text-info"
-                role="status"
-              >
-                <span class="visually-hidden">Loading...</span>
-              </div>
-            ) : canClaimHourly ? (
-              "Ready to Claim"
-            ) : (
-              <Countdown
-                renderer={renderer}
-                date={chestTimeStamp}
-                onComplete={() => {
-                  setCanClaimHourly(true);
-                }}
-              />
-            )}
-          </button>
-        )}
-        
+        {/* <ChestSlider onClaim={onClaim} canClaimHourly={canClaimHourly} /> */}
+        <img src={playBanner} style={{ borderRadius: "10px" }} alt="" />
+        <NavLink to={"/play"}>
+          <button className={`play-button  py-2 px-4`}>Play</button>
+        </NavLink>
       </div>
       <div className="d-flex flex-column gap-2 mt-3">
         <h6 className="home-tasks-title mb-0">Earn</h6>
@@ -140,47 +86,30 @@ const Home = ({
 
 export default Home;
 
-
-
-// const postToken = async (token) => {
-//   setLoadingChest(true);
-//   let body = {
-//     data: token,
-//   };
-
-//   const initData = window.Telegram?.WebApp?.initDataUnsafe;
-//   if (initData?.start_param) {
-//     body = {
-//       data: token,
-//       referralCode: initData?.start_param,
-//     };
-//   }
-
-//   try {
-//     const res = await axios.post(
-//       `https://api.worldofdypians.com/api/tg_auth`,
-//       body
-//     );
-//     // console.log(res);
-//     setUserData(res.data.userData);
-//     setTasks(res.data.userData.availableTasks);
-//     setDailySessionData({
-//       streakDay: res.data.userData.streakDay,
-//       lastStreakDate: res.data.userData.lastStreakDate,
-//       streakPoints: res.data.userData.streakPoints,
-//     });
-//     setChestTimeStamp(
-//       Date.parse(res.data.userData.lastChestOpened) + 3600000
-//     );
-//     setLoadingChest(false);
-//     const referredUsers = res.data.userData.referredUsers;
-//     const sumRewards = referredUsers.reduce(
-//       (acc, item) => acc + item.earnedPoints,
-//       0
-//     );
-//     setReferralPoints(sumRewards);
-//     setJwt(res.data.JWT);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
+// {!disableAll && (
+//   <button
+//     className={`play-button ${
+//       !canClaimHourly || loadingChest ? "play-button-disabled" : ""
+//     }  py-2 px-4`}
+//     disabled={!canClaimHourly || loadingChest}
+//   >
+//     {loadingChest ? (
+//       <div
+//         class="spinner-border spinner-border-sm text-info"
+//         role="status"
+//       >
+//         <span class="visually-hidden">Loading...</span>
+//       </div>
+//     ) : canClaimHourly ? (
+//       "Ready to Claim"
+//     ) : (
+//       <Countdown
+//         renderer={renderer}
+//         date={chestTimeStamp}
+//         onComplete={() => {
+//           setCanClaimHourly(true);
+//         }}
+//       />
+//     )}
+//   </button>
+// )}

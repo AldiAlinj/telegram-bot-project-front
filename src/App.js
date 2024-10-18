@@ -12,6 +12,7 @@ import ComingSoon from "./components/ComingSoon/ComingSoon";
 import axios from "axios";
 import DailySession from "./components/DailySession/DailySession";
 import EarnPartner from "./pages/Earn/EarnPartner";
+import Play from "./pages/Play/Play";
 
 const App = () => {
   const [showWelcome, setShowWelcome] = useState(true);
@@ -28,6 +29,8 @@ const App = () => {
     streakDay: 0,
     lastStreakDate: null,
     chestTimeStamp: null,
+    referredUsers: [],
+    referralCode: "",
   });
   const [leaderboard, setLeaderboard] = useState({
     player: {},
@@ -40,89 +43,7 @@ const App = () => {
   const [canClaim, setCanClaim] = useState(false);
   const [referralPoints, setReferralPoints] = useState(0);
   const [loadingChest, setLoadingChest] = useState(false);
-  const [chestTimeStamp, setChestTimeStamp] = useState(null);
   const [canClaimHourly, setCanClaimHourly] = useState(false);
-
-  // const dummyTasks = [
-  //   {
-  //     partner: "world-of-dypians",
-  //     title: "Watch new WoD Video",
-  //     subtitle: "Watch and earn 500 points",
-  //     link: "https://www.youtube.com/watch?v=VTiIhZcXLSM",
-  //     type: "youtube",
-  //     action: "watch",
-  //     secretWord: "wod the best",
-  //     reward: 500,
-  //   },
-  //   {
-  //     partner: "world-of-dypians",
-  //     title: "Follow WoD on X",
-  //     subtitle: "Follow WoD on X and earn 750 points",
-  //     link: "https://twitter.com/worldofdypians",
-  //     type: "twitter",
-  //     action: "follow",
-  //     reward: 700,
-  //   },
-  //   {
-  //     partner: "openflux",
-  //     title: "Follow OpenFlux on X",
-  //     subtitle: "Follow OpenFlux on X and earn 750 points",
-  //     link: "https://x.com/OpenFluxNFT",
-  //     type: "twitter",
-  //     action: "follow",
-  //     reward: 700,
-  //   },
-  //   {
-  //     partner: "openflux",
-  //     title: "Join WoD On Telegram",
-  //     subtitle: "oin WoD On Telegram and earn 500 points",
-  //     link: "https://x.com/OpenFluxNFT",
-  //     type: "telegram",
-  //     action: "join",
-  //     groupId: "-1001542536650",
-  //     reward: 700,
-  //   },
-  // ];
-  // const dummyCompletedTasks = [
-  //   {
-  //     partner: "world-of-dypians",
-  //     title: "Watch new WoD Video",
-  //     subtitle: "Watch and earn 500 points",
-  //     link: "https://www.youtube.com/watch?v=VTiIhZcXLSM",
-  //     type: "youtube",
-  //     action: "watch",
-  //     secretWord: "wod the best",
-  //     reward: 500,
-  //   },
-  //   {
-  //     partner: "world-of-dypians",
-  //     title: "Follow WoD on X",
-  //     subtitle: "Follow WoD on X and earn 750 points",
-  //     link: "https://twitter.com/worldofdypians",
-  //     type: "twitter",
-  //     action: "follow",
-  //     reward: 700,
-  //   },
-  //   {
-  //     partner: "openflux",
-  //     title: "Follow OpenFlux on X",
-  //     subtitle: "Follow OpenFlux on X and earn 750 points",
-  //     link: "https://x.com/OpenFluxNFT",
-  //     type: "twitter",
-  //     action: "follow",
-  //     reward: 700,
-  //   },
-  //   {
-  //     partner: "openflux",
-  //     title: "Join WoD On Telegram",
-  //     subtitle: "oin WoD On Telegram and earn 500 points",
-  //     link: "https://x.com/OpenFluxNFT",
-  //     type: "telegram",
-  //     action: "join",
-  //     groupId: "-1001542536650",
-  //     reward: 700,
-  //   },
-  // ];
 
   const postToken = async (token) => {
     setLoadingChest(true);
@@ -154,6 +75,8 @@ const App = () => {
         streakDay: res.data.userData.streakDay,
         lastStreakDate: res.data.userData.lastStreakDate,
         chestTimeStamp: Date.parse(res.data.userData.lastChestOpened) + 3600000,
+        referredUsers: res.data.userData.referredUsers,
+        referralCode: res.data.userData.referralCode,
       });
       setLoadingChest(false);
       const referredUsers = res.data.userData.referredUsers;
@@ -226,8 +149,8 @@ const App = () => {
       setUserData((prevState) => ({
         ...prevState,
         totalPoints: res.data.totalPoints,
+        chestTimeStamp: res.data.nextChestAvailableAt,
       }));
-      setChestTimeStamp(Date.parse(res.data.nextChestAvailableAt));
       setCanClaimHourly(false);
     } catch (err) {
       console.log(err);
@@ -244,8 +167,10 @@ const App = () => {
         }
       );
       setLoadingClaim(false);
-      fetchAllData();
-      console.log(res.data);
+      setUserData((prevState) => ({
+        ...prevState,
+        totalPoints: res.data.totalPoints,
+      }));
     } catch (err) {
       console.log(err);
     }
@@ -307,8 +232,10 @@ const App = () => {
         `https://api.worldofdypians.com/api/complete-task`,
         body
       );
-      console.log(res.data);
-      fetchAllData();
+      setUserData((prevState) => ({
+        ...prevState,
+        totalPoints: res.data.totalPoints,
+      }));
     } catch (err) {
       console.log(err);
     }
@@ -349,13 +276,7 @@ const App = () => {
               referralPoints={referralPoints}
               tasks={userData.tasks.slice(0, 4)}
               userData={userData}
-              jwt={jwt}
               handleCompleteTask={handleCompleteTask}
-              openHourlyChest={openHourlyChest}
-              loadingChest={loadingChest}
-              chestTimeStamp={chestTimeStamp}
-              canClaimHourly={canClaimHourly}
-              setCanClaimHourly={setCanClaimHourly}
             />
           }
         />
@@ -363,6 +284,18 @@ const App = () => {
           path="/leaderboard"
           element={
             <Leaderboard username={username} leaderboard={leaderboard} />
+          }
+        />
+        <Route
+          path="/play"
+          element={
+            <Play
+              openHourlyChest={openHourlyChest}
+              chestTimeStamp={userData.chestTimeStamp}
+              canClaimHourly={canClaimHourly}
+              setCanClaimHourly={setCanClaimHourly}
+              loadingChest={loadingChest}
+            />
           }
         />
         <Route

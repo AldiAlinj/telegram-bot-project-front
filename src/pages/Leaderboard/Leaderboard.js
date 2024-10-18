@@ -10,10 +10,6 @@ const Leaderboard = ({ username, leaderboard }) => {
     window.scrollTo(0, 0);
   }, []);
 
-
-  
-
-
   return (
     <div className="container-fluid leaderboard-wrapper pt-4 pb-3">
       <div className="d-flex flex-column gap-2">

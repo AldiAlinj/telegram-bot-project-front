@@ -33,8 +33,8 @@ import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
 
 const ChestSlider = ({ onClaim, canClaimHourly }) => {
   const [chestIndex, setChestIndex] = useState(null);
-  const [activeIndex, setActiveIndex] = useState(0); // Track the active slide index
-
+  const [activeIndex, setActiveIndex] = useState(0);
+  
   const claimChest = (id) => {
     if (canClaimHourly && id === activeIndex) {
       onClaim();
@@ -121,7 +121,12 @@ const ChestSlider = ({ onClaim, canClaimHourly }) => {
         {chests.map((item, index) => (
           <SwiperSlide key={index}>
             <img
-              src={chestIndex === index || sessionStorage.getItem("hasOpened") === index ? item.openImage : item.image}
+              src={
+                chestIndex === index ||
+                sessionStorage.getItem("hasOpened") === index
+                  ? item.openImage
+                  : item.image
+              }
               className={`${
                 canClaimHourly && activeIndex === index ? "shake-img" : ""
               }`}

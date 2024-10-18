@@ -9,13 +9,12 @@
     width: 100%;
     overflow: hidden;
     padding: 2rem 0;
-    background-image: url("../../assets/blueBg.png");
     border-radius: 10px;
     position: relative;  /* This ensures the arrows stay outside the container */
   }
   
   .swiper-slide {
-    width: 70px !important;
+    width: 75px !important;
     height: 100% !important;
     position: relative !important;
     display: flex !important;
@@ -28,7 +27,7 @@
       height: 200px;
     }
     .swiper-slide {
-      width: 70px !important;
+      width: 75px !important;
       height: 100% !important;
     }
     .swiper-slide img {
