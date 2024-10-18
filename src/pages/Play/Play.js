@@ -25,7 +25,7 @@ const Play = ({
   setRewardPopup,
   chestReward,
 }) => {
-  const [disableAll, setDisableAll] = useState(false);
+  const [disableAll, setDisableAll] = useState(true);
 
   const onClaim = () => {
     openHourlyChest();
@@ -40,7 +40,11 @@ const Play = ({
     if (chestTimeStamp !== null) {
       setDisableAll(false);
     }
-  }, [chestTimeStamp, openHourlyChest, canClaimHourly]);
+  }, [chestTimeStamp, openHourlyChest]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
@@ -55,31 +59,31 @@ const Play = ({
             </span>
           </div>
           <ChestSlider onClaim={onClaim} canClaimHourly={canClaimHourly} />
-          {disableAll && (
-            <button
-              className={`play-page-button play-button-disabled ${
-                !canClaimHourly || loadingChest ? "play-button-disabled" : ""
-              }  py-2 px-4`}
-              disabled={!canClaimHourly || loadingChest}
-            >
-              {loadingChest ? (
-                <div
-                  class="spinner-border spinner-border-sm text-info"
-                  role="status"
-                >
-                  <span class="visually-hidden">Loading...</span>
-                </div>
-              ) : canClaimHourly ? (
-                "Ready to Claim"
-              ) : (
-                <Countdown
-                  renderer={renderer}
-                  date={chestTimeStamp}
-                  onComplete={() => {
-                    setCanClaimHourly(true);
-                  }}
-                />
-              )}
+          {!disableAll && (
+          <button
+            className={`play-page-button ${
+              !canClaimHourly || loadingChest ? "play-page-button-disabled" : ""
+            }  py-2 px-4`}
+            disabled={!canClaimHourly || loadingChest}
+          >
+            {loadingChest ? (
+              <div
+                class="spinner-border spinner-border-sm text-info"
+                role="status"
+              >
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            ) : canClaimHourly ? (
+              "Ready to Claim"
+            ) : (
+              <Countdown
+                renderer={renderer}
+                date={chestTimeStamp}
+                onComplete={() => {
+                  setCanClaimHourly(true);
+                }}
+              />
+            )}
             </button>
           )}
         </div>
