@@ -1,0 +1,49 @@
+.partner-card {
+  border-radius: 10px;
+  border: 1px solid #f2f0f8;
+  background: #fff;
+  box-shadow: 0px 4px 4px 0px rgba(185, 179, 216, 0.1);
+  text-decoration: none;
+  transition: all 0.25s;
+}
+
+.partner-title {
+  color: #4f5f90;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.partner-card:hover {
+  border: 1px solid #5690ff;
+}
+.partner-card:hover .partner-title {
+  color: #5690ff;
+}
+
+.partner-completed {
+  border-radius: 10px;
+  border: 1px solid #5690ff;
+  background: #5690ff;
+  box-shadow: 0px 4px 4px 0px rgba(185, 179, 216, 0.1);
+}
+
+.partner-completed .partner-title {
+  color: #fff;
+}
+
+.partner-reward-wrapper {
+  border: 0.5px solid #FFFFFF99;
+  background: #79A9FF;
+  border-radius: 5px;
+  width: 80px;
+}
+
+.partner-reward-amount {
+  color: #FFF;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}

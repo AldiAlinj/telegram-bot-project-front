@@ -30,7 +30,11 @@ line-height: normal;
 
 .completed-task{
     border: 1px solid #3370E3;
-    background: rgba(51, 112, 227, 0.1);
+    background: #5690FF;
+}
+
+.completed-task .home-task-name{
+    color: #fff !important;
 }
 
 .task-reward-wrapper{
@@ -46,3 +50,18 @@ width: 80px;
     font-weight: 400;
     line-height: normal;
 }
+
+.completed-reward-wrapper {
+    border: 0.5px solid #FFFFFF99;
+    background: #79A9FF;
+    border-radius: 5px;
+    width: 80px;
+  }
+  
+  .completed-reward-amount {
+    color: #FFF;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }

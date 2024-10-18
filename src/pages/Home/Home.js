@@ -139,3 +139,48 @@ const Home = ({
 };
 
 export default Home;
+
+
+
+// const postToken = async (token) => {
+//   setLoadingChest(true);
+//   let body = {
+//     data: token,
+//   };
+
+//   const initData = window.Telegram?.WebApp?.initDataUnsafe;
+//   if (initData?.start_param) {
+//     body = {
+//       data: token,
+//       referralCode: initData?.start_param,
+//     };
+//   }
+
+//   try {
+//     const res = await axios.post(
+//       `https://api.worldofdypians.com/api/tg_auth`,
+//       body
+//     );
+//     // console.log(res);
+//     setUserData(res.data.userData);
+//     setTasks(res.data.userData.availableTasks);
+//     setDailySessionData({
+//       streakDay: res.data.userData.streakDay,
+//       lastStreakDate: res.data.userData.lastStreakDate,
+//       streakPoints: res.data.userData.streakPoints,
+//     });
+//     setChestTimeStamp(
+//       Date.parse(res.data.userData.lastChestOpened) + 3600000
+//     );
+//     setLoadingChest(false);
+//     const referredUsers = res.data.userData.referredUsers;
+//     const sumRewards = referredUsers.reduce(
+//       (acc, item) => acc + item.earnedPoints,
+//       0
+//     );
+//     setReferralPoints(sumRewards);
+//     setJwt(res.data.JWT);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };

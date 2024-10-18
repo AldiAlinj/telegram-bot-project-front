@@ -1,19 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import "./taskitem.css";
 import rightArrow from "../../assets/rightArrow.svg";
 import getFormattedNumber from "../../hooks/getFormattedNumber";
-import coin from '../../assets/dailySession/coin.png'
+import coin from "../../assets/dailySession/coin.png";
 
 const TaskItem = ({ item, handleCompleteTask }) => {
+  const [loading, setLoading] = useState(false);
 
+  const completeTask = (id) => {
+    setLoading(true);
+    setTimeout(() => {
+      handleCompleteTask(id);
+      setLoading(false);
+    }, 4000);
+  };
 
   return (
     <a
       href={item.link}
       target="_blank"
       rel="noreferrer"
-      onClick={() => handleCompleteTask(item._id)}
-      style={{ textDecoration: "none" }}
+      onClick={() => completeTask(item._id)}
+      style={{ textDecoration: "none", pointerEvents: loading ? "none" : "auto" }}
       className={`home-task-item p-2 d-flex w-100 align-items-center justify-content-between`}
     >
       <div className="d-flex align-items-center gap-2">
@@ -30,19 +38,25 @@ const TaskItem = ({ item, handleCompleteTask }) => {
           >
             {item.title}
           </span>
-         
         </div>
       </div>
-      <div className="d-flex align-items-center gap-2">
-      <div className="d-flex align-items-center gap-2">
-        <div className="task-reward-wrapper d-flex align-items-center gap-1">
-            <img src={coin} width={20} height={20} alt="" />
-            <span className="task-reward-amount">+{getFormattedNumber(item.reward, 0)}</span>
+      {loading ? (
+        <div class="spinner-border spinner-border-sm text-info" role="status">
+          <span class="visually-hidden">Loading...</span>
         </div>
-      
-      </div>
-        <img src={rightArrow} alt="" />
-      </div>
+      ) : (
+        <div className="d-flex align-items-center gap-2">
+          <div className="d-flex align-items-center gap-2">
+            <div className="task-reward-wrapper d-flex align-items-center gap-1">
+              <img src={coin} width={20} height={20} alt="" />
+              <span className="task-reward-amount">
+                +{getFormattedNumber(item.reward, 0)}
+              </span>
+            </div>
+          </div>
+          <img src={rightArrow} alt="rightarrow" />
+        </div>
+      )}
     </a>
   );
 };

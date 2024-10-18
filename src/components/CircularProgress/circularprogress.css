@@ -1,0 +1,29 @@
+.progress {
+  width: 40px;
+  height: 40px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: conic-gradient(var(--color) var(--progress, 0), #f2f0f8 0);
+  display: grid;
+  place-content: center;
+}
+.progress:after {
+  width: calc(40px * 0.8);
+  aspect-ratio: 1;
+  content: attr(data-value);
+  display: grid;
+  background: #fff;
+  border-radius: 50%;
+  display: grid;
+  color: var(--color);
+  text-align: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+
+  place-content: center;
+}
+button {
+  margin-top: 20px;
+}

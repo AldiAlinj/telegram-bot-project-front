@@ -11,27 +11,118 @@ import GetStarted from "./components/GetStarted/GetStarted";
 import ComingSoon from "./components/ComingSoon/ComingSoon";
 import axios from "axios";
 import DailySession from "./components/DailySession/DailySession";
+import EarnPartner from "./pages/Earn/EarnPartner";
 
 const App = () => {
-  const [showWelcome, setShowWelcome] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(true);
   const [airdrop, setAirdrop] = useState(false);
   const [isTelegram, setIsTelegram] = useState(null);
   const [username, setUsername] = useState("");
-  const [userData, setUserData] = useState({});
-  const [tasks, setTasks] = useState([]);
-  const [leaderboard, setLeaderboard] = useState([]);
-  const [userPosition, setUserPosition] = useState({});
+  const [userData, setUserData] = useState({
+    tasks: [],
+    completedTasks: [],
+    totalPoints: 0,
+    streakPoints: 0,
+    chestsPoints: 0,
+    tasksPoints: 0,
+    streakDay: 0,
+    lastStreakDate: null,
+    chestTimeStamp: null,
+  });
+  const [leaderboard, setLeaderboard] = useState({
+    player: {},
+    users: [],
+    userCount: 0,
+  });
   const [jwt, setJwt] = useState(null);
-  const [dailySession, setDailySession] = useState(false);
-  const [dailySessionData, setDailySessionData] = useState({});
+  const [dailySession, setDailySession] = useState(true);
   const [loadingClaim, setLoadingClaim] = useState(false);
   const [canClaim, setCanClaim] = useState(false);
   const [referralPoints, setReferralPoints] = useState(0);
   const [loadingChest, setLoadingChest] = useState(false);
   const [chestTimeStamp, setChestTimeStamp] = useState(null);
   const [canClaimHourly, setCanClaimHourly] = useState(false);
-  
-  // const [chestReward, setChestReward] = useState(0);
+
+  // const dummyTasks = [
+  //   {
+  //     partner: "world-of-dypians",
+  //     title: "Watch new WoD Video",
+  //     subtitle: "Watch and earn 500 points",
+  //     link: "https://www.youtube.com/watch?v=VTiIhZcXLSM",
+  //     type: "youtube",
+  //     action: "watch",
+  //     secretWord: "wod the best",
+  //     reward: 500,
+  //   },
+  //   {
+  //     partner: "world-of-dypians",
+  //     title: "Follow WoD on X",
+  //     subtitle: "Follow WoD on X and earn 750 points",
+  //     link: "https://twitter.com/worldofdypians",
+  //     type: "twitter",
+  //     action: "follow",
+  //     reward: 700,
+  //   },
+  //   {
+  //     partner: "openflux",
+  //     title: "Follow OpenFlux on X",
+  //     subtitle: "Follow OpenFlux on X and earn 750 points",
+  //     link: "https://x.com/OpenFluxNFT",
+  //     type: "twitter",
+  //     action: "follow",
+  //     reward: 700,
+  //   },
+  //   {
+  //     partner: "openflux",
+  //     title: "Join WoD On Telegram",
+  //     subtitle: "oin WoD On Telegram and earn 500 points",
+  //     link: "https://x.com/OpenFluxNFT",
+  //     type: "telegram",
+  //     action: "join",
+  //     groupId: "-1001542536650",
+  //     reward: 700,
+  //   },
+  // ];
+  // const dummyCompletedTasks = [
+  //   {
+  //     partner: "world-of-dypians",
+  //     title: "Watch new WoD Video",
+  //     subtitle: "Watch and earn 500 points",
+  //     link: "https://www.youtube.com/watch?v=VTiIhZcXLSM",
+  //     type: "youtube",
+  //     action: "watch",
+  //     secretWord: "wod the best",
+  //     reward: 500,
+  //   },
+  //   {
+  //     partner: "world-of-dypians",
+  //     title: "Follow WoD on X",
+  //     subtitle: "Follow WoD on X and earn 750 points",
+  //     link: "https://twitter.com/worldofdypians",
+  //     type: "twitter",
+  //     action: "follow",
+  //     reward: 700,
+  //   },
+  //   {
+  //     partner: "openflux",
+  //     title: "Follow OpenFlux on X",
+  //     subtitle: "Follow OpenFlux on X and earn 750 points",
+  //     link: "https://x.com/OpenFluxNFT",
+  //     type: "twitter",
+  //     action: "follow",
+  //     reward: 700,
+  //   },
+  //   {
+  //     partner: "openflux",
+  //     title: "Join WoD On Telegram",
+  //     subtitle: "oin WoD On Telegram and earn 500 points",
+  //     link: "https://x.com/OpenFluxNFT",
+  //     type: "telegram",
+  //     action: "join",
+  //     groupId: "-1001542536650",
+  //     reward: 700,
+  //   },
+  // ];
 
   const postToken = async (token) => {
     setLoadingChest(true);
@@ -53,16 +144,17 @@ const App = () => {
         body
       );
       // console.log(res);
-      setUserData(res.data.userData);
-      setTasks(res.data.userData.availableTasks);
-      setDailySessionData({
+      setUserData({
+        tasks: res.data.userData.availableTasks,
+        completedTasks: res.data.userData.completedTasks,
+        totalPoints: res.data.userData.totalPoints,
+        streakPoints: res.data.userData.streakPoints,
+        chestsPoints: res.data.userData.chestsPoints,
+        tasksPoints: res.data.userData.tasksPoints,
         streakDay: res.data.userData.streakDay,
         lastStreakDate: res.data.userData.lastStreakDate,
-        streakPoints: res.data.userData.streakPoints,
+        chestTimeStamp: Date.parse(res.data.userData.lastChestOpened) + 3600000,
       });
-      setChestTimeStamp(
-        Date.parse(res.data.userData.lastChestOpened) + 3600000
-      );
       setLoadingChest(false);
       const referredUsers = res.data.userData.referredUsers;
       const sumRewards = referredUsers.reduce(
@@ -110,8 +202,11 @@ const App = () => {
           token: token,
         }
       );
-      setLeaderboard(res.data.topUsers);
-      setUserPosition(res.data.userPosition);
+      setLeaderboard({
+        player: res.data.userPosition,
+        users: res.data.topUsers,
+        userCount: res.data.totalParticipants,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -128,6 +223,10 @@ const App = () => {
       );
       setLoadingChest(false);
       alert(res.data.pointsAwarded);
+      setUserData((prevState) => ({
+        ...prevState,
+        totalPoints: res.data.totalPoints,
+      }));
       setChestTimeStamp(Date.parse(res.data.nextChestAvailableAt));
       setCanClaimHourly(false);
     } catch (err) {
@@ -177,8 +276,8 @@ const App = () => {
   };
 
   useEffect(() => {
-    canClaimToday(dailySessionData.lastStreakDate);
-  }, [dailySessionData]);
+    canClaimToday(userData.lastStreakDate);
+  }, [userData.lastStreakDate]);
 
   useEffect(() => {
     const hasVisited = sessionStorage.getItem("hasVisited");
@@ -191,7 +290,6 @@ const App = () => {
 
   const handleClose = () => {
     setShowWelcome(false); // Hide the welcome screen when the user dismisses it
-    setDailySession(true);
   };
 
   useEffect(() => {
@@ -249,7 +347,7 @@ const App = () => {
             <Home
               username={username}
               referralPoints={referralPoints}
-              tasks={tasks?.slice(0, 4)}
+              tasks={userData.tasks.slice(0, 4)}
               userData={userData}
               jwt={jwt}
               handleCompleteTask={handleCompleteTask}
@@ -264,11 +362,7 @@ const App = () => {
         <Route
           path="/leaderboard"
           element={
-            <Leaderboard
-              username={username}
-              leaderboard={leaderboard}
-              userPosition={userPosition}
-            />
+            <Leaderboard username={username} leaderboard={leaderboard} />
           }
         />
         <Route
@@ -280,12 +374,12 @@ const App = () => {
             />
           }
         />
+        <Route path="/earn" element={<Earn />} />
         <Route
-          path="/earn"
+          path="/earn/:partnerId"
           element={
-            <Earn
-              tasks={tasks}
-              jwt={jwt}
+            <EarnPartner
+              tasks={userData.tasks}
               completedTasks={userData.completedTasks}
               handleCompleteTask={handleCompleteTask}
             />
@@ -297,7 +391,7 @@ const App = () => {
         show={dailySession}
         onClose={() => setDailySession(false)}
         canClaimToday={canClaim}
-        streakDay={dailySessionData?.streakDay}
+        streakDay={userData?.streakDay}
         claimDailySession={() => claimDailySession(jwt)}
         loadingClaim={loadingClaim}
       />

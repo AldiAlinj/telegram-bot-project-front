@@ -8,3 +8,24 @@
 .earn-wrapper::-webkit-scrollbar {
     display: none;
   }
+
+
+  .daily-opportunities-wrapper{
+    background-image: url('../../assets/userLeaderboardBg.svg');
+    background-size: 100% 100%;
+    border-radius: 10px;
+    text-decoration: none;
+  }
+
+  .daily-opportunities-wrapper img{
+    width: 30px;
+  }
+
+
+  .daily-opportunities-title{
+    color: #FFF;
+font-size: 14px;
+font-style: normal;
+font-weight: 800;
+line-height: normal;
+  }

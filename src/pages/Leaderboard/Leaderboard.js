@@ -5,7 +5,7 @@ import silverMedal from "../../assets/silverMedal.svg";
 import bronzeMedal from "../../assets/bronzeMedal.svg";
 import getFormattedNumber from "../../hooks/getFormattedNumber";
 
-const Leaderboard = ({ username, leaderboard, userPosition }) => {
+const Leaderboard = ({ username, leaderboard }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -25,36 +25,36 @@ const Leaderboard = ({ username, leaderboard, userPosition }) => {
               
             >
               <span className="name-initial">{username.slice(0, 1)}</span>
-              {/* <span className="name-initial">{username.slice(0, 1)}</span> */}
+            
             </div>
             <div className="d-flex flex-column">
               <h6 className="user-name mb-0" >
                 {username}
               </h6>
               <span className="user-score-amount">
-                {getFormattedNumber(userPosition?.points, 0)} Points
+                {getFormattedNumber(leaderboard.player?.points, 0)} Points
               </span>
             </div>
           </div>
-          {userPosition?.position === 1 ? (
+          {leaderboard.player?.position === 1 ? (
             <img src={goldMedal} alt="gold" />
-          ) : userPosition?.position === 2 ? (
+          ) : leaderboard.player?.position === 2 ? (
             <img src={silverMedal} alt="silver" />
-          ) : userPosition?.position === 3 ? (
+          ) : leaderboard.player?.position === 3 ? (
             <img src={bronzeMedal} alt="bronze" />
           ) : (
             <span className="user-rank">
-              #{userPosition?.position}
+              #{leaderboard.player?.position}
             </span>
           )}
         </div>
         <div className="d-flex mt-3 align-items-bottom justify-content-between">
-          <h6 className="mb-0 wod-total-holders">51,632,343 Holders</h6>
+          <h6 className="mb-0 wod-total-holders">{getFormattedNumber(leaderboard.userCount, 0)} Holders</h6>
           <span className="top-100">(Top 100)</span>
         </div>
       </div>
       <div className="players-leaderboard d-flex flex-column">
-        {leaderboard.map((item, index) => (
+        {leaderboard.users.map((item, index) => (
           <div
             key={index}
             className="leaderboard-item d-flex align-items-center justify-content-between px-3 py-2"

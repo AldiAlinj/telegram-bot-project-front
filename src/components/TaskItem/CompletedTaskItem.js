@@ -1,6 +1,7 @@
 import React from "react";
 import check from "../../assets/check.svg";
 import getFormattedNumber from "../../hooks/getFormattedNumber";
+import coin from '../../assets/dailySession/coin.png'
 
 const CompletedTaskItem = ({ item }) => {
   return (
@@ -9,7 +10,7 @@ const CompletedTaskItem = ({ item }) => {
     >
       <div className="d-flex align-items-center gap-2">
         <img
-          src={require(`../../assets/${item.type}.svg`)}
+          src={require(`../../assets/${item.type}Completed.svg`)}
           height={36}
           width={36}
           alt=""
@@ -21,15 +22,19 @@ const CompletedTaskItem = ({ item }) => {
           >
             {item.title}
           </span>
-          <span
-            className="home-task-reward"
-            style={{ textDecoration: "none", color: "#B9B3D8" }}
-          >
-            Reward: {getFormattedNumber(item.reward, 0)} points
-          </span>
+        
         </div>
       </div>
-      <img src={check} alt="" />
+      <div className="d-flex align-items-center gap-2">
+      <div className="d-flex align-items-center gap-2">
+        <div className="completed-reward-wrapper d-flex align-items-center gap-1">
+            <img src={coin} width={20} height={20} alt="" />
+            <span className="completed-reward-amount">+{getFormattedNumber(item.reward, 0)}</span>
+        </div>
+      
+      </div>
+        <img src={check} alt="" />
+      </div>
     </div>
   );
 };
