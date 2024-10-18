@@ -66,7 +66,6 @@ const App = () => {
         `https://api.worldofdypians.com/api/tg_auth`,
         body
       );
-      // console.log(res);
       setUserData({
         tasks: res.data.userData.availableTasks,
         completedTasks: res.data.userData.completedTasks,
