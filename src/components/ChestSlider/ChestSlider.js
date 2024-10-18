@@ -6,29 +6,93 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import chest0 from "../../assets/chestImages/chest0.png";
-import chest0open from '../../assets/chestImages/chest0open.png';
+import chest0open from "../../assets/chestImages/chest0open.png";
 import chest1 from "../../assets/chestImages/chest1.png";
-import chest1open from '../../assets/chestImages/chest1open.png';
+import chest1open from "../../assets/chestImages/chest1open.png";
 import chest2 from "../../assets/chestImages/chest2.png";
-import chest2open from '../../assets/chestImages/chest2open.png';
+import chest2open from "../../assets/chestImages/chest2open.png";
 import chest3 from "../../assets/chestImages/chest3.png";
-import chest3open from '../../assets/chestImages/chest3open.png';
+import chest3open from "../../assets/chestImages/chest3open.png";
 import chest4 from "../../assets/chestImages/chest4.png";
-import chest4open from '../../assets/chestImages/chest4open.png';
+import chest4open from "../../assets/chestImages/chest4open.png";
+import chest5 from "../../assets/chestImages/chest5.png";
+import chest5open from "../../assets/chestImages/chest5open.png";
+import chest6 from "../../assets/chestImages/chest6.png";
+import chest6open from "../../assets/chestImages/chest6open.png";
+import chest7 from "../../assets/chestImages/chest7.png";
+import chest7open from "../../assets/chestImages/chest7open.png";
+import chest8 from "../../assets/chestImages/chest8.png";
+import chest8open from "../../assets/chestImages/chest8open.png";
+import chest9 from "../../assets/chestImages/chest9.png";
+import chest9open from "../../assets/chestImages/chest9open.png";
+import chest10 from "../../assets/chestImages/chest10.png";
+import chest10open from "../../assets/chestImages/chest10open.png";
+import chest11 from "../../assets/chestImages/chest11.png";
+import chest11open from "../../assets/chestImages/chest11open.png";
 import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
 
 const ChestSlider = ({ onClaim, canClaimHourly }) => {
   const [chestIndex, setChestIndex] = useState(null);
-  const [activeIndex, setActiveIndex] = useState(0);  // Track the active slide index
+  const [activeIndex, setActiveIndex] = useState(0); // Track the active slide index
 
-  const claimChest = (index) => {
-    if (canClaimHourly && index === activeIndex) {
+  const claimChest = (id) => {
+    if (canClaimHourly && id === activeIndex) {
       onClaim();
-      sessionStorage.setItem("hasOpened", index);
-      const hasOpened = sessionStorage.getItem("hasOpened");
-      setChestIndex(hasOpened);
+      sessionStorage.setItem("hasOpened", id);
+      setChestIndex(id);
     }
   };
+
+  const chests = [
+    {
+      image: chest0,
+      openImage: chest0open,
+    },
+    {
+      image: chest1,
+      openImage: chest1open,
+    },
+    {
+      image: chest2,
+      openImage: chest2open,
+    },
+    {
+      image: chest3,
+      openImage: chest3open,
+    },
+    {
+      image: chest4,
+      openImage: chest4open,
+    },
+    {
+      image: chest5,
+      openImage: chest5open,
+    },
+    {
+      image: chest6,
+      openImage: chest6open,
+    },
+    {
+      image: chest7,
+      openImage: chest7open,
+    },
+    {
+      image: chest8,
+      openImage: chest8open,
+    },
+    {
+      image: chest9,
+      openImage: chest9open,
+    },
+    {
+      image: chest10,
+      openImage: chest10open,
+    },
+    {
+      image: chest11,
+      openImage: chest11open,
+    },
+  ];
 
   return (
     <div className="d-flex flex-column align-items-center gap-2 w-100">
@@ -46,61 +110,31 @@ const ChestSlider = ({ onClaim, canClaimHourly }) => {
         }}
         pagination={{ el: ".swiper-pagination", clickable: true }}
         navigation={{
-          nextEl: '.arrow-holder-next',
-          prevEl: '.arrow-holder-prev',
+          nextEl: ".arrow-holder-next",
+          prevEl: ".arrow-holder-prev",
           clickable: true,
         }}
         modules={[EffectCoverflow, Pagination, Navigation]}
-        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}  // Track the current slide index
+        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)} // Track the current slide index
         className="swiper_container"
       >
-        <SwiperSlide>
-          <img
-            src={chestIndex === 0 ? chest0open : chest0}
-            className={`${canClaimHourly && activeIndex === 0 ? "shake-img" : ""}`}
-            style={{ pointerEvents: canClaimHourly && activeIndex === 0 ? "auto" : "none" }}
-            onClick={() => claimChest(0)}
-            alt="chest0"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src={chestIndex === 1 ? chest1open : chest1}
-            className={`${canClaimHourly && activeIndex === 1 ? "shake-img" : ""}`}
-            style={{ pointerEvents: canClaimHourly && activeIndex === 1 ? "auto" : "none" }}
-            onClick={() => claimChest(1)}
-            alt="chest1"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src={chestIndex === 2 ? chest2open : chest2}
-            className={`${canClaimHourly && activeIndex === 2 ? "shake-img" : ""}`}
-            style={{ pointerEvents: canClaimHourly && activeIndex === 2 ? "auto" : "none" }}
-            onClick={() => claimChest(2)}
-            alt="chest2"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src={chestIndex === 3 ? chest3open : chest3}
-            className={`${canClaimHourly && activeIndex === 3 ? "shake-img" : ""}`}
-            style={{ pointerEvents: canClaimHourly && activeIndex === 3 ? "auto" : "none" }}
-            onClick={() => claimChest(3)}
-            alt="chest3"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src={chestIndex === 4 ? chest4open : chest4}
-            className={`${canClaimHourly && activeIndex === 4 ? "shake-img" : ""}`}
-            style={{ pointerEvents: canClaimHourly && activeIndex === 4 ? "auto" : "none" }}
-            onClick={() => claimChest(4)}
-            alt="chest4"
-          />
-        </SwiperSlide>
+        {chests.map((item, index) => (
+          <SwiperSlide key={index}>
+            <img
+              src={chestIndex === index || sessionStorage.getItem("hasOpened") === index ? item.openImage : item.image}
+              className={`${
+                canClaimHourly && activeIndex === index ? "shake-img" : ""
+              }`}
+              style={{
+                pointerEvents:
+                  canClaimHourly && activeIndex === index ? "auto" : "none",
+              }}
+              onClick={() => claimChest(index)}
+              alt={`chest${index}`}
+            />
+          </SwiperSlide>
+        ))}
       </Swiper>
-    
     </div>
   );
 };
