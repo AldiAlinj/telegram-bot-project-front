@@ -1,12 +1,99 @@
 .play-wrapper {
-    height: calc(-64px + 100vh);
-    overflow-y: scroll;
-    background-size: 100% 100%;
-    background: #FCFCFE;
-  }
+  height: calc(-64px + 100vh);
+  overflow-y: scroll;
+  background-size: 100% 100%;
+  background: #fcfcfe;
+}
 
-  .inner-play-banner{
-    height: 100%;
-    background-image: url('../../assets/blueBg.png');
-    background-size: 100% 100%;
-  }
+.inner-play-banner {
+  height: 100%;
+  background-image: url("../../assets/blueBg.png");
+  background-size: 100% 100%;
+}
+
+.play-page-button {
+  background: #fff;
+  border-radius: 100px;
+  width: 100%;
+  color: #5690ff;
+  text-align: center;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+  letter-spacing: 0.4px;
+  text-transform: capitalize;
+  border-bottom: 5px solid #8cb1ff;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  width: 75%;
+}
+
+.play-button-disabled{
+  background: #DFDCED;
+  color: #4F5F90;
+}
+
+.play-title {
+  color: #fff;
+  text-align: center;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 123.725%; /* 24.745px */
+  letter-spacing: 0.4px;
+}
+
+.play-desc {
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 123.725%; /* 14.847px */
+  letter-spacing: 0.4px;
+}
+
+.hourly-chest-reward {
+  height: fit-content;
+  width: 80%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: -1000px;
+  bottom: 0;
+  margin: auto;
+  background: #fff;
+  z-index: 1000;
+  border-radius: 10px;
+  transition: all 0.35s ease-in-out;
+}
+
+.hourly-reward-active {
+  box-shadow: 0 0 0 10000px rgba(0, 0, 0, 0.5);
+  top: 0;
+}
+
+.you-won-title {
+  color: #5690ff;
+  text-align: center;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 24px; /* 150% */
+  letter-spacing: 0.4px;
+}
+
+.chest-reward-wrapper {
+  border: 0.5px solid #e19836;
+  border-radius: 5px;
+}
+
+.chest-reward-amount {
+  color: #e19836;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}

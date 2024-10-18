@@ -18,7 +18,9 @@ const App = () => {
   const [showWelcome, setShowWelcome] = useState(true);
   const [airdrop, setAirdrop] = useState(false);
   const [isTelegram, setIsTelegram] = useState(null);
+  const [rewardPopup, setRewardPopup] = useState(false);
   const [username, setUsername] = useState("");
+  const [chestReward, setChestReward] = useState(0);
   const [userData, setUserData] = useState({
     tasks: [],
     completedTasks: [],
@@ -145,12 +147,13 @@ const App = () => {
         }
       );
       setLoadingChest(false);
-      alert(res.data.pointsAwarded);
+      setChestReward(res.data.pointsAwarded);
       setUserData((prevState) => ({
         ...prevState,
         totalPoints: res.data.totalPoints,
         chestTimeStamp: res.data.nextChestAvailableAt,
       }));
+      setRewardPopup(true);
       setCanClaimHourly(false);
     } catch (err) {
       console.log(err);
@@ -295,6 +298,9 @@ const App = () => {
               canClaimHourly={canClaimHourly}
               setCanClaimHourly={setCanClaimHourly}
               loadingChest={loadingChest}
+              rewardPopup={rewardPopup}
+              setRewardPopup={setRewardPopup}
+              chestReward={chestReward}
             />
           }
         />
