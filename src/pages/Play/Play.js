@@ -30,17 +30,10 @@ const Play = ({
   const onClaim = () => {
     openHourlyChest();
     setDisableAll(true);
-    if (chestTimeStamp !== null) {
-      setDisableAll(false);
-    }
+  
   };
 
-  useEffect(() => {
-    setDisableAll(true);
-    if (chestTimeStamp !== null) {
-      setDisableAll(false);
-    }
-  }, [chestTimeStamp, openHourlyChest, canClaimHourly]);
+
 
   return (
     <>
@@ -55,9 +48,8 @@ const Play = ({
             </span>
           </div>
           <ChestSlider onClaim={onClaim} canClaimHourly={canClaimHourly} />
-          {disableAll && (
             <button
-              className={`play-page-button play-button-disabled ${
+              className={`play-page-button ${
                 !canClaimHourly || loadingChest ? "play-button-disabled" : ""
               }  py-2 px-4`}
               disabled={!canClaimHourly || loadingChest}
@@ -81,7 +73,6 @@ const Play = ({
                 />
               )}
             </button>
-          )}
         </div>
       </div>
       <OutsideClickHandler onOutsideClick={() => setRewardPopup(false)}>
