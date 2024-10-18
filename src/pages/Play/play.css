@@ -1,6 +1,6 @@
 .play-wrapper {
   height: calc(-64px + 100vh);
-  overflow-y: scroll;
+  overflow: hidden;
   background-size: 100% 100%;
   background: #fcfcfe;
 }
