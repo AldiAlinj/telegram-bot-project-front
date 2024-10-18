@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./play.css";
 import Countdown from "react-countdown";
 import ChestSlider from "../../components/ChestSlider/ChestSlider";
@@ -25,11 +25,9 @@ const Play = ({
   setRewardPopup,
   chestReward,
 }) => {
-  const [disableAll, setDisableAll] = useState(false);
 
   const onClaim = () => {
     openHourlyChest();
-    setDisableAll(true);
   
   };
 
