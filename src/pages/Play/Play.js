@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./play.css";
 import Countdown from "react-countdown";
 import ChestSlider from "../../components/ChestSlider/ChestSlider";
@@ -25,13 +25,22 @@ const Play = ({
   setRewardPopup,
   chestReward,
 }) => {
+  const [disableAll, setDisableAll] = useState(false);
 
   const onClaim = () => {
     openHourlyChest();
-  
+    setDisableAll(true);
+    if (chestTimeStamp !== null) {
+      setDisableAll(false);
+    }
   };
 
-
+  useEffect(() => {
+    setDisableAll(true);
+    if (chestTimeStamp !== null) {
+      setDisableAll(false);
+    }
+  }, [chestTimeStamp, openHourlyChest, canClaimHourly]);
 
   return (
     <>
@@ -46,8 +55,9 @@ const Play = ({
             </span>
           </div>
           <ChestSlider onClaim={onClaim} canClaimHourly={canClaimHourly} />
+          {disableAll && (
             <button
-              className={`play-page-button ${
+              className={`play-page-button play-button-disabled ${
                 !canClaimHourly || loadingChest ? "play-button-disabled" : ""
               }  py-2 px-4`}
               disabled={!canClaimHourly || loadingChest}
@@ -71,6 +81,7 @@ const Play = ({
                 />
               )}
             </button>
+          )}
         </div>
       </div>
       <OutsideClickHandler onOutsideClick={() => setRewardPopup(false)}>
