@@ -40,7 +40,7 @@ const Play = ({
     if (chestTimeStamp !== null) {
       setDisableAll(false);
     }
-  }, [chestTimeStamp, openHourlyChest]);
+  }, [chestTimeStamp, openHourlyChest, canClaimHourly]);
 
   return (
     <>
