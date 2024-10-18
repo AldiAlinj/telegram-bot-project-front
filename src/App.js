@@ -244,6 +244,16 @@ const App = () => {
     }
   };
 
+
+  useEffect(() => {
+   if(userData.chestTimeStamp !== null){
+    setCanClaimHourly(true)
+   }else{
+    setCanClaimHourly(false);
+   }
+  }, [userData.chestTimeStamp])
+  
+
   if (!isTelegram) {
     return (
       <div
