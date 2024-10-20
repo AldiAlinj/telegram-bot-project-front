@@ -59,27 +59,40 @@ const Play = ({
             </span>
           </div>
           <ChestSlider onClaim={onClaim} canClaimHourly={canClaimHourly} />
-          {!disableAll && (
-          <button
-          className={`play-page-button ${
-            !canClaimHourly || loadingChest ? "play-page-button-disabled" : ""
-          } py-2 px-4`}
-          disabled={!canClaimHourly || loadingChest}
-        >
-          {loadingChest ? (
-            <div className="spinner-border spinner-border-sm text-info" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
-          ) : canClaimHourly ? (
-            "Ready to Claim"
+          {!disableAll ? (
+            <button
+              className={`play-page-button ${
+                !canClaimHourly || loadingChest
+                  ? "play-page-button-disabled"
+                  : ""
+              } py-2 px-4`}
+              disabled={!canClaimHourly || loadingChest}
+            >
+              {loadingChest ? (
+                <div
+                  className="spinner-border spinner-border-sm text-info"
+                  role="status"
+                >
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              ) : (
+                "Ready to Claim"
+              )}
+            </button>
           ) : (
-            <Countdown
-              renderer={renderer}
-              date={chestTimeStamp}
-              onComplete={() => setCanClaimHourly(true)}
-            />
-          )}
-        </button>
+            <button
+              className={`play-page-button play-page-button-disabled  py-2 px-4`}
+              disabled={true}
+            >
+              <Countdown
+                renderer={renderer}
+                date={chestTimeStamp}
+                onComplete={() => {
+                  setCanClaimHourly(true);
+                  setDisableAll(false);
+                }}
+              />
+            </button>
           )}
         </div>
       </div>
