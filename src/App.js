@@ -150,7 +150,7 @@ const App = () => {
       setUserData((prevState) => ({
         ...prevState,
         totalPoints: res.data.totalPoints,
-        chestTimeStamp: Date.parse(res.data.userData.lastChestOpened) + 300000,
+        chestTimeStamp: Date.parse(res.data.nextChestAvailableAt),
       }));
       setRewardPopup(true);
       setCanClaimHourly(false);
