@@ -74,7 +74,7 @@ const Play = ({
             >
               <Countdown
                 renderer={renderer}
-                date={new Date(chestTimeStamp.getTime() + 60 * 60 * 1000)}
+                date={new Date(chestTimeStamp.getTime() + 5 * 60 * 1000)}
                 onComplete={() => {
                   setCanClaimHourly(true);
                 }}

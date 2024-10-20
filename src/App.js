@@ -95,12 +95,14 @@ const App = () => {
   useEffect(() => {
     if (userData.chestTimeStamp) {
       const nextAvailableTime = new Date(
-        userData.chestTimeStamp.getTime() + 60 * 60 * 1000
+        userData.chestTimeStamp.getTime() + 5 * 60 * 1000
       );
       const now = new Date();
 
       if (now >= nextAvailableTime) {
         setCanClaimHourly(true);
+      }else{
+        setCanClaimHourly(false);
       }
     }
   }, [userData.chestTimeStamp]);
