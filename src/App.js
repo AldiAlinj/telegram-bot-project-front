@@ -75,7 +75,7 @@ const App = () => {
         tasksPoints: res.data.userData.tasksPoints,
         streakDay: res.data.userData.streakDay,
         lastStreakDate: res.data.userData.lastStreakDate,
-        chestTimeStamp: Date.parse(res.data.userData.lastChestOpened) + 3600000,
+        chestTimeStamp: Date.parse(res.data.userData.lastChestOpened) + 300000,
         referredUsers: res.data.userData.referredUsers,
         referralCode: res.data.userData.referralCode,
       });
@@ -150,7 +150,7 @@ const App = () => {
       setUserData((prevState) => ({
         ...prevState,
         totalPoints: res.data.totalPoints,
-        chestTimeStamp: res.data.nextChestAvailableAt,
+        chestTimeStamp: Date.parse(res.data.userData.lastChestOpened) + 300000,
       }));
       setRewardPopup(true);
       setCanClaimHourly(false);
