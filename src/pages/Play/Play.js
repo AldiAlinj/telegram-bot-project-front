@@ -34,13 +34,13 @@ const Play = ({
       setDisableAll(false);
     }
   };
-
   useEffect(() => {
-    setDisableAll(true);
-    if (chestTimeStamp !== null) {
-      setDisableAll(false);
+    if (chestTimeStamp !== null && Date.now() < chestTimeStamp) {
+      setDisableAll(true); // Disable if countdown is running
+    } else {
+      setDisableAll(false); // Enable if cooldown is over
     }
-  }, [chestTimeStamp, openHourlyChest]);
+  }, [chestTimeStamp]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -61,30 +61,25 @@ const Play = ({
           <ChestSlider onClaim={onClaim} canClaimHourly={canClaimHourly} />
           {!disableAll && (
           <button
-            className={`play-page-button ${
-              !canClaimHourly || loadingChest ? "play-page-button-disabled" : ""
-            }  py-2 px-4`}
-            disabled={!canClaimHourly || loadingChest}
-          >
-            {loadingChest ? (
-              <div
-                class="spinner-border spinner-border-sm text-info"
-                role="status"
-              >
-                <span class="visually-hidden">Loading...</span>
-              </div>
-            ) : canClaimHourly ? (
-              "Ready to Claim"
-            ) : (
-              <Countdown
-                renderer={renderer}
-                date={chestTimeStamp}
-                onComplete={() => {
-                  setCanClaimHourly(true);
-                }}
-              />
-            )}
-            </button>
+          className={`play-page-button ${
+            !canClaimHourly || loadingChest ? "play-page-button-disabled" : ""
+          } py-2 px-4`}
+          disabled={!canClaimHourly || loadingChest}
+        >
+          {loadingChest ? (
+            <div className="spinner-border spinner-border-sm text-info" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          ) : canClaimHourly ? (
+            "Ready to Claim"
+          ) : (
+            <Countdown
+              renderer={renderer}
+              date={chestTimeStamp}
+              onComplete={() => setCanClaimHourly(true)}
+            />
+          )}
+        </button>
           )}
         </div>
       </div>
