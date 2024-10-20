@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./play.css";
 import Countdown from "react-countdown";
 import ChestSlider from "../../components/ChestSlider/ChestSlider";
@@ -25,22 +25,10 @@ const Play = ({
   setRewardPopup,
   chestReward,
 }) => {
-  const [disableAll, setDisableAll] = useState(true);
-
   const onClaim = () => {
     openHourlyChest();
-    setDisableAll(true);
-    if (chestTimeStamp !== null) {
-      setDisableAll(false);
-    }
   };
-  useEffect(() => {
-    if (chestTimeStamp !== null && Date.now() < chestTimeStamp) {
-      setDisableAll(true); // Disable if countdown is running
-    } else {
-      setDisableAll(false); // Enable if cooldown is over
-    }
-  }, [chestTimeStamp]);
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -59,7 +47,7 @@ const Play = ({
             </span>
           </div>
           <ChestSlider onClaim={onClaim} canClaimHourly={canClaimHourly} />
-          {!disableAll ? (
+          {canClaimHourly ? (
             <button
               className={`play-page-button ${
                 !canClaimHourly || loadingChest
@@ -86,10 +74,9 @@ const Play = ({
             >
               <Countdown
                 renderer={renderer}
-                date={Date.now() + 3600000}
+                date={new Date(chestTimeStamp.getTime() + 60 * 60 * 1000)}
                 onComplete={() => {
                   setCanClaimHourly(true);
-                  setDisableAll(false);
                 }}
               />
             </button>

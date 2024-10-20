@@ -75,7 +75,7 @@ const App = () => {
         tasksPoints: res.data.userData.tasksPoints,
         streakDay: res.data.userData.streakDay,
         lastStreakDate: res.data.userData.lastStreakDate,
-        chestTimeStamp: Date.parse(res.data.userData.lastChestOpened) + 300000,
+        chestTimeStamp: new Date(res.data.userData.lastChestOpened),
         referredUsers: res.data.userData.referredUsers,
         referralCode: res.data.userData.referralCode,
       });
@@ -89,6 +89,44 @@ const App = () => {
       setJwt(res.data.JWT);
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    if (userData.chestTimeStamp) {
+      const nextAvailableTime = new Date(
+        userData.chestTimeStamp.getTime() + 60 * 60 * 1000
+      );
+      const now = new Date();
+
+      if (now >= nextAvailableTime) {
+        setCanClaimHourly(true);
+      }
+    }
+  }, [userData.chestTimeStamp]);
+
+  const openHourlyChest = async () => {
+    if (canClaimHourly) {
+      setLoadingChest(true);
+      try {
+        const res = await axios.post(
+          `https://api.worldofdypians.com/api/open-chest`,
+          {
+            token: jwt,
+          }
+        );
+        setLoadingChest(false);
+        setChestReward(res.data.pointsAwarded);
+        setUserData((prevState) => ({
+          ...prevState,
+          totalPoints: res.data.totalPoints,
+          chestTimeStamp: new Date(res.data.lastChestOpened),
+        }));
+        setRewardPopup(true);
+        setCanClaimHourly(false);
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
@@ -131,29 +169,6 @@ const App = () => {
         users: res.data.topUsers,
         userCount: res.data.totalParticipants,
       });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const openHourlyChest = async () => {
-    setLoadingChest(true);
-    try {
-      const res = await axios.post(
-        `https://api.worldofdypians.com/api/open-chest`,
-        {
-          token: jwt,
-        }
-      );
-      setLoadingChest(false);
-      setChestReward(res.data.pointsAwarded);
-      setUserData((prevState) => ({
-        ...prevState,
-        totalPoints: res.data.totalPoints,
-        chestTimeStamp: Date.parse(res.data.nextChestAvailableAt),
-      }));
-      setRewardPopup(true);
-      setCanClaimHourly(false);
     } catch (err) {
       console.log(err);
     }
@@ -243,15 +258,13 @@ const App = () => {
     }
   };
 
-
   useEffect(() => {
-   if(userData.chestTimeStamp !== null){
-    setCanClaimHourly(true)
-   }else{
-    setCanClaimHourly(false);
-   }
-  }, [userData.chestTimeStamp])
-  
+    if (userData.chestTimeStamp !== null) {
+      setCanClaimHourly(true);
+    } else {
+      setCanClaimHourly(false);
+    }
+  }, [userData.chestTimeStamp]);
 
   if (!isTelegram) {
     return (
