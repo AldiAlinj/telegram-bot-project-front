@@ -105,7 +105,7 @@ const App = () => {
       } else {
         setCanClaimHourly(false);
       }
-    } else setCanClaimHourly(true);
+    }
   }, [userData.chestTimeStamp]);
 
   const openHourlyChest = async () => {
