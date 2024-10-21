@@ -30,9 +30,9 @@
   width: 75%;
 }
 
-.play-button-disabled{
-  background: #DFDCED;
-  color: #4F5F90;
+.play-page-button-disabled{
+  background: #DFDCED !important;
+  color: #4F5F90 !important;
 }
 
 .play-title {
@@ -97,3 +97,4 @@
   font-weight: 400;
   line-height: normal;
 }
+
