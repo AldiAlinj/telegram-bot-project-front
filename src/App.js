@@ -126,7 +126,6 @@ const App = () => {
           chestTimeStamp: new Date(res.data.nextChestAvailableAt).getTime(),
         }));
         alert(new Date(res.data.nextChestAvailableAt).getTime() + 'timeeeeeee');
-
         setRewardPopup(true);
         setCanClaimHourly(false);
       } catch (err) {
@@ -263,13 +262,13 @@ const App = () => {
     }
   };
 
-  useEffect(() => {
-    if (userData.chestTimeStamp) {
-      setCanClaimHourly(true);
-    } else {
-      setCanClaimHourly(false);
-    }
-  }, [userData.chestTimeStamp]);
+  // useEffect(() => {
+  //   if (userData.chestTimeStamp) {
+  //     setCanClaimHourly(true);
+  //   } else {
+  //     setCanClaimHourly(false);
+  //   }
+  // }, [userData.chestTimeStamp]);
 
   if (!isTelegram) {
     return (
