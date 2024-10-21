@@ -76,7 +76,7 @@ const App = () => {
         streakDay: res.data.userData.streakDay,
         lastStreakDate: res.data.userData.lastStreakDate,
         chestTimeStamp:
-          new Date(res.data.userData.lastChestOpened) + 5 * 60 * 1000,
+          new Date(new Date(res.data.userData.lastChestOpened).toLocaleString()) + 5 * 60 * 1000,
         referredUsers: res.data.userData.referredUsers,
         referralCode: res.data.userData.referralCode,
       });
@@ -123,7 +123,7 @@ const App = () => {
         setUserData((prevState) => ({
           ...prevState,
           totalPoints: res.data.totalPoints,
-          chestTimeStamp: new Date(res.data.nextChestAvailableAt),
+          chestTimeStamp: new Date(new Date(res.data.nextChestAvailableAt).toLocaleString()),
         }));
         alert(res.data.nextChestAvailableAt);
 
@@ -209,12 +209,12 @@ const App = () => {
       setCanClaim(true);
     } else {
       const now = new Date();
-      const lastDate = new Date(lastStreakDate);
-
-      lastDate.setUTCHours(0, 0, 0, 0);
+      const lastDate = new Date(lastStreakDate).toLocaleString();
+      const localDateObject = new Date(lastDate)
+      localDateObject.setUTCHours(0, 0, 0, 0);
       now.setUTCHours(0, 0, 0, 0);
 
-      if (now > lastDate) {
+      if (now.getTime() > localDateObject.getTime()) {
         setCanClaim(true);
       } else {
         setCanClaim(false);
