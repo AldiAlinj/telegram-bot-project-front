@@ -72,7 +72,7 @@ const Play = ({
             >
               <Countdown
                 renderer={renderer}
-                date={new Date(chestTimeStamp)}
+                date={chestTimeStamp}
                 onComplete={() => {
                   setCanClaimHourly(true);
                 }}
