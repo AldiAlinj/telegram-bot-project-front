@@ -106,27 +106,30 @@ const App = () => {
   }, [userData.chestTimeStamp]);
 
   const openHourlyChest = async () => {
-    if (canClaimHourly) {
-      setLoadingChest(true);
-      try {
-        const res = await axios.post(
-          `https://api.worldofdypians.com/api/open-chest`,
-          {
-            token: jwt,
-          }
-        );
-        setLoadingChest(false);
-        setChestReward(res.data.pointsAwarded);
-        setUserData((prevState) => ({
-          ...prevState,
-          totalPoints: res.data.totalPoints,
-          chestTimeStamp: new Date(res.data.nextChestAvailableAt).getTime(),
-        }));
-        setCanClaimHourly(false);
-      } catch (err) {
-        console.log(err);
+    setLoadingChest(true);
+
+    setTimeout(async() => {    
+      if (canClaimHourly) {
+        try {
+          const res = await axios.post(
+            `https://api.worldofdypians.com/api/open-chest`,
+            {
+              token: jwt,
+            }
+          );
+          setLoadingChest(false);
+          setChestReward(res.data.pointsAwarded);
+          setUserData((prevState) => ({
+            ...prevState,
+            totalPoints: res.data.totalPoints,
+            chestTimeStamp: new Date(res.data.nextChestAvailableAt).getTime(),
+          }));
+          setCanClaimHourly(false);
+        } catch (err) {
+          console.log(err);
+        }
       }
-    }
+    }, 2500);
   };
 
   const fetchAllData = useCallback(() => {
@@ -260,24 +263,24 @@ const App = () => {
   };
 
 
-  if (!isTelegram) {
-    return (
-      <div
-        className={`d-flex  justify-content-center align-items-center`}
-        style={{ height: "100vh", width: "100vw" }}
-      >
-        <div className="d-flex flex-column align-items-center justify-content-center gap-2">
-          <h1 className="use-telegram-title mb-0">Page available on</h1>
-          <a
-            href="https://t.me/AldiTestBot_bot/AldiTestBot"
-            className="use-telegram-title"
-          >
-            Telegram
-          </a>
-        </div>
-      </div>
-    );
-  }
+  // if (!isTelegram) {
+  //   return (
+  //     <div
+  //       className={`d-flex  justify-content-center align-items-center`}
+  //       style={{ height: "100vh", width: "100vw" }}
+  //     >
+  //       <div className="d-flex flex-column align-items-center justify-content-center gap-2">
+  //         <h1 className="use-telegram-title mb-0">Page available on</h1>
+  //         <a
+  //           href="https://t.me/AldiTestBot_bot/AldiTestBot"
+  //           className="use-telegram-title"
+  //         >
+  //           Telegram
+  //         </a>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div

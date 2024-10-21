@@ -141,6 +141,8 @@ const ChestSlider = ({ onClaim, canClaimHourly, reward }) => {
                 style={{
                   pointerEvents:
                     canClaimHourly && activeIndex === index ? "auto" : "none",
+                  scale:
+                    canClaimHourly && activeIndex === index ? "1.2" : "1",
                 }}
                 onClick={() => claimChest(index)}
                 alt={`chest${index}`}
