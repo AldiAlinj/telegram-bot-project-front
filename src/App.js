@@ -95,9 +95,7 @@ const App = () => {
 
   useEffect(() => {
     if (userData.chestTimeStamp) {
-      const nextAvailableTime = new Date(
-        userData.chestTimeStamp.getTime() + 5 * 60 * 1000
-      );
+      const nextAvailableTime = userData.chestTimeStamp.getTime() + 5 * 60 * 1000;
       const now = new Date();
 
       if (now >= nextAvailableTime) {

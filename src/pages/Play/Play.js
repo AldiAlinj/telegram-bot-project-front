@@ -25,6 +25,8 @@ const Play = ({
   setRewardPopup,
   chestReward,
 }) => {
+
+
   const onClaim = () => {
     openHourlyChest();
   };
@@ -74,7 +76,7 @@ const Play = ({
             >
               <Countdown
                 renderer={renderer}
-                date={new Date(chestTimeStamp.getTime() + 5 * 60 * 1000)}
+                date={chestTimeStamp.getTime() + 5 * 60 * 1000}
                 onComplete={() => {
                   setCanClaimHourly(true);
                 }}
