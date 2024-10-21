@@ -18,6 +18,7 @@ const App = () => {
   const [showWelcome, setShowWelcome] = useState(true);
   const [airdrop, setAirdrop] = useState(false);
   const [isTelegram, setIsTelegram] = useState();
+  const [rewardPopup, setRewardPopup] = useState(false);
   const [username, setUsername] = useState("");
   const [chestReward, setChestReward] = useState(0);
   const [userData, setUserData] = useState({
@@ -79,6 +80,7 @@ const App = () => {
         referredUsers: res.data.userData.referredUsers,
         referralCode: res.data.userData.referralCode,
       });
+      alert(new Date(res.data.userData.lastChestOpened).getTime() + 300000);
       setLoadingChest(false);
       const referredUsers = res.data.userData.referredUsers;
       const sumRewards = referredUsers.reduce(
@@ -122,9 +124,12 @@ const App = () => {
           totalPoints: res.data.totalPoints,
           chestTimeStamp: new Date(res.data.nextChestAvailableAt).getTime(),
         }));
+        alert(new Date(res.data.nextChestAvailableAt).getTime() + "timeeeeeee");
+        setRewardPopup(true);
         setCanClaimHourly(false);
       } catch (err) {
         console.log(err);
+        alert(err?.toString());
       }
     }
   };
@@ -259,32 +264,32 @@ const App = () => {
     }
   };
 
-  useEffect(() => {
-    if (userData.chestTimeStamp) {
-      setCanClaimHourly(true);
-    } else {
-      setCanClaimHourly(false);
-    }
-  }, [userData.chestTimeStamp]);
+  // useEffect(() => {
+  //   if (userData.chestTimeStamp) {
+  //     setCanClaimHourly(true);
+  //   } else {
+  //     setCanClaimHourly(false);
+  //   }
+  // }, [userData.chestTimeStamp]);
 
-  if (!isTelegram) {
-    return (
-      <div
-        className={`d-flex  justify-content-center align-items-center`}
-        style={{ height: "100vh", width: "100vw" }}
-      >
-        <div className="d-flex flex-column align-items-center justify-content-center gap-2">
-          <h1 className="use-telegram-title mb-0">Page available on</h1>
-          <a
-            href="https://t.me/AldiTestBot_bot/AldiTestBot"
-            className="use-telegram-title"
-          >
-            Telegram
-          </a>
-        </div>
-      </div>
-    );
-  }
+  // if (!isTelegram) {
+  //   return (
+  //     <div
+  //       className={`d-flex  justify-content-center align-items-center`}
+  //       style={{ height: "100vh", width: "100vw" }}
+  //     >
+  //       <div className="d-flex flex-column align-items-center justify-content-center gap-2">
+  //         <h1 className="use-telegram-title mb-0">Page available on</h1>
+  //         <a
+  //           href="https://t.me/AldiTestBot_bot/AldiTestBot"
+  //           className="use-telegram-title"
+  //         >
+  //           Telegram
+  //         </a>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div
@@ -323,7 +328,8 @@ const App = () => {
                   canClaimHourly={canClaimHourly}
                   setCanClaimHourly={setCanClaimHourly}
                   loadingChest={loadingChest}
-  
+                  rewardPopup={rewardPopup}
+                  setRewardPopup={setRewardPopup}
                   chestReward={chestReward}
                 />
               }
