@@ -188,6 +188,7 @@ const App = () => {
         totalPoints: res.data.totalPoints,
         streakDay: res.data.streakDay,
       }));
+      setCanClaim(false);
     } catch (err) {
       console.log(err);
     }
