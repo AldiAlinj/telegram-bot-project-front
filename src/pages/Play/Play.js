@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
 import "./play.css";
-import Countdown from "react-countdown";
+// import Countdown from "react-countdown";
 import ChestSlider from "../../components/ChestSlider/ChestSlider";
 import OutsideClickHandler from "react-outside-click-handler";
 import coin from "../../assets/dailySession/coin.png";
 import getFormattedNumber from "../../hooks/getFormattedNumber";
 import closeReward from "../../assets/closeReward.svg";
 
-const renderer = ({ hours, minutes }) => {
-  return (
-    <span className="time-left">
-      {hours}:{minutes}
-    </span>
-  );
-};
+// const renderer = ({ hours, minutes }) => {
+//   return (
+//     <span className="time-left">
+//       {hours}:{minutes}
+//     </span>
+//   );
+// };
 
 const Play = ({
   openHourlyChest,
