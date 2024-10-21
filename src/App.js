@@ -100,7 +100,7 @@ const App = () => {
         userData.chestTimeStamp;
       const now = new Date();
 
-      if (now >= nextAvailableTime) {
+      if (now.getTime() >= nextAvailableTime) {
         setCanClaimHourly(true);
       } else {
         setCanClaimHourly(false);
