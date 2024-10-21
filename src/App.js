@@ -75,7 +75,8 @@ const App = () => {
         tasksPoints: res.data.userData.tasksPoints,
         streakDay: res.data.userData.streakDay,
         lastStreakDate: res.data.userData.lastStreakDate,
-        chestTimeStamp: new Date(res.data.userData.lastChestOpened),
+        chestTimeStamp:
+          new Date(res.data.userData.lastChestOpened) + 5 * 60 * 1000,
         referredUsers: res.data.userData.referredUsers,
         referralCode: res.data.userData.referralCode,
       });
@@ -94,9 +95,9 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (userData.chestTimeStamp ) {
+    if (userData.chestTimeStamp) {
       const nextAvailableTime =
-        userData.chestTimeStamp.getTime() + 5 * 60 * 1000;
+        userData.chestTimeStamp;
       const now = new Date();
 
       if (now >= nextAvailableTime) {
@@ -122,9 +123,9 @@ const App = () => {
         setUserData((prevState) => ({
           ...prevState,
           totalPoints: res.data.totalPoints,
-          chestTimeStamp: new Date(res.data.lastChestOpened),
+          chestTimeStamp: new Date(res.data.nextChestAvailableAt),
         }));
-        alert(res.data.userData.lastChestOpened);
+        alert(res.data.userData.nextChestAvailableAt);
 
         setRewardPopup(true);
         setCanClaimHourly(false);
