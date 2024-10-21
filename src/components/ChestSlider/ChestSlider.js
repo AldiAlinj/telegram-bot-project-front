@@ -30,11 +30,12 @@ import chest10open from "../../assets/chestImages/chest10open.png";
 import chest11 from "../../assets/chestImages/chest11.png";
 import chest11open from "../../assets/chestImages/chest11open.png";
 import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
+import getFormattedNumber from "../../hooks/getFormattedNumber";
 
-const ChestSlider = ({ onClaim, canClaimHourly }) => {
+const ChestSlider = ({ onClaim, canClaimHourly, reward }) => {
   const [chestIndex, setChestIndex] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  
+
   const claimChest = (id) => {
     if (canClaimHourly && id === activeIndex) {
       onClaim();
@@ -120,23 +121,31 @@ const ChestSlider = ({ onClaim, canClaimHourly }) => {
       >
         {chests.map((item, index) => (
           <SwiperSlide key={index}>
-            <img
-              src={
-                chestIndex === index ||
-                sessionStorage.getItem("hasOpened") === index
-                  ? item.openImage
-                  : item.image
-              }
-              className={`${
-                canClaimHourly && activeIndex === index ? "shake-img" : ""
-              }`}
-              style={{
-                pointerEvents:
-                  canClaimHourly && activeIndex === index ? "auto" : "none",
-              }}
-              onClick={() => claimChest(index)}
-              alt={`chest${index}`}
-            />
+            <div className="position-relative">
+              {chestIndex === index && reward > 0 ? (
+                <div className="d-flex flex-column align-items-center prize-position">
+                  <span className="text-white">You won</span>
+                  <div className="won-reward">{getFormattedNumber(reward, 0)} Points</div>
+                </div>
+              ) : (
+                <></>
+              )}
+              <img
+                src={
+                  chestIndex === index ||
+                  sessionStorage.getItem("hasOpened") === index
+                    ? item.openImage
+                    : item.image
+                }
+                className={`${canClaimHourly ? "shake-img" : ""}`}
+                style={{
+                  pointerEvents:
+                    canClaimHourly && activeIndex === index ? "auto" : "none",
+                }}
+                onClick={() => claimChest(index)}
+                alt={`chest${index}`}
+              />
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>

@@ -18,7 +18,6 @@ const App = () => {
   const [showWelcome, setShowWelcome] = useState(true);
   const [airdrop, setAirdrop] = useState(false);
   const [isTelegram, setIsTelegram] = useState();
-  const [rewardPopup, setRewardPopup] = useState(false);
   const [username, setUsername] = useState("");
   const [chestReward, setChestReward] = useState(0);
   const [userData, setUserData] = useState({
@@ -80,7 +79,6 @@ const App = () => {
         referredUsers: res.data.userData.referredUsers,
         referralCode: res.data.userData.referralCode,
       });
-      alert( new Date(res.data.userData.lastChestOpened).getTime() + 300000);
       setLoadingChest(false);
       const referredUsers = res.data.userData.referredUsers;
       const sumRewards = referredUsers.reduce(
@@ -96,8 +94,7 @@ const App = () => {
 
   useEffect(() => {
     if (userData.chestTimeStamp) {
-      const nextAvailableTime =
-        userData.chestTimeStamp;
+      const nextAvailableTime = userData.chestTimeStamp;
       const now = new Date();
 
       if (now.getTime() >= nextAvailableTime) {
@@ -125,12 +122,9 @@ const App = () => {
           totalPoints: res.data.totalPoints,
           chestTimeStamp: new Date(res.data.nextChestAvailableAt).getTime(),
         }));
-        alert(new Date(res.data.nextChestAvailableAt).getTime() + 'timeeeeeee');
-        setRewardPopup(true);
         setCanClaimHourly(false);
       } catch (err) {
         console.log(err);
-        alert(err?.toString());
       }
     }
   };
@@ -192,6 +186,7 @@ const App = () => {
       setUserData((prevState) => ({
         ...prevState,
         totalPoints: res.data.totalPoints,
+        streakDay: res.data.streakDay,
       }));
     } catch (err) {
       console.log(err);
@@ -208,7 +203,7 @@ const App = () => {
       setCanClaim(true);
     } else {
       const now = new Date();
-      const lastDate = new Date(lastStreakDate)
+      const lastDate = new Date(lastStreakDate);
       lastDate.setUTCHours(0, 0, 0, 0);
       now.setUTCHours(0, 0, 0, 0);
 
@@ -256,19 +251,21 @@ const App = () => {
       setUserData((prevState) => ({
         ...prevState,
         totalPoints: res.data.totalPoints,
+        tasks: res.data.availableTasks,
+        completedTasks: res.data.completedTasks,
       }));
     } catch (err) {
       console.log(err);
     }
   };
 
-  // useEffect(() => {
-  //   if (userData.chestTimeStamp) {
-  //     setCanClaimHourly(true);
-  //   } else {
-  //     setCanClaimHourly(false);
-  //   }
-  // }, [userData.chestTimeStamp]);
+  useEffect(() => {
+    if (userData.chestTimeStamp) {
+      setCanClaimHourly(true);
+    } else {
+      setCanClaimHourly(false);
+    }
+  }, [userData.chestTimeStamp]);
 
   if (!isTelegram) {
     return (
@@ -296,72 +293,75 @@ const App = () => {
       }`}
     >
       <GetStarted showWelcome={showWelcome} onClose={handleClose} />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              username={username}
-              referralPoints={referralPoints}
-              tasks={userData.tasks.slice(0, 4)}
-              userData={userData}
-              handleCompleteTask={handleCompleteTask}
+      {!showWelcome && (
+        <>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Home
+                  username={username}
+                  referralPoints={referralPoints}
+                  tasks={userData.tasks.slice(0, 4)}
+                  userData={userData}
+                  handleCompleteTask={handleCompleteTask}
+                />
+              }
             />
-          }
-        />
-        <Route
-          path="/leaderboard"
-          element={
-            <Leaderboard username={username} leaderboard={leaderboard} />
-          }
-        />
-        <Route
-          path="/play"
-          element={
-            <Play
-              openHourlyChest={openHourlyChest}
-              chestTimeStamp={userData.chestTimeStamp}
-              canClaimHourly={canClaimHourly}
-              setCanClaimHourly={setCanClaimHourly}
-              loadingChest={loadingChest}
-              rewardPopup={rewardPopup}
-              setRewardPopup={setRewardPopup}
-              chestReward={chestReward}
+            <Route
+              path="/leaderboard"
+              element={
+                <Leaderboard username={username} leaderboard={leaderboard} />
+              }
             />
-          }
-        />
-        <Route
-          path="/friends"
-          element={
-            <Friends
-              referredUsers={userData.referredUsers}
-              referralCode={userData.referralCode}
+            <Route
+              path="/play"
+              element={
+                <Play
+                  openHourlyChest={openHourlyChest}
+                  chestTimeStamp={userData.chestTimeStamp}
+                  canClaimHourly={canClaimHourly}
+                  setCanClaimHourly={setCanClaimHourly}
+                  loadingChest={loadingChest}
+  
+                  chestReward={chestReward}
+                />
+              }
             />
-          }
-        />
-        <Route path="/earn" element={<Earn />} />
-        <Route
-          path="/earn/:partnerId"
-          element={
-            <EarnPartner
-              tasks={userData.tasks}
-              completedTasks={userData.completedTasks}
-              handleCompleteTask={handleCompleteTask}
+            <Route
+              path="/friends"
+              element={
+                <Friends
+                  referredUsers={userData.referredUsers}
+                  referralCode={userData.referralCode}
+                />
+              }
             />
-          }
-        />
-        <Route path="/airdrop" element={<Airdrop />} />
-      </Routes>
-      <DailySession
-        show={dailySession}
-        onClose={() => setDailySession(false)}
-        canClaimToday={canClaim}
-        streakDay={userData?.streakDay}
-        claimDailySession={() => claimDailySession(jwt)}
-        loadingClaim={loadingClaim}
-      />
-      <ComingSoon show={airdrop} onClose={() => setAirdrop(false)} />
-      <Navbar showAirdrop={() => setAirdrop(true)} />
+            <Route path="/earn" element={<Earn />} />
+            <Route
+              path="/earn/:partnerId"
+              element={
+                <EarnPartner
+                  tasks={userData.tasks}
+                  completedTasks={userData.completedTasks}
+                  handleCompleteTask={handleCompleteTask}
+                />
+              }
+            />
+            <Route path="/airdrop" element={<Airdrop />} />
+          </Routes>
+          <DailySession
+            show={dailySession}
+            onClose={() => setDailySession(false)}
+            canClaimToday={canClaim}
+            streakDay={userData?.streakDay}
+            claimDailySession={() => claimDailySession(jwt)}
+            loadingClaim={loadingClaim}
+          />
+          <ComingSoon show={airdrop} onClose={() => setAirdrop(false)} />
+          <Navbar showAirdrop={() => setAirdrop(true)} />
+        </>
+      )}
     </div>
   );
 };

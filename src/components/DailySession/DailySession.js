@@ -56,7 +56,7 @@ const DailySession = ({
           </div>
        <div className="daily-session-lower-wrapper d-flex flex-column gap-2">
        <div className="d-flex flex-column gap-2 align-items-center">
-          <h6 className="mb-0 daily-streak-amount">2</h6>
+          <h6 className="mb-0 daily-streak-amount">{streakDay}</h6>
           <span className="daily-streak-span">Daily Streak</span>
           <p className="daily-streak-desc mb-0">
             Earn points by logging into the game daily

@@ -98,24 +98,46 @@
 @keyframes shake {
   0% {
     transform: rotate(10deg);
-    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6)) 
-            drop-shadow(0 0 20px rgba(255, 215, 0, 0.5)) 
-            drop-shadow(0 0 30px rgba(255, 215, 0, 0.4)) 
-            drop-shadow(0 0 40px rgba(255, 215, 0, 0.3)); /* Initial golden shine */
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6))
+      drop-shadow(0 0 20px rgba(255, 215, 0, 0.5))
+      drop-shadow(0 0 30px rgba(255, 215, 0, 0.4))
+      drop-shadow(0 0 40px rgba(255, 215, 0, 0.3)); /* Initial golden shine */
   }
   50% {
     transform: rotate(-10deg);
-    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.7)) 
-            drop-shadow(0 0 25px rgba(255, 215, 0, 0.6)) 
-            drop-shadow(0 0 35px rgba(255, 215, 0, 0.5)) 
-            drop-shadow(0 0 45px rgba(255, 215, 0, 0.4)); /* Increase the shine */
+    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.7))
+      drop-shadow(0 0 25px rgba(255, 215, 0, 0.6))
+      drop-shadow(0 0 35px rgba(255, 215, 0, 0.5))
+      drop-shadow(0 0 45px rgba(255, 215, 0, 0.4)); /* Increase the shine */
   }
   100% {
     transform: rotate(10deg);
-    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6)) 
-            drop-shadow(0 0 20px rgba(255, 215, 0, 0.5)) 
-            drop-shadow(0 0 30px rgba(255, 215, 0, 0.4)) 
-            drop-shadow(0 0 40px rgba(255, 215, 0, 0.3)); /* Return to initial shine */
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6))
+      drop-shadow(0 0 20px rgba(255, 215, 0, 0.5))
+      drop-shadow(0 0 30px rgba(255, 215, 0, 0.4))
+      drop-shadow(0 0 40px rgba(255, 215, 0, 0.3)); /* Return to initial shine */
   }
 }
 
+.prize-position {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 20px;
+  margin: auto;
+  width: fit-content;
+  z-index: 5;
+
+}
+
+.won-reward {
+  color: #ffdc73;
+  text-align: center;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 24px; /* 150% */
+  letter-spacing: 0.4px;
+  text-shadow: 2px 2px #bf9b30;
+  filter: drop-shadow(0 0px 3px #bf9b30);
+}
