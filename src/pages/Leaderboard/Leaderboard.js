@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./leaderboard.css";
 import goldMedal from "../../assets/goldMedal.svg";
 import silverMedal from "../../assets/silverMedal.svg";
@@ -6,6 +6,10 @@ import bronzeMedal from "../../assets/bronzeMedal.svg";
 import getFormattedNumber from "../../hooks/getFormattedNumber";
 
 const Leaderboard = ({ username, leaderboard }) => {
+
+  const [type, setType] = useState("global")
+
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -31,6 +35,7 @@ const Leaderboard = ({ username, leaderboard }) => {
                 {getFormattedNumber(leaderboard.player?.points, 0)} Points
               </span>
             </div>
+           
           </div>
           {leaderboard.player?.position === 1 ? (
             <img src={goldMedal} alt="gold" />
@@ -48,6 +53,15 @@ const Leaderboard = ({ username, leaderboard }) => {
           <h6 className="mb-0 wod-total-holders">{getFormattedNumber(leaderboard.userCount, 0)} Holders</h6>
           <span className="top-100">(Top 100)</span>
         </div>
+        <div className="leaderboard-tabs position-relative mb-3  d-flex align-items-center justify-content-between w-100">
+              <div className={`leaderboard-tab-bg ${type === "weekly" && "move-1"}`}></div>
+              <div className="leaderboard-tab p-2 d-flex align-items-center justify-content-center w-50 h-100" onClick={() => setType("global")}>
+                <span className={`leaderboard-tab-title ${type === "global" && "leaderboard-tab-title-active"}`}>Global</span>
+              </div>
+              <div className="leaderboard-tab p-2 d-flex align-items-center justify-content-center w-50 h-100" onClick={() => setType("weekly")}>
+                <span className={`leaderboard-tab-title ${type === "weekly" && "leaderboard-tab-title-active"}`}>Weekly</span>
+              </div>
+            </div>
       </div>
       <div className="players-leaderboard d-flex flex-column">
         {leaderboard.users.map((item, index) => (
