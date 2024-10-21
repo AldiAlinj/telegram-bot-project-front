@@ -76,11 +76,11 @@ const App = () => {
         streakDay: res.data.userData.streakDay,
         lastStreakDate: res.data.userData.lastStreakDate,
         chestTimeStamp:
-          new Date(new Date(res.data.userData.lastChestOpened).toLocaleString()) + 5 * 60 * 1000,
+          new Date(new Date(res.data.userData.lastChestOpened).toLocaleString()).getTime() + 5 * 60 * 1000,
         referredUsers: res.data.userData.referredUsers,
         referralCode: res.data.userData.referralCode,
       });
-      alert(new Date(new Date(res.data.userData.lastChestOpened).toLocaleString()) + 5 * 60 * 1000);
+      alert(new Date(new Date(res.data.userData.lastChestOpened).toLocaleString()).getTime() + 5 * 60 * 1000);
       setLoadingChest(false);
       const referredUsers = res.data.userData.referredUsers;
       const sumRewards = referredUsers.reduce(
@@ -123,7 +123,7 @@ const App = () => {
         setUserData((prevState) => ({
           ...prevState,
           totalPoints: res.data.totalPoints,
-          chestTimeStamp: new Date(new Date(res.data.nextChestAvailableAt).toLocaleString()),
+          chestTimeStamp: new Date(new Date(res.data.nextChestAvailableAt).toLocaleString()).getTime(),
         }));
         alert(new Date(new Date(res.data.nextChestAvailableAt).toLocaleString()));
 
