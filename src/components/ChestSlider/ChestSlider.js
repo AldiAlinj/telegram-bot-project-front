@@ -32,7 +32,7 @@ import chest11open from "../../assets/chestImages/chest11open.png";
 import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
 import getFormattedNumber from "../../hooks/getFormattedNumber";
 
-const ChestSlider = ({ onClaim, canClaimHourly, reward, setLoadingChest }) => {
+const ChestSlider = ({ onClaim, canClaimHourly, reward,loadingChest, setLoadingChest }) => {
   const [chestIndex, setChestIndex] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -142,7 +142,7 @@ const ChestSlider = ({ onClaim, canClaimHourly, reward, setLoadingChest }) => {
                     ? item.openImage
                     : item.image
                 }
-                className={`${canClaimHourly ? "shake-img" : ""}`}
+                className={`${canClaimHourly && activeIndex === index && loadingChest ? "shake-img" : ""}`}
                 style={{
                   pointerEvents:
                     canClaimHourly && activeIndex === index ? "auto" : "none",

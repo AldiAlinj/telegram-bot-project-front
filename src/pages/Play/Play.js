@@ -45,6 +45,7 @@ const Play = ({
             onClaim={onClaim}
             canClaimHourly={canClaimHourly}
             reward={chestReward}
+            loadingChest={loadingChest}
             setLoadingChest={setLoadingChest}
           />
           {canClaimHourly ? (
