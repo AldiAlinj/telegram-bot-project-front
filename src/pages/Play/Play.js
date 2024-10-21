@@ -71,13 +71,14 @@ const Play = ({
               className={`play-page-button play-page-button-disabled  py-2 px-4`}
               disabled={true}
             >
-              <Countdown
+              {chestTimeStamp}
+              {/* <Countdown
                 renderer={renderer}
                 date={chestTimeStamp}
                 onComplete={() => {
                   setCanClaimHourly(true);
                 }}
-              />
+              /> */}
             </button>
           )}
         </div>
