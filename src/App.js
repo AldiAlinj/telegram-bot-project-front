@@ -79,6 +79,7 @@ const App = () => {
         referredUsers: res.data.userData.referredUsers,
         referralCode: res.data.userData.referralCode,
       });
+      alert(res.data.userData.lastChestOpened)
       setLoadingChest(false);
       const referredUsers = res.data.userData.referredUsers;
       const sumRewards = referredUsers.reduce(
@@ -124,6 +125,8 @@ const App = () => {
           totalPoints: res.data.totalPoints,
           chestTimeStamp: new Date(res.data.lastChestOpened),
         }));
+      alert(res.data.userData.lastChestOpened)
+
         setRewardPopup(true);
         setCanClaimHourly(false);
       } catch (err) {
