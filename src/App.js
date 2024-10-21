@@ -106,30 +106,27 @@ const App = () => {
   }, [userData.chestTimeStamp]);
 
   const openHourlyChest = async () => {
-    setLoadingChest(true);
 
-    setTimeout(async() => {    
-      if (canClaimHourly) {
-        try {
-          const res = await axios.post(
-            `https://api.worldofdypians.com/api/open-chest`,
-            {
-              token: jwt,
-            }
-          );
-          setLoadingChest(false);
-          setChestReward(res.data.pointsAwarded);
-          setUserData((prevState) => ({
-            ...prevState,
-            totalPoints: res.data.totalPoints,
-            chestTimeStamp: new Date(res.data.nextChestAvailableAt).getTime(),
-          }));
-          setCanClaimHourly(false);
-        } catch (err) {
-          console.log(err);
-        }
+    if (canClaimHourly) {
+      try {
+        const res = await axios.post(
+          `https://api.worldofdypians.com/api/open-chest`,
+          {
+            token: jwt,
+          }
+        );
+        setLoadingChest(false);
+        setChestReward(res.data.pointsAwarded);
+        setUserData((prevState) => ({
+          ...prevState,
+          totalPoints: res.data.totalPoints,
+          chestTimeStamp: new Date(res.data.nextChestAvailableAt).getTime(),
+        }));
+        setCanClaimHourly(false);
+      } catch (err) {
+        console.log(err);
       }
-    }, 2500);
+    }
   };
 
   const fetchAllData = useCallback(() => {
@@ -319,6 +316,7 @@ const App = () => {
                   canClaimHourly={canClaimHourly}
                   setCanClaimHourly={setCanClaimHourly}
                   loadingChest={loadingChest}
+                  setLoadingChest={setLoadingChest}
                   chestReward={chestReward}
                 />
               }

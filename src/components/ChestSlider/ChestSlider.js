@@ -32,16 +32,19 @@ import chest11open from "../../assets/chestImages/chest11open.png";
 import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
 import getFormattedNumber from "../../hooks/getFormattedNumber";
 
-const ChestSlider = ({ onClaim, canClaimHourly, reward }) => {
+const ChestSlider = ({ onClaim, canClaimHourly, reward, setLoadingChest }) => {
   const [chestIndex, setChestIndex] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const claimChest = (id) => {
-    if (canClaimHourly && id === activeIndex) {
-      onClaim();
-      sessionStorage.setItem("hasOpened", id);
-      setChestIndex(id);
-    }
+    setLoadingChest(true);
+    setTimeout(() => {
+      if (canClaimHourly && id === activeIndex) {
+        onClaim();
+        sessionStorage.setItem("hasOpened", id);
+        setChestIndex(id);
+      }
+    }, 2500);
   };
 
   const chests = [
@@ -125,7 +128,9 @@ const ChestSlider = ({ onClaim, canClaimHourly, reward }) => {
               {chestIndex === index && reward > 0 ? (
                 <div className="d-flex flex-column align-items-center prize-position">
                   <span className="text-white">You won</span>
-                  <div className="won-reward">{getFormattedNumber(reward, 0)} Points</div>
+                  <div className="won-reward">
+                    {getFormattedNumber(reward, 0)} Points
+                  </div>
                 </div>
               ) : (
                 <></>
@@ -141,8 +146,7 @@ const ChestSlider = ({ onClaim, canClaimHourly, reward }) => {
                 style={{
                   pointerEvents:
                     canClaimHourly && activeIndex === index ? "auto" : "none",
-                  scale:
-                    canClaimHourly && activeIndex === index ? "1.2" : "1",
+                  scale: activeIndex === index ? "1.2" : "1",
                 }}
                 onClick={() => claimChest(index)}
                 alt={`chest${index}`}

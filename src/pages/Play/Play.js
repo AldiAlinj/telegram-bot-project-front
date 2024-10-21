@@ -19,6 +19,7 @@ const Play = ({
   setCanClaimHourly,
   loadingChest,
   chestReward,
+  setLoadingChest,
 }) => {
   const onClaim = () => {
     openHourlyChest();
@@ -44,6 +45,7 @@ const Play = ({
             onClaim={onClaim}
             canClaimHourly={canClaimHourly}
             reward={chestReward}
+            setLoadingChest={setLoadingChest}
           />
           {canClaimHourly ? (
             <button
