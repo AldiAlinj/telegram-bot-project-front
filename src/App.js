@@ -125,7 +125,7 @@ const App = () => {
           totalPoints: res.data.totalPoints,
           chestTimeStamp: new Date(res.data.nextChestAvailableAt),
         }));
-        alert(res.data.userData.nextChestAvailableAt);
+        alert(res.data.nextChestAvailableAt);
 
         setRewardPopup(true);
         setCanClaimHourly(false);
