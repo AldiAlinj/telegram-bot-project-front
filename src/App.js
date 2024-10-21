@@ -17,7 +17,7 @@ import Play from "./pages/Play/Play";
 const App = () => {
   const [showWelcome, setShowWelcome] = useState(true);
   const [airdrop, setAirdrop] = useState(false);
-  const [isTelegram, setIsTelegram] = useState(null);
+  const [isTelegram, setIsTelegram] = useState();
   const [rewardPopup, setRewardPopup] = useState(false);
   const [username, setUsername] = useState("");
   const [chestReward, setChestReward] = useState(0);
@@ -29,8 +29,8 @@ const App = () => {
     chestsPoints: 0,
     tasksPoints: 0,
     streakDay: 0,
-    lastStreakDate: null,
-    chestTimeStamp: null,
+    lastStreakDate: undefined,
+    chestTimeStamp: undefined,
     referredUsers: [],
     referralCode: "",
   });
@@ -39,7 +39,7 @@ const App = () => {
     users: [],
     userCount: 0,
   });
-  const [jwt, setJwt] = useState(null);
+  const [jwt, setJwt] = useState();
   const [dailySession, setDailySession] = useState(true);
   const [loadingClaim, setLoadingClaim] = useState(false);
   const [canClaim, setCanClaim] = useState(false);
@@ -79,7 +79,7 @@ const App = () => {
         referredUsers: res.data.userData.referredUsers,
         referralCode: res.data.userData.referralCode,
       });
-      alert(res.data.userData.lastChestOpened)
+      alert(res.data.userData.lastChestOpened);
       setLoadingChest(false);
       const referredUsers = res.data.userData.referredUsers;
       const sumRewards = referredUsers.reduce(
@@ -94,16 +94,17 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (userData.chestTimeStamp) {
-      const nextAvailableTime = userData.chestTimeStamp.getTime() + 5 * 60 * 1000;
+    if (userData.chestTimeStamp ) {
+      const nextAvailableTime =
+        userData.chestTimeStamp.getTime() + 5 * 60 * 1000;
       const now = new Date();
 
       if (now >= nextAvailableTime) {
         setCanClaimHourly(true);
-      }else{
+      } else {
         setCanClaimHourly(false);
       }
-    }
+    } else setCanClaimHourly(true);
   }, [userData.chestTimeStamp]);
 
   const openHourlyChest = async () => {
@@ -123,12 +124,13 @@ const App = () => {
           totalPoints: res.data.totalPoints,
           chestTimeStamp: new Date(res.data.lastChestOpened),
         }));
-      alert(res.data.userData.lastChestOpened)
+        alert(res.data.userData.lastChestOpened);
 
         setRewardPopup(true);
         setCanClaimHourly(false);
       } catch (err) {
         console.log(err);
+        alert(err?.toString());
       }
     }
   };
@@ -262,7 +264,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (userData.chestTimeStamp !== null) {
+    if (userData.chestTimeStamp) {
       setCanClaimHourly(true);
     } else {
       setCanClaimHourly(false);

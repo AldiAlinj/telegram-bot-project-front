@@ -69,7 +69,7 @@ const Play = ({
                 "Ready to Claim"
               )}
             </button>
-          ) : (
+          ) : chestTimeStamp ? (
             <button
               className={`play-page-button play-page-button-disabled  py-2 px-4`}
               disabled={true}
@@ -82,7 +82,7 @@ const Play = ({
                 }}
               />
             </button>
-          )}
+          ) : <></>}
         </div>
       </div>
       <OutsideClickHandler onOutsideClick={() => setRewardPopup(false)}>
