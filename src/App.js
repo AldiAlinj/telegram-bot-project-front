@@ -125,7 +125,6 @@ const App = () => {
         setCanClaimHourly(false);
       } catch (err) {
         console.log(err);
-        alert(err);
         setLoadingChest(false);
       }
     }

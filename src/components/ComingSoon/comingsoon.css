@@ -6,6 +6,8 @@
   border-radius: 25px 25px 0 0;
   bottom: -100%;
   transition: all .35s ease-in-out;
+  max-width: 425px;
+
 }
 
 
