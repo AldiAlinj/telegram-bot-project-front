@@ -3,7 +3,7 @@ import "./dailysession.css";
 import coin from "../../assets/dailySession/coin.png";
 import calendar from "../../assets/dailySession/calendar.png";
 import fire from "../../assets/dailySession/fire.png";
-import closeDaily from "../../assets/dailySession/closeDaily.svg";
+import xMark from "../../assets/xMark.svg";
 import getFormattedNumber from "../../hooks/getFormattedNumber";
 
 const DailySession = ({
@@ -52,7 +52,7 @@ const DailySession = ({
           className="d-flex align-items-center justify-content-end w-100 px-2"
           style={{ position: "absolute", top: "10px" }}
         >
-          <img src={closeDaily} onClick={onClose} alt="" />
+          <img src={xMark} onClick={onClose} alt="" />
         </div>
         <div className="daily-session-fire-wrapper w-100 d-flex justify-content-center align-items-center">
           <img src={fire} alt="" className="w-50" />
