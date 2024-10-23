@@ -89,7 +89,7 @@ border-radius: 5px;
     line-height: normal;
 }
 
-.daily-session-button{
+.daily-session-button {
     background: #fff;
     border-radius: 100px;
     width: 100%;
@@ -105,8 +105,20 @@ border-radius: 5px;
     border-top: none;
     border-left: none;
     border-right: none;
-}
-
+    transition: background 0.3s ease, border-color 0.3s ease; /* Smooth transition */
+  }
+  
+  .daily-session-button.animate-colors {
+    background: #5690FF; /* Swap background */
+    color: #fff; /* Swap text color */
+    border-bottom-color: #fff; /* Swap border color */
+  }
+  
+  .daily-session-button.cant-claim {
+    background-color: #ddd;
+    color: #888;
+    cursor: not-allowed;
+  }
 .completed-session{
     background-image: url('../../assets/dailySession/completedSessionBg.png');
     background-size: cover;

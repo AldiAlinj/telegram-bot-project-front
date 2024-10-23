@@ -131,6 +131,7 @@ const App = () => {
 
   const fetchAllData = useCallback(() => {
     if (window.Telegram?.WebApp) {
+      window.Telegram.WebApp.ready();
       window.Telegram.WebApp.expand();
       window.Telegram.WebApp.setHeaderColor("bg_color", "#FF5733");
     }
@@ -219,6 +220,7 @@ const App = () => {
 
   useEffect(() => {
     if (window.Telegram?.WebApp) {
+      window.Telegram.WebApp.ready(); // Ensure Telegram WebApp is ready
       window.Telegram.WebApp.expand();
       window.Telegram.WebApp.setHeaderColor("bg_color", "#FF5733");
     }
@@ -274,16 +276,16 @@ const App = () => {
     const backButton = window.Telegram.WebApp.BackButton;
 
     if (location.pathname !== "/") {
-      backButton.show(); // Show the back button
+      backButton.show();
       backButton.onClick(() => {
-        navigate(-1); // Navigate back when the button is clicked
+        navigate(-1);
       });
     } else {
-      backButton.hide(); // Hide the back button on the main page
+      backButton.hide();
     }
 
     return () => {
-      backButton.offClick(); // Clean up the event listener
+      backButton.offClick();
     };
   }, [location, navigate]);
 

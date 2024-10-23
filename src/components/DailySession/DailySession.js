@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./dailysession.css";
 import coin from "../../assets/dailySession/coin.png";
 import calendar from "../../assets/dailySession/calendar.png";
@@ -40,6 +40,23 @@ const DailySession = ({
       reward: 200000,
     },
   ];
+
+
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleClick = () => {
+    if (canClaimToday) {
+      setIsClicked(true);
+      claimDailySession();
+
+      // Reset the animation after a delay (e.g., 500ms)
+      setTimeout(() => {
+        setIsClicked(false);
+      }, 500); // Adjust timing as needed
+    } else {
+      console.log("Cannot claim");
+    }
+  };
 
   return (
     <div
@@ -150,24 +167,22 @@ const DailySession = ({
         </div>
       </div>
       <button
-        className={`daily-session-button py-3 ${
-          !canClaimToday && "cant-claim"
-        } mb-3`}
-        disabled={!canClaimToday}
-        onClick={() => {
-          canClaimToday ? claimDailySession() : console.log("Cannot claim");
-        }}
-      >
-        {loadingClaim ? (
-          <div class="spinner-border spinner-border-sm text-info" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-        ) : canClaimToday ? (
-          "Claim"
-        ) : (
-          "Claimed"
-        )}
-      </button>
+      className={`daily-session-button py-3 mb-3 ${!canClaimToday && "cant-claim"} ${
+        isClicked ? "animate-colors" : ""
+      }`}
+      disabled={!canClaimToday}
+      onClick={handleClick}
+    >
+      {loadingClaim ? (
+        <div className="spinner-border spinner-border-sm text-info" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      ) : canClaimToday ? (
+        "Claim"
+      ) : (
+        "Claimed"
+      )}
+    </button>
     </div>
   );
 };
