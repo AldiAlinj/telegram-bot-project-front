@@ -34,14 +34,15 @@
 }
 
 .partner-reward-wrapper {
-  border: 0.5px solid #FFFFFF99;
-  background: #79A9FF;
+  border: 1px solid #5690ff;
+
+  background: rgba(86, 144, 255, 0.1);
   border-radius: 5px;
   width: 80px;
 }
 
 .partner-reward-amount {
-  color: #FFF;
+  color: #5690ff;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;

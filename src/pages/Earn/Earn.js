@@ -72,7 +72,7 @@ const Earn = ({tasks, completedTasks, handleCompleteTask}) => {
           <img src={sandTimer} alt="" />
         </NavLink>
         <h6 className="home-tasks-title mb-0">Tasks</h6>
-        <div className="home-tasks-container d-flex flex-column gap-2 position-relative">
+        <div className="home-tasks-container mb-3 d-flex flex-column gap-2 position-relative">
           {tasks.map((task, index) => (
             <TaskItem
               item={task}

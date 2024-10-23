@@ -29,12 +29,12 @@ line-height: normal;
 
 
 .completed-task{
-    border: 1px solid #3370E3;
-    background: #5690FF;
+    border: 1px solid #5690ff;
+    background: rgba(86, 144, 255, 0.1);
 }
 
 .completed-task .home-task-name{
-    color: #fff !important;
+    color: #5690ff !important;
 }
 
 .task-reward-wrapper{
