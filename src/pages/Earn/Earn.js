@@ -4,8 +4,10 @@ import "./earn.css";
 
 import sandTimer from "../../assets/earnAssets/sandTimer.png";
 import PartnerCard from "../../components/PartnerCard/PartnerCard";
+import TaskItem from "../../components/TaskItem/TaskItem";
+import CompletedTaskItem from "../../components/TaskItem/CompletedTaskItem";
 
-const Earn = () => {
+const Earn = ({tasks, completedTasks, handleCompleteTask}) => {
   const partners = [
     {
       title: "World of Dypians",
@@ -69,6 +71,21 @@ const Earn = () => {
           <span className="daily-opportunities-title" style={{fontSize: "18px"}}>Daily Opportunities</span>
           <img src={sandTimer} alt="" />
         </NavLink>
+        <h6 className="home-tasks-title mb-0">Tasks</h6>
+        <div className="home-tasks-container d-flex flex-column gap-2 position-relative">
+          {tasks.map((task, index) => (
+            <TaskItem
+              item={task}
+              key={index}
+              handleCompleteTask={handleCompleteTask}
+            />
+          ))}
+          {completedTasks.map((task, index) => (
+            <CompletedTaskItem item={task} key={index} />
+          ))}
+        </div>
+        <h6 className="home-tasks-title mb-0">Partner Tasks</h6>
+
         <div className="d-flex earn-partners-wrapper flex-column gap-2">
           {partners.map((item, index) => (
             <PartnerCard key={index} item={item} />

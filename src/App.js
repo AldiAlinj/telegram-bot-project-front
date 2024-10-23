@@ -359,7 +359,16 @@ const App = () => {
                 />
               }
             />
-            <Route path="/earn" element={<Earn />} />
+            <Route
+              path="/earn"
+              element={
+                <Earn
+                  tasks={userData.tasks}
+                  completedTasks={userData.completedTasks}
+                  handleCompleteTask={handleCompleteTask}
+                />
+              }
+            />
             <Route
               path="/earn/:partnerId"
               element={
