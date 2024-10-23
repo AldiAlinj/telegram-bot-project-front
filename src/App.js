@@ -106,7 +106,6 @@ const App = () => {
   }, [userData.chestTimeStamp]);
 
   const openHourlyChest = async () => {
-
     if (canClaimHourly) {
       try {
         const res = await axios.post(
@@ -219,6 +218,13 @@ const App = () => {
   };
 
   useEffect(() => {
+    if (window.Telegram?.WebApp) {
+      window.Telegram.WebApp.expand();
+      window.Telegram.WebApp.setHeaderColor("bg_color", "#FF5733");
+    }
+  }, []);
+
+  useEffect(() => {
     canClaimToday(userData.lastStreakDate);
   }, [userData.lastStreakDate]);
 
@@ -267,7 +273,7 @@ const App = () => {
   useEffect(() => {
     const backButton = window.Telegram.WebApp.BackButton;
 
-    if (location.pathname !== '/') {
+    if (location.pathname !== "/") {
       backButton.show(); // Show the back button
       backButton.onClick(() => {
         navigate(-1); // Navigate back when the button is clicked
@@ -280,7 +286,6 @@ const App = () => {
       backButton.offClick(); // Clean up the event listener
     };
   }, [location, navigate]);
-
 
   if (!isTelegram) {
     return (
