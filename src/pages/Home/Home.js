@@ -31,7 +31,7 @@ const Home = ({
             onClick={() => setConnectPopup(true)}
           >
             <img src={walletIcon} height={16} width={16} alt="" />
-            <span className="user-total-coins ps-1">Associate Wallet</span>
+            <span className="user-total-coins ps-1">Add Wallet</span>
           </div>
           <div className="total-coins-wrapper d-flex align-items-center gap-2 p-1">
             <span className="user-total-coins ps-1">

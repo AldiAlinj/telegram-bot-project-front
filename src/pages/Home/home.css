@@ -175,7 +175,7 @@
   position: fixed;
   left: 0;
   right: 0;
-  top: -1000px;
+  top: -120%;
   bottom: 0;
   margin: auto;
   background: #fff;
@@ -197,7 +197,7 @@
 }
 
 .associate-wallet-input::placeholder{
-  color: #4F5F90;
+  color: rgba(79, 95, 144, 0.3);
 
 }
 

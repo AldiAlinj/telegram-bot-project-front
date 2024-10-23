@@ -62,12 +62,11 @@ const Earn = () => {
     <div className="container-fluid earn-wrapper pt-4 pb-3">
       <div className="d-flex flex-column gap-2 ">
         <h6 className="home-tasks-title mb-0">Earn</h6>
-
         <NavLink
           to={"/earn/dailies"}
           className={`daily-opportunities-wrapper p-3 d-flex w-100 justify-content-between align-items-center mb-4`}
         >
-          <span className="daily-opportunities-title">Daily Opportunities</span>
+          <span className="daily-opportunities-title" style={{fontSize: "18px"}}>Daily Opportunities</span>
           <img src={sandTimer} alt="" />
         </NavLink>
         <div className="d-flex earn-partners-wrapper flex-column gap-2">

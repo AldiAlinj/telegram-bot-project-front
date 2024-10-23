@@ -56,7 +56,7 @@ const Leaderboard = ({ username, leaderboard }) => {
         <div className="leaderboard-tabs position-relative mb-3  d-flex align-items-center justify-content-between w-100">
               <div className={`leaderboard-tab-bg ${type === "weekly" && "move-1"}`}></div>
               <div className="leaderboard-tab p-2 d-flex align-items-center justify-content-center w-50 h-100" onClick={() => setType("global")}>
-                <span className={`leaderboard-tab-title ${type === "global" && "leaderboard-tab-title-active"}`}>Global</span>
+                <span className={`leaderboard-tab-title ${type === "global" && "leaderboard-tab-title-active"}`}>Future Airdrop</span>
               </div>
               <div className="leaderboard-tab p-2 d-flex align-items-center justify-content-center w-50 h-100" onClick={() => setType("weekly")}>
                 <span className={`leaderboard-tab-title ${type === "weekly" && "leaderboard-tab-title-active"}`}>Weekly</span>

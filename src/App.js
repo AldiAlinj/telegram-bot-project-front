@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Leaderboard from "./pages/Leaderboard/Leaderboard";
 import Friends from "./pages/Friends/Friends";
@@ -260,6 +260,26 @@ const App = () => {
       console.log(err);
     }
   };
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const backButton = window.Telegram.WebApp.BackButton;
+
+    if (location.pathname !== '/') {
+      backButton.show(); // Show the back button
+      backButton.onClick(() => {
+        navigate(-1); // Navigate back when the button is clicked
+      });
+    } else {
+      backButton.hide(); // Hide the back button on the main page
+    }
+
+    return () => {
+      backButton.offClick(); // Clean up the event listener
+    };
+  }, [location, navigate]);
 
 
   if (!isTelegram) {
