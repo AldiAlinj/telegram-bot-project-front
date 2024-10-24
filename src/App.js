@@ -28,6 +28,7 @@ const App = () => {
     chestsPoints: 0,
     tasksPoints: 0,
     streakDay: 0,
+    referralPoints: 0,
     lastStreakDate: undefined,
     chestTimeStamp: undefined,
     referredUsers: [],
@@ -43,12 +44,11 @@ const App = () => {
     player: {},
     weeklyUsers: [],
     prevWeeklyUsers: [],
-  })
+  });
   const [jwt, setJwt] = useState();
   const [dailySession, setDailySession] = useState(true);
   const [loadingClaim, setLoadingClaim] = useState(false);
   const [canClaim, setCanClaim] = useState(false);
-  const [referralPoints, setReferralPoints] = useState(0);
   const [loadingChest, setLoadingChest] = useState(false);
   const [canClaimHourly, setCanClaimHourly] = useState(false);
 
@@ -71,6 +71,11 @@ const App = () => {
         `https://api.worldofdypians.com/api/tg_auth`,
         body
       );
+      const referredUsers = res.data.userData.referredUsers;
+      const sumRewards = referredUsers.reduce(
+        (acc, item) => acc + item.earnedPoints,
+        0
+      );
       setUserData({
         tasks: res.data.userData.availableTasks,
         completedTasks: res.data.userData.completedTasks,
@@ -85,14 +90,10 @@ const App = () => {
         referredUsers: res.data.userData.referredUsers,
         referralCode: res.data.userData.referralCode,
         walletAddress: res.data.userData.walletAddress,
+        referralPoints: sumRewards,
       });
       setLoadingChest(false);
-      const referredUsers = res.data.userData.referredUsers;
-      const sumRewards = referredUsers.reduce(
-        (acc, item) => acc + item.earnedPoints,
-        0
-      );
-      setReferralPoints(sumRewards);
+
       setJwt(res.data.JWT);
     } catch (err) {
       console.log(err);
@@ -118,17 +119,15 @@ const App = () => {
         `https://api.worldofdypians.com/api/link-wallet`,
         {
           token: jwt,
-          walletAddress: wallet
+          walletAddress: wallet,
         }
       );
       setUserData((prevState) => ({
         ...prevState,
-       walletAddress: res.data.walletAddress,
+        walletAddress: res.data.walletAddress,
       }));
-
     } catch (err) {
       console.log(err);
-      
     }
   };
 
@@ -146,6 +145,7 @@ const App = () => {
         setUserData((prevState) => ({
           ...prevState,
           totalPoints: res.data.totalPoints,
+          chestsPoints: res.data.chestsPoints,
           chestTimeStamp: new Date(res.data.nextChestAvailableAt).getTime(),
         }));
         setCanClaimHourly(false);
@@ -232,6 +232,7 @@ const App = () => {
         ...prevState,
         totalPoints: res.data.totalPoints,
         streakDay: res.data.streakDay,
+        streakPoints: res.data.streakPoints,
       }));
       setCanClaim(false);
     } catch (err) {
@@ -368,7 +369,7 @@ const App = () => {
               element={
                 <Home
                   username={username}
-                  referralPoints={referralPoints}
+                  referralPoints={userData.referralPoints}
                   tasks={userData.tasks.slice(0, 4)}
                   userData={userData}
                   handleCompleteTask={handleCompleteTask}
@@ -380,7 +381,11 @@ const App = () => {
             <Route
               path="/leaderboard"
               element={
-                <Leaderboard username={username} leaderboard={leaderboard} weeklyLeaderboard={weeklyLeaderboard} />
+                <Leaderboard
+                  username={username}
+                  leaderboard={leaderboard}
+                  weeklyLeaderboard={weeklyLeaderboard}
+                />
               }
             />
             <Route

@@ -22,7 +22,7 @@ const Friends = ({referredUsers, referralCode}) => {
         Invite friends and get more points
       </h1>
       <button className="invite-friends-button py-3" style={{textDecoration: "none"}}>
-        <a href={`https://t.me/share/url?url=${appLink}?startapp=${referralCode}`} style={{textDecoration: "none", color: "#5690FF"}}>Invite Friends</a>
+        <a target="_blank" rel="noreferrer" href={`https://t.me/share/url?url=${appLink}?startapp=${referralCode}`} style={{textDecoration: "none", color: "#5690FF"}}>Invite Friends</a>
      </button>
       </div>
       {referredUsers.length > 0 &&
