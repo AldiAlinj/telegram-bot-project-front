@@ -32,7 +32,7 @@ const App = () => {
     chestTimeStamp: undefined,
     referredUsers: [],
     referralCode: "",
-    walletAddress: "",
+    walletAddress: null,
   });
   const [leaderboard, setLeaderboard] = useState({
     player: {},
@@ -79,6 +79,7 @@ const App = () => {
           new Date(res.data.userData.lastChestOpened).getTime() + 300000,
         referredUsers: res.data.userData.referredUsers,
         referralCode: res.data.userData.referralCode,
+        walletAddress: res.data.userData.walletAddress,
       });
       setLoadingChest(false);
       const referredUsers = res.data.userData.referredUsers;
