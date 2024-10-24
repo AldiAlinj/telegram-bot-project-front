@@ -1,67 +1,73 @@
-.home-task-item{
-    border-radius: 10px;
-    border: 1px solid #F2F0F8;
-    background: #FFF;
+.home-task-item {
+  border-radius: 10px;
+  border: 1px solid #f2f0f8;
+  background: #fff;
 }
 
-.home-task-name{
-    color: #4F5F90;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 800;
-    line-height: normal;
+.home-task-name {
+  color: #4f5f90;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
 }
-.home-task-reward{
-    color: #B9B3D8;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-}
-
-.home-tasks-title{
-    color: #46557B;
-font-size: 18px;
-font-style: normal;
-font-weight: 800;
-line-height: normal;
-}
-
-
-.completed-task{
-    border: 1px solid #5690ff;
-    background: rgba(86, 144, 255, 0.1);
-}
-
-.completed-task .home-task-name{
-    color: #5690ff !important;
-}
-
-.task-reward-wrapper{
-border: 0.5px solid #E19836;
-border-radius: 5px;
-width: 80px;
-}
-
-.task-reward-amount{
-    color: #E19836;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-}
-
-.completed-reward-wrapper {
-    border: 1px solid #5690ff;
-  background: rgba(86, 144, 255, 0.1);
-  border-radius: 5px;
-  width: 80px;
-  }
-  
-  .completed-reward-amount {
-    color: #5690ff;
+.home-task-reward {
+  color: #b9b3d8;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  }
+}
+
+.home-tasks-title {
+  color: #46557b;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.completed-task {
+  border: 1px solid #5690ff;
+  background: rgba(86, 144, 255, 0.1);
+}
+
+.completed-task .home-task-name {
+  color: #5690ff !important;
+}
+
+.task-reward-wrapper {
+  border: 0.5px solid #e19836;
+  border-radius: 5px;
+  width: 80px;
+}
+
+.task-reward-amount {
+  color: #e19836;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.completed-reward-wrapper {
+  border: 1px solid #5690ff;
+  background: rgba(86, 144, 255, 0.1);
+  border-radius: 5px;
+  width: 80px;
+}
+
+.completed-reward-amount {
+  color: #5690ff;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.task-banner {
+  width: 100%;
+  aspect-ratio: 2/1;
+  object-fit: cover;
+  border-radius: 10px;
+}

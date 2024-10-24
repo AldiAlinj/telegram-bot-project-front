@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import CompletedTaskItem from "../../components/TaskItem/CompletedTaskItem";
 import TaskItem from "../../components/TaskItem/TaskItem";
-
+import DailyTaskItem from "../../components/TaskItem/DailyTaskItem";
+import CompletedDailyTaskItem from "../../components/TaskItem/CompletedDailyTaskItem";
 
 const EarnPartner = ({ tasks, completedTasks, handleCompleteTask }) => {
   const { partnerId } = useParams();
@@ -28,16 +29,33 @@ const EarnPartner = ({ tasks, completedTasks, handleCompleteTask }) => {
       <div className="d-flex flex-column gap-2 ">
         <h6 className="home-tasks-title mb-0">{convertString(partnerId)}</h6>
         <div className="home-tasks-container d-flex flex-column gap-2 position-relative">
-          {filteredTasks.map((task, index) => (
-            <TaskItem
-              item={task}
-              key={index}
-              handleCompleteTask={handleCompleteTask}
-            />
-          ))}
-          {filteredCompleted.map((task, index) => (
-            <CompletedTaskItem item={task} key={index} />
-          ))}
+          {partnerId === "daily-opportunities" ? (
+            <>
+              {filteredTasks.map((task, index) => (
+                <DailyTaskItem
+                  item={task}
+                  key={index}
+                  handleCompleteTask={handleCompleteTask}
+                />
+              ))}
+              {filteredCompleted.map((task, index) => (
+                <CompletedDailyTaskItem item={task} key={index} />
+              ))}
+            </>
+          ) : (
+            <>
+              {filteredTasks.map((task, index) => (
+                <TaskItem
+                  item={task}
+                  key={index}
+                  handleCompleteTask={handleCompleteTask}
+                />
+              ))}
+              {filteredCompleted.map((task, index) => (
+                <CompletedTaskItem item={task} key={index} />
+              ))}
+            </>
+          )}
         </div>
       </div>
     </div>
