@@ -210,13 +210,11 @@ const App = () => {
       );
       setWeeklyLeaderboard({
         player: res.data.userPosition,
-        weeklyUsers: res.data.topUsers,
-        prevWeeklyUsers: res.data.topUsers,
+        weeklyUsers: res.data.currentLeaderboard.topUsers,
+        prevWeeklyUsers: res.data.previousLeaderboard.leaderboard,
       });
-      alert(res.data.topUsers[0])
     } catch (err) {
       console.log(err);
-      alert(err)
     }
   };
 
