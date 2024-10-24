@@ -55,7 +55,7 @@ const App = () => {
   const [canClaimHourly, setCanClaimHourly] = useState(false);
   const [error, setError] = useState("");
   const [loadingWallet, setLoadingWallet] = useState(false);
-
+  const [connectPopup, setConnectPopup] = useState(false);
 
   const postToken = async (token) => {
     setLoadingChest(true);
@@ -115,25 +115,29 @@ const App = () => {
   }, [userData.chestTimeStamp]);
 
   const postWalletAddress = async (wallet) => {
-   setError(validateInfo(wallet))
-   if(validateInfo(wallet) === ""){
-    try {
-      const res = await axios.post(
-        `https://api.worldofdypians.com/api/link-wallet`,
-        {
-          token: jwt,
-          walletAddress: wallet,
+    setError(validateInfo(wallet));
+    if (validateInfo(wallet) === "") {
+      setLoadingWallet(true);
+      setTimeout(async () => {
+        try {
+          const res = await axios.post(
+            `https://api.worldofdypians.com/api/link-wallet`,
+            {
+              token: jwt,
+              walletAddress: wallet,
+            }
+          );
+          setUserData((prevState) => ({
+            ...prevState,
+            walletAddress: res.data.walletAddress,
+          }));
+          setLoadingWallet(false);
+          setConnectPopup(false);
+        } catch (err) {
+          console.log(err);
         }
-      );
-      setUserData((prevState) => ({
-        ...prevState,
-        walletAddress: res.data.walletAddress,
-      }));
-      setLoadingWallet(false);
-    } catch (err) {
-      console.log(err);
+      }, 3000);
     }
-   }
   };
 
   const openHourlyChest = async () => {
@@ -314,7 +318,7 @@ const App = () => {
         totalPoints: res.data.totalPoints,
         tasks: res.data.availableTasks,
         completedTasks: res.data.completedTasks,
-        tasksPoints: res.data.tasksPoints
+        tasksPoints: res.data.tasksPoints,
       }));
     } catch (err) {
       console.log(err);
@@ -384,6 +388,8 @@ const App = () => {
                   loadingWallet={loadingWallet}
                   setLoadingWallet={setLoadingWallet}
                   error={error}
+                  connectPopup={connectPopup}
+                  setConnectPopup={setConnectPopup}
                 />
               }
             />
