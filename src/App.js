@@ -15,6 +15,7 @@ import EarnPartner from "./pages/Earn/EarnPartner";
 import Play from "./pages/Play/Play";
 import DailyOpportunities from "./pages/Earn/DailyOpportunities";
 import validateInfo from "./hooks/validateInfo";
+import successSound from './assets/success.mp3'
 
 const App = () => {
   const [showWelcome, setShowWelcome] = useState(true);
@@ -157,6 +158,8 @@ const App = () => {
           chestsPoints: res.data.chestsPoints,
           chestTimeStamp: new Date(res.data.nextChestAvailableAt).getTime(),
         }));
+    new Audio(successSound).play();
+
         setCanClaimHourly(false);
       } catch (err) {
         console.log(err);

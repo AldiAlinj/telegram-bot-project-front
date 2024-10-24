@@ -29,7 +29,6 @@ import chest10 from "../../assets/chestImages/chest10.png";
 import chest10open from "../../assets/chestImages/chest10open.png";
 import chest11 from "../../assets/chestImages/chest11.png";
 import chest11open from "../../assets/chestImages/chest11open.png";
-// import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
 import getFormattedNumber from "../../hooks/getFormattedNumber";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -187,7 +186,7 @@ const ChestSlider = ({
                     : item.image
                 }
                 className={`${
-                  activeIndex === index && loadingChest
+                  activeIndex === index && loadingChest && canClaimHourly
                     ? "chest-img shake-img"
                     : "chest-img "
                 }`}
