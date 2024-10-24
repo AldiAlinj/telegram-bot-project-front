@@ -7,7 +7,7 @@
 
 .inner-play-banner {
   height: 100%;
-  background-image: url("../../assets/blueBg.png");
+  background-image: url("../../assets/playBg.webp");
   background-size: 100% 100%;
 }
 
@@ -98,3 +98,10 @@
   line-height: normal;
 }
 
+.slick-slider{
+  width: 100%;
+}
+
+.slick-slide{
+  height: 150px;
+}

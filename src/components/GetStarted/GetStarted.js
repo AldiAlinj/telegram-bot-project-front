@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import "./getstarted.css";
 import getStartedWod from '../../assets/getStartedWod.png'
 
 const GetStarted = ({ showWelcome, onClose }) => {
+
+  const [isClicked, setIsClicked] = useState(false);
+
+
+  const handleClose = () => {
+      setIsClicked(true);
+
+      setTimeout(() => {
+        setIsClicked(false);
+        onClose()
+      }, 200); 
+  
+  };
+
   return (
     <div
       className={`get-started-wrapper ${
@@ -19,7 +33,7 @@ const GetStarted = ({ showWelcome, onClose }) => {
         <p className="get-started-desc mb-3">
           Play, Learn, and Explore with Exciting Tasks!
         </p>
-        <button className="get-started-button py-3 mb-3" onClick={onClose}>
+        <button className={`get-started-button ${isClicked ? "animate-colors" : ""} py-3 mb-3`} onClick={handleClose}>
           Get Started
         </button>
       </div>

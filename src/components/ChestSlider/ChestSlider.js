@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./chestslider.css";
-import { Swiper, SwiperSlide } from "swiper/react";
+// import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
@@ -29,12 +29,58 @@ import chest10 from "../../assets/chestImages/chest10.png";
 import chest10open from "../../assets/chestImages/chest10open.png";
 import chest11 from "../../assets/chestImages/chest11.png";
 import chest11open from "../../assets/chestImages/chest11open.png";
-import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
+// import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
 import getFormattedNumber from "../../hooks/getFormattedNumber";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import Countdown from "react-countdown";
+import nextArrow from "../../assets/nextArrow.svg";
+import prevArrow from "../../assets/prevArrow.svg";
 
-const ChestSlider = ({ onClaim, canClaimHourly, reward,loadingChest, setLoadingChest }) => {
+const renderer = ({ hours, minutes, seconds }) => {
+  return (
+    <span className="time-left">
+      {String(hours).padStart(2, "0")}:{String(minutes).padStart(2, "0")}:
+      {String(seconds).padStart(2, "0")}
+    </span>
+  );
+};
+
+const ChestSlider = ({
+  onClaim,
+  canClaimHourly,
+  reward,
+  loadingChest,
+  setLoadingChest,
+  setCanClaimHourly,
+  chestTimeStamp,
+}) => {
   const [chestIndex, setChestIndex] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const sliderRef = useRef(null);
+
+  const nextSlide = () => {
+    sliderRef.current.slickNext();
+  };
+  const prevSlide = () => {
+    sliderRef.current.slickPrev();
+  };
+
+  var settings = {
+    dots: false,
+    arrows: false,
+    dotsClass: "button__bar",
+    infinite: true,
+    fade: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    afterChange: (current) => {
+      setActiveIndex(current);
+    },
+  };
 
   const claimChest = (id) => {
     setLoadingChest(true);
@@ -99,42 +145,40 @@ const ChestSlider = ({ onClaim, canClaimHourly, reward,loadingChest, setLoadingC
   ];
 
   return (
-    <div className="d-flex flex-column align-items-center gap-2 w-100">
-      <Swiper
-        effect={`coverflow`}
-        grabCursor={true}
-        centeredSlides={true}
-        loop={true}
-        slidesPerView={5}
-        coverflowEffect={{
-          rotate: 0,
-          stretch: 0,
-          depth: 100,
-          modifier: 2.5,
-        }}
-        pagination={{ el: ".swiper-pagination", clickable: true }}
-        navigation={{
-          nextEl: ".arrow-holder-next",
-          prevEl: ".arrow-holder-prev",
-          clickable: true,
-        }}
-        modules={[EffectCoverflow, Pagination, Navigation]}
-        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)} // Track the current slide index
-        className="swiper_container"
-      >
-        {chests.map((item, index) => (
-          <SwiperSlide key={index}>
-            <div className="position-relative">
-              {chestIndex === index && reward > 0 ? (
-                <div className="d-flex flex-column align-items-center prize-position">
-                  <span className="text-white">You won</span>
-                  <div className="won-reward">
-                    {getFormattedNumber(reward, 0)} Points
-                  </div>
-                </div>
-              ) : (
-                <></>
-              )}
+    <>
+      {reward > 0 ? (
+        <div className="d-flex flex-column gap-2 align-items-center chest-rewards-position">
+          <div className="won-reward">{getFormattedNumber(reward, 0)}</div>
+          <span className="you-won-text">Points</span>
+        </div>
+      ) : (
+        <></>
+      )}
+
+      <div className="chest-slider-wrapper d-flex align-items-center justify-content-center w-100">
+        <img
+          src={prevArrow}
+          width={40}
+          height={40}
+          onClick={prevSlide}
+          alt=""
+          className="prev-arrow"
+        />
+        <img
+          src={nextArrow}
+          width={40}
+          height={40}
+          onClick={nextSlide}
+          alt=""
+          className="next-arrow"
+        />
+        <Slider {...settings} ref={sliderRef}>
+          {chests.map((item, index) => (
+            <div
+              className="position-relative d-flex align-items-center justify-content-center"
+              key={index}
+              onClick={() => claimChest(index)}
+            >
               <img
                 src={
                   chestIndex === index ||
@@ -142,20 +186,58 @@ const ChestSlider = ({ onClaim, canClaimHourly, reward,loadingChest, setLoadingC
                     ? item.openImage
                     : item.image
                 }
-                className={`${canClaimHourly && activeIndex === index && loadingChest ? "shake-img" : ""}`}
+                className={`${
+                  activeIndex === index && loadingChest
+                    ? "chest-img shake-img"
+                    : "chest-img "
+                }`}
                 style={{
                   pointerEvents:
                     canClaimHourly && activeIndex === index ? "auto" : "none",
-                  scale: activeIndex === index ? "1.2" : "1",
                 }}
-                onClick={() => claimChest(index)}
                 alt={`chest${index}`}
               />
             </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </div>
+          ))}
+        </Slider>
+      </div>
+      {canClaimHourly && !loadingChest ? (
+        <button
+          className={`play-page-button chest-button ${
+            !canClaimHourly || loadingChest ? "play-page-button-disabled" : ""
+          } py-2 px-4`}
+          onClick={() => claimChest(activeIndex)}
+        >
+          Claim
+        </button>
+      ) : canClaimHourly && loadingChest ? (
+        <button
+          className={`play-page-button chest-button play-button-disabled py-2 px-4`}
+        >
+          <div
+            className="spinner-border spinner-border-sm text-info"
+            role="status"
+          >
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </button>
+      ) : !canClaimHourly ? (
+        <button
+          className={`play-page-button play-page-button-disabled chest-button  py-2 px-4`}
+          disabled={true}
+        >
+          <Countdown
+            renderer={renderer}
+            date={chestTimeStamp}
+            onComplete={() => {
+              setCanClaimHourly(true);
+            }}
+          />
+        </button>
+      ) : (
+        <></>
+      )}
+    </>
   );
 };
 
