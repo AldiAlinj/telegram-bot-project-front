@@ -66,3 +66,14 @@
 .daily-social-item:hover span {
   color: #5690ff !important;
 }
+
+
+.empty-title{
+  color: #4F5F90;
+text-align: center;
+font-size: 24px;
+font-style: normal;
+font-weight: 600;
+line-height: 123.725%; /* 24.745px */
+letter-spacing: 0.4px;
+}

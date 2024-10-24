@@ -14,6 +14,7 @@ import DailySession from "./components/DailySession/DailySession";
 import EarnPartner from "./pages/Earn/EarnPartner";
 import Play from "./pages/Play/Play";
 import DailyOpportunities from "./pages/Earn/DailyOpportunities";
+import validateInfo from "./hooks/validateInfo";
 
 const App = () => {
   const [showWelcome, setShowWelcome] = useState(true);
@@ -52,6 +53,9 @@ const App = () => {
   const [canClaim, setCanClaim] = useState(false);
   const [loadingChest, setLoadingChest] = useState(false);
   const [canClaimHourly, setCanClaimHourly] = useState(false);
+  const [error, setError] = useState("");
+  const [loadingWallet, setLoadingWallet] = useState(false);
+
 
   const postToken = async (token) => {
     setLoadingChest(true);
@@ -111,6 +115,8 @@ const App = () => {
   }, [userData.chestTimeStamp]);
 
   const postWalletAddress = async (wallet) => {
+   setError(validateInfo(wallet))
+   if(validateInfo(wallet) === ""){
     try {
       const res = await axios.post(
         `https://api.worldofdypians.com/api/link-wallet`,
@@ -123,9 +129,11 @@ const App = () => {
         ...prevState,
         walletAddress: res.data.walletAddress,
       }));
+      setLoadingWallet(false);
     } catch (err) {
       console.log(err);
     }
+   }
   };
 
   const openHourlyChest = async () => {
@@ -333,24 +341,24 @@ const App = () => {
     };
   }, [location, navigate]);
 
-  if (!isTelegram) {
-    return (
-      <div
-        className={`d-flex  justify-content-center align-items-center`}
-        style={{ height: "100vh", width: "100vw" }}
-      >
-        <div className="d-flex flex-column align-items-center justify-content-center gap-2">
-          <h1 className="use-telegram-title mb-0">Page available on</h1>
-          <a
-            href="https://t.me/AldiTestBot_bot/AldiTestBot"
-            className="use-telegram-title"
-          >
-            Telegram
-          </a>
-        </div>
-      </div>
-    );
-  }
+  // if (!isTelegram) {
+  //   return (
+  //     <div
+  //       className={`d-flex  justify-content-center align-items-center`}
+  //       style={{ height: "100vh", width: "100vw" }}
+  //     >
+  //       <div className="d-flex flex-column align-items-center justify-content-center gap-2">
+  //         <h1 className="use-telegram-title mb-0">Page available on</h1>
+  //         <a
+  //           href="https://t.me/AldiTestBot_bot/AldiTestBot"
+  //           className="use-telegram-title"
+  //         >
+  //           Telegram
+  //         </a>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div
@@ -373,6 +381,9 @@ const App = () => {
                   handleCompleteTask={handleCompleteTask}
                   walletAddress={userData.walletAddress}
                   postWalletAddress={postWalletAddress}
+                  loadingWallet={loadingWallet}
+                  setLoadingWallet={setLoadingWallet}
+                  error={error}
                 />
               }
             />

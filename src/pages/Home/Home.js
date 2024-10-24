@@ -19,10 +19,12 @@ const Home = ({
   referralPoints,
   postWalletAddress,
   walletAddress,
+  error,
+  loadingWallet,
+  setLoadingWallet
 }) => {
   const [connectPopup, setConnectPopup] = useState(false);
   const [inputData, setInputData] = useState("");
-  const [loadingWallet, setLoadingWallet] = useState(false);
   const [tooltipInfo, setTooltipInfo] = useState(false);
 
   const handlePopup = () => {
@@ -37,8 +39,7 @@ const Home = ({
     setLoadingWallet(true);
     setTimeout(() => {
       postWalletAddress(wallet);
-      setLoadingWallet(false);
-      setConnectPopup(false);
+      // setConnectPopup(false);
     }, 3000);
   };
 
@@ -176,7 +177,13 @@ const Home = ({
             value={inputData}
             onChange={(e) => setInputData(e.target.value)}
             className="px-2 associate-wallet-input w-100"
+            style={{border: error !== "" && "1px solid #FF8168"}}
           />
+          {error !== "" && 
+           <span style={{ color: "#FF8168" }}>
+            {error}
+         </span>
+          }
           <button
             className="submit-wallet-button py-2 px-3"
             disabled={loadingWallet}

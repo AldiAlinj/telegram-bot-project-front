@@ -48,13 +48,18 @@ const DailyOpportunities = ({ tasks, completedTasks, handleCompleteTask }) => {
           ))}
         </div>
         <div className="home-tasks-container d-flex flex-column gap-2 position-relative">
-          {filteredTasks.map((task, index) => (
+          {filteredTasks.length > 0 ?  filteredTasks.map((task, index) => (
             <DailyTaskItem
               item={task}
               key={index}
               handleCompleteTask={handleCompleteTask}
             />
-          ))}
+          )) : 
+          <div className="d-flex w-100 align-items-center justify-content-center  flex-column mt-5">
+            <h6 className="empty-title">No tasks Available.</h6>
+            <h6 className="empty-title">Stay tuned for more!</h6>
+          </div>
+          }
         </div>
       </div>
     </div>
