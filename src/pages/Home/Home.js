@@ -8,6 +8,8 @@ import walletIcon from "../../assets/walletIcon.svg";
 import playBanner from "../../assets/playBanner.png";
 import OutsideClickHandler from "react-outside-click-handler";
 import xMark from "../../assets/xMark.svg";
+import { shortAddress } from "../../hooks/shortAddress";
+import tooltip from '../../assets/tooltip.svg';
 
 const Home = ({
   username,
@@ -15,8 +17,33 @@ const Home = ({
   userData,
   handleCompleteTask,
   referralPoints,
+  postWalletAddress,
+  walletAddress,
 }) => {
   const [connectPopup, setConnectPopup] = useState(false);
+  const [inputData, setInputData] = useState("")
+  const [loadingWallet, setLoadingWallet] = useState(false);
+  const [tooltipInfo, setTooltipInfo] = useState(false);
+
+
+  const handlePopup = () => {
+    if (walletAddress !== "") {
+      return;
+    } else {
+      setConnectPopup(true);
+    }
+  };
+
+
+  const handleWalletPost = (wallet) => {
+    setLoadingWallet(true);
+    setTimeout(() => {
+      postWalletAddress(wallet);
+      setLoadingWallet(false);
+      setConnectPopup(false);
+    }, 3000);
+  }
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -28,10 +55,14 @@ const Home = ({
           <span className="hello-user">Hello, {username}!</span>
           <div
             className="connect-wallet-wrapper px-2 d-flex align-items-center gap-1"
-            onClick={() => setConnectPopup(true)}
+            onClick={handlePopup}
           >
             <img src={walletIcon} height={16} width={16} alt="" />
-            <span className="user-total-coins ps-1">Add Wallet</span>
+            <span className="user-total-coins ps-1">
+              {walletAddress !== ""
+                ? shortAddress(walletAddress)
+                : "Add Wallet"}
+            </span>
           </div>
           <div className="total-coins-wrapper d-flex align-items-center gap-2 p-1">
             <span className="user-total-coins ps-1">
@@ -99,16 +130,45 @@ const Home = ({
           } p-3`}
         >
           <div className="d-flex w-100 align-items-center justify-content-between">
-            <h6
+           <div className="d-flex align-items-center gap-1">
+           <h6
               className="associate-wallet-title mb-0"
               style={{ color: "#4F5F90" }}
             >
               Associate Wallet
             </h6>
-            <img src={xMark} alt="" style={{cursor: "pointer"}} onClick={() => setConnectPopup(false)} />
+            <div className="position-relative d-flex align-items-center justify-content-center">
+            <img src={tooltip} width={20} height={20} style={{cursor: "pointer"}} alt="" onClick={() => setTooltipInfo(true)} />
+             <OutsideClickHandler onOutsideClick={() => setTooltipInfo(false)}>
+             <div className={`wallet-tooltip-content-wrapper ${tooltipInfo && "wallet-tooltip-active"}`}>
+                <span>Associate a wallet to this account for the chance of future rewards</span>
+                <br />
+                <span style={{color: "#FF8168"}}>NOTE: The wallet address cannot be changed so please be careful when you associate it</span>
+              </div>
+             </OutsideClickHandler>
+            </div>
+           </div>
+            <img
+              src={xMark}
+              alt=""
+              style={{ cursor: "pointer" }}
+              onClick={() => setConnectPopup(false)}
+            />
           </div>
-          <input type="text" placeholder="Wallet Address" className="px-2 associate-wallet-input w-100" />
-          <button className="submit-wallet-button py-2 px-3">Submit</button>
+          <input
+            type="text"
+            placeholder="Wallet Address"
+            value={inputData}
+            onChange={(e) => setInputData(e.target.value)}
+            className="px-2 associate-wallet-input w-100"
+          />
+          <button className="submit-wallet-button py-2 px-3" disabled={loadingWallet} onClick={() => handleWalletPost(inputData)}>{loadingWallet ? 
+        <div className="spinner-border spinner-border-sm text-info" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
+      :
+      "Submit"  
+        }</button>
         </div>
       </OutsideClickHandler>
     </>

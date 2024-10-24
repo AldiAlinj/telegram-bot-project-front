@@ -32,6 +32,7 @@ const App = () => {
     chestTimeStamp: undefined,
     referredUsers: [],
     referralCode: "",
+    walletAddress: "",
   });
   const [leaderboard, setLeaderboard] = useState({
     player: {},
@@ -104,6 +105,26 @@ const App = () => {
       }
     }
   }, [userData.chestTimeStamp]);
+
+  const postWalletAddress = async (wallet) => {
+    try {
+      const res = await axios.post(
+        `https://api.worldofdypians.com/api/link-wallet`,
+        {
+          token: jwt,
+          walletAddress: wallet
+        }
+      );
+      setUserData((prevState) => ({
+        ...prevState,
+       walletAddress: res.data.walletAddress,
+      }));
+
+    } catch (err) {
+      console.log(err);
+      
+    }
+  };
 
   const openHourlyChest = async () => {
     if (canClaimHourly) {
@@ -327,6 +348,8 @@ const App = () => {
                   tasks={userData.tasks.slice(0, 4)}
                   userData={userData}
                   handleCompleteTask={handleCompleteTask}
+                  walletAddress={userData.walletAddress}
+                  postWalletAddress={postWalletAddress}
                 />
               }
             />

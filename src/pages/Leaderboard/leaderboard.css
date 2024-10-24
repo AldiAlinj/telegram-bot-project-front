@@ -163,6 +163,7 @@
 .leaderboard-tab{
   border-radius: 10px;
   z-index: 2;
+  cursor: pointer;
 }
 
 .leaderboard-tab-title{
