@@ -166,7 +166,7 @@ const Leaderboard = ({ username, leaderboard, weeklyLeaderboard }) => {
                 <div className="d-flex align-items-center gap-2">
                   <img src={usdt} alt=""/>
                   <span className="player-usdt-amount">
-                    {getFormattedNumber(usdtPrizes[index], 0)} Points
+                    {getFormattedNumber(usdtPrizes[index], 0)}
                   </span>
                 </div>
                 <div className="d-flex align-items-center gap-2">
@@ -199,6 +199,12 @@ const Leaderboard = ({ username, leaderboard, weeklyLeaderboard }) => {
                   <div className="d-flex flex-column">
                     <h6 className="player-name mb-0">{item.username}</h6>
                   </div>
+                </div>
+                <div className="d-flex align-items-center gap-2">
+                  <img src={usdt} alt=""/>
+                  <span className="player-usdt-amount">
+                    {getFormattedNumber(usdtPrizes[index], 0)}
+                  </span>
                 </div>
                 <div className="d-flex align-items-center gap-2">
                   {/* <span className="player-score-amount">
