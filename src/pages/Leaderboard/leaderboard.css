@@ -24,6 +24,14 @@
   background-repeat: no-repeat;
 }
 
+.user-leaderboard-rank-weekly {
+  border-radius: 10px;
+  background: url('../../assets/userLeaderboardWeeklybg.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
 .user-name{
   color: #FFF;
   font-size: 14px;
@@ -57,6 +65,14 @@
   border-radius: 50%;
 }
 
+.name-holder-weekly {
+  width: 32px;
+  height: 32px;
+  background: #388F76;
+  border: 1px solid #fff;
+  border-radius: 50%;
+}
+
 .name-initial {
   color: #fff;
   text-align: center;
@@ -82,6 +98,15 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+.player-usdt-amount {
+color: #388F76;
+text-align: center;
+font-size: 10px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
 }
 
 .player-rank {
@@ -142,9 +167,15 @@
   border-radius: 10px;
   border: 1px solid #F2F0F8;
   background: #FFF;
-  
 }
 
+.view-previus-txt {
+  color: #4F5F90;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
 
 .leaderboard-tab-bg{
   width: 50%;
@@ -167,7 +198,7 @@
 }
 
 .leaderboard-tab-title{
-  color: #5690FF;
+  color: #AEB7D0;
 }
 
 .leaderboard-tab-title-active{
