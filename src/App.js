@@ -305,6 +305,7 @@ const App = () => {
         totalPoints: res.data.totalPoints,
         tasks: res.data.availableTasks,
         completedTasks: res.data.completedTasks,
+        tasksPoints: res.data.tasksPoints
       }));
     } catch (err) {
       console.log(err);
