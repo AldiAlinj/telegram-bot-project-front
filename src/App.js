@@ -216,6 +216,7 @@ const App = () => {
       alert(res.data.topUsers)
     } catch (err) {
       console.log(err);
+      alert(err)
     }
   };
 
