@@ -13,8 +13,11 @@ const DailyOpportunities = ({ tasks, completedTasks, handleCompleteTask }) => {
   );
 
   useEffect(() => {
-    setFilteredTasks(dailyOpportunities);
-  }, [dailyOpportunities]);
+    const initalFilter = tasks.filter(
+      (item) => item.partner === "daily-opportunities"
+    );
+    setFilteredTasks(initalFilter);
+  }, [tasks]);
 
   const filterTasks = (filter) => {
     setSocial(filter);
