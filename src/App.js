@@ -209,7 +209,7 @@ const App = () => {
         }
       );
       setWeeklyLeaderboard({
-        player: res.data.userPosition,
+        player: res.data.currentLeaderboard.userPosition,
         weeklyUsers: res.data.currentLeaderboard.topUsers,
         prevWeeklyUsers: res.data.previousLeaderboard.leaderboard,
       });
