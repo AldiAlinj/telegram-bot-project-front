@@ -69,7 +69,7 @@ const DailySession = ({
           className="d-flex align-items-center justify-content-end w-100 px-2"
           style={{ position: "absolute", top: "10px" }}
         >
-          <img src={xMark} onClick={onClose} alt="" />
+          <img src={xMark} onClick={onClose} alt="" style={{cursor: 'pointer'}}/>
         </div>
         <div className="daily-session-fire-wrapper w-100 d-flex justify-content-center align-items-center">
           <img src={fire} alt="" className="w-50" />
