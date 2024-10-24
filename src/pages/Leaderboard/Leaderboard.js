@@ -128,7 +128,7 @@ const Leaderboard = ({ username, leaderboard, weeklyLeaderboard }) => {
                 </div>
               </div>
             ))
-          : weeklyLeaderboard.users.map((item, index) => (
+          : weeklyLeaderboard.weeklyUsers.map((item, index) => (
               <div
                 key={index}
                 className="leaderboard-item d-flex align-items-center justify-content-between px-3 py-2"
