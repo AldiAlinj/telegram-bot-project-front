@@ -38,11 +38,11 @@ import Countdown from "react-countdown";
 import nextArrow from "../../assets/nextArrow.svg";
 import prevArrow from "../../assets/prevArrow.svg";
 
-const renderer = ({ hours, minutes, seconds }) => {
+const renderer = ({ minutes, seconds }) => {
   return (
     <span className="time-left">
-      {String(hours).padStart(2, "0")}:{String(minutes).padStart(2, "0")}:
-      {String(seconds).padStart(2, "0")}
+      {String(minutes).padStart(2, "0")}m:
+      {String(seconds).padStart(2, "0")}s
     </span>
   );
 };
@@ -70,7 +70,6 @@ const ChestSlider = ({
   var settings = {
     dots: false,
     arrows: false,
-    dotsClass: "button__bar",
     infinite: true,
     fade: true,
     speed: 500,
@@ -176,6 +175,7 @@ const ChestSlider = ({
           {chests.map((item, index) => (
             <div
               className="position-relative d-flex align-items-center justify-content-center"
+              style={{cursor: "pointer"}}
               key={index}
               onClick={() => claimChest(index)}
             >
@@ -212,10 +212,11 @@ const ChestSlider = ({
         </button>
       ) : canClaimHourly && loadingChest ? (
         <button
-          className={`play-page-button chest-button play-button-disabled py-2 px-4`}
+          className={`play-page-button chest-button  py-2 px-4`}
+          disabled
         >
           <div
-            className="spinner-border spinner-border-sm text-info"
+            className="spinner-border spinner-border-sm text-info loading-chest-color"
             role="status"
           >
             <span className="visually-hidden">Loading...</span>
@@ -223,9 +224,10 @@ const ChestSlider = ({
         </button>
       ) : !canClaimHourly ? (
         <button
-          className={`play-page-button play-page-button-disabled chest-button  py-2 px-4`}
+          className={`play-page-button countdown-button d-flex align-items-center justify-content-between chest-button  py-2 px-4`}
           disabled={true}
         >
+          Next in
           <Countdown
             renderer={renderer}
             date={chestTimeStamp}

@@ -12,10 +12,10 @@
 }
 
 .play-page-button {
-  background: #fff;
+  background: #FFFBF1;
   border-radius: 100px;
   width: 100%;
-  color: #5690ff;
+  color: #787366;
   text-align: center;
   font-size: 18px;
   font-style: normal;
@@ -23,11 +23,15 @@
   line-height: 24px; /* 150% */
   letter-spacing: 0.4px;
   text-transform: capitalize;
-  border-bottom: 5px solid #8cb1ff;
+  border-bottom: 5px solid #787366;
   border-top: none;
   border-left: none;
   border-right: none;
   width: 75%;
+}
+
+.loading-chest-color{
+  color: #787366 !important;
 }
 
 .play-page-button-disabled{
@@ -53,6 +57,12 @@
   font-weight: 400;
   line-height: 123.725%; /* 14.847px */
   letter-spacing: 0.4px;
+}
+
+.countdown-button{
+  background: #FFE7AA !important;
+  color: #4C4637 !important;
+  border-bottom:5px solid #4C4637 !important;
 }
 
 .hourly-chest-reward {
