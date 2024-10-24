@@ -39,6 +39,11 @@ const App = () => {
     users: [],
     userCount: 0,
   });
+  const [weeklyLeaderboard, setWeeklyLeaderboard] = useState({
+    player: {},
+    weeklyUsers: [],
+    prevWeeklyUsers: [],
+  })
   const [jwt, setJwt] = useState();
   const [dailySession, setDailySession] = useState(true);
   const [loadingClaim, setLoadingClaim] = useState(false);
@@ -195,6 +200,23 @@ const App = () => {
       console.log(err);
     }
   };
+  const fetchWeeklyLeaderboard = async (token) => {
+    try {
+      const res = await axios.post(
+        `https://api.worldofdypians.com/api/weekly-leaderboard`,
+        {
+          token: token,
+        }
+      );
+      setWeeklyLeaderboard({
+        player: res.data.userPosition,
+        weeklyUsers: res.data.topUsers,
+        prevWeeklyUsers: res.data.topUsers,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const claimDailySession = async (token) => {
     setLoadingClaim(true);
@@ -267,6 +289,7 @@ const App = () => {
 
   useEffect(() => {
     fetchLeaderboard(jwt);
+    fetchWeeklyLeaderboard(jwt);
   }, [jwt]);
 
   const handleCompleteTask = async (taskId) => {
@@ -357,7 +380,7 @@ const App = () => {
             <Route
               path="/leaderboard"
               element={
-                <Leaderboard username={username} leaderboard={leaderboard} />
+                <Leaderboard username={username} leaderboard={leaderboard} weeklyLeaderboard={weeklyLeaderboard} />
               }
             />
             <Route
