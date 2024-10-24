@@ -36,7 +36,9 @@ const TaskItem = ({ item, handleCompleteTask }) => {
             className="home-task-name"
             style={{ textDecoration: "none", color: "#46557B" }}
           >
-            {item.title}
+             {item.title.length < 30
+                ? item.title
+                : item.title?.slice(0, 20) + "..."}
           </span>
         </div>
       </div>
