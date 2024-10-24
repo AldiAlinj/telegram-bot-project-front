@@ -13,6 +13,7 @@ import axios from "axios";
 import DailySession from "./components/DailySession/DailySession";
 import EarnPartner from "./pages/Earn/EarnPartner";
 import Play from "./pages/Play/Play";
+import DailyOpportunities from "./pages/Earn/DailyOpportunities";
 
 const App = () => {
   const [showWelcome, setShowWelcome] = useState(true);
@@ -422,6 +423,16 @@ const App = () => {
               path="/earn/:partnerId"
               element={
                 <EarnPartner
+                  tasks={userData.tasks}
+                  completedTasks={userData.completedTasks}
+                  handleCompleteTask={handleCompleteTask}
+                />
+              }
+            />
+            <Route
+              path="/earn/daily-opportunities"
+              element={
+                <DailyOpportunities
                   tasks={userData.tasks}
                   completedTasks={userData.completedTasks}
                   handleCompleteTask={handleCompleteTask}
