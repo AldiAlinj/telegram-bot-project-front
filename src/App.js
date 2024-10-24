@@ -45,6 +45,7 @@ const App = () => {
   });
   const [weeklyLeaderboard, setWeeklyLeaderboard] = useState({
     player: {},
+    prevPlayer: {},
     weeklyUsers: [],
     prevWeeklyUsers: [],
   });
@@ -222,6 +223,7 @@ const App = () => {
       );
       setWeeklyLeaderboard({
         player: res.data.currentLeaderboard.userPosition,
+        prevPlayer: res.data.previousLeaderboard.userPosition,
         weeklyUsers: res.data.currentLeaderboard.topUsers,
         prevWeeklyUsers: res.data.previousLeaderboard.leaderboard,
       });

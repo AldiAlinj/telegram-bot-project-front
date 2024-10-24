@@ -28,6 +28,8 @@ const Home = ({
   const [inputData, setInputData] = useState("");
   const [tooltipInfo, setTooltipInfo] = useState(false);
 
+  const homeTasks = tasks.filter((item) => item.partner === "world-of-dypians");
+
   const handlePopup = () => {
     if (walletAddress) {
       return;
@@ -103,17 +105,30 @@ const Home = ({
         <div className="d-flex flex-column gap-2 mt-3">
           <h6 className="home-tasks-title mb-0">Earn</h6>
           <div className="home-tasks-container d-flex flex-column gap-2 position-relative mb-4">
-            {tasks.map((task, index) => (
-              <TaskItem
-                item={task}
-                key={index}
-                handleCompleteTask={handleCompleteTask}
-              />
-            ))}
+            {homeTasks.length > 0 ? (
+              homeTasks
+                .slice(0, 4)
+                .map((task, index) => (
+                  <TaskItem
+                    item={task}
+                    key={index}
+                    handleCompleteTask={handleCompleteTask}
+                  />
+                ))
+            ) : (
+              <div className="d-flex w-100 align-items-center justify-content-center  flex-column mt-5">
+                <h6 className="empty-title">No tasks Available.</h6>
+                <h6 className="empty-title">Stay tuned for more!</h6>
+              </div>
+            )}
 
-            <NavLink to={"/earn"}>
-              <button className="show-more-button py-1 px-2">Show more</button>
-            </NavLink>
+            {homeTasks.length >= 4 && (
+              <NavLink to={"/earn"}>
+                <button className="show-more-button py-1 px-2">
+                  Show more
+                </button>
+              </NavLink>
+            )}
           </div>
         </div>
       </div>
