@@ -213,7 +213,7 @@ const App = () => {
         weeklyUsers: res.data.topUsers,
         prevWeeklyUsers: res.data.topUsers,
       });
-      alert(res.data.topUsers)
+      alert(res.data.topUsers[0])
     } catch (err) {
       console.log(err);
       alert(err)
