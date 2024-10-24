@@ -172,7 +172,7 @@ const Leaderboard = ({ username, leaderboard, weeklyLeaderboard }) => {
                 key={index}
                 className="leaderboard-item d-flex align-items-center justify-content-between px-3 py-2"
               >
-                <div className="d-flex align-items-center gap-2">
+                <div className="d-flex align-items-center gap-2 col-4">
                   <div className="name-holder d-flex align-items-center justify-content-center">
                     <span className="name-initial">
                       {item.username.slice(0, 1)}
@@ -209,7 +209,7 @@ const Leaderboard = ({ username, leaderboard, weeklyLeaderboard }) => {
                 key={index}
                 className="leaderboard-item d-flex align-items-center justify-content-between px-3 py-2"
               >
-                <div className="d-flex align-items-center gap-2">
+                <div className="d-flex align-items-center gap-2 col-4">
                   <div className="name-holder d-flex align-items-center justify-content-center">
                     <span className="name-initial">
                       {item.username.slice(0, 1)}
