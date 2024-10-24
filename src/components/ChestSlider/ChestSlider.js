@@ -57,6 +57,7 @@ const ChestSlider = ({
 }) => {
   const [chestIndex, setChestIndex] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [persistIndex, setPersistIndex] = useState(null)
   const sliderRef = useRef(null);
 
   const nextSlide = () => {
@@ -87,6 +88,7 @@ const ChestSlider = ({
         onClaim();
         sessionStorage.setItem("hasOpened", id);
         setChestIndex(id);
+        setPersistIndex(id);
       }
     }, 2500);
   };
@@ -144,7 +146,7 @@ const ChestSlider = ({
 
   return (
     <>
-      {reward > 0 ? (
+      {reward > 0 && persistIndex === activeIndex ? (
         <div className="d-flex flex-column gap-2 align-items-center chest-rewards-position">
           <div className="won-reward">{getFormattedNumber(reward, 0)}</div>
           <span className="you-won-text">Points</span>

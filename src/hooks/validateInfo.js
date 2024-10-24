@@ -3,7 +3,7 @@ export default function validateInfo(walletAddress) {
   if (!walletAddress) {
     error = "Wallet Address required";
   } else if (!/^0x[a-fA-F0-9]{40}$/g.test(walletAddress)) {
-    error = "Wallet Addres is invalid";
+    error = "Wallet Address is invalid";
   }
   return error;
 }

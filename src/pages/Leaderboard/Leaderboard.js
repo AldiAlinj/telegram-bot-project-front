@@ -45,7 +45,7 @@ const Leaderboard = ({ username, leaderboard, weeklyLeaderboard }) => {
                 <span className="user-score-amount">
                   {getFormattedNumber(leaderboard.player?.points, 0)} Points
                 </span>
-              ): type === "weekly" && weeklyState === "current" ? (
+              ) : type === "weekly" && weeklyState === "current" ? (
                 <span className="user-score-amount">
                   {getFormattedNumber(
                     weeklyLeaderboard.player?.weeklyPoints,
@@ -53,15 +53,17 @@ const Leaderboard = ({ username, leaderboard, weeklyLeaderboard }) => {
                   )}{" "}
                   Points
                 </span>
-              ): 
-              <span className="user-score-amount">
+              ) : type === "weekly" && weeklyState === "previous" ? (
+                <span className="user-score-amount">
                   {getFormattedNumber(
                     weeklyLeaderboard.prevPlayer?.weeklyPoints,
                     0
                   )}{" "}
                   Points
                 </span>
-              }
+              ) : (
+                <></>
+              )}
             </div>
           </div>
           {type === "global" ? (
@@ -74,26 +76,35 @@ const Leaderboard = ({ username, leaderboard, weeklyLeaderboard }) => {
             ) : (
               <span className="user-rank">#{leaderboard.player?.position}</span>
             )
-          ) :type === "weekly" && weeklyState === "current" ? weeklyLeaderboard.player?.rank === 1 ? (
-            <img src={goldMedal} alt="gold" />
-          ) : weeklyLeaderboard.player?.rank === 2 ? (
-            <img src={silverMedal} alt="silver" />
-          ) : weeklyLeaderboard.player?.rank === 3 ? (
-            <img src={bronzeMedal} alt="bronze" />
+          ) : type === "weekly" && weeklyState === "current" ? (
+            weeklyLeaderboard.player?.rank === 1 ? (
+              <img src={goldMedal} alt="gold" />
+            ) : weeklyLeaderboard.player?.rank === 2 ? (
+              <img src={silverMedal} alt="silver" />
+            ) : weeklyLeaderboard.player?.rank === 3 ? (
+              <img src={bronzeMedal} alt="bronze" />
+            ) : (
+              <span className="user-rank">
+                #{weeklyLeaderboard.player?.rank}
+              </span>
+            )
+          ) : type === "weekly" && weeklyState === "previous" ? (
+            <>
+              {weeklyLeaderboard.prevPlayer?.rank === 1 ? (
+                <img src={goldMedal} alt="gold" />
+              ) : weeklyLeaderboard.prevPlayer?.rank === 2 ? (
+                <img src={silverMedal} alt="silver" />
+              ) : weeklyLeaderboard.prevPlayer?.rank === 3 ? (
+                <img src={bronzeMedal} alt="bronze" />
+              ) : (
+                <span className="user-rank">
+                  #{weeklyLeaderboard.prevPlayer?.rank}
+                </span>
+              )}
+            </>
           ) : (
-            <span className="user-rank">#{weeklyLeaderboard.player?.rank}</span>
-          )
-        :
-        weeklyLeaderboard.prevPlayer?.rank === 1 ? (
-          <img src={goldMedal} alt="gold" />
-        ) : weeklyLeaderboard.prevPlayer?.rank === 2 ? (
-          <img src={silverMedal} alt="silver" />
-        ) : weeklyLeaderboard.prevPlayer?.rank === 3 ? (
-          <img src={bronzeMedal} alt="bronze" />
-        ) : (
-          <span className="user-rank">#{weeklyLeaderboard.prevPlayer?.rank}</span>
-        )
-        }
+            <></>
+          )}
         </div>
         <div className="d-flex mt-3 align-items-bottom justify-content-between">
           <h6 className="mb-0 wod-total-holders">
@@ -183,7 +194,7 @@ const Leaderboard = ({ username, leaderboard, weeklyLeaderboard }) => {
                   </div>
                 </div>
                 <div className="d-flex align-items-center gap-2">
-                  <img src={usdt} alt=""/>
+                  <img src={usdt} alt="" />
                   <span className="player-usdt-amount">
                     {getFormattedNumber(usdtPrizes[index], 0)}
                   </span>
@@ -220,15 +231,15 @@ const Leaderboard = ({ username, leaderboard, weeklyLeaderboard }) => {
                   </div>
                 </div>
                 <div className="d-flex align-items-center gap-2">
-                  <img src={usdt} alt=""/>
+                  <img src={usdt} alt="" />
                   <span className="player-usdt-amount">
                     {getFormattedNumber(usdtPrizes[index], 0)}
                   </span>
                 </div>
                 <div className="d-flex align-items-center gap-2">
                   <span className="player-score-amount">
-                  {getFormattedNumber(item.weeklyPoints, 0)} Points
-                </span>
+                    {getFormattedNumber(item.weeklyPoints, 0)} Points
+                  </span>
                   {index + 1 === 1 ? (
                     <img src={goldMedal} alt="" />
                   ) : index + 1 === 2 ? (
