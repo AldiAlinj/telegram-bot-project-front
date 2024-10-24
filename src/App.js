@@ -71,11 +71,7 @@ const App = () => {
         `https://api.worldofdypians.com/api/tg_auth`,
         body
       );
-      const referredUsers = res.data.userData.referredUsers;
-      const sumRewards = referredUsers.reduce(
-        (acc, item) => acc + item.earnedPoints,
-        0
-      );
+
       setUserData({
         tasks: res.data.userData.availableTasks,
         completedTasks: res.data.userData.completedTasks,
@@ -90,7 +86,7 @@ const App = () => {
         referredUsers: res.data.userData.referredUsers,
         referralCode: res.data.userData.referralCode,
         walletAddress: res.data.userData.walletAddress,
-        referralPoints: sumRewards,
+        referralPoints: res.data.userData.referralPoints,
       });
       setLoadingChest(false);
 
