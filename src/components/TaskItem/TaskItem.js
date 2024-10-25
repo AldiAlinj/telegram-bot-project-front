@@ -3,11 +3,11 @@ import "./taskitem.css";
 import rightArrow from "../../assets/rightArrow.svg";
 import getFormattedNumber from "../../hooks/getFormattedNumber";
 import coin from "../../assets/dailySession/coin.png";
+import { toast, ToastContainer } from "react-toastify";
 
 const TaskItem = ({ item, handleCompleteTask }) => {
   const [loading, setLoading] = useState(false);
   const [check, setCheck] = useState(false);
-  const [error, setError] = useState(false);
 
   const completeTask = (id) => {
     setLoading(true);
@@ -17,10 +17,8 @@ const TaskItem = ({ item, handleCompleteTask }) => {
         setLoading(false);
       } else {
         setLoading(false);
-        setError(true);
-        setTimeout(() => {
-          setError(false);
-        }, 2000);
+        toast("You have not completed the task!")
+        
       }
     }, 4000);
   };
@@ -39,7 +37,6 @@ const TaskItem = ({ item, handleCompleteTask }) => {
         style={{
           textDecoration: "none",
           pointerEvents: loading ? "none" : "auto",
-          border: error ? "1px solid red" : "1px solid #f2f0f8",
         }}
         className={`home-task-item p-2 d-flex w-100 align-items-center justify-content-between`}
       >
@@ -90,6 +87,7 @@ const TaskItem = ({ item, handleCompleteTask }) => {
       >
         <span className="check-task">Check</span>
       </div>
+      <ToastContainer />
     </div>
   );
 };
