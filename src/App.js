@@ -405,6 +405,7 @@ const App = () => {
                   username={username}
                   leaderboard={leaderboard}
                   weeklyLeaderboard={weeklyLeaderboard}
+                  totalPoints={userData.totalPoints}
                 />
               }
             />

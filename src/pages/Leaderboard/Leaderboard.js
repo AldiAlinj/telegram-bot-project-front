@@ -7,14 +7,42 @@ import usdt from "../../assets/usdt.svg";
 
 import getFormattedNumber from "../../hooks/getFormattedNumber";
 
-const Leaderboard = ({ username, leaderboard, weeklyLeaderboard }) => {
+const Leaderboard = ({ username, leaderboard, weeklyLeaderboard, totalPoints }) => {
   const [type, setType] = useState("global");
   const [weeklyState, setWeeklyState] = useState("current");
+  const [globalLeaderboard, setGlobalLeaderboard] = useState([])
 
   const usdtPrizes = [
     200, 180, 160, 140, 120, 100, 100, 100, 100, 100, 90, 80, 70, 60, 50, 50,
     50, 50, 50, 50, 20, 20, 20, 20, 20,
   ];
+
+
+  const updateUserScoreAndSort = (array, username, totalPoints) => {
+    // Check if the user exists in the array
+    const userExists = array.users.some(user => user.username === username);
+  
+    // If user exists, update the score and sort the array
+    if (userExists) {
+      const updatedArray = array.users.map(user =>
+        user.username === username ? { ...user, totalPoints: totalPoints } : user
+      );
+  
+      // Sort the array by score, highest to lowest
+      return updatedArray.sort((a, b) => b.totalPoints - a.totalPoints);
+    }
+  
+    return array; // Return the array unchanged if the username is not found
+  }
+
+  useEffect(() => {
+    const updatedLeaderboard = updateUserScoreAndSort(leaderboard, username, totalPoints)
+    setGlobalLeaderboard(updatedLeaderboard)
+  }, [leaderboard, totalPoints, username])
+  
+
+
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -146,7 +174,7 @@ const Leaderboard = ({ username, leaderboard, weeklyLeaderboard }) => {
       </div>
       <div className="players-leaderboard d-flex flex-column">
         {type === "global"
-          ? leaderboard.users.map((item, index) => (
+          ? globalLeaderboard.users.map((item, index) => (
               <div
                 key={index}
                 className="leaderboard-item d-flex align-items-center justify-content-between px-3 py-2"
