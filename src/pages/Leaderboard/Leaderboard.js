@@ -7,42 +7,58 @@ import usdt from "../../assets/usdt.svg";
 
 import getFormattedNumber from "../../hooks/getFormattedNumber";
 
-const Leaderboard = ({ username, leaderboard, weeklyLeaderboard, totalPoints }) => {
+const Leaderboard = ({
+  username,
+  leaderboard,
+  weeklyLeaderboard,
+  totalPoints,
+}) => {
   const [type, setType] = useState("global");
   const [weeklyState, setWeeklyState] = useState("current");
-  const [globalLeaderboard, setGlobalLeaderboard] = useState([])
+  const [globalLeaderboard, setGlobalLeaderboard] = useState([]);
+  const [globalUser, setGlobalUser] = useState({});
 
   const usdtPrizes = [
     200, 180, 160, 140, 120, 100, 100, 100, 100, 100, 90, 80, 70, 60, 50, 50,
     50, 50, 50, 50, 20, 20, 20, 20, 20,
   ];
 
-
   const updateUserScoreAndSort = (array, username, totalPoints) => {
     // Check if the user exists in the array
-    const userExists = array.users.some(user => user.username === username);
-  
+    const userExists = array.users.some((user) => user.username === username);
+
     // If user exists, update the score and sort the array
     if (userExists) {
-      const updatedArray = array.users.map(user =>
-        user.username === username ? { ...user, totalPoints: totalPoints } : user
+      const updatedArray = array.users.map((user) =>
+        user.username === username
+          ? { ...user, totalPoints: totalPoints }
+          : user
       );
-  
-      // Sort the array by score, highest to lowest
-      return updatedArray.sort((a, b) => b.totalPoints - a.totalPoints);
+      const sortedArray = updatedArray.sort(
+        (a, b) => b.totalPoints - a.totalPoints
+      );
+
+      // Find the updated user
+      const updatedUser = sortedArray.find(
+        (user) => user.username === username
+      );
+
+      // Return both the sorted array and the updated user
+      return { sortedArray, updatedUser };
     }
-  
-    return array; // Return the array unchanged if the username is not found
-  }
+
+    return { sortedArray: array, updatedUser: null };
+  };
 
   useEffect(() => {
-    const updatedLeaderboard = updateUserScoreAndSort(leaderboard, username, totalPoints)
-    setGlobalLeaderboard(updatedLeaderboard)
-  }, [leaderboard, totalPoints, username])
-  
-
-
-
+    const {sortedArray, updatedUser} = updateUserScoreAndSort(
+      leaderboard,
+      username,
+      totalPoints
+    );
+    setGlobalLeaderboard(sortedArray);
+    setGlobalUser(updatedUser)
+  }, [leaderboard, totalPoints, username]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -71,7 +87,7 @@ const Leaderboard = ({ username, leaderboard, weeklyLeaderboard, totalPoints }) 
               <h6 className="user-name mb-0">{username}</h6>
               {type === "global" ? (
                 <span className="user-score-amount">
-                  {getFormattedNumber(leaderboard.player?.points, 0)} Points
+                  {getFormattedNumber(totalPoints, 0)} Points
                 </span>
               ) : type === "weekly" && weeklyState === "current" ? (
                 <span className="user-score-amount">
@@ -95,14 +111,14 @@ const Leaderboard = ({ username, leaderboard, weeklyLeaderboard, totalPoints }) 
             </div>
           </div>
           {type === "global" ? (
-            leaderboard.player?.position === 1 ? (
+            globalUser?.rank === 1 ? (
               <img src={goldMedal} alt="gold" />
-            ) : leaderboard.player?.position === 2 ? (
+            ) : globalUser?.rank === 2 ? (
               <img src={silverMedal} alt="silver" />
-            ) : leaderboard.player?.position === 3 ? (
+            ) : globalUser?.rank === 3 ? (
               <img src={bronzeMedal} alt="bronze" />
             ) : (
-              <span className="user-rank">#{leaderboard.player?.position}</span>
+              <span className="user-rank">#{globalUser?.rank}</span>
             )
           ) : type === "weekly" && weeklyState === "current" ? (
             weeklyLeaderboard.player?.rank === 1 ? (
