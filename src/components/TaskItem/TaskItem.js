@@ -18,7 +18,7 @@ const TaskItem = ({ item, handleCompleteTask }) => {
         setLoading(false);
       } else {
         setLoading(false);
-        toast("You have not completed the task!", {
+        toast.error("You have not completed the task!", {
           className: "custom-toast",
           progressClassName: "custom-progress",
         });
