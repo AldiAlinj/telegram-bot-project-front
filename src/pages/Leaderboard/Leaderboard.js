@@ -100,6 +100,7 @@ const Leaderboard = ({
     window.scrollTo(0, 0);
   }, []);
 
+  console.log(weeklySorted, weeklyLeaderboard.weeklyUsers);
   
   return (
     <div className="container-fluid leaderboard-wrapper pt-4 pb-3">
