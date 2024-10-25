@@ -27,11 +27,13 @@ const DailyTaskItem = ({ item, handleCompleteTask }) => {
       }}
       className={`home-task-item d-flex flex-column`}
     >
-      <img src={item.banner_url} alt="" className="task-banner" />
+      {item.banner_url !== "" && (
+        <img src={item.banner_url} alt="" className="task-banner" />
+      )}
       <div className=" p-2 d-flex w-100 align-items-center justify-content-between">
         <div className="d-flex align-items-center gap-2">
           <img
-            src={require(`../../assets/${item.type}.svg`)}
+            src={require(`../../assets/${item.partner}.svg`)}
             height={36}
             width={36}
             alt=""

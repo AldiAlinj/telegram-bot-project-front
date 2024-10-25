@@ -24,6 +24,10 @@ const DailyOpportunities = ({ tasks, completedTasks, handleCompleteTask }) => {
     setFilteredTasks(dailyOpportunities.filter((item) => item.type === filter));
   };
 
+
+  console.log(dailyOpportunities);
+  
+
   return (
     <div className="container-fluid earn-wrapper pt-4 pb-3">
       <div className="d-flex flex-column gap-2 ">
