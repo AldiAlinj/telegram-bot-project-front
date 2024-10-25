@@ -71,3 +71,12 @@
   object-fit: cover;
   border-radius: 10px;
 }
+
+.check-task{
+  color: #fff;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+}
