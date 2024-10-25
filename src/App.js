@@ -16,6 +16,7 @@ import Play from "./pages/Play/Play";
 import DailyOpportunities from "./pages/Earn/DailyOpportunities";
 import validateInfo from "./hooks/validateInfo";
 import successSound from './assets/success.mp3'
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   const [showWelcome, setShowWelcome] = useState(true);
@@ -480,6 +481,7 @@ const App = () => {
           />
           <ComingSoon show={airdrop} onClose={() => setAirdrop(false)} />
           <Navbar showAirdrop={() => setAirdrop(true)} />
+          <ToastContainer />
         </>
       )}
     </div>
