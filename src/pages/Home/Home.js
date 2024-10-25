@@ -30,6 +30,40 @@ const Home = ({
 
   const homeTasks = tasks.filter((item) => item.partner === "world-of-dypians");
 
+
+  const dummyTasks = [
+    {
+      type: "kucoin",
+      link: "https://x.com/KuCoinCom",
+      title: "Follow KuCoin on Twitter",
+      reward: 1500,
+      _id: "kucoin"
+    },
+    {
+      type: "wod",
+      link: "https://x.com/worldofdypians",
+      title: "Follow World of Dypians on Twitter",
+      reward: 750,
+      _id: "wod"
+    },
+    {
+      type: "wod",
+      link: "https://x.com/worldofdypians",
+      title: "Connect World of Dypians on Telegram",
+      reward: 750,
+      _id: "wod"
+    },
+    {
+      type: "wod",
+      link: "https://x.com/worldofdypians",
+      title: "Follow World of Dypians on Instagram",
+      reward: 750,
+      _id: "wod"
+    },
+
+    
+  ]
+
   const handlePopup = () => {
     if (walletAddress) {
       return;
@@ -105,8 +139,8 @@ const Home = ({
         <div className="d-flex flex-column gap-2 mt-3">
           <h6 className="home-tasks-title mb-0">Earn</h6>
           <div className="home-tasks-container d-flex flex-column gap-2 position-relative mb-4">
-            {homeTasks.length > 0 ? (
-              homeTasks
+            {dummyTasks.length > 0 ? (
+              dummyTasks
                 .slice(0, 4)
                 .map((task, index) => (
                   <TaskItem
