@@ -63,20 +63,20 @@ const Leaderboard = ({
           ? { ...user, weeklyPoints: weeklyPoints }
           : user
       );
-      const sortedArray = updatedArray.sort(
+      const sortedWeekly = updatedArray.sort(
         (a, b) => b.weeklyPoints - a.weeklyPoints
       ).map((user, index) => ({ ...user, rank: index + 1 }));
 
       // Find the updated user
-      const updatedUser = sortedArray.find(
+      const updatedUserWeekly = sortedWeekly.find(
         (user) => user.username === username
       );
 
       // Return both the sorted array and the updated user
-      return { sortedArray, updatedUser };
+      return { sortedWeekly, updatedUserWeekly };
     }
 
-    return { sortedArray: array, updatedUser: null };
+    return { sortedWeekly: array, updatedUserWeekly: null };
   };
 
   useEffect(() => {
@@ -100,7 +100,7 @@ const Leaderboard = ({
     window.scrollTo(0, 0);
   }, []);
 
-  console.log(weeklySorted, weeklyLeaderboard.weeklyUsers, weeklyPoints, leaderboard.users, totalPoints);
+  console.log(weeklySorted, globalLeaderboard, weeklyLeaderboard.weeklyUsers, weeklyPoints, leaderboard.users, totalPoints);
   
   return (
     <div className="container-fluid leaderboard-wrapper pt-4 pb-3">
