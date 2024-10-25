@@ -25,6 +25,10 @@ const TaskItem = ({ item, handleCompleteTask }) => {
     }, 4000);
   };
 
+  const handleRedirect = (url) => {
+    window.Telegram.WebApp.openLink(url);
+  };
+
   useEffect(() => {
     if (item.type === "telegram") {
       setCheck(true);
@@ -33,11 +37,8 @@ const TaskItem = ({ item, handleCompleteTask }) => {
 
   return (
     <div className="d-flex flex-column">
-      <a
-        href={item.link}
-        target="_blank"
-        rel="noreferrer"
-        onClick={() => setCheck(true)}
+      <div
+        onClick={() => {handleRedirect(item.link); setCheck(true);}}
         style={{
           textDecoration: "none",
           pointerEvents: loading ? "none" : "auto",
@@ -80,7 +81,7 @@ const TaskItem = ({ item, handleCompleteTask }) => {
             <img src={rightArrow} alt="rightarrow" />
           </div>
         )}
-      </a>
+      </div>
       {item.type !== "telegram" && (
         <div
           className="completed-reward-wrapper d-flex align-items-center p-1 gap-1 mt-1"
