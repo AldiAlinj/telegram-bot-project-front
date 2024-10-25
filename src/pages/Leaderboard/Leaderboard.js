@@ -7,19 +7,100 @@ import usdt from "../../assets/usdt.svg";
 
 import getFormattedNumber from "../../hooks/getFormattedNumber";
 
-const Leaderboard = ({ username, leaderboard, weeklyLeaderboard }) => {
+const Leaderboard = ({
+  username,
+  leaderboard,
+  weeklyLeaderboard,
+  totalPoints,
+  weeklyPoints
+}) => {
   const [type, setType] = useState("global");
   const [weeklyState, setWeeklyState] = useState("current");
+  const [globalLeaderboard, setGlobalLeaderboard] = useState([]);
+  const [globalUser, setGlobalUser] = useState({});
+  const [weeklySorted, setWeeklySorted] = useState([]);
+  const [weeklyUser, setWeeklyUser] = useState({})
 
   const usdtPrizes = [
     200, 180, 160, 140, 120, 100, 100, 100, 100, 100, 90, 80, 70, 60, 50, 50,
     50, 50, 50, 50, 20, 20, 20, 20, 20,
   ];
 
+  const updateUserScoreAndSort = (array, username, totalPoints) => {
+    // Check if the user exists in the array
+    const userExists = array.some((user) => user.username === username);
+
+    // If user exists, update the score and sort the array
+    if (userExists) {
+      const updatedArray = array.map((user) =>
+        user.username === username
+          ? { ...user, totalPoints: totalPoints }
+          : user
+      );
+      const sortedArray = updatedArray.sort(
+        (a, b) => b.totalPoints - a.totalPoints
+      ).map((user, index) => ({ ...user, rank: index + 1 }));
+
+      // Find the updated user
+      const updatedUser = sortedArray.find(
+        (user) => user.username === username
+      );
+
+      // Return both the sorted array and the updated user
+      return { sortedArray, updatedUser };
+    }
+
+    return { sortedArray: array, updatedUser: null };
+  };
+  const updateUserScoreAndSortWeekly = (array, username, weeklyPoints) => {
+    // Check if the user exists in the array
+    const userExists = array.some((user) => user.username === username);
+
+    // If user exists, update the score and sort the array
+    if (userExists) {
+      const updatedArray = array.map((user) =>
+        user.username === username
+          ? { ...user, weeklyPoints: weeklyPoints }
+          : user
+      );
+      const sortedWeekly = updatedArray.sort(
+        (a, b) => b.weeklyPoints - a.weeklyPoints
+      ).map((user, index) => ({ ...user, rank: index + 1 }));
+
+      // Find the updated user
+      const updatedUserWeekly = sortedWeekly.find(
+        (user) => user.username === username
+      );
+
+      // Return both the sorted array and the updated user
+      return { sortedWeekly, updatedUserWeekly };
+    }
+
+    return { sortedWeekly: array, updatedUserWeekly: null };
+  };
+
+  useEffect(() => {
+    const {sortedArray, updatedUser} = updateUserScoreAndSort(
+      leaderboard.users,
+      username,
+      totalPoints
+    );
+    const {sortedWeekly, updatedUserWeekly} = updateUserScoreAndSortWeekly(
+      weeklyLeaderboard.weeklyUsers,
+      username,
+      weeklyPoints
+    )
+    setGlobalLeaderboard(sortedArray);
+    setGlobalUser(updatedUser);
+    setWeeklySorted(sortedWeekly)
+    setWeeklyUser(updatedUserWeekly)
+  }, [leaderboard, totalPoints, username, weeklyLeaderboard, weeklyPoints]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  
   return (
     <div className="container-fluid leaderboard-wrapper pt-4 pb-3">
       <div className="d-flex flex-column gap-2">
@@ -43,37 +124,67 @@ const Leaderboard = ({ username, leaderboard, weeklyLeaderboard }) => {
               <h6 className="user-name mb-0">{username}</h6>
               {type === "global" ? (
                 <span className="user-score-amount">
-                  {getFormattedNumber(leaderboard.player?.points, 0)} Points
+                  {getFormattedNumber(totalPoints, 0)} Points
                 </span>
-              ) : (
+              ) : type === "weekly" && weeklyState === "current" ? (
                 <span className="user-score-amount">
                   {getFormattedNumber(
-                    weeklyLeaderboard.player?.weeklyPoints,
+                    weeklyPoints,
                     0
                   )}{" "}
                   Points
                 </span>
+              ) : type === "weekly" && weeklyState === "previous" ? (
+                <span className="user-score-amount">
+                  {getFormattedNumber(
+                    weeklyLeaderboard.prevPlayer?.weeklyPoints,
+                    0
+                  )}{" "}
+                  Points
+                </span>
+              ) : (
+                <></>
               )}
             </div>
           </div>
           {type === "global" ? (
-            leaderboard.player?.position === 1 ? (
+            globalUser?.rank === 1 ? (
               <img src={goldMedal} alt="gold" />
-            ) : leaderboard.player?.position === 2 ? (
+            ) : globalUser?.rank === 2 ? (
               <img src={silverMedal} alt="silver" />
-            ) : leaderboard.player?.position === 3 ? (
+            ) : globalUser?.rank === 3 ? (
               <img src={bronzeMedal} alt="bronze" />
             ) : (
-              <span className="user-rank">#{leaderboard.player?.position}</span>
+              <span className="user-rank">#{globalUser?.rank}</span>
             )
-          ) : weeklyLeaderboard.player?.rank === 1 ? (
-            <img src={goldMedal} alt="gold" />
-          ) : weeklyLeaderboard.player?.rank === 2 ? (
-            <img src={silverMedal} alt="silver" />
-          ) : weeklyLeaderboard.player?.rank === 3 ? (
-            <img src={bronzeMedal} alt="bronze" />
+          ) : type === "weekly" && weeklyState === "current" ? (
+            weeklyUser?.rank === 1 ? (
+              <img src={goldMedal} alt="gold" />
+            ) : weeklyUser?.rank === 2 ? (
+              <img src={silverMedal} alt="silver" />
+            ) : weeklyUser?.rank === 3 ? (
+              <img src={bronzeMedal} alt="bronze" />
+            ) : (
+              <span className="user-rank">
+                #{weeklyUser?.rank}
+              </span>
+            )
+          ) : type === "weekly" && weeklyState === "previous" ? (
+            <>
+              {weeklyLeaderboard.prevPlayer?.rank === 1 ? (
+                <img src={goldMedal} alt="gold" />
+              ) : weeklyLeaderboard.prevPlayer?.rank === 2 ? (
+                <img src={silverMedal} alt="silver" />
+              ) : weeklyLeaderboard.prevPlayer?.rank === 3 ? (
+                <img src={bronzeMedal} alt="bronze" />
+              ) : (
+                <span className="user-rank">
+                  #{weeklyLeaderboard.prevPlayer?.rank}
+                </span>
+              )}
+            </>
           ) : (
-            <span className="user-rank">#{weeklyLeaderboard.player?.rank}</span>
+            <></>
           )}
         </div>
         <div className="d-flex mt-3 align-items-bottom justify-content-between">
@@ -116,7 +227,7 @@ const Leaderboard = ({ username, leaderboard, weeklyLeaderboard }) => {
       </div>
       <div className="players-leaderboard d-flex flex-column">
         {type === "global"
-          ? leaderboard.users.map((item, index) => (
+          ? globalLeaderboard.map((item, index) => (
               <div
                 key={index}
                 className="leaderboard-item d-flex align-items-center justify-content-between px-3 py-2"
@@ -148,12 +259,12 @@ const Leaderboard = ({ username, leaderboard, weeklyLeaderboard }) => {
               </div>
             ))
           : weeklyState === "current"
-          ? weeklyLeaderboard.weeklyUsers.map((item, index) => (
+          ? weeklySorted.map((item, index) => (
               <div
                 key={index}
                 className="leaderboard-item d-flex align-items-center justify-content-between px-3 py-2"
               >
-                <div className="d-flex align-items-center gap-2">
+                <div className="d-flex align-items-center gap-2 col-4">
                   <div className="name-holder d-flex align-items-center justify-content-center">
                     <span className="name-initial">
                       {item.username.slice(0, 1)}
@@ -163,13 +274,13 @@ const Leaderboard = ({ username, leaderboard, weeklyLeaderboard }) => {
                     <h6 className="player-name mb-0">{item.username}</h6>
                   </div>
                 </div>
-                <div className="d-flex align-items-center gap-2">
-                  <img src={usdt} alt=""/>
+                <div className="d-flex align-items-center gap-2 justify-content-center col-4">
+                  <img src={usdt} alt="" />
                   <span className="player-usdt-amount">
                     {getFormattedNumber(usdtPrizes[index], 0)}
                   </span>
                 </div>
-                <div className="d-flex align-items-center gap-2">
+                <div className="d-flex align-items-center gap-2 justify-content-end col-4">
                   <span className="player-score-amount">
                     {getFormattedNumber(item.weeklyPoints, 0)} Points
                   </span>
@@ -190,7 +301,7 @@ const Leaderboard = ({ username, leaderboard, weeklyLeaderboard }) => {
                 key={index}
                 className="leaderboard-item d-flex align-items-center justify-content-between px-3 py-2"
               >
-                <div className="d-flex align-items-center gap-2">
+                <div className="d-flex align-items-center gap-2 col-4">
                   <div className="name-holder d-flex align-items-center justify-content-center">
                     <span className="name-initial">
                       {item.username.slice(0, 1)}
@@ -200,16 +311,16 @@ const Leaderboard = ({ username, leaderboard, weeklyLeaderboard }) => {
                     <h6 className="player-name mb-0">{item.username}</h6>
                   </div>
                 </div>
-                <div className="d-flex align-items-center gap-2">
-                  <img src={usdt} alt=""/>
+                <div className="d-flex align-items-center gap-2 justify-content-center col-4">
+                  <img src={usdt} alt="" />
                   <span className="player-usdt-amount">
                     {getFormattedNumber(usdtPrizes[index], 0)}
                   </span>
                 </div>
-                <div className="d-flex align-items-center gap-2">
-                  {/* <span className="player-score-amount">
-                  {getFormattedNumber(item.weeklyPoints, 0)} Points
-                </span> */}
+                <div className="d-flex align-items-center gap-2 justify-content-end col-4">
+                  <span className="player-score-amount">
+                    {getFormattedNumber(item.weeklyPoints, 0)} Points
+                  </span>
                   {index + 1 === 1 ? (
                     <img src={goldMedal} alt="" />
                   ) : index + 1 === 2 ? (

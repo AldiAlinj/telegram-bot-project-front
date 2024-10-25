@@ -1,4 +1,4 @@
-import React, {  useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import "./chestslider.css";
 // import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -29,7 +29,6 @@ import chest10 from "../../assets/chestImages/chest10.png";
 import chest10open from "../../assets/chestImages/chest10open.png";
 import chest11 from "../../assets/chestImages/chest11.png";
 import chest11open from "../../assets/chestImages/chest11open.png";
-// import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
 import getFormattedNumber from "../../hooks/getFormattedNumber";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -109,8 +108,9 @@ const ChestSlider = ({
 
   const [chestIndex, setChestIndex] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [shuffledChests, ] = useState(shuffle(chests));
+  const [persistIndex, setPersistIndex] = useState(null);
 
+  const [shuffledChests] = useState(shuffle(chests));
   const sliderRef = useRef(null);
 
   const nextSlide = () => {
@@ -141,6 +141,7 @@ const ChestSlider = ({
         onClaim();
         sessionStorage.setItem("hasOpened", id);
         setChestIndex(id);
+        setPersistIndex(id);
       }
     }, 2500);
   };
@@ -164,10 +165,9 @@ const ChestSlider = ({
     return array;
   }
 
-
   return (
     <>
-      {reward > 0 ? (
+      {reward > 0 && persistIndex === activeIndex ? (
         <div className="d-flex flex-column gap-2 align-items-center chest-rewards-position">
           <div className="won-reward">{getFormattedNumber(reward, 0)}</div>
           <span className="you-won-text">Points</span>
@@ -215,7 +215,7 @@ const ChestSlider = ({
                     : item.image
                 }
                 className={`${
-                  activeIndex === index && loadingChest
+                  activeIndex === index && loadingChest && canClaimHourly
                     ? "chest-img shake-img"
                     : "chest-img "
                 }`}

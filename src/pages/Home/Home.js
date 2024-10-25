@@ -19,11 +19,50 @@ const Home = ({
   referralPoints,
   postWalletAddress,
   walletAddress,
+  error,
+  loadingWallet,
+  setLoadingWallet,
+  connectPopup,
+  setConnectPopup,
 }) => {
-  const [connectPopup, setConnectPopup] = useState(false);
   const [inputData, setInputData] = useState("");
-  const [loadingWallet, setLoadingWallet] = useState(false);
   const [tooltipInfo, setTooltipInfo] = useState(false);
+
+  const homeTasks = tasks.filter((item) => item.partner === "world-of-dypians");
+
+
+  const dummyTasks = [
+    {
+      type: "kucoin",
+      link: "https://x.com/KuCoinCom",
+      title: "Follow KuCoin on Twitter",
+      reward: 1500,
+      _id: "kucoin"
+    },
+    {
+      type: "wod",
+      link: "https://x.com/worldofdypians",
+      title: "Follow World of Dypians on Twitter",
+      reward: 750,
+      _id: "wod"
+    },
+    {
+      type: "wod",
+      link: "https://x.com/worldofdypians",
+      title: "Connect World of Dypians on Telegram",
+      reward: 750,
+      _id: "wod"
+    },
+    {
+      type: "wod",
+      link: "https://x.com/worldofdypians",
+      title: "Follow World of Dypians on Instagram",
+      reward: 750,
+      _id: "wod"
+    },
+
+    
+  ]
 
   const handlePopup = () => {
     if (walletAddress) {
@@ -34,12 +73,7 @@ const Home = ({
   };
 
   const handleWalletPost = (wallet) => {
-    setLoadingWallet(true);
-    setTimeout(() => {
-      postWalletAddress(wallet);
-      setLoadingWallet(false);
-      setConnectPopup(false);
-    }, 3000);
+    postWalletAddress(wallet);
   };
 
   useEffect(() => {
@@ -105,17 +139,30 @@ const Home = ({
         <div className="d-flex flex-column gap-2 mt-3">
           <h6 className="home-tasks-title mb-0">Earn</h6>
           <div className="home-tasks-container d-flex flex-column gap-2 position-relative mb-4">
-            {tasks.map((task, index) => (
-              <TaskItem
-                item={task}
-                key={index}
-                handleCompleteTask={handleCompleteTask}
-              />
-            ))}
+            {dummyTasks.length > 0 ? (
+              dummyTasks
+                .slice(0, 4)
+                .map((task, index) => (
+                  <TaskItem
+                    item={task}
+                    key={index}
+                    handleCompleteTask={handleCompleteTask}
+                  />
+                ))
+            ) : (
+              <div className="d-flex w-100 align-items-center justify-content-center  flex-column mt-5">
+                <h6 className="empty-title">No tasks Available.</h6>
+                <h6 className="empty-title">Stay tuned for more!</h6>
+              </div>
+            )}
 
-            <NavLink to={"/earn"}>
-              <button className="show-more-button py-1 px-2">Show more</button>
-            </NavLink>
+            {homeTasks.length >= 4 && (
+              <NavLink to={"/earn"}>
+                <button className="show-more-button py-1 px-2">
+                  Show more
+                </button>
+              </NavLink>
+            )}
           </div>
         </div>
       </div>
@@ -176,7 +223,9 @@ const Home = ({
             value={inputData}
             onChange={(e) => setInputData(e.target.value)}
             className="px-2 associate-wallet-input w-100"
+            style={{ border: error !== "" && "1px solid #FF8168" }}
           />
+          {error !== "" && <span style={{ color: "#FF8168" }}>{error}</span>}
           <button
             className="submit-wallet-button py-2 px-3"
             disabled={loadingWallet}

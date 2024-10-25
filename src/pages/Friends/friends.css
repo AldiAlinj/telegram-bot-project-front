@@ -116,8 +116,17 @@ background: #FFF;
 padding: 10px;
 }
 
+
+.gift-box{
+  width: 300px;
+}
+
 @media screen and (max-height: 700px) {
     .wod-friends{
         width: 25%;
+      }
+
+      .gift-box{
+        width: 150px;
       }
 }

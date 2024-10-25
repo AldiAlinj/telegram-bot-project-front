@@ -13,6 +13,9 @@ import axios from "axios";
 import DailySession from "./components/DailySession/DailySession";
 import EarnPartner from "./pages/Earn/EarnPartner";
 import Play from "./pages/Play/Play";
+import DailyOpportunities from "./pages/Earn/DailyOpportunities";
+import validateInfo from "./hooks/validateInfo";
+import successSound from './assets/success.mp3'
 
 const App = () => {
   const [showWelcome, setShowWelcome] = useState(true);
@@ -24,6 +27,7 @@ const App = () => {
     tasks: [],
     completedTasks: [],
     totalPoints: 0,
+    weeklyPoints: 0,
     streakPoints: 0,
     chestsPoints: 0,
     tasksPoints: 0,
@@ -42,6 +46,7 @@ const App = () => {
   });
   const [weeklyLeaderboard, setWeeklyLeaderboard] = useState({
     player: {},
+    prevPlayer: {},
     weeklyUsers: [],
     prevWeeklyUsers: [],
   });
@@ -51,6 +56,9 @@ const App = () => {
   const [canClaim, setCanClaim] = useState(false);
   const [loadingChest, setLoadingChest] = useState(false);
   const [canClaimHourly, setCanClaimHourly] = useState(false);
+  const [error, setError] = useState("");
+  const [loadingWallet, setLoadingWallet] = useState(false);
+  const [connectPopup, setConnectPopup] = useState(false);
 
   const postToken = async (token) => {
     setLoadingChest(true);
@@ -76,6 +84,7 @@ const App = () => {
         tasks: res.data.userData.availableTasks,
         completedTasks: res.data.userData.completedTasks,
         totalPoints: res.data.userData.totalPoints,
+        weeklyPoints: res.data.userData.weeklyPoints,
         streakPoints: res.data.userData.streakPoints,
         chestsPoints: res.data.userData.chestsPoints,
         tasksPoints: res.data.userData.tasksPoints,
@@ -110,20 +119,28 @@ const App = () => {
   }, [userData.chestTimeStamp]);
 
   const postWalletAddress = async (wallet) => {
-    try {
-      const res = await axios.post(
-        `https://api.worldofdypians.com/api/link-wallet`,
-        {
-          token: jwt,
-          walletAddress: wallet,
+    setError(validateInfo(wallet));
+    if (validateInfo(wallet) === "") {
+      setLoadingWallet(true);
+      setTimeout(async () => {
+        try {
+          const res = await axios.post(
+            `https://api.worldofdypians.com/api/link-wallet`,
+            {
+              token: jwt,
+              walletAddress: wallet,
+            }
+          );
+          setUserData((prevState) => ({
+            ...prevState,
+            walletAddress: res.data.walletAddress,
+          }));
+          setLoadingWallet(false);
+          setConnectPopup(false);
+        } catch (err) {
+          console.log(err);
         }
-      );
-      setUserData((prevState) => ({
-        ...prevState,
-        walletAddress: res.data.walletAddress,
-      }));
-    } catch (err) {
-      console.log(err);
+      }, 3000);
     }
   };
 
@@ -141,9 +158,12 @@ const App = () => {
         setUserData((prevState) => ({
           ...prevState,
           totalPoints: res.data.totalPoints,
+          weeklyPoints: res.data.weeklyPoints,
           chestsPoints: res.data.chestsPoints,
           chestTimeStamp: new Date(res.data.nextChestAvailableAt).getTime(),
         }));
+    new Audio(successSound).play();
+
         setCanClaimHourly(false);
       } catch (err) {
         console.log(err);
@@ -206,6 +226,7 @@ const App = () => {
       );
       setWeeklyLeaderboard({
         player: res.data.currentLeaderboard.userPosition,
+        prevPlayer: res.data.previousLeaderboard.userPosition,
         weeklyUsers: res.data.currentLeaderboard.topUsers,
         prevWeeklyUsers: res.data.previousLeaderboard.leaderboard,
       });
@@ -227,6 +248,7 @@ const App = () => {
       setUserData((prevState) => ({
         ...prevState,
         totalPoints: res.data.totalPoints,
+        weeklyPoints: res.data.weeklyPoints,
         streakDay: res.data.streakDay,
         streakPoints: res.data.streakPoints,
       }));
@@ -303,9 +325,10 @@ const App = () => {
       setUserData((prevState) => ({
         ...prevState,
         totalPoints: res.data.totalPoints,
+        weeklyPoints: res.data.weeklyPoints,
         tasks: res.data.availableTasks,
         completedTasks: res.data.completedTasks,
-        tasksPoints: res.data.tasksPoints
+        tasksPoints: res.data.tasksPoints,
       }));
     } catch (err) {
       console.log(err);
@@ -372,6 +395,11 @@ const App = () => {
                   handleCompleteTask={handleCompleteTask}
                   walletAddress={userData.walletAddress}
                   postWalletAddress={postWalletAddress}
+                  loadingWallet={loadingWallet}
+                  setLoadingWallet={setLoadingWallet}
+                  error={error}
+                  connectPopup={connectPopup}
+                  setConnectPopup={setConnectPopup}
                 />
               }
             />
@@ -382,6 +410,8 @@ const App = () => {
                   username={username}
                   leaderboard={leaderboard}
                   weeklyLeaderboard={weeklyLeaderboard}
+                  totalPoints={userData.totalPoints}
+                  weeklyPoints={userData.weeklyPoints}
                 />
               }
             />
@@ -422,6 +452,16 @@ const App = () => {
               path="/earn/:partnerId"
               element={
                 <EarnPartner
+                  tasks={userData.tasks}
+                  completedTasks={userData.completedTasks}
+                  handleCompleteTask={handleCompleteTask}
+                />
+              }
+            />
+            <Route
+              path="/earn/daily-opportunities"
+              element={
+                <DailyOpportunities
                   tasks={userData.tasks}
                   completedTasks={userData.completedTasks}
                   handleCompleteTask={handleCompleteTask}
