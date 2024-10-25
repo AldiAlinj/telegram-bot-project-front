@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./taskitem.css";
 import rightArrow from "../../assets/rightArrow.svg";
 import getFormattedNumber from "../../hooks/getFormattedNumber";
@@ -12,21 +12,27 @@ const TaskItem = ({ item, handleCompleteTask }) => {
   const completeTask = (id) => {
     setLoading(true);
     setTimeout(() => {
-      if(check){
+      if (check) {
         handleCompleteTask(id);
         setLoading(false);
-      }else{
+      } else {
         setLoading(false);
-        setError(true)
+        setError(true);
         setTimeout(() => {
-          setError(false)
+          setError(false);
         }, 2000);
       }
     }, 4000);
   };
 
+  useEffect(() => {
+    if (item.type === "telegram") {
+      setCheck(true);
+    }
+  }, [item]);
+
   return (
-    <div className="d-flex flex-column ">
+    <div className="d-flex flex-column">
       <a
         href={item.link}
         target="_blank"
@@ -35,7 +41,7 @@ const TaskItem = ({ item, handleCompleteTask }) => {
         style={{
           textDecoration: "none",
           pointerEvents: loading ? "none" : "auto",
-          border: error ? "1px solid red" : "1px solid #f2f0f8"
+          border: error ? "1px solid red" : "1px solid #f2f0f8",
         }}
         className={`home-task-item p-2 d-flex w-100 align-items-center justify-content-between`}
       >
@@ -75,17 +81,19 @@ const TaskItem = ({ item, handleCompleteTask }) => {
           </div>
         )}
       </a>
-      <div
-        className="completed-reward-wrapper d-flex align-items-center p-1 gap-1 mt-1"
-        style={{
-          width: "fit-content",
-          cursor: "pointer",
-          background: "#5690ff",
-        }}
-        onClick={() => completeTask(item._id)}
-      >
-        <span className="check-task">Check</span>
-      </div>
+      {item.type !== "telegram" && (
+        <div
+          className="completed-reward-wrapper d-flex align-items-center p-1 gap-1 mt-1"
+          style={{
+            width: "fit-content",
+            cursor: "pointer",
+            background: "#5690ff",
+          }}
+          onClick={() => completeTask(item._id)}
+        >
+          <span className="check-task">Check</span>
+        </div>
+      )}
     </div>
   );
 };
