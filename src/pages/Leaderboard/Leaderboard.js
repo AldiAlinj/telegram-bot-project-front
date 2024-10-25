@@ -12,11 +12,14 @@ const Leaderboard = ({
   leaderboard,
   weeklyLeaderboard,
   totalPoints,
+  weeklyPoints
 }) => {
   const [type, setType] = useState("global");
   const [weeklyState, setWeeklyState] = useState("current");
   const [globalLeaderboard, setGlobalLeaderboard] = useState([]);
   const [globalUser, setGlobalUser] = useState({});
+  const [weeklySorted, setWeeklySorted] = useState([]);
+  const [weeklyUser, setWeeklyUser] = useState({})
 
   const usdtPrizes = [
     200, 180, 160, 140, 120, 100, 100, 100, 100, 100, 90, 80, 70, 60, 50, 50,
@@ -25,11 +28,11 @@ const Leaderboard = ({
 
   const updateUserScoreAndSort = (array, username, totalPoints) => {
     // Check if the user exists in the array
-    const userExists = array.users.some((user) => user.username === username);
+    const userExists = array.some((user) => user.username === username);
 
     // If user exists, update the score and sort the array
     if (userExists) {
-      const updatedArray = array.users.map((user) =>
+      const updatedArray = array.map((user) =>
         user.username === username
           ? { ...user, totalPoints: totalPoints }
           : user
@@ -52,13 +55,20 @@ const Leaderboard = ({
 
   useEffect(() => {
     const {sortedArray, updatedUser} = updateUserScoreAndSort(
-      leaderboard,
+      leaderboard.users,
       username,
       totalPoints
     );
+    const {sortedWeekly, updatedUserWeekly} = updateUserScoreAndSort(
+      weeklyLeaderboard.weeklyUsers,
+      username,
+      weeklyPoints
+    )
     setGlobalLeaderboard(sortedArray);
-    setGlobalUser(updatedUser)
-  }, [leaderboard, totalPoints, username]);
+    setGlobalUser(updatedUser);
+    setWeeklySorted(sortedWeekly)
+    setWeeklyUser(updatedUserWeekly)
+  }, [leaderboard, totalPoints, username, weeklyLeaderboard, weeklyPoints]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -92,7 +102,7 @@ const Leaderboard = ({
               ) : type === "weekly" && weeklyState === "current" ? (
                 <span className="user-score-amount">
                   {getFormattedNumber(
-                    weeklyLeaderboard.player?.weeklyPoints,
+                    weeklyPoints,
                     0
                   )}{" "}
                   Points
@@ -121,15 +131,15 @@ const Leaderboard = ({
               <span className="user-rank">#{globalUser?.rank}</span>
             )
           ) : type === "weekly" && weeklyState === "current" ? (
-            weeklyLeaderboard.player?.rank === 1 ? (
+            weeklyUser?.rank === 1 ? (
               <img src={goldMedal} alt="gold" />
-            ) : weeklyLeaderboard.player?.rank === 2 ? (
+            ) : weeklyUser?.rank === 2 ? (
               <img src={silverMedal} alt="silver" />
-            ) : weeklyLeaderboard.player?.rank === 3 ? (
+            ) : weeklyUser?.rank === 3 ? (
               <img src={bronzeMedal} alt="bronze" />
             ) : (
               <span className="user-rank">
-                #{weeklyLeaderboard.player?.rank}
+                #{weeklyUser?.rank}
               </span>
             )
           ) : type === "weekly" && weeklyState === "previous" ? (
@@ -222,7 +232,7 @@ const Leaderboard = ({
               </div>
             ))
           : weeklyState === "current"
-          ? weeklyLeaderboard.weeklyUsers.map((item, index) => (
+          ? weeklySorted.map((item, index) => (
               <div
                 key={index}
                 className="leaderboard-item d-flex align-items-center justify-content-between px-3 py-2"

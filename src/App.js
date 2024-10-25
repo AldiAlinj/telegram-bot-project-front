@@ -27,6 +27,7 @@ const App = () => {
     tasks: [],
     completedTasks: [],
     totalPoints: 0,
+    weeklyPoints: 0,
     streakPoints: 0,
     chestsPoints: 0,
     tasksPoints: 0,
@@ -83,6 +84,7 @@ const App = () => {
         tasks: res.data.userData.availableTasks,
         completedTasks: res.data.userData.completedTasks,
         totalPoints: res.data.userData.totalPoints,
+        weeklyPoints: res.data.userData.weeklyPoints,
         streakPoints: res.data.userData.streakPoints,
         chestsPoints: res.data.userData.chestsPoints,
         tasksPoints: res.data.userData.tasksPoints,
@@ -156,6 +158,7 @@ const App = () => {
         setUserData((prevState) => ({
           ...prevState,
           totalPoints: res.data.totalPoints,
+          weeklyPoints: res.data.weeklyPoints,
           chestsPoints: res.data.chestsPoints,
           chestTimeStamp: new Date(res.data.nextChestAvailableAt).getTime(),
         }));
@@ -245,6 +248,7 @@ const App = () => {
       setUserData((prevState) => ({
         ...prevState,
         totalPoints: res.data.totalPoints,
+        weeklyPoints: res.data.weeklyPoints,
         streakDay: res.data.streakDay,
         streakPoints: res.data.streakPoints,
       }));
@@ -321,6 +325,7 @@ const App = () => {
       setUserData((prevState) => ({
         ...prevState,
         totalPoints: res.data.totalPoints,
+        weeklyPoints: res.data.weeklyPoints,
         tasks: res.data.availableTasks,
         completedTasks: res.data.completedTasks,
         tasksPoints: res.data.tasksPoints,
@@ -406,6 +411,7 @@ const App = () => {
                   leaderboard={leaderboard}
                   weeklyLeaderboard={weeklyLeaderboard}
                   totalPoints={userData.totalPoints}
+                  weeklyPoints={userData.weeklyPoints}
                 />
               }
             />
