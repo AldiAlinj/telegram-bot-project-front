@@ -36,7 +36,7 @@ const Leaderboard = ({
       );
       const sortedArray = updatedArray.sort(
         (a, b) => b.totalPoints - a.totalPoints
-      );
+      ).map((user, index) => ({ ...user, rank: index + 1 }));
 
       // Find the updated user
       const updatedUser = sortedArray.find(
