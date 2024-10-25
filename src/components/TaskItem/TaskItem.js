@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./taskitem.css";
 import rightArrow from "../../assets/rightArrow.svg";
 import getFormattedNumber from "../../hooks/getFormattedNumber";
@@ -29,16 +29,13 @@ const TaskItem = ({ item, handleCompleteTask }) => {
     window.Telegram.WebApp.openLink(url);
   };
 
-  useEffect(() => {
-    if (item.type === "telegram") {
-      setCheck(true);
-    }
-  }, [item]);
-
   return (
     <div className="d-flex flex-column">
       <div
-        onClick={() => {handleRedirect(item.link); setCheck(true);}}
+        onClick={() => {
+          handleRedirect(item.link);
+          setCheck(true);
+        }}
         style={{
           textDecoration: "none",
           pointerEvents: loading ? "none" : "auto",
@@ -48,7 +45,7 @@ const TaskItem = ({ item, handleCompleteTask }) => {
       >
         <div className="d-flex align-items-center gap-2">
           <img
-            src={require(`../../assets/${item.type}.svg`)}
+            src={require(`../../assets/${item.partner}.svg`)}
             height={36}
             width={36}
             alt=""
@@ -82,19 +79,17 @@ const TaskItem = ({ item, handleCompleteTask }) => {
           </div>
         )}
       </div>
-      {item.type !== "telegram" && (
-        <div
-          className="completed-reward-wrapper d-flex align-items-center p-1 gap-1 mt-1"
-          style={{
-            width: "fit-content",
-            cursor: "pointer",
-            background: "#5690ff",
-          }}
-          onClick={() => completeTask(item._id)}
-        >
-          <span className="check-task">Check</span>
-        </div>
-      )}
+      <div
+        className="completed-reward-wrapper d-flex align-items-center p-1 gap-1 mt-1"
+        style={{
+          width: "fit-content",
+          cursor: "pointer",
+          background: "#5690ff",
+        }}
+        onClick={() => completeTask(item._id)}
+      >
+        <span className="check-task">Check</span>
+      </div>
     </div>
   );
 };

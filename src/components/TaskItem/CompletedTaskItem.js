@@ -10,7 +10,7 @@ const CompletedTaskItem = ({ item }) => {
     >
       <div className="d-flex align-items-center gap-2">
         <img
-          src={require(`../../assets/${item.type}.svg`)}
+          src={require(`../../assets/${item.partner}.svg`)}
           height={36}
           width={36}
           alt=""
