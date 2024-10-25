@@ -16,10 +16,11 @@ const TaskItem = ({ item, handleCompleteTask }) => {
         handleCompleteTask(id);
         setLoading(false);
       }else{
+        setLoading(false);
         setError(true)
         setTimeout(() => {
           setError(false)
-        }, 1000);
+        }, 2000);
       }
     }, 4000);
   };
