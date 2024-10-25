@@ -15,7 +15,7 @@ import EarnPartner from "./pages/Earn/EarnPartner";
 import Play from "./pages/Play/Play";
 import DailyOpportunities from "./pages/Earn/DailyOpportunities";
 import validateInfo from "./hooks/validateInfo";
-import successSound from './assets/success.mp3'
+import successSound from "./assets/success.mp3";
 import { toast, ToastContainer } from "react-toastify";
 
 const App = () => {
@@ -163,7 +163,7 @@ const App = () => {
           chestsPoints: res.data.chestsPoints,
           chestTimeStamp: new Date(res.data.nextChestAvailableAt).getTime(),
         }));
-    new Audio(successSound).play();
+        new Audio(successSound).play();
 
         setCanClaimHourly(false);
       } catch (err) {
@@ -332,7 +332,7 @@ const App = () => {
         tasksPoints: res.data.tasksPoints,
       }));
     } catch (err) {
-      console.log(err);
+      console.log(err, "hello");
       toast.error("You have not completed the task!", {
         className: "custom-toast",
         progressClassName: "custom-progress",
@@ -486,16 +486,16 @@ const App = () => {
           <ComingSoon show={airdrop} onClose={() => setAirdrop(false)} />
           <Navbar showAirdrop={() => setAirdrop(true)} />
           <ToastContainer
-          position="top-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
           />
         </>
       )}
