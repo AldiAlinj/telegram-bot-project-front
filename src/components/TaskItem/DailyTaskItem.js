@@ -33,7 +33,7 @@ const DailyTaskItem = ({ item, handleCompleteTask }) => {
       <div className=" p-2 d-flex w-100 align-items-center justify-content-between">
         <div className="d-flex align-items-center gap-2">
           <img
-            src={require(`../../assets/${item.partner}.svg`)}
+            src={require(`../../assets/world-of-dypians.svg`)}
             height={36}
             width={36}
             alt=""
