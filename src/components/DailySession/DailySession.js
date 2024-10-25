@@ -17,27 +17,27 @@ const DailySession = ({
   const days = [
     {
       title: "Day 1",
-      reward: 10000,
+      reward: 100,
     },
     {
       title: "Day 2",
-      reward: 25000,
+      reward: 400,
     },
     {
       title: "Day 3",
-      reward: 45000,
+      reward: 800,
     },
     {
       title: "Day 4",
-      reward: 70000,
+      reward: 1000,
     },
     {
       title: "Day 5",
-      reward: 100000,
+      reward: 1500,
     },
     {
       title: "Day 6",
-      reward: 200000,
+      reward: 2000,
     },
   ];
 
@@ -156,7 +156,7 @@ const DailySession = ({
                   >
                     <img src={coin} width={15} height={15} alt="" />
                     <span className="daily-session-reward-amount">
-                      +250,000
+                      +3,000
                     </span>
                   </div>
                 </div>
