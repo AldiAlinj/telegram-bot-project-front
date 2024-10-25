@@ -331,6 +331,12 @@ const App = () => {
         completedTasks: res.data.completedTasks,
         tasksPoints: res.data.tasksPoints,
       }));
+      if(res.status === 400){
+        toast.error("You have not completed the task!", {
+          className: "custom-toast",
+          progressClassName: "custom-progress",
+        });
+      }
     } catch (err) {
       console.log(err, "hello");
       toast.error("You have not completed the task!", {
