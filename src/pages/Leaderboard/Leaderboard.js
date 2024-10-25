@@ -74,6 +74,8 @@ const Leaderboard = ({
     window.scrollTo(0, 0);
   }, []);
 
+  console.log(weeklySorted);
+  
   return (
     <div className="container-fluid leaderboard-wrapper pt-4 pb-3">
       <div className="d-flex flex-column gap-2">
@@ -232,7 +234,7 @@ const Leaderboard = ({
               </div>
             ))
           : weeklyState === "current"
-          ? weeklySorted.map((item, index) => (
+          ? weeklyLeaderboard.weeklyUsers.map((item, index) => (
               <div
                 key={index}
                 className="leaderboard-item d-flex align-items-center justify-content-between px-3 py-2"
