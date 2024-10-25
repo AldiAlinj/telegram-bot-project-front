@@ -174,7 +174,7 @@ const Leaderboard = ({ username, leaderboard, weeklyLeaderboard, totalPoints }) 
       </div>
       <div className="players-leaderboard d-flex flex-column">
         {type === "global"
-          ? globalLeaderboard.users.map((item, index) => (
+          ? globalLeaderboard.map((item, index) => (
               <div
                 key={index}
                 className="leaderboard-item d-flex align-items-center justify-content-between px-3 py-2"
