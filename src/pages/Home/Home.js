@@ -34,35 +34,37 @@ const Home = ({
 
   // const dummyTasks = [
   //   {
-  //     type: "kucoin",
+  //     type: "discord",
   //     link: "https://x.com/KuCoinCom",
   //     title: "Follow KuCoin on Twitter",
+  //     partner: "kucoin",
   //     reward: 1500,
   //     _id: "kucoin"
   //   },
   //   {
-  //     type: "wod",
+  //     type: "telegram",
   //     link: "https://x.com/worldofdypians",
   //     title: "Follow World of Dypians on Twitter",
+  //     partner: "world-of-dypians",
   //     reward: 750,
   //     _id: "wod"
   //   },
   //   {
-  //     type: "wod",
+  //     type: "twitter",
   //     link: "https://x.com/worldofdypians",
   //     title: "Connect World of Dypians on Telegram",
+  //     partner: "world-of-dypians",
   //     reward: 750,
   //     _id: "wod"
   //   },
   //   {
-  //     type: "wod",
+  //     type: "youtube",
   //     link: "https://x.com/worldofdypians",
   //     title: "Follow World of Dypians on Instagram",
+  //     partner: "world-of-dypians",
   //     reward: 750,
   //     _id: "wod"
   //   },
-
-    
   // ]
 
   const handlePopup = () => {

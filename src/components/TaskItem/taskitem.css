@@ -89,3 +89,11 @@
 .custom-progress {
   background-color: #ff6f6f !important; /* Light red progress bar */
 }
+
+.type-icon{
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  top: -5px;
+  right: -10px;
+}
