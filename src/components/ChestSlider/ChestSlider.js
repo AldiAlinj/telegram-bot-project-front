@@ -170,7 +170,7 @@ const ChestSlider = ({
       {reward > 0 && persistIndex === activeIndex ? (
         <div className="d-flex flex-column gap-2 align-items-center chest-rewards-position">
           <div className="won-reward">{getFormattedNumber(reward, 0)}</div>
-          <span className="you-won-text">Points</span>
+          <span className="you-won-text">Coins</span>
         </div>
       ) : (
         <></>

@@ -72,7 +72,7 @@ const Friends = ({referredUsers, referralCode}) => {
               </div>
                   <span className="friend-name">{friend.telegramUsername}</span>
                 </div>
-                <span className="friend-reward">+{friend.earnedPoints} Points</span>
+                <span className="friend-reward">+{friend.earnedPoints} Coins</span>
             </div>
           ))}
         </div>

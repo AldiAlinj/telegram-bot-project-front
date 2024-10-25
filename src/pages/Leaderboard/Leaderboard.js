@@ -124,7 +124,7 @@ const Leaderboard = ({
               <h6 className="user-name mb-0">{username}</h6>
               {type === "global" ? (
                 <span className="user-score-amount">
-                  {getFormattedNumber(totalPoints, 0)} Points
+                  {getFormattedNumber(totalPoints, 0)} Coins
                 </span>
               ) : type === "weekly" && weeklyState === "current" ? (
                 <span className="user-score-amount">
@@ -132,7 +132,7 @@ const Leaderboard = ({
                     weeklyPoints,
                     0
                   )}{" "}
-                  Points
+                  Coins
                 </span>
               ) : type === "weekly" && weeklyState === "previous" ? (
                 <span className="user-score-amount">
@@ -140,7 +140,7 @@ const Leaderboard = ({
                     weeklyLeaderboard.prevPlayer?.weeklyPoints,
                     0
                   )}{" "}
-                  Points
+                  Coins
                 </span>
               ) : (
                 <></>
@@ -244,7 +244,7 @@ const Leaderboard = ({
                 </div>
                 <div className="d-flex align-items-center gap-2">
                   <span className="player-score-amount">
-                    {getFormattedNumber(item.totalPoints, 0)} Points
+                    {getFormattedNumber(item.totalPoints, 0)} Coins
                   </span>
                   {index + 1 === 1 ? (
                     <img src={goldMedal} alt="" />
@@ -282,7 +282,7 @@ const Leaderboard = ({
                 </div>
                 <div className="d-flex align-items-center gap-2 justify-content-end col-4">
                   <span className="player-score-amount">
-                    {getFormattedNumber(item.weeklyPoints, 0)} Points
+                    {getFormattedNumber(item.weeklyPoints, 0)} Coins
                   </span>
                   {index + 1 === 1 ? (
                     <img src={goldMedal} alt="" />
@@ -319,7 +319,7 @@ const Leaderboard = ({
                 </div>
                 <div className="d-flex align-items-center gap-2 justify-content-end col-4">
                   <span className="player-score-amount">
-                    {getFormattedNumber(item.weeklyPoints, 0)} Points
+                    {getFormattedNumber(item.weeklyPoints, 0)} Coins
                   </span>
                   {index + 1 === 1 ? (
                     <img src={goldMedal} alt="" />
