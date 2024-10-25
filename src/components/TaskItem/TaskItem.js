@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./taskitem.css";
 import rightArrow from "../../assets/rightArrow.svg";
 import getFormattedNumber from "../../hooks/getFormattedNumber";
@@ -25,6 +25,14 @@ const TaskItem = ({ item, handleCompleteTask }) => {
       }
     }, 4000);
   };
+
+useEffect(() => {
+if(item.type === "telegram"){
+  setCheck(true)
+}
+}, [item])
+
+
 
   const handleRedirect = (url) => {
     window.Telegram.WebApp.openLink(url);
