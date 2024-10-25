@@ -52,6 +52,32 @@ const Leaderboard = ({
 
     return { sortedArray: array, updatedUser: null };
   };
+  const updateUserScoreAndSortWeekly = (array, username, weeklyPoints) => {
+    // Check if the user exists in the array
+    const userExists = array.some((user) => user.username === username);
+
+    // If user exists, update the score and sort the array
+    if (userExists) {
+      const updatedArray = array.map((user) =>
+        user.username === username
+          ? { ...user, weeklyPoints: weeklyPoints }
+          : user
+      );
+      const sortedArray = updatedArray.sort(
+        (a, b) => b.weeklyPoints - a.weeklyPoints
+      ).map((user, index) => ({ ...user, rank: index + 1 }));
+
+      // Find the updated user
+      const updatedUser = sortedArray.find(
+        (user) => user.username === username
+      );
+
+      // Return both the sorted array and the updated user
+      return { sortedArray, updatedUser };
+    }
+
+    return { sortedArray: array, updatedUser: null };
+  };
 
   useEffect(() => {
     const {sortedArray, updatedUser} = updateUserScoreAndSort(
@@ -59,7 +85,7 @@ const Leaderboard = ({
       username,
       totalPoints
     );
-    const {sortedWeekly, updatedUserWeekly} = updateUserScoreAndSort(
+    const {sortedWeekly, updatedUserWeekly} = updateUserScoreAndSortWeekly(
       weeklyLeaderboard.weeklyUsers,
       username,
       weeklyPoints
@@ -74,7 +100,6 @@ const Leaderboard = ({
     window.scrollTo(0, 0);
   }, []);
 
-  console.log(weeklySorted, weeklyLeaderboard.weeklyUsers);
   
   return (
     <div className="container-fluid leaderboard-wrapper pt-4 pb-3">
@@ -234,7 +259,7 @@ const Leaderboard = ({
               </div>
             ))
           : weeklyState === "current"
-          ? weeklyLeaderboard.weeklyUsers.map((item, index) => (
+          ? weeklySorted.map((item, index) => (
               <div
                 key={index}
                 className="leaderboard-item d-flex align-items-center justify-content-between px-3 py-2"
