@@ -100,7 +100,7 @@ const Leaderboard = ({
     window.scrollTo(0, 0);
   }, []);
 
-  console.log(weeklySorted, weeklyLeaderboard.weeklyUsers, weeklyPoints);
+  console.log(weeklySorted, weeklyLeaderboard.weeklyUsers, weeklyPoints, leaderboard.users, totalPoints);
   
   return (
     <div className="container-fluid leaderboard-wrapper pt-4 pb-3">
