@@ -4,7 +4,7 @@ import rightArrow from "../../assets/rightArrow.svg";
 import getFormattedNumber from "../../hooks/getFormattedNumber";
 import coin from "../../assets/dailySession/coin.png";
 import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 const TaskItem = ({ item, handleCompleteTask }) => {
   const [loading, setLoading] = useState(false);
@@ -18,8 +18,10 @@ const TaskItem = ({ item, handleCompleteTask }) => {
         setLoading(false);
       } else {
         setLoading(false);
-        toast("You have not completed the task!")
-        
+        toast("You have not completed the task!", {
+          className: "custom-toast",
+          progressClassName: "custom-progress",
+        });
       }
     }, 4000);
   };
@@ -88,7 +90,18 @@ const TaskItem = ({ item, handleCompleteTask }) => {
       >
         <span className="check-task">Check</span>
       </div>
-      <ToastContainer />
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };

@@ -80,3 +80,12 @@
   line-height: normal;
   cursor: pointer;
 }
+
+.custom-toast {
+  color: #ff6f6f !important; /* Light red text */
+}
+
+/* Customize the progress bar */
+.custom-progress {
+  background-color: #ff6f6f !important; /* Light red progress bar */
+}
