@@ -55,44 +55,6 @@ const ChestSlider = ({
   setCanClaimHourly,
   chestTimeStamp,
 }) => {
-  const [chestIndex, setChestIndex] = useState(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [persistIndex, setPersistIndex] = useState(null)
-  const sliderRef = useRef(null);
-
-  const nextSlide = () => {
-    sliderRef.current.slickNext();
-  };
-  const prevSlide = () => {
-    sliderRef.current.slickPrev();
-  };
-
-  var settings = {
-    dots: false,
-    arrows: false,
-    infinite: true,
-    fade: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    initialSlide: 0,
-    afterChange: (current) => {
-      setActiveIndex(current);
-    },
-  };
-
-  const claimChest = (id) => {
-    setLoadingChest(true);
-    setTimeout(() => {
-      if (canClaimHourly && id === activeIndex) {
-        onClaim();
-        sessionStorage.setItem("hasOpened", id);
-        setChestIndex(id);
-        setPersistIndex(id);
-      }
-    }, 2500);
-  };
-
   const chests = [
     {
       image: chest0,
@@ -144,6 +106,65 @@ const ChestSlider = ({
     },
   ];
 
+  const [chestIndex, setChestIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [persistIndex, setPersistIndex] = useState(null);
+
+  const [shuffledChests] = useState(shuffle(chests));
+  const sliderRef = useRef(null);
+
+  const nextSlide = () => {
+    sliderRef.current.slickNext();
+  };
+  const prevSlide = () => {
+    sliderRef.current.slickPrev();
+  };
+
+  var settings = {
+    dots: false,
+    arrows: false,
+    infinite: true,
+    fade: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    afterChange: (current) => {
+      setActiveIndex(current);
+    },
+  };
+
+  const claimChest = (id) => {
+    setLoadingChest(true);
+    setTimeout(() => {
+      if (canClaimHourly && id === activeIndex) {
+        onClaim();
+        sessionStorage.setItem("hasOpened", id);
+        setChestIndex(id);
+        setPersistIndex(id);
+      }
+    }, 2500);
+  };
+
+  function shuffle(array) {
+    let currentIndex = array.length,
+      randomIndex;
+
+    // While there remain elements to shuffle.
+    while (currentIndex > 0) {
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex],
+        array[currentIndex],
+      ];
+    }
+    return array;
+  }
+
   return (
     <>
       {reward > 0 && persistIndex === activeIndex ? (
@@ -173,12 +194,18 @@ const ChestSlider = ({
           className="next-arrow"
         />
         <Slider {...settings} ref={sliderRef}>
-          {chests.map((item, index) => (
+          {shuffledChests.map((item, index) => (
             <div
               className="position-relative d-flex align-items-center justify-content-center"
-              style={{cursor: "pointer"}}
+              style={{
+                cursor: canClaimHourly && activeIndex === index && "pointer",
+                pointerEvents:
+                  canClaimHourly && activeIndex === index ? "auto" : "none",
+              }}
               key={index}
-              onClick={() => claimChest(index)}
+              onClick={() =>
+                canClaimHourly && activeIndex === index && claimChest(index)
+              }
             >
               <img
                 src={
@@ -212,10 +239,7 @@ const ChestSlider = ({
           Claim
         </button>
       ) : canClaimHourly && loadingChest ? (
-        <button
-          className={`play-page-button chest-button  py-2 px-4`}
-          disabled
-        >
+        <button className={`play-page-button chest-button  py-2 px-4`} disabled>
           <div
             className="spinner-border spinner-border-sm text-info loading-chest-color"
             role="status"
