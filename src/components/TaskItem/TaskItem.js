@@ -4,6 +4,7 @@ import rightArrow from "../../assets/rightArrow.svg";
 import getFormattedNumber from "../../hooks/getFormattedNumber";
 import coin from "../../assets/dailySession/coin.png";
 import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const TaskItem = ({ item, handleCompleteTask }) => {
   const [loading, setLoading] = useState(false);
