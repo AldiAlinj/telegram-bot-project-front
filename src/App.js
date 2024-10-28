@@ -313,7 +313,7 @@ const App = () => {
       setGeneralLoading(false);
       console.log("Hello");
       
-    }, 3000);
+    }, 1500);
   }, []);
 
   useEffect(() => {
