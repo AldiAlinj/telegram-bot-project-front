@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./earn.css";
 
@@ -9,8 +9,24 @@ import CompletedTaskItem from "../../components/TaskItem/CompletedTaskItem";
 
 const Earn = ({tasks, completedTasks, handleCompleteTask}) => {
 
-  const homeTasks = tasks.filter((item) => item.partner === "world-of-dypians");
+const [data, setData] = useState([])
 
+  // const homeTasks = tasks.filter((item) => item.partner === "world-of-dypians");
+
+   // Sorting logic
+   useEffect(() => {
+    const sortedData = [...tasks].sort((a, b) => {
+      if (a.partner === 'world-of-dypians' && b.partner !== 'world-of-dypians') {
+        return -1; // a should come first
+      }
+      if (a.partner !== 'world-of-dypians' && b.partner === 'world-of-dypians') {
+        return 1; // b should come first
+      }
+      return 0; // No change in order
+    });
+
+    setData(sortedData); // Update the state with sorted data
+  }, [tasks]); // Runs only once after the initial render
 
 //  const dummyTasks = [
 //         {
@@ -119,7 +135,7 @@ const Earn = ({tasks, completedTasks, handleCompleteTask}) => {
         </NavLink>
         <h6 className="home-tasks-title mb-0">Tasks</h6>
         <div className="home-tasks-container mb-3 d-flex flex-column gap-2 position-relative">
-          {homeTasks.map((task, index) => (
+          {data.map((task, index) => (
             <TaskItem
               item={task}
               key={index}
