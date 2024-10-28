@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useCallback, useEffect, useState } from "react";
+import React, { lazy, useCallback, useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Leaderboard from "./pages/Leaderboard/Leaderboard";
@@ -62,6 +62,7 @@ const App = () => {
   const [error, setError] = useState("");
   const [loadingWallet, setLoadingWallet] = useState(false);
   const [connectPopup, setConnectPopup] = useState(false);
+  const [generalLoading, setGeneralLoading] = useState(true);
 
   const postToken = async (token) => {
     setLoadingChest(true);
@@ -362,7 +363,11 @@ const App = () => {
     };
   }, [location, navigate]);
 
-  
+  useEffect(() => {
+    setTimeout(() => {
+      setGeneralLoading(false);
+    }, 1500);
+  }, []);
 
   if (!isTelegram) {
     return (
@@ -391,6 +396,7 @@ const App = () => {
         alignItems: "center",
         height: "100vh",
         width: "100vw",
+        zIndex: 9999,
       }}
     >
       <div
@@ -408,9 +414,8 @@ const App = () => {
         airdrop && "hide-scroll"
       }`}
     >
-      <Suspense fallback={<Spinner />}>
-        <GetStarted showWelcome={showWelcome} onClose={handleClose} />
-      </Suspense>
+      {generalLoading && <Spinner />}
+      <GetStarted showWelcome={showWelcome} onClose={handleClose} />
       {!showWelcome && (
         <>
           <Routes>
