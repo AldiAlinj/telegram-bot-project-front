@@ -104,11 +104,11 @@ const Home = ({
           <div className="d-flex w-100 align-items-center justify-content-between">
             <h6 className="my-progress-title mb-0">My Progress</h6>
             <div className="total-coins-wrapper d-flex align-items-center gap-2 p-1">
-              <span className="user-total-coins ps-1" style={{fontSize: "16px"}}>
+              <span className="user-total-coins ps-1" style={{fontSize: "18px"}}>
                 {getFormattedNumber(userData.totalPoints, 0)} Coins
               </span>
               <div className="home-coin-wrapper d-flex align-items-center justify-content-center">
-                <img src={coin} width={20} height={20} alt="" />
+                <img src={coin} width={24} height={24} alt="" />
               </div>
             </div>
           </div>

@@ -17,6 +17,7 @@ import DailyOpportunities from "./pages/Earn/DailyOpportunities";
 import validateInfo from "./hooks/validateInfo";
 // import successSound from "./assets/success.mp3";
 import chestSound from "./assets/chestSound.mp3";
+import dailySessionSound from "./assets/dailySessionSound.mp3";
 import { toast, ToastContainer } from "react-toastify";
 import getStartedWod from './assets/getStartedWod.png'
 
@@ -66,9 +67,11 @@ const App = () => {
   const [generalLoading, setGeneralLoading] = useState(true);
 
   const chestSoundRef = useRef(null);
+  const dailySessionSoundRef = useRef(null);
 
   useEffect(() => {
     chestSoundRef.current = new Audio(chestSound);
+    dailySessionSoundRef.current = new Audio(dailySessionSound);
   }, []);
 
 
@@ -258,6 +261,8 @@ const App = () => {
         }
       );
       setLoadingClaim(false);
+      dailySessionSoundRef.current.play();
+
       setUserData((prevState) => ({
         ...prevState,
         totalPoints: res.data.totalPoints,
