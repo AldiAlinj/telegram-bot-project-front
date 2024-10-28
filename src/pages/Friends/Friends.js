@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import giftBox from '../../assets/giftBox.png';
+import verified from '../../assets/verified.svg';
 import "./friends.css";
 
 const Friends = ({referredUsers, referralCode}) => {
@@ -9,30 +10,37 @@ const Friends = ({referredUsers, referralCode}) => {
   //   {
   //     telegramUsername: "Lorena579",
   //     earnedPoints: 1500,
+  //     isPremium: false,
   //   },
   //   {
   //     telegramUsername: "Aldi",
   //     earnedPoints: 1500,
+  //     isPremium: true,
   //   },
   //   {
   //     telegramUsername: "Nitu",
   //     earnedPoints: 1500,
+  //     isPremium: false,
   //   },
   //   {
   //     telegramUsername: "Gazi",
   //     earnedPoints: 1500,
+  //     isPremium: true,
   //   },
   //   {
   //     telegramUsername: "Lorena579",
   //     earnedPoints: 1500,
+  //     isPremium: false,
   //   },
   //   {
   //     telegramUsername: "Lorena579",
   //     earnedPoints: 1500,
+  //     isPremium: true,
   //   },
   //   {
   //     telegramUsername: "Lorena579",
   //     earnedPoints: 1500,
+  //     isPremium: false,
   //   },
 
   // ]
@@ -77,7 +85,12 @@ const Friends = ({referredUsers, referralCode}) => {
               <div className="friend-initial-wrapper">
                 <span className="friend-initial">{friend.telegramUsername.slice(0, 1)}</span>
               </div>
-                  <span className="friend-name">{friend.telegramUsername}</span>
+                 <div className="d-flex align-items-center gap-1">
+                 <span className="friend-name">{friend.telegramUsername}</span>
+                 {friend.isPremium &&
+                 <img src={verified} width={20} height={20} alt="" />
+                 }
+                 </div>
                 </div>
                 <span className="friend-reward">+{friend.earnedPoints} Coins</span>
             </div>
