@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Leaderboard from "./pages/Leaderboard/Leaderboard";
@@ -7,7 +7,7 @@ import Earn from "./pages/Earn/Earn";
 import Navbar from "./components/Navbar/Navbar";
 import "./app.css";
 import Airdrop from "./pages/Airdrop/Airdrop";
-import GetStarted from "./components/GetStarted/GetStarted";
+// import GetStarted from "./components/GetStarted/GetStarted";
 import ComingSoon from "./components/ComingSoon/ComingSoon";
 import axios from "axios";
 import DailySession from "./components/DailySession/DailySession";
@@ -19,6 +19,8 @@ import successSound from "./assets/success.mp3";
 import { toast, ToastContainer } from "react-toastify";
 
 const App = () => {
+  const GetStarted = lazy(() => import("./components/GetStarted/GetStarted"));
+
   const [showWelcome, setShowWelcome] = useState(true);
   const [airdrop, setAirdrop] = useState(false);
   const [isTelegram, setIsTelegram] = useState();
@@ -379,13 +381,34 @@ const App = () => {
     );
   }
 
+  const Spinner = () => (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        width: "100vw",
+      }}
+    >
+      <div
+        className="spinner-border spinner-border-sm text-info loading-chest-color"
+        role="status"
+      >
+        <span className="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  );
+
   return (
     <div
       className={`container-fluid px-0 main-wrapper ${
         airdrop && "hide-scroll"
       }`}
     >
-      <GetStarted showWelcome={showWelcome} onClose={handleClose} />
+      <Suspense fallback={<Spinner />}>
+        <GetStarted showWelcome={showWelcome} onClose={handleClose} />
+      </Suspense>
       {!showWelcome && (
         <>
           <Routes>
