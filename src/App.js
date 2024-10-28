@@ -403,7 +403,8 @@ const App = () => {
             height: "100vh",
             width: "100vw",
             zIndex: 9999,
-            position: "relative"
+            position: "relative",
+            background: "white"
           }}
         >
           <div
