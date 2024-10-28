@@ -11,11 +11,11 @@ const Earn = ({tasks, completedTasks, handleCompleteTask}) => {
 
 const [data, setData] = useState([])
 
-  // const homeTasks = tasks.filter((item) => item.partner === "world-of-dypians");
+  const filteredTasks = tasks.filter((item) => item.partner !== "daily-opportunities");
 
    // Sorting logic
    useEffect(() => {
-    const sortedData = [...tasks].sort((a, b) => {
+    const sortedData = [...filteredTasks].sort((a, b) => {
       if (a.partner === 'world-of-dypians' && b.partner !== 'world-of-dypians') {
         return -1; // a should come first
       }
@@ -26,7 +26,7 @@ const [data, setData] = useState([])
     });
 
     setData(sortedData); // Update the state with sorted data
-  }, [tasks]); // Runs only once after the initial render
+  }, [filteredTasks]); // Runs only once after the initial render
 
 //  const dummyTasks = [
 //         {
