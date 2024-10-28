@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Leaderboard from "./pages/Leaderboard/Leaderboard";
@@ -64,6 +64,13 @@ const App = () => {
   const [loadingWallet, setLoadingWallet] = useState(false);
   const [connectPopup, setConnectPopup] = useState(false);
   const [generalLoading, setGeneralLoading] = useState(true);
+
+  const chestSoundRef = useRef(null);
+
+  useEffect(() => {
+    chestSoundRef.current = new Audio(chestSound);
+  }, []);
+
 
   const postToken = async (token, is_premium) => {
     setLoadingChest(true);
@@ -160,7 +167,7 @@ const App = () => {
           }
         );
         setLoadingChest(false);
-        new Audio(chestSound).play();
+        chestSoundRef.current.play();
         setChestReward(res.data.pointsAwarded);
         setUserData((prevState) => ({
           ...prevState,
