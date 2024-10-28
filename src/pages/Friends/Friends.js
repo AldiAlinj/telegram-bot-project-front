@@ -35,7 +35,7 @@ const Friends = ({ referredUsers, referralCode }) => {
 
   // ]
 
-  const appLink = "https://t.me/AldiTestBot_bot/AldiTestBot";
+  // const appLink = "https://t.me/AldiTestBot_bot/AldiTestBot";
 
   useEffect(() => {
     window.scrollTo(0, 0);
