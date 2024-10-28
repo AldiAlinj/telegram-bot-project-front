@@ -4,6 +4,7 @@ import verified from "../../assets/verified.svg";
 import "./friends.css";
 import infoTooltip from "../../assets/infoTooltip.svg";
 import OutsideClickHandler from "react-outside-click-handler";
+import coin from '../../assets/dailySession/coin.png'
 
 const Friends = ({ referredUsers, referralCode }) => {
   // const dummyFriends = [
@@ -44,10 +45,7 @@ const Friends = ({ referredUsers, referralCode }) => {
   //   },
   // ];
 
-  const rewardData = [
-    { userType: "Regular", range1: 300, range2: 600, range3: 1200 },
-    { userType: "Verified", range1: 600, range2: 1200, range3: 2400 },
-  ];
+
 
   const [tooltipInfo, setTooltipInfo] = useState(false);
 
@@ -117,70 +115,55 @@ const Friends = ({ referredUsers, referralCode }) => {
           <span className="invite-friends-info">2. You and your friends both recieve rewards</span>
           <span className="invite-friends-info">3. The more invites, the more you earn</span>
         </div>
-        <table
-          border="1"
-          cellPadding="5"
-          style={{
-            width: "100%",
-            textAlign: "start",
-            borderCollapse: "collapse",
-            borderRadius: "10px",
-            border: "1px solid #F2F0F8",
-            background: "rgba(255,255,255,0.4)",
-            overflow: "hidden",
-          }}
-        >
-          <thead>
-            <tr>
-              <th className="friend-table-header">User Type</th>
-              <th className="friend-table-header">1-5</th>
-              <th className="friend-table-header">6-20</th>
-              <th className="friend-table-header">20+</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rewardData.map((row, index) => (
-              <tr key={index}>
-                <td
-                  className={`${
-                    row.userType === "Verified"
-                      ? "verified-table-span"
-                      : "regular-table-span"
-                  }`}
-                >
-                  {row.userType}
-                </td>
-                <td
-                  className={`${
-                    row.userType === "Verified"
-                      ? "verified-table-span"
-                      : "regular-table-span"
-                  }`}
-                >
-                  {row.range1}
-                </td>
-                <td
-                  className={`${
-                    row.userType === "Verified"
-                      ? "verified-table-span"
-                      : "regular-table-span"
-                  }`}
-                >
-                  {row.range2}
-                </td>
-                <td
-                  className={`${
-                    row.userType === "Verified"
-                      ? "verified-table-span"
-                      : "regular-table-span"
-                  }`}
-                >
-                  {row.range3}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+          <div className="d-flex flex-column w-100">
+            <div className="friends-benefits-header w-100 p-3 d-flex align-items-center">
+              <div className="col-3 d-flex align-items-center justify-content-start">
+                <span className="friends-table-header">User Type</span>
+              </div>
+              <div className="col-3 d-flex align-items-center justify-content-center">
+                <span className="friends-table-header">1-5</span>
+              </div>
+              <div className="col-3 d-flex align-items-center justify-content-center">
+                <span className="friends-table-header">6-20</span>
+              </div>
+              <div className="col-3 d-flex align-items-center justify-content-center">
+                <span className="friends-table-header">20+</span>
+              </div>
+            </div>
+            <div className="friends-benefits-body w-100 p-3 d-flex align-items-center flex-wrap">
+            <div className="col-3 d-flex align-items-center justify-content-start">
+                <span className="friends-table-content">Regular</span>
+              </div>
+              <div className="col-3 d-flex align-items-center gap-1 justify-content-center">
+                <img src={coin} height={16} width={16} alt="" />
+                <span className="friends-table-content">300</span>
+              </div>
+              <div className="col-3 d-flex align-items-center gap-1 justify-content-center">
+                <img src={coin} height={16} width={16} alt="" />
+                <span className="friends-table-content">600</span>
+              </div>
+              <div className="col-3 d-flex align-items-center gap-1 justify-content-center">
+                <img src={coin} height={16} width={16} alt="" />
+                <span className="friends-table-content">1200</span>
+              </div>
+            <div className="col-3 d-flex align-items-center gap-1 justify-content-start">
+                <span className="friends-table-content">Verified</span>
+                <img src={verified} width={16} height={16} alt="" />
+              </div>
+              <div className="col-3 d-flex align-items-center gap-1 justify-content-center">
+                <img src={coin} height={16} width={16} alt="" />
+                <span className="friends-table-content">600</span>
+              </div>
+              <div className="col-3 d-flex align-items-center gap-1 justify-content-center">
+                <img src={coin} height={16} width={16} alt="" />
+                <span className="friends-table-content">1200</span>
+              </div>
+              <div className="col-3 d-flex align-items-center gap-1 justify-content-center">
+                <img src={coin} height={16} width={16} alt="" />
+                <span className="friends-table-content">2400</span>
+              </div>
+            </div>
+          </div>
         <button
           className="invite-friends-button py-3"
           onClick={() => {
