@@ -105,7 +105,7 @@ const Home = ({
             <h6 className="my-progress-title mb-0">My Progress</h6>
             <div className="total-coins-wrapper d-flex align-items-center gap-2 p-1">
               <span className="user-total-coins ps-1" style={{fontSize: "16px"}}>
-                {getFormattedNumber(userData.totalPoints, 0)}
+                {getFormattedNumber(userData.totalPoints, 0)} Coins
               </span>
               <div className="home-coin-wrapper d-flex align-items-center justify-content-center">
                 <img src={coin} width={20} height={20} alt="" />
@@ -209,6 +209,10 @@ const Home = ({
                       future rewards
                     </span>
                     <br />
+                    <span>
+                    (EVM Compatible Wallets Only!)
+                    </span>
+                    <br />
                     <span style={{ color: "#FF8168" }}>
                       NOTE: The wallet address cannot be changed so please be
                       careful when you associate it
@@ -226,7 +230,7 @@ const Home = ({
           </div>
           <input
             type="text"
-            placeholder="Wallet Address"
+            placeholder="0x1234..."
             value={inputData}
             onChange={(e) => setInputData(e.target.value)}
             className="px-2 associate-wallet-input w-100"

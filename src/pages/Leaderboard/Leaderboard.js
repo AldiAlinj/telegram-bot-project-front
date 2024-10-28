@@ -14,7 +14,7 @@ const Leaderboard = ({
   totalPoints,
   weeklyPoints
 }) => {
-  const [type, setType] = useState("global");
+  const [type, setType] = useState("weekly");
   const [weeklyState, setWeeklyState] = useState("current");
   const [globalLeaderboard, setGlobalLeaderboard] = useState([]);
   const [globalUser, setGlobalUser] = useState({});
@@ -197,8 +197,20 @@ const Leaderboard = ({
         </div>
         <div className="leaderboard-tabs position-relative mb-3  d-flex align-items-center justify-content-between w-100">
           <div
-            className={`leaderboard-tab-bg ${type === "weekly" && "move-1"}`}
+            className={`leaderboard-tab-bg ${type === "global" && "move-1"}`}
           ></div>
+           <div
+            className="leaderboard-tab p-2 d-flex align-items-center justify-content-center w-50 h-100"
+            onClick={() => setType("weekly")}
+          >
+            <span
+              className={`leaderboard-tab-title ${
+                type === "weekly" && "leaderboard-tab-title-active"
+              }`}
+            >
+              Weekly
+            </span>
+          </div>
           <div
             className="leaderboard-tab p-2 d-flex align-items-center justify-content-center w-50 h-100"
             onClick={() => setType("global")}
@@ -209,18 +221,6 @@ const Leaderboard = ({
               }`}
             >
               Future Airdrop
-            </span>
-          </div>
-          <div
-            className="leaderboard-tab p-2 d-flex align-items-center justify-content-center w-50 h-100"
-            onClick={() => setType("weekly")}
-          >
-            <span
-              className={`leaderboard-tab-title ${
-                type === "weekly" && "leaderboard-tab-title-active"
-              }`}
-            >
-              Weekly
             </span>
           </div>
         </div>

@@ -48,3 +48,21 @@
   line-height: 123.725%; /* 24.745px */
   letter-spacing: 0.4px;
   }
+
+  .loading-wod{
+    animation: pulse infinite 2s;
+  }
+
+
+  @keyframes pulse {
+    0%{
+      opacity: 1;
+    }
+    50%{
+      opacity: 0;
+
+    }
+    100%{
+      opacity: 1;
+    }
+  }

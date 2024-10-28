@@ -18,6 +18,8 @@ import validateInfo from "./hooks/validateInfo";
 // import successSound from "./assets/success.mp3";
 import chestSound from "./assets/chestSound.wav";
 import { toast, ToastContainer } from "react-toastify";
+import getStartedWod from './assets/getStartedWod.png'
+
 
 const App = () => {
   const [showWelcome, setShowWelcome] = useState(true);
@@ -158,6 +160,7 @@ const App = () => {
           }
         );
         setLoadingChest(false);
+        new Audio(chestSound).play();
         setChestReward(res.data.pointsAwarded);
         setUserData((prevState) => ({
           ...prevState,
@@ -166,7 +169,6 @@ const App = () => {
           chestsPoints: res.data.chestsPoints,
           chestTimeStamp: new Date(res.data.nextChestAvailableAt).getTime(),
         }));
-        new Audio(chestSound).play();
 
         setCanClaimHourly(false);
       } catch (err) {
@@ -313,9 +315,9 @@ const App = () => {
   useEffect(() => {
     setTimeout(() => {
       setGeneralLoading(false);
-      console.log("Hello");
+    
       
-    }, 1500);
+    }, 15000);
   }, []);
 
   useEffect(() => {
@@ -406,15 +408,10 @@ const App = () => {
             width: "100vw",
             zIndex: 9999,
             position: "relative",
-            background: "white"
+            background: "#3370E3"
           }}
         >
-          <div
-            className="spinner-border spinner-border-sm text-info loading-chest-color"
-            role="status"
-          >
-            <span className="visually-hidden">Loading...</span>
-          </div>
+        <img src={getStartedWod} className="loading-wod" alt="" />
         </div>
       )}
       <GetStarted showWelcome={showWelcome} onClose={handleClose} />
