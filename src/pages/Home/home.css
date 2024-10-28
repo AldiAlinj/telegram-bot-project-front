@@ -234,3 +234,31 @@ color: #fff;
   font-weight: 400;
   line-height: normal;
 }
+.coin-tooltip-content-wrapper{
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid #4F5F90;
+  background: #fff;
+  position: absolute;
+  width: 300px;
+  top: 30px;
+  right: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: all .25s;
+  z-index: 10;
+}
+
+.coin-tooltip-active{
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.coin-tooltip-content-wrapper span{
+  color: #4F5F90;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+

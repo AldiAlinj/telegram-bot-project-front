@@ -28,6 +28,7 @@ const Home = ({
 }) => {
   const [inputData, setInputData] = useState("");
   const [tooltipInfo, setTooltipInfo] = useState(false);
+  const [coinTooltip, setCoinTooltip] = useState(false);
 
   const homeTasks = tasks.filter((item) => item.partner === "world-of-dypians");
 
@@ -104,11 +105,39 @@ const Home = ({
           <div className="d-flex w-100 align-items-center justify-content-between">
             <h6 className="my-progress-title mb-0">My Progress</h6>
             <div className="total-coins-wrapper d-flex align-items-center gap-2 p-1">
-              <span className="user-total-coins ps-1" style={{fontSize: "18px"}}>
+              <span
+                className="user-total-coins ps-1"
+                style={{ fontSize: "18px" }}
+              >
                 {getFormattedNumber(userData.totalPoints, 0)} Coins
               </span>
-              <div className="home-coin-wrapper d-flex align-items-center justify-content-center">
-                <img src={coin} width={24} height={24} alt="" />
+              <div className="home-coin-wrapper d-flex align-items-center justify-content-center position-relative">
+                <img
+                  src={coin}
+                  width={24}
+                  height={24}
+                  alt=""
+                  onClick={() => setCoinTooltip(true)}
+                />
+                <OutsideClickHandler
+                  onOutsideClick={() => setCoinTooltip(false)}
+                >
+                  <div
+                    className={`coin-tooltip-content-wrapper ${
+                      coinTooltip && "coin-tooltip-active"
+                    }`}
+                  >
+                    <span>
+                      This precious coin represents your progress! Accumulate
+                      coins through various activities, including completing
+                      tasks, participating in daily sessions, interacting with
+                      the game, and inviting friends. Your coins allow you to
+                      unlock rewards, access exclusive in-game features, and
+                      participate in upcoming airdrops. Keep collecting and see
+                      where your efforts take you!
+                    </span>
+                  </div>
+                </OutsideClickHandler>
               </div>
             </div>
           </div>
@@ -209,9 +238,7 @@ const Home = ({
                       future rewards
                     </span>
                     <br />
-                    <span>
-                    (EVM Compatible Wallets Only!)
-                    </span>
+                    <span>(EVM Compatible Wallets Only!)</span>
                     <br />
                     <span style={{ color: "#FF8168" }}>
                       NOTE: The wallet address cannot be changed so please be
