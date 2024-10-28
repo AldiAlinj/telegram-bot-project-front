@@ -311,7 +311,7 @@ const App = () => {
   useEffect(() => {
     setTimeout(() => {
       setGeneralLoading(false);
-    }, 1500);
+    }, 3000);
   }, []);
 
   useEffect(() => {
