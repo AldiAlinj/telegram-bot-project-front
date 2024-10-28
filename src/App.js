@@ -369,24 +369,6 @@ const App = () => {
     };
   }, [location, navigate]);
 
-  if (!isTelegram) {
-    return (
-      <div
-        className={`d-flex  justify-content-center align-items-center`}
-        style={{ height: "100vh", width: "100vw" }}
-      >
-        <div className="d-flex flex-column align-items-center justify-content-center gap-2">
-          <h1 className="use-telegram-title mb-0">Page available on</h1>
-          <a
-            href="https://t.me/AldiTestBot_bot/AldiTestBot"
-            className="use-telegram-title"
-          >
-            Telegram
-          </a>
-        </div>
-      </div>
-    );
-  }
 
   const Spinner = () => (
     <div
@@ -407,6 +389,28 @@ const App = () => {
       </div>
     </div>
   );
+
+
+  if (!isTelegram) {
+    return (
+      <div
+        className={`d-flex  justify-content-center align-items-center`}
+        style={{ height: "100vh", width: "100vw" }}
+      >
+        <div className="d-flex flex-column align-items-center justify-content-center gap-2">
+          <h1 className="use-telegram-title mb-0">Page available on</h1>
+          <a
+            href="https://t.me/AldiTestBot_bot/AldiTestBot"
+            className="use-telegram-title"
+          >
+            Telegram
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+
 
   return (
     <div
