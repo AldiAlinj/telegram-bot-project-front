@@ -10,6 +10,7 @@ import OutsideClickHandler from "react-outside-click-handler";
 import xMark from "../../assets/xMark.svg";
 import { shortAddress } from "../../hooks/shortAddress";
 import tooltip from "../../assets/tooltip.svg";
+import { toast } from "react-toastify";
 
 
 const Home = ({
@@ -69,7 +70,10 @@ const Home = ({
 
   const handlePopup = () => {
     if (walletAddress) {
-      return;
+      toast.error("You have already associated your wallet", {
+        className: "custom-toast",
+        progressClassName: "custom-progress",
+      });
     } else {
       setConnectPopup(true);
     }
