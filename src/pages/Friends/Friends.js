@@ -56,8 +56,8 @@ const Friends = ({ referredUsers, referralCode }) => {
         <button
           className="invite-friends-button py-3"
           onClick={() => {
-            const appLink = "https://t.me/share/url";
-            window.Telegram.WebApp.openTelegramLink(`${appLink}?url=${appLink}&startapp=${referralCode}`);
+            
+            window.Telegram.WebApp.openTelegramLink(`https://t.me/share/url=${appLink}&startapp=${referralCode}`);
           }}
           style={{ textDecoration: "none" }}
         >
