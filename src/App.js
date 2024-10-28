@@ -396,6 +396,7 @@ const App = () => {
         alignItems: "center",
         height: "100vh",
         width: "100vw",
+        zIndex:9999
       }}
     >
       <div
