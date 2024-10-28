@@ -12,6 +12,7 @@ const Earn = ({tasks, completedTasks, handleCompleteTask}) => {
 const [data, setData] = useState([])
 
   const filteredTasks = tasks.filter((item) => item.partner !== "daily-opportunities");
+  const filteredCompleted = completedTasks.filter((item) => item.partner !== "daily-opportunities");
 
    // Sorting logic
    useEffect(() => {
@@ -142,7 +143,7 @@ const [data, setData] = useState([])
               handleCompleteTask={handleCompleteTask}
             />
           ))}
-          {completedTasks.map((task, index) => (
+          {filteredCompleted.map((task, index) => (
             <CompletedTaskItem item={task} key={index} />
           ))}
         </div>
