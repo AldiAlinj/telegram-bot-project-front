@@ -224,6 +224,57 @@ const Leaderboard = ({
             </span>
           </div>
         </div>
+        {type === "weekly" && (
+        <div className="leaderboard-tabs position-relative mt-3 p-2  d-flex align-items-center justify-content-between w-100">
+          <div className="d-flex align-items-center w-100 gap-2 justify-content-between">
+            <span className="view-previus-txt">View previous winners </span>
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="flexSwitchCheckDefault"
+                value={weeklyState}
+                style={{ cursor: "pointer" }}
+                onChange={() => {
+                  setWeeklyState(
+                    weeklyState === "current" ? "previous" : "current"
+                  );
+                }}
+              />
+            </div>
+          </div>
+          {/* <div
+              className={`leaderboard-tab-bg ${
+                weeklyState === "previous" && "move-1"
+              }`}
+            ></div>
+            <div
+              className="leaderboard-tab p-1 d-flex align-items-center justify-content-center w-50 h-100"
+              onClick={() => setWeeklyState("current")}
+            >
+              <span
+                className={`leaderboard-tab-title ${
+                  weeklyState === "current" && "leaderboard-tab-title-active"
+                }`}
+              >
+                Current Week
+              </span>
+            </div>
+            <div
+              className="leaderboard-tab p-1 d-flex align-items-center justify-content-center w-50 h-100"
+              onClick={() => setWeeklyState("previous")}
+            >
+              <span
+                className={`leaderboard-tab-title ${
+                  weeklyState === "previous" && "leaderboard-tab-title-active"
+                }`}
+              >
+                Previous Week
+              </span>
+            </div> */}
+        </div>
+      )}
       </div>
       <div className="players-leaderboard d-flex flex-column">
         {type === "global"
@@ -334,57 +385,7 @@ const Leaderboard = ({
               </div>
             ))}
       </div>
-      {type === "weekly" && (
-        <div className="leaderboard-tabs position-relative mt-3 p-2  d-flex align-items-center justify-content-between w-100">
-          <div className="d-flex align-items-center w-100 gap-2 justify-content-between">
-            <span className="view-previus-txt">View previous winners </span>
-            <div class="form-check form-switch">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                role="switch"
-                id="flexSwitchCheckDefault"
-                value={weeklyState}
-                style={{ cursor: "pointer" }}
-                onChange={() => {
-                  setWeeklyState(
-                    weeklyState === "current" ? "previous" : "current"
-                  );
-                }}
-              />
-            </div>
-          </div>
-          {/* <div
-              className={`leaderboard-tab-bg ${
-                weeklyState === "previous" && "move-1"
-              }`}
-            ></div>
-            <div
-              className="leaderboard-tab p-1 d-flex align-items-center justify-content-center w-50 h-100"
-              onClick={() => setWeeklyState("current")}
-            >
-              <span
-                className={`leaderboard-tab-title ${
-                  weeklyState === "current" && "leaderboard-tab-title-active"
-                }`}
-              >
-                Current Week
-              </span>
-            </div>
-            <div
-              className="leaderboard-tab p-1 d-flex align-items-center justify-content-center w-50 h-100"
-              onClick={() => setWeeklyState("previous")}
-            >
-              <span
-                className={`leaderboard-tab-title ${
-                  weeklyState === "previous" && "leaderboard-tab-title-active"
-                }`}
-              >
-                Previous Week
-              </span>
-            </div> */}
-        </div>
-      )}
+   
     </div>
   );
 };
