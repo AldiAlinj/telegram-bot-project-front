@@ -312,7 +312,6 @@ const App = () => {
     setTimeout(() => {
       setGeneralLoading(false);
       console.log("Hello");
-      
     }, 3000);
   }, []);
 
@@ -369,28 +368,6 @@ const App = () => {
     };
   }, [location, navigate]);
 
-
-  const Spinner = () => (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        width: "100vw",
-        zIndex:9999
-      }}
-    >
-      <div
-        className="spinner-border spinner-border-sm text-info loading-chest-color"
-        role="status"
-      >
-        <span className="visually-hidden">Loading...</span>
-      </div>
-    </div>
-  );
-
-
   if (!isTelegram) {
     return (
       <div
@@ -410,15 +387,31 @@ const App = () => {
     );
   }
 
-
-
   return (
     <div
       className={`container-fluid px-0 main-wrapper ${
         airdrop && "hide-scroll"
       }`}
     >
-      {generalLoading && <Spinner />}
+      {generalLoading && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+            width: "100vw",
+            zIndex: 9999,
+          }}
+        >
+          <div
+            className="spinner-border spinner-border-sm text-info loading-chest-color"
+            role="status"
+          >
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      )}
       <GetStarted showWelcome={showWelcome} onClose={handleClose} />
       {!showWelcome && (
         <>
