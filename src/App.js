@@ -313,7 +313,7 @@ const App = () => {
       setGeneralLoading(false);
       console.log("Hello");
       
-    }, 10000);
+    }, 3000);
   }, []);
 
   useEffect(() => {
@@ -403,6 +403,7 @@ const App = () => {
             height: "100vh",
             width: "100vw",
             zIndex: 9999,
+            position: "relative"
           }}
         >
           <div
