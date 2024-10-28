@@ -410,6 +410,7 @@ const App = () => {
     >
       <Suspense fallback={<Spinner />}>
         <GetStarted showWelcome={showWelcome} onClose={handleClose} />
+      </Suspense>
       {!showWelcome && (
         <>
           <Routes>
@@ -523,8 +524,6 @@ const App = () => {
           />
         </>
       )}
-      </Suspense>
-
     </div>
   );
 };
