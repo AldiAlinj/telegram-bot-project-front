@@ -16,7 +16,7 @@ import Play from "./pages/Play/Play";
 import DailyOpportunities from "./pages/Earn/DailyOpportunities";
 import validateInfo from "./hooks/validateInfo";
 // import successSound from "./assets/success.mp3";
-import chestSound from "./assets/chestSound.wav";
+import chestSound from "./assets/chestSound.mp3";
 import { toast, ToastContainer } from "react-toastify";
 import getStartedWod from './assets/getStartedWod.png'
 
