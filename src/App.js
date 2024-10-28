@@ -317,7 +317,7 @@ const App = () => {
       setGeneralLoading(false);
     
       
-    }, 15000);
+    }, 1500);
   }, []);
 
   useEffect(() => {
