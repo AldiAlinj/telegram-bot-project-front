@@ -312,7 +312,8 @@ const App = () => {
     setTimeout(() => {
       setGeneralLoading(false);
       console.log("Hello");
-    }, 3000);
+      
+    }, 10000);
   }, []);
 
   useEffect(() => {
