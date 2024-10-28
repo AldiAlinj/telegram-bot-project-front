@@ -36,6 +36,8 @@ import Slider from "react-slick";
 import Countdown from "react-countdown";
 import nextArrow from "../../assets/nextArrow.svg";
 import prevArrow from "../../assets/prevArrow.svg";
+import swipe from '../../assets/swipe.wav'
+
 
 const renderer = ({ minutes, seconds }) => {
   return (
@@ -115,9 +117,13 @@ const ChestSlider = ({
 
   const nextSlide = () => {
     sliderRef.current.slickNext();
+        new Audio(swipe).play();
+
   };
   const prevSlide = () => {
     sliderRef.current.slickPrev();
+        new Audio(swipe).play();
+
   };
 
   var settings = {
@@ -128,6 +134,9 @@ const ChestSlider = ({
     slidesToShow: 1,
     slidesToScroll: 1,
     initialSlide: 0,
+    beforeChange: () => {
+      new Audio(swipe).play();
+    },
     afterChange: (current) => {
       setActiveIndex(current);
     },
