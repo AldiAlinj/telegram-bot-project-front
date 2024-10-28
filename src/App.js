@@ -62,7 +62,7 @@ const App = () => {
   const [error, setError] = useState("");
   const [loadingWallet, setLoadingWallet] = useState(false);
   const [connectPopup, setConnectPopup] = useState(false);
-  const [generalLoading, setGeneralLoading] = useState(true)
+  // const [generalLoading, setGeneralLoading] = useState(true)
 
   const postToken = async (token) => {
     setLoadingChest(true);
@@ -363,11 +363,11 @@ const App = () => {
     };
   }, [location, navigate]);
 
-  useEffect(() => {
-  setTimeout(() => {
-    setGeneralLoading(false)
-  }, 1500);
-  }, [])
+  // useEffect(() => {
+  // setTimeout(() => {
+  //   setGeneralLoading(false)
+  // }, 1500);
+  // }, [])
   
 
   if (!isTelegram) {
