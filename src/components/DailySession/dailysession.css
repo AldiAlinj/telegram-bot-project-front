@@ -136,17 +136,15 @@ border-radius: 5px;
 }
 
 
-@media screen and (max-height: 950px) {
     .daily-session-fire-wrapper{
         height: 30%;
             position: relative;
-            bottom: 50px;
+            bottom: 30px;
     }
 
     .fire-img{
-        width: 75%;
+        width: 65%;
     }
-}
 @media screen and (max-height: 775px) {
     .daily-session-fire-wrapper{
         height: 30%;
