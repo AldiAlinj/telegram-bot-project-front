@@ -12,7 +12,6 @@ import { shortAddress } from "../../hooks/shortAddress";
 import tooltip from "../../assets/tooltip.svg";
 import { toast } from "react-toastify";
 
-
 const Home = ({
   username,
   tasks,
@@ -31,7 +30,6 @@ const Home = ({
   const [tooltipInfo, setTooltipInfo] = useState(false);
 
   const homeTasks = tasks.filter((item) => item.partner === "world-of-dypians");
-
 
   // const dummyTasks = [
   //   {
@@ -101,17 +99,19 @@ const Home = ({
               {walletAddress ? shortAddress(walletAddress) : "Add Wallet"}
             </span>
           </div>
-          <div className="total-coins-wrapper d-flex align-items-center gap-2 p-1">
-            <span className="user-total-coins ps-1">
-              {getFormattedNumber(userData.totalPoints, 0)}
-            </span>
-            <div className="home-coin-wrapper d-flex align-items-center justify-content-center">
-              <img src={coin} width={20} height={20} alt="" />
-            </div>
-          </div>
         </div>
         <div className="my-progress-wrapper d-flex flex-column gap-2 p-3 mt-3">
-          <h6 className="my-progress-title mb-0">My Progress</h6>
+          <div className="d-flex w-100 align-items-center justify-content-between">
+            <h6 className="my-progress-title mb-0">My Progress</h6>
+            <div className="total-coins-wrapper d-flex align-items-center gap-2 p-1">
+              <span className="user-total-coins ps-1" style={{fontSize: "16px"}}>
+                {getFormattedNumber(userData.totalPoints, 0)}
+              </span>
+              <div className="home-coin-wrapper d-flex align-items-center justify-content-center">
+                <img src={coin} width={20} height={20} alt="" />
+              </div>
+            </div>
+          </div>
           <div className="home-info-grid">
             <div className="home-info-grid-item d-flex flex-column align-items-center gap-1 py-2">
               <span className="home-grid-value ">
