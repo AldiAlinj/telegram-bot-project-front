@@ -38,7 +38,7 @@ const Friends = ({referredUsers, referralCode}) => {
   // ]
 
   const appLink = "https://t.me/AldiTestBot_bot/AldiTestBot"
-
+  // const referralLink = `${appLink}?url=${appLink}&startapp=${referralCode}`;
 
   useEffect(() => {
     window.scrollTo(0,0)
@@ -54,9 +54,16 @@ const Friends = ({referredUsers, referralCode}) => {
       <h1 className="invite-friends-title mb-0">
         Invite friends and get more points
       </h1>
-      <button className="invite-friends-button py-3" style={{textDecoration: "none"}}>
-        <a  href={`https://t.me/share/url?url=${appLink}?startapp=${referralCode}`} style={{textDecoration: "none", color: "#5690FF"}}>Invite Friends</a>
-     </button>
+      <button
+  className="invite-friends-button py-3"
+  onClick={() => {
+
+    window.Telegram.WebApp.openTelegramLink(`https://t.me/share/url?url=${appLink}?startapp=${referralCode}`);
+  }}
+  style={{ textDecoration: "none" }}
+>
+  Invite Friends
+</button>
       </div>
       {referredUsers.length > 0 &&
       <>
