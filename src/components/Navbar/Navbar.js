@@ -8,6 +8,8 @@ import houseIcon from "../../assets/houseIcon.svg";
 import houseIconActive from "../../assets/houseIconActive.svg";
 import taskIcon from "../../assets/taskIcon.svg";
 import taskIconActive from "../../assets/taskIconActive.svg";
+import gameIcon from "../../assets/gameIcon.svg";
+import gameIconActive from "../../assets/gameIconActive.svg";
 import giftIcon from "../../assets/giftIcon.svg";
 import { NavLink } from "react-router-dom";
 
@@ -32,6 +34,28 @@ const Navbar = ({showAirdrop}) => {
             />
             <span className={`navbar-span ${isActive && "span-active"}`}>
               Home
+            </span>
+          </>
+        )}
+      </NavLink>
+      <NavLink
+        to="/play"
+        className={({ isActive }) =>
+          `navbar-item p-2 d-flex flex-column align-items-center justify-content-center ${
+            isActive ? "active" : ""
+          }`
+        }
+      >
+        {({ isActive }) => (
+          <>
+            <img
+              src={isActive ? gameIconActive : gameIcon}
+              width={24}
+              height={24}
+              alt="Game Icon"
+            />
+            <span className={`navbar-span ${isActive && "span-active"}`}>
+              Game
             </span>
           </>
         )}
