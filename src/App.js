@@ -63,7 +63,7 @@ const App = () => {
   const [connectPopup, setConnectPopup] = useState(false);
   const [generalLoading, setGeneralLoading] = useState(true);
 
-  const postToken = async (token) => {
+  const postToken = async (token, is_premium) => {
     setLoadingChest(true);
     let body = {
       data: token,
@@ -74,6 +74,7 @@ const App = () => {
       body = {
         data: token,
         referralCode: initData?.start_param,
+        is_premium: is_premium
       };
     }
 
@@ -186,7 +187,7 @@ const App = () => {
       const user = window.Telegram.WebApp.initDataUnsafe.user;
 
       if (user) {
-        postToken(window.Telegram.WebApp.initData);
+        postToken(window.Telegram.WebApp.initData, user.is_premium);
         setIsTelegram(true);
         if (user.username) {
           setUsername(user.username);

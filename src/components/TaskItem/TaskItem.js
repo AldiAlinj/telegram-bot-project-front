@@ -26,42 +26,46 @@ const TaskItem = ({ item, handleCompleteTask }) => {
     }, 4000);
   };
 
-useEffect(() => {
-if(item.type === "telegram"){
-  setCheck(true)
-}
-}, [item])
-
-
+  useEffect(() => {
+    if (item.type === "telegram") {
+      setCheck(true);
+    }
+  }, [item]);
 
   const handleRedirect = (url) => {
     window.Telegram.WebApp.openLink(url);
   };
 
   return (
-    <div className="d-flex flex-column" style={{cursor: "pointer"}}>
+    <div className="d-flex flex-column" style={{ cursor: "pointer" }}>
       <div
-        onClick={() => {
-          handleRedirect(item.link);
-          setCheck(true);
-        }}
         style={{
           textDecoration: "none",
           pointerEvents: loading ? "none" : "auto",
         }}
         className={`home-task-item p-2 d-flex w-100 align-items-center justify-content-between`}
       >
-        <div className="d-flex align-items-center gap-2">
-        <div className="position-relative">
-        <img
-            src={require(`../../assets/${item.partner}.svg`)}
-            height={36}
-            width={36}
-            alt=""
-          />
-          <img src={require(`../../assets/${item.type}.svg`)} alt="" className="type-icon" />
-        </div>
-          <div className="d-flex flex-column">
+        <div
+          className="d-flex align-items-center gap-2"
+          onClick={() => {
+            handleRedirect(item.link);
+            setCheck(true);
+          }}
+        >
+          <div className="position-relative">
+            <img
+              src={require(`../../assets/${item.partner}.svg`)}
+              height={36}
+              width={36}
+              alt=""
+            />
+            <img
+              src={require(`../../assets/${item.type}.svg`)}
+              alt=""
+              className="type-icon"
+            />
+          </div>
+          <div className="d-flex flex-column gap-2 ps-3">
             <span
               className="home-task-name"
               style={{ textDecoration: "none", color: "#46557B" }}
@@ -70,6 +74,16 @@ if(item.type === "telegram"){
                 ? item.title
                 : item.title?.slice(0, 20) + "..."}
             </span>
+            <div className="d-flex align-items-center gap-2">
+              <div className="d-flex align-items-center gap-2">
+                <div className="task-reward-wrapper d-flex align-items-center gap-1">
+                  <img src={coin} width={20} height={20} alt="" />
+                  <span className="task-reward-amount">
+                    +{getFormattedNumber(item.reward, 0)}
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         {loading ? (
@@ -78,30 +92,17 @@ if(item.type === "telegram"){
           </div>
         ) : (
           <div className="d-flex align-items-center gap-2">
-            <div className="d-flex align-items-center gap-2">
-              <div className="task-reward-wrapper d-flex align-items-center gap-1">
-                <img src={coin} width={20} height={20} alt="" />
-                <span className="task-reward-amount">
-                  +{getFormattedNumber(item.reward, 0)}
-                </span>
-              </div>
+            <div
+              className="check-button d-flex align-items-center py-1 gap-1 px-2"
+           
+              onClick={() => completeTask(item._id)}
+            >
+              <span className="check-task">Check</span>
             </div>
             <img src={rightArrow} alt="rightarrow" />
           </div>
         )}
       </div>
-      <div
-        className="completed-reward-wrapper d-flex align-items-center p-1 gap-1 mt-1"
-        style={{
-          width: "fit-content",
-          cursor: "pointer",
-          background: "#5690ff",
-        }}
-        onClick={() => completeTask(item._id)}
-      >
-        <span className="check-task">Check</span>
-      </div>
-  
     </div>
   );
 };

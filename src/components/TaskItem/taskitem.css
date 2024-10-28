@@ -72,14 +72,7 @@
   border-radius: 10px;
 }
 
-.check-task{
-  color: #fff;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  cursor: pointer;
-}
+
 
 .custom-toast {
   color: #ff6f6f !important; /* Light red text */
@@ -96,4 +89,30 @@
   position: absolute;
   top: -5px;
   right: -10px;
+}
+
+.check-button{
+  width: fit-content;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #5690ff;
+  border-radius: 8px;
+  transition: all .25s;
+}
+
+.check-task{
+  color: #5690ff;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.check-button:hover{
+  background: #5690ff;
+}
+
+.check-button:hover .check-task{
+  color: #fff;
 }

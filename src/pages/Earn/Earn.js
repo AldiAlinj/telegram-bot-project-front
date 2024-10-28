@@ -12,6 +12,48 @@ const Earn = ({tasks, completedTasks, handleCompleteTask}) => {
   const homeTasks = tasks.filter((item) => item.partner === "world-of-dypians");
 
 
+//  const dummyTasks = [
+//         {
+//           partner: 'world-of-dypians',
+//           title: 'Watch new WoD Video',
+//           subtitle: 'Watch and earn 500 points',
+//           link: 'https://www.youtube.com/watch?v=VTiIhZcXLSM',
+//           type: 'youtube',
+//           action: 'watch',
+//           secretWord: 'wod the best',
+//           reward: 500,
+//         },
+//         {
+//           partner: 'world-of-dypians',
+//           title: 'Follow WoD on X',
+//           subtitle: 'Follow WoD on X and earn 750 points',
+//           link: 'https://twitter.com/worldofdypians',
+//           type: 'twitter',
+//           action: 'follow',
+//           reward: 700,
+//         },
+//         {
+//           partner: 'world-of-dypians',
+//           title: 'Follow OpenFlux on X',
+//           subtitle: 'Follow OpenFlux on X and earn 750 points',
+//           link: 'https://x.com/OpenFluxNFT',
+//           type: 'twitter',
+//           action: 'follow',
+//           reward: 700,
+//         },
+//         {
+//           partner: 'world-of-dypians',
+//           title: 'Join WoD On Telegram',
+//           subtitle: 'oin WoD On Telegram and earn 500 points',
+//           link: 'https://x.com/OpenFluxNFT',
+//           type: 'telegram',
+//           action: 'join',
+//           groupId: '-1001542536650',
+//           reward: 700,
+//         }
+//       ]
+
+
   // const partners = [
   //   {
   //     title: "World of Dypians",
