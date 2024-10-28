@@ -362,6 +362,19 @@ const App = () => {
     };
   }, [location, navigate]);
 
+  const [backgroundLoaded, setBackgroundLoaded] = useState(false);
+
+  // Preload the background image
+  useEffect(() => {
+    const img = new Image();
+    img.src = './assets/blueBg.png'; // Replace with your actual image path
+    img.onload = () => {
+      setBackgroundLoaded(true);
+    };
+  }, []);
+
+
+
   if (!isTelegram) {
     return (
       <div
@@ -407,7 +420,11 @@ const App = () => {
       }`}
     >
       <Suspense fallback={<Spinner />}>
-        <GetStarted showWelcome={showWelcome} onClose={handleClose} />
+        {!backgroundLoaded ? 
+      <Spinner />
+      :
+      <GetStarted showWelcome={showWelcome} onClose={handleClose} />  
+      }
       </Suspense>
       {!showWelcome && (
         <>
