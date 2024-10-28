@@ -88,17 +88,17 @@ const Earn = ({tasks, completedTasks, handleCompleteTask}) => {
             <CompletedTaskItem item={task} key={index} />
           ))}
         </div>
-        <h6 className="home-tasks-title mb-0">Partner Tasks</h6>
+        {/* <h6 className="home-tasks-title mb-0">Partner Tasks</h6> */}
 
-        <div className="d-flex earn-partners-wrapper flex-column gap-2">
+        {/* <div className="d-flex earn-partners-wrapper flex-column gap-2"> */}
           {/* {partners.map((item, index) => (
             <PartnerCard key={index} item={item} />
           ))} */}
-           <div className="d-flex w-100 align-items-center justify-content-center  flex-column mt-5">
+           {/* <div className="d-flex w-100 align-items-center justify-content-center  flex-column mt-5">
                 <h6 className="empty-title">Partner tasks are coming soon</h6>
                 <h6 className="empty-title">Stay tuned!</h6>
               </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

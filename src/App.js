@@ -15,7 +15,8 @@ import EarnPartner from "./pages/Earn/EarnPartner";
 import Play from "./pages/Play/Play";
 import DailyOpportunities from "./pages/Earn/DailyOpportunities";
 import validateInfo from "./hooks/validateInfo";
-import successSound from "./assets/success.mp3";
+// import successSound from "./assets/success.mp3";
+import chestSound from "./assets/chestSound.wav";
 import { toast, ToastContainer } from "react-toastify";
 
 const App = () => {
@@ -164,7 +165,7 @@ const App = () => {
           chestsPoints: res.data.chestsPoints,
           chestTimeStamp: new Date(res.data.nextChestAvailableAt).getTime(),
         }));
-        new Audio(successSound).play();
+        new Audio(chestSound).play();
 
         setCanClaimHourly(false);
       } catch (err) {

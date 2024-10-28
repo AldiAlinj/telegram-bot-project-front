@@ -1,6 +1,6 @@
 .daily-session-outer-wrapper{
     width: 100%;
-    height: 100vh;
+    height: calc(-64px + 100vh);
     position: fixed;
     top: -10000px;
     z-index: 20;
@@ -22,11 +22,13 @@
 background: rgba(255, 255, 255, 0.80);
 box-shadow: 0px 4px 4px 0px rgba(185, 179, 216, 0.10);
 }
-@media screen and (max-height: 660px) {
+@media screen and (max-height: 725px) {
     .daily-session-inner-wrapper{
         height: 85%;
-  ;
     } 
+    .fire-img{
+        width: 50%;
+    }
 }
 
 
@@ -131,6 +133,35 @@ border-radius: 5px;
 
 .daily-session-fire-wrapper{
     height: 20%;
+}
+
+
+@media screen and (max-height: 950px) {
+    .daily-session-fire-wrapper{
+        height: 30%;
+            position: relative;
+            bottom: 50px;
+    }
+
+    .fire-img{
+        width: 75%;
+    }
+}
+@media screen and (max-height: 775px) {
+    .daily-session-fire-wrapper{
+        height: 30%;
+            position: relative;
+            bottom: 0;
+    }
+
+    .fire-img{
+        width: 60%;
+    }
+}
+@media screen and (max-height: 640px) {
+    .daily-session-fire-wrapper{
+        display: none !important;
+    }
 }
 .daliy-session-lower-wrapper{
     height: 70%;

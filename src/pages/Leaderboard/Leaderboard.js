@@ -225,7 +225,7 @@ const Leaderboard = ({
           </div>
         </div>
         {type === "weekly" && (
-        <div className="leaderboard-tabs position-relative mt-3 p-2  d-flex align-items-center justify-content-between w-100">
+        <div className="leaderboard-tabs position-relative mt-3 p-2  d-flex align-items-center justify-content-between w-100 mb-2">
           <div className="d-flex align-items-center w-100 gap-2 justify-content-between">
             <span className="view-previus-txt">View previous winners </span>
             <div class="form-check form-switch">
@@ -328,7 +328,7 @@ const Leaderboard = ({
                 <div className="d-flex align-items-center gap-2 justify-content-center col-4">
                   <img src={usdt} alt="" />
                   <span className="player-usdt-amount">
-                    {getFormattedNumber(usdtPrizes[index], 0)}
+                    ${getFormattedNumber(usdtPrizes[index], 0)}
                   </span>
                 </div>
                 <div className="d-flex align-items-center gap-2 justify-content-end col-4">
@@ -365,7 +365,7 @@ const Leaderboard = ({
                 <div className="d-flex align-items-center gap-2 justify-content-center col-4">
                   <img src={usdt} alt="" />
                   <span className="player-usdt-amount">
-                    {getFormattedNumber(usdtPrizes[index], 0)}
+                    ${getFormattedNumber(usdtPrizes[index], 0)}
                   </span>
                 </div>
                 <div className="d-flex align-items-center gap-2 justify-content-end col-4">

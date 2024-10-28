@@ -5,6 +5,7 @@ import calendar from "../../assets/dailySession/calendar.png";
 import fire from "../../assets/dailySession/fire.png";
 import xMark from "../../assets/xMark.svg";
 import getFormattedNumber from "../../hooks/getFormattedNumber";
+import OutsideClickHandler from "react-outside-click-handler";
 
 const DailySession = ({
   canClaimToday,
@@ -59,7 +60,8 @@ const DailySession = ({
   };
 
   return (
-    <div
+    <OutsideClickHandler onOutsideClick={onClose}>
+        <div
       className={`daily-session-outer-wrapper ${
         show && "daily-session-active"
       } p-3 d-flex flex-column align-items-center gap-2`}
@@ -72,7 +74,7 @@ const DailySession = ({
           <img src={xMark} onClick={onClose} alt="" style={{cursor: 'pointer'}}/>
         </div>
         <div className="daily-session-fire-wrapper w-100 d-flex justify-content-center align-items-center">
-          <img src={fire} alt="" className="w-50" />
+          <img src={fire} alt="" className="fire-img" />
         </div>
         <div className="daily-session-lower-wrapper d-flex flex-column gap-2">
           <div className="d-flex flex-column gap-2 align-items-center">
@@ -184,6 +186,7 @@ const DailySession = ({
       )}
     </button>
     </div>
+    </OutsideClickHandler>
   );
 };
 
