@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Leaderboard from "./pages/Leaderboard/Leaderboard";
@@ -7,7 +7,7 @@ import Earn from "./pages/Earn/Earn";
 import Navbar from "./components/Navbar/Navbar";
 import "./app.css";
 import Airdrop from "./pages/Airdrop/Airdrop";
-// import GetStarted from "./components/GetStarted/GetStarted";
+import GetStarted from "./components/GetStarted/GetStarted";
 import ComingSoon from "./components/ComingSoon/ComingSoon";
 import axios from "axios";
 import DailySession from "./components/DailySession/DailySession";
@@ -19,8 +19,6 @@ import successSound from "./assets/success.mp3";
 import { toast, ToastContainer } from "react-toastify";
 
 const App = () => {
-  const GetStarted = lazy(() => import("./components/GetStarted/GetStarted"));
-
   const [showWelcome, setShowWelcome] = useState(true);
   const [airdrop, setAirdrop] = useState(false);
   const [isTelegram, setIsTelegram] = useState();
@@ -62,7 +60,7 @@ const App = () => {
   const [error, setError] = useState("");
   const [loadingWallet, setLoadingWallet] = useState(false);
   const [connectPopup, setConnectPopup] = useState(false);
-  // const [generalLoading, setGeneralLoading] = useState(true)
+  const [generalLoading, setGeneralLoading] = useState(true);
 
   const postToken = async (token) => {
     setLoadingChest(true);
@@ -311,6 +309,12 @@ const App = () => {
   };
 
   useEffect(() => {
+    setTimeout(() => {
+      setGeneralLoading(false);
+    }, 1500);
+  }, []);
+
+  useEffect(() => {
     fetchLeaderboard(jwt);
     fetchWeeklyLeaderboard(jwt);
   }, [jwt]);
@@ -363,13 +367,6 @@ const App = () => {
     };
   }, [location, navigate]);
 
-  // useEffect(() => {
-  // setTimeout(() => {
-  //   setGeneralLoading(false)
-  // }, 1500);
-  // }, [])
-  
-
   if (!isTelegram) {
     return (
       <div
@@ -414,9 +411,8 @@ const App = () => {
         airdrop && "hide-scroll"
       }`}
     >
-      <Suspense fallback={<Spinner />}>
-        <GetStarted showWelcome={showWelcome} onClose={handleClose} />
-      </Suspense>
+      {generalLoading && <Spinner />}
+      <GetStarted showWelcome={showWelcome} onClose={handleClose} />
       {!showWelcome && (
         <>
           <Routes>
