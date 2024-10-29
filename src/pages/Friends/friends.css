@@ -141,7 +141,7 @@ padding: 10px;
         width: 150px;
       }
 }
-@media screen and (max-height: 730px) {
+@media screen and (max-height: 800px) {
 .gift-box-small{
   display: none;
 }

@@ -50,7 +50,6 @@ const Friends = ({ referredUsers, referralCode }) => {
   const [tooltipInfo, setTooltipInfo] = useState(false);
 
   const appLink = "https://t.me/AldiTestBot_bot/AldiTestBot";
-  // const referralLink = `${appLink}?url=${appLink}&startapp=${referralCode}`;
 
   useEffect(() => {
     window.scrollTo(0, 0);
