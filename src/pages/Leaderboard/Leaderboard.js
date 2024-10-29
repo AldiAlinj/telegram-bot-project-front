@@ -4,22 +4,24 @@ import goldMedal from "../../assets/goldMedal.svg";
 import silverMedal from "../../assets/silverMedal.svg";
 import bronzeMedal from "../../assets/bronzeMedal.svg";
 import usdt from "../../assets/usdt.svg";
-
+import tooltip from "../../assets/tooltip.svg";
 import getFormattedNumber from "../../hooks/getFormattedNumber";
+import OutsideClickHandler from "react-outside-click-handler";
 
 const Leaderboard = ({
   username,
   leaderboard,
   weeklyLeaderboard,
   totalPoints,
-  weeklyPoints
+  weeklyPoints,
 }) => {
   const [type, setType] = useState("weekly");
   const [weeklyState, setWeeklyState] = useState("current");
   const [globalLeaderboard, setGlobalLeaderboard] = useState([]);
   const [globalUser, setGlobalUser] = useState({});
   const [weeklySorted, setWeeklySorted] = useState([]);
-  const [weeklyUser, setWeeklyUser] = useState({})
+  const [weeklyUser, setWeeklyUser] = useState({});
+  const [tooltipInfo, setTooltipInfo] = useState(false);
 
   const usdtPrizes = [
     200, 180, 160, 140, 120, 100, 100, 100, 100, 100, 90, 80, 70, 60, 50, 50,
@@ -37,9 +39,9 @@ const Leaderboard = ({
           ? { ...user, totalPoints: totalPoints }
           : user
       );
-      const sortedArray = updatedArray.sort(
-        (a, b) => b.totalPoints - a.totalPoints
-      ).map((user, index) => ({ ...user, rank: index + 1 }));
+      const sortedArray = updatedArray
+        .sort((a, b) => b.totalPoints - a.totalPoints)
+        .map((user, index) => ({ ...user, rank: index + 1 }));
 
       // Find the updated user
       const updatedUser = sortedArray.find(
@@ -63,9 +65,9 @@ const Leaderboard = ({
           ? { ...user, weeklyPoints: weeklyPoints }
           : user
       );
-      const sortedWeekly = updatedArray.sort(
-        (a, b) => b.weeklyPoints - a.weeklyPoints
-      ).map((user, index) => ({ ...user, rank: index + 1 }));
+      const sortedWeekly = updatedArray
+        .sort((a, b) => b.weeklyPoints - a.weeklyPoints)
+        .map((user, index) => ({ ...user, rank: index + 1 }));
 
       // Find the updated user
       const updatedUserWeekly = sortedWeekly.find(
@@ -80,31 +82,60 @@ const Leaderboard = ({
   };
 
   useEffect(() => {
-    const {sortedArray, updatedUser} = updateUserScoreAndSort(
+    const { sortedArray, updatedUser } = updateUserScoreAndSort(
       leaderboard.users,
       username,
       totalPoints
     );
-    const {sortedWeekly, updatedUserWeekly} = updateUserScoreAndSortWeekly(
+    const { sortedWeekly, updatedUserWeekly } = updateUserScoreAndSortWeekly(
       weeklyLeaderboard.weeklyUsers,
       username,
       weeklyPoints
-    )
+    );
     setGlobalLeaderboard(sortedArray);
     setGlobalUser(updatedUser);
-    setWeeklySorted(sortedWeekly)
-    setWeeklyUser(updatedUserWeekly)
+    setWeeklySorted(sortedWeekly);
+    setWeeklyUser(updatedUserWeekly);
   }, [leaderboard, totalPoints, username, weeklyLeaderboard, weeklyPoints]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  
   return (
     <div className="container-fluid leaderboard-wrapper pt-4 pb-3">
       <div className="d-flex flex-column gap-2">
-        <h6 className="leaderboard-main-title">Wall of Fame</h6>
+        <div className="d-flex align-items-center justify-content-between w-100">
+          <h6 className="leaderboard-main-title">Wall of Fame</h6>
+          <div className="position-relative d-flex align-items-center justify-content-center">
+            <img
+              src={tooltip}
+              width={20}
+              height={20}
+              style={{ cursor: "pointer" }}
+              alt=""
+              onClick={() => setTooltipInfo(true)}
+            />
+            <OutsideClickHandler onOutsideClick={() => setTooltipInfo(false)}>
+              <div
+                className={`leaderboard-tooltip-content-wrapper ${
+                  tooltipInfo && "leaderboard-tooltip-active"
+                }`}
+              >
+                <span>
+                  - Weekly Prize Pool: $2,000, distributed among the top 25
+                  users each week.
+                  <br />
+                  - Distribution Chain: BNB Chain, ensuring easy access to
+                  rewards.
+                  <br />- Future Airdrop Eligibility: Coins earned will count
+                  towards eligibility for future airdrops from our partners,
+                  offering additional rewards for participation.
+                </span>
+              </div>
+            </OutsideClickHandler>
+          </div>
+        </div>
         <div
           className={`${
             type === "global"
@@ -128,11 +159,7 @@ const Leaderboard = ({
                 </span>
               ) : type === "weekly" && weeklyState === "current" ? (
                 <span className="user-score-amount">
-                  {getFormattedNumber(
-                    weeklyPoints,
-                    0
-                  )}{" "}
-                  Coins
+                  {getFormattedNumber(weeklyPoints, 0)} Coins
                 </span>
               ) : type === "weekly" && weeklyState === "previous" ? (
                 <span className="user-score-amount">
@@ -165,9 +192,7 @@ const Leaderboard = ({
             ) : weeklyUser?.rank === 3 ? (
               <img src={bronzeMedal} alt="bronze" />
             ) : (
-              <span className="user-rank">
-                #{weeklyUser?.rank}
-              </span>
+              <span className="user-rank">#{weeklyUser?.rank}</span>
             )
           ) : type === "weekly" && weeklyState === "previous" ? (
             <>
@@ -199,7 +224,7 @@ const Leaderboard = ({
           <div
             className={`leaderboard-tab-bg ${type === "global" && "move-1"}`}
           ></div>
-           <div
+          <div
             className="leaderboard-tab p-2 d-flex align-items-center justify-content-center w-50 h-100"
             onClick={() => setType("weekly")}
           >
@@ -225,26 +250,26 @@ const Leaderboard = ({
           </div>
         </div>
         {type === "weekly" && (
-        <div className="leaderboard-tabs position-relative mt-3 p-2  d-flex align-items-center justify-content-between w-100 mb-2">
-          <div className="d-flex align-items-center w-100 gap-2 justify-content-between">
-            <span className="view-previus-txt">View previous winners </span>
-            <div class="form-check form-switch">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                role="switch"
-                id="flexSwitchCheckDefault"
-                value={weeklyState}
-                style={{ cursor: "pointer" }}
-                onChange={() => {
-                  setWeeklyState(
-                    weeklyState === "current" ? "previous" : "current"
-                  );
-                }}
-              />
+          <div className="leaderboard-tabs position-relative mt-3 p-2  d-flex align-items-center justify-content-between w-100 mb-2">
+            <div className="d-flex align-items-center w-100 gap-2 justify-content-between">
+              <span className="view-previus-txt">View previous winners </span>
+              <div class="form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  id="flexSwitchCheckDefault"
+                  value={weeklyState}
+                  style={{ cursor: "pointer" }}
+                  onChange={() => {
+                    setWeeklyState(
+                      weeklyState === "current" ? "previous" : "current"
+                    );
+                  }}
+                />
+              </div>
             </div>
-          </div>
-          {/* <div
+            {/* <div
               className={`leaderboard-tab-bg ${
                 weeklyState === "previous" && "move-1"
               }`}
@@ -273,8 +298,8 @@ const Leaderboard = ({
                 Previous Week
               </span>
             </div> */}
-        </div>
-      )}
+          </div>
+        )}
       </div>
       <div className="players-leaderboard d-flex flex-column">
         {type === "global"
@@ -385,7 +410,6 @@ const Leaderboard = ({
               </div>
             ))}
       </div>
-   
     </div>
   );
 };

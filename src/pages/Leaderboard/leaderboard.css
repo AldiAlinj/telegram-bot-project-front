@@ -203,3 +203,31 @@ line-height: normal;
 .leaderboard-tab-title-active{
 color: #fff !important;
 }
+
+
+.leaderboard-tooltip-content-wrapper {
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid #4f5f90;
+  background: #fff;
+  position: absolute;
+  width: 350px;
+  top: 30px;
+  right: 0px;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.25s;
+}
+.leaderboard-tooltip-content-wrapper span {
+  color: #4f5f90;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.leaderboard-tooltip-active {
+  pointer-events: auto;
+  opacity: 1;
+}
