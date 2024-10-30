@@ -28,7 +28,7 @@ const GetStarted = ({ showWelcome, onClose }) => {
       </div>
       <div className="d-flex flex-column gap-3">
         <h1 className="get-started-title mb-0">
-          Welcome to <br /> World of Dypians!
+          Welcome to <br /> World of Dypians Mini App!
         </h1>
         <p className="get-started-desc mb-3">
           Play, Learn, and Explore with Exciting Tasks!

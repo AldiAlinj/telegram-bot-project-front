@@ -7,7 +7,7 @@
   bottom: -100%;
   transition: all .35s ease-in-out;
   max-width: 440px;
-
+z-index: 3;
 }
 
 
@@ -41,4 +41,10 @@
     border-top: none;
     border-left: none;
     border-right: none;
+}
+
+.coming-soon-tooltip-position{
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }

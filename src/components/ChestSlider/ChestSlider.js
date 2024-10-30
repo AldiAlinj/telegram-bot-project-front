@@ -36,8 +36,7 @@ import Slider from "react-slick";
 import Countdown from "react-countdown";
 import nextArrow from "../../assets/nextArrow.svg";
 import prevArrow from "../../assets/prevArrow.svg";
-import swipe from '../../assets/swipe.wav'
-
+import swipe from "../../assets/swipe.wav";
 
 const renderer = ({ minutes, seconds }) => {
   return (
@@ -117,13 +116,11 @@ const ChestSlider = ({
 
   const nextSlide = () => {
     sliderRef.current.slickNext();
-        new Audio(swipe).play();
-
+    new Audio(swipe).play();
   };
   const prevSlide = () => {
     sliderRef.current.slickPrev();
-        new Audio(swipe).play();
-
+    new Audio(swipe).play();
   };
 
   var settings = {
@@ -192,6 +189,10 @@ const ChestSlider = ({
           onClick={prevSlide}
           alt=""
           className="prev-arrow"
+          style={{
+            pointerEvents: loadingChest ? "none" : "auto",
+            opacity: loadingChest ? "0.7" : "1",
+          }}
         />
         <img
           src={nextArrow}
@@ -200,8 +201,18 @@ const ChestSlider = ({
           onClick={nextSlide}
           alt=""
           className="next-arrow"
+          style={{
+            pointerEvents: loadingChest ? "none" : "auto",
+            opacity: loadingChest ? "0.7" : "1",
+          }}
         />
-        <Slider {...settings} ref={sliderRef}>
+        <Slider
+          {...settings}
+          ref={sliderRef}
+          draggable={loadingChest ? false : true}
+          swipe={loadingChest ? false : true}
+          touchMove={loadingChest ? false : true}
+        >
           {shuffledChests.map((item, index) => (
             <div
               className="position-relative d-flex align-items-center justify-content-center"

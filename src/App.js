@@ -15,7 +15,6 @@ import EarnPartner from "./pages/Earn/EarnPartner";
 import Play from "./pages/Play/Play";
 import DailyOpportunities from "./pages/Earn/DailyOpportunities";
 import validateInfo from "./hooks/validateInfo";
-// import successSound from "./assets/success.mp3";
 import chestSound from "./assets/chestSound.mp3";
 import dailySessionSound from "./assets/dailySessionSound.mp3";
 import { toast, ToastContainer } from "react-toastify";
@@ -417,7 +416,7 @@ const App = () => {
             justifyContent: "center",
             alignItems: "center",
             height: "100vh",
-            width: "100vw",
+            width: "100%",
             zIndex: 9999,
             position: "relative",
             background: "#3370E3"

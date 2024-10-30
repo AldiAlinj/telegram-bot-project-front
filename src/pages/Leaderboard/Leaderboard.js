@@ -128,9 +128,19 @@ const Leaderboard = ({
                   <br />
                   - Distribution Chain: BNB Chain, ensuring easy access to
                   rewards.
-                  <br />- Future Airdrop Eligibility: Coins earned will count
-                  towards eligibility for future airdrops from our partners,
-                  offering additional rewards for participation.
+                  <br />- Weekly leaderboard: Rewards will be distributed within
+                  2 to 5 days after the leaderboard resets, so ensure you have
+                  registered a valid wallet address on BNB Chain.
+                  <br />
+                  - Future Airdrop Eligibility: Coins earned will count towards
+                  eligibility for future airdrops from our partners, offering
+                  additional rewards for participation.
+               
+                </span>
+                <br />
+                <span style={{ color: "#FF8168" }}>
+                  Any users detected by our system for abuse will be restricted,
+                  and their rewards will not be distributed.
                 </span>
               </div>
             </OutsideClickHandler>
