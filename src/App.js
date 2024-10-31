@@ -426,7 +426,8 @@ const App = () => {
         </div>
       )}
       <GetStarted showWelcome={showWelcome} onClose={handleClose} />
-      {!showWelcome && (
+      
+
         <>
           <Routes>
             <Route
@@ -538,7 +539,8 @@ const App = () => {
             theme="light"
           />
         </>
-      )}
+
+     
     </div>
   );
 };
