@@ -103,7 +103,7 @@ const Leaderboard = ({
   }, []);
 
 
-console.log(weeklyLeaderboard.weeklyUsers, weeklySorted);
+console.log(weeklyLeaderboard.weeklyUsers, weeklySorted, weeklyUser);
 
 
   return (
