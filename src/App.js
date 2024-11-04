@@ -91,7 +91,7 @@ const App = () => {
 
     try {
       const res = await axios.post(
-        `https://apimini.worldofdypians.com/api/tg_auth`,
+        `https://api.worldofdypians.com/api/tg_auth`,
         body
       );
 
@@ -140,7 +140,7 @@ const App = () => {
       setTimeout(async () => {
         try {
           const res = await axios.post(
-            `https://apimini.worldofdypians.com/api/link-wallet`,
+            `https://api.worldofdypians.com/api/link-wallet`,
             {
               token: jwt,
               walletAddress: wallet,
@@ -163,7 +163,7 @@ const App = () => {
     if (canClaimHourly) {
       try {
         const res = await axios.post(
-          `https://apimini.worldofdypians.com/api/open-chest`,
+          `https://api.worldofdypians.com/api/open-chest`,
           {
             token: jwt,
           }
@@ -217,7 +217,7 @@ const App = () => {
   const fetchLeaderboard = async (token) => {
     try {
       const res = await axios.post(
-        `https://apimini.worldofdypians.com/api/leaderboard`,
+        `https://api.worldofdypians.com/api/leaderboard`,
         {
           token: token,
         }
@@ -234,7 +234,7 @@ const App = () => {
   const fetchWeeklyLeaderboard = async (token) => {
     try {
       const res = await axios.post(
-        `https://apimini.worldofdypians.com/api/weekly-leaderboard`,
+        `https://api.worldofdypians.com/api/weekly-leaderboard`,
         {
           token: token,
         }
@@ -254,7 +254,7 @@ const App = () => {
     setLoadingClaim(true);
     try {
       const res = await axios.post(
-        `https://apimini.worldofdypians.com/api/claim-streak`,
+        `https://api.worldofdypians.com/api/claim-streak`,
         {
           token: token,
         }
@@ -341,10 +341,9 @@ const App = () => {
       token: jwt,
       taskId: taskId,
     };
-
     try {
       const res = await axios.post(
-        `https://apimini.worldofdypians.com/api/complete-task`,
+        `https://api.worldofdypians.com/api/complete-task`,
         body
       );
       setUserData((prevState) => ({

@@ -31,6 +31,9 @@ const Home = ({
   const [coinTooltip, setCoinTooltip] = useState(false);
 
   const homeTasks = tasks.filter((item) => item.partner === "world-of-dypians");
+  const dailyOpportunities = tasks.filter(
+    (item) => item.partner === "daily-opportunities"
+  );
 
   // const dummyTasks = [
   //   {
@@ -185,19 +188,33 @@ const Home = ({
                     handleCompleteTask={handleCompleteTask}
                   />
                 ))
+            ) : dailyOpportunities.length > 0 ? (
+              <>
+                {dailyOpportunities.slice(0, 4).map((task, index) => (
+                  <TaskItem
+                    item={task}
+                    key={index}
+                    handleCompleteTask={handleCompleteTask}
+                  />
+                ))}
+              </>
             ) : (
-              <div className="d-flex w-100 align-items-center justify-content-center  flex-column mt-5">
-                <h6 className="empty-title">No tasks Available.</h6>
-                <h6 className="empty-title">Stay tuned for more!</h6>
+              <div className="d-flex flex-column gap-2 w-100 align-items-center justify-content-center  flex-column mt-5">
+                <h6 className="empty-title">Hey! Well done for today, don't forget to play the game or invite more friends to earn more points</h6>
+                <NavLink to={"/friends"}>
+            <button className={`play-button  py-2 px-4 position-relative`}>Invite Friends</button>
+          </NavLink>
               </div>
             )}
 
-            {homeTasks.length >= 4 && (
+            {homeTasks.length >= 4 || dailyOpportunities.length >= 4 ? (
               <NavLink to={"/earn"}>
                 <button className="show-more-button py-1 px-2">
                   Show more
                 </button>
               </NavLink>
+            ) : (
+              <></>
             )}
           </div>
         </div>
