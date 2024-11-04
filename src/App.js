@@ -435,7 +435,7 @@ const App = () => {
                 <Home
                   username={username}
                   referralPoints={userData.referralPoints}
-                  tasks={userData.tasks.slice(0, 4)}
+                  tasks={userData.tasks}
                   userData={userData}
                   handleCompleteTask={handleCompleteTask}
                   walletAddress={userData.walletAddress}
