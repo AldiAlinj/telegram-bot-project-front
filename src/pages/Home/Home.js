@@ -36,6 +36,9 @@ const Home = ({
     (item) => item.partner === "daily-opportunities"
   );
 
+  console.log(dailyOpportunities);
+  
+
   // const dummyTasks = [
   //   {
   //     type: "discord",
