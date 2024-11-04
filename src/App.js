@@ -326,8 +326,6 @@ const App = () => {
   useEffect(() => {
     setTimeout(() => {
       setGeneralLoading(false);
-    
-      
     }, 1500);
   }, []);
 
@@ -382,6 +380,13 @@ const App = () => {
       backButton.offClick();
     };
   }, [location, navigate]);
+
+
+  const handleCloseDaily = () => {
+    if(!showWelcome){
+      setDailySession(false);
+    }
+  }
 
   if (!isTelegram) {
     return (
@@ -516,13 +521,13 @@ const App = () => {
             <Route path="/airdrop" element={<Airdrop />} />
           </Routes>
           <DailySession
-            show={dailySession}
-            onClose={() => setDailySession(false)}
-            canClaimToday={canClaim}
-            streakDay={userData?.streakDay}
-            claimDailySession={() => claimDailySession(jwt)}
-            loadingClaim={loadingClaim}
-          />
+                show={dailySession}
+                onClose={handleCloseDaily}
+                canClaimToday={canClaim}
+                streakDay={userData?.streakDay}
+                claimDailySession={() => claimDailySession(jwt)}
+                loadingClaim={loadingClaim}
+              />
           <ComingSoon show={airdrop} onClose={() => setAirdrop(false)} />
           <Navbar showAirdrop={() => setAirdrop(true)} />
           <ToastContainer
