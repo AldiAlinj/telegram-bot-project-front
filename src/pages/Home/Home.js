@@ -11,6 +11,7 @@ import xMark from "../../assets/xMark.svg";
 import { shortAddress } from "../../hooks/shortAddress";
 import tooltip from "../../assets/tooltip.svg";
 import { toast } from "react-toastify";
+import DailyTaskItem from "../../components/TaskItem/DailyTaskItem";
 
 const Home = ({
   username,
@@ -191,7 +192,7 @@ const Home = ({
             ) : dailyOpportunities.length > 0 ? (
               <>
                 {dailyOpportunities.slice(0, 4).map((task, index) => (
-                  <TaskItem
+                  <DailyTaskItem
                     item={task}
                     key={index}
                     handleCompleteTask={handleCompleteTask}
