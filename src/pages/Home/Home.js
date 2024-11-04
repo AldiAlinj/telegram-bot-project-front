@@ -204,7 +204,7 @@ const Home = ({
               </>
             ) : (
               <div className="d-flex flex-column gap-2 w-100 align-items-center justify-content-center  flex-column mt-5">
-                <h6 className="empty-title">Hey! Well done for today, don't forget to play the game or invite more friends to earn more points</h6>
+                <h6 className="empty-title">Well done! Don’t forget to play the game or invite friends to earn even more coins!</h6>
                 <NavLink to={"/friends"}>
             <button className={`play-button  py-2 px-4 position-relative`}>Invite Friends</button>
           </NavLink>
